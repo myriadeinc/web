@@ -18,17 +18,17 @@ class HeaderComponent extends Component {
                     <img className={Style.menuLink} src="dropDown.png" length="15" width="15" alt="" />
                 </div>
                 <a className={Style.menuLink} href="#Notification"><img src="notification.png" alt="" length="30" width="30" /></a>
-                <div className={Style.Stats, Style.menuLink}>
-                    <div className={Style.myriadeStat, Style.cryptoStat}>
+                <div className={Style.Stats + Style.menuLink}>
+                    <div className={Style.myriadeStat + Style.cryptoStat}>
                         <img src="monero-symbol.png" alt="" length="13" width="16" />
                         <p className={Style.navStats}>2.590843</p>
                     </div>
-                    <div className={Style.moneroStat, Style.cryptoStat}>
+                    <div className={Style.moneroStat + Style.cryptoStat}>
                         <img src="myriadeWhiteLogo.png" alt="" length="13" width="16" />
                         <p className={Style.navStats}>6,548,701</p>
                     </div>
                 </div>
-                <button type="button" className="btn btn-dark">
+                <button type="button" className={Style.btnDark + "btn"}>
                     <a className={Style.menuLink + "btn"} href="#Download"> + Download </a>   
                 </button>
             </div>
