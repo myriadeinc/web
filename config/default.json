@@ -1,0 +1,11 @@
+{
+    "iridum_url": "https://127.0.0.1:8180",
+    "mirabilite_url":"https://127.0.0.1:8000",
+    "domain_name": "https://developers.bynorth.com",
+    "authentication": {
+        "accessToken": "access.dev",
+        "refreshToken": "refresh.dev",
+        "login_base_url":"https://account.dev.bynorth.com/login?redirect=",
+        "redirect_url": "https://developers.bynorth.com:8030/#/dashboard"
+    }
+}
