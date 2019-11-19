@@ -3,8 +3,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 
 import PageStyle from '../styles/pages/Dashboard.less';
 
-import Mining from '../pages/Mining.jsx';
-import Sidenav from '../components/Sidenav.jsx';
+import Mining from '../components/dashboard/Mining.jsx';
+import Sidenav from '../components/dashboard/Sidenav.jsx';
 
 class DashboardPage extends Component {
   render() {

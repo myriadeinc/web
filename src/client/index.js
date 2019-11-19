@@ -7,6 +7,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 
 import LandingPage from './pages/LandingPage.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 library.add(fas);
 

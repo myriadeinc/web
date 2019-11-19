@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import Header from '../components/Header.jsx';
-import LandingBody from '../components/LandingBody.jsx';
-
+import Header from '../components/landing/Header.jsx';
+import LandingBody from '../components/landing/LandingBody.jsx';
+import SignUp from '../components/landing/SignUp.jsx'
 import PoolStats from '../components/PoolStats.jsx';
-import FindOutMore from '../components/FindOutMore.jsx';
+import FindOutMore from '../components/landing/FindOutMore.jsx';
 
 class LandingPage extends Component {
   render() {

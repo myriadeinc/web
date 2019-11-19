@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Nav, Card, Container} from "react-bootstrap";
 
-import PageStyle from '../styles/components/Sidenav.less';
+import PageStyle from '../../styles/components/Sidenav.less';
 
 class Sidenav extends Component {
     render() {
