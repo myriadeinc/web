@@ -57,7 +57,7 @@ class SignUp extends Component {
             </tr>
         </table>
       </section>
-    );
+    )
   }
 }
 
