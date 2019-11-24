@@ -19,38 +19,33 @@ class Sidenav extends Component {
           <Nav className="flex-column" variant="pills">
             <Nav.Item>
               <Nav.Link>
-                Mining
-                  </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link>
                 Game Room
-                  </Nav.Link>
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
                 Counter
-                  </Nav.Link>
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
                 Partners
-                  </Nav.Link>
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
                 Analytics
-                  </Nav.Link>
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
                 History
-                  </Nav.Link>
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
                 Settings
-                  </Nav.Link>
+              </Nav.Link>
             </Nav.Item>
           </Nav>
           <Card.Footer>Footer</Card.Footer>

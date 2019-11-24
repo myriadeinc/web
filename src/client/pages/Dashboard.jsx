@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 
 import PageStyle from '../styles/pages/Dashboard.less';
 
-import Mining from '../components/dashboard/Mining.jsx';
+import Analytics from '../components/dashboard/Analytics.jsx';
 import Sidenav from '../components/dashboard/Sidenav.jsx';
 
 class DashboardPage extends Component {
@@ -12,10 +12,10 @@ class DashboardPage extends Component {
       <Container fluid className={PageStyle.container} >
         <Row noGutters className="w-100">
           <Col sm="2">
-            <Sidenav/>
+            <Sidenav />
           </Col>
           <Col sm="10" className={PageStyle.Mining}>
-            <Mining/>
+            <Analytics />
           </Col>
         </Row>
       </Container>
