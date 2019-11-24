@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Style from '../styles/main.less';
+import Style from '../../styles/main.less';
 
 class FindOutMoreComponent extends Component {
 
