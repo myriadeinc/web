@@ -14,7 +14,7 @@ class DashboardPage extends Component {
           <Col sm="2">
             <Sidenav />
           </Col>
-          <Col sm="10" className={PageStyle.Mining}>
+          <Col sm="10" className={PageStyle.Analytics}>
             <Analytics />
           </Col>
         </Row>
