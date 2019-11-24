@@ -42,6 +42,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "~5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
+    "@nivo/line": "^0.59.3",
     "axios": "^0.18.1",
     "body-parser": "~1.18.3",
     "bootstrap": "^4.3.1",
