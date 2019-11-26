@@ -10,6 +10,7 @@ import Partners from '../components/dashboard/Partners.jsx';
 import History from '../components/dashboard/History.jsx';
 import Settings from '../components/dashboard/Settings.jsx';
 
+
 class DashboardPage extends Component {
   render() {
     return (
