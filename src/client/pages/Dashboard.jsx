@@ -22,7 +22,7 @@ class DashboardPage extends Component {
                 <Image src="https://cdn.dribbble.com/users/1859048/screenshots/4248411/shot-24.png" fluid roundedCircle />
                 <h1>Shoush</h1>
                 <p>Shoush# 6779</p>
-                <h3 className={PageStyle.myriadeCredits}>6,548,701</h3>
+                <h3>6,548,701</h3>
                 <h3 className={PageStyle.moneroCredits}>2.590843</h3>
               </div>
               <div className="flex-grow-1">
