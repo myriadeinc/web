@@ -1,5 +1,7 @@
+// Deprecated, now using Tab.Container layout from React Bootstrap
+
 import React, { Component } from 'react';
-import { Nav, Card, Container, Image } from "react-bootstrap";
+import { Nav, Card, Image } from "react-bootstrap";
 
 import PageStyle from '../../styles/components/Sidenav.less';
 
