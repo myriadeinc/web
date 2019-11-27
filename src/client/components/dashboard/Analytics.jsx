@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Card, CardDeck, Container, Row, Col } from "react-bootstrap";
+import { Card, CardDeck, Row, Col } from "react-bootstrap";
 import LineChart from './LineChart.jsx';
-import PageStyle from '../../styles/components/AnalyticsComponent.less';
 
+import PageStyle from '../../styles/components/AnalyticsComponent.less';
 
 class AnalyticsComponent extends Component {
   render() {
     return (
-      <Container className="h-100 w-100 d-flex flex-column m-5">
+      <div className="h-100 w-100 d-flex flex-column p-5">
         <h1 className={PageStyle.title}>Analytics</h1>
         <CardDeck className="text-white">
           <Card>
@@ -50,7 +50,7 @@ class AnalyticsComponent extends Component {
             </Card>
           </Col>
         </Row>
-      </Container>
+      </div >
     )
   }
 }
