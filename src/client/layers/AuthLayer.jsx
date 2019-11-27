@@ -1,4 +1,6 @@
+
 import React, { Component, createContext } from 'react';
+import { Route } from 'react-router-dom';
 import decode from 'jwt-decode';
 import axios from 'axios';
 
@@ -65,5 +67,16 @@ class AuthLayer extends Component {
   }
 }
 
+
+
+
+const ProtectedRoute = ({component: Component, authenticated: authenticated, ...rest}) => {
+  <Route {...rest} render={(props) => (
+    authenticated ? <Component {...props} /> : <Redirect to='/login' />
+  )} />
+}
+
+
 export const AuthConsumer = authContext.Consumer;
+export const ProtectedRoute = ProtectedRoute;
 export default AuthLayer;
