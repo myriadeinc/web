@@ -50,7 +50,7 @@ class AnalyticsComponent extends Component {
             </Card>
           </Col>
         </Row>
-      </div>
+      </div >
     )
   }
 }
