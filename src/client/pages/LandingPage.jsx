@@ -17,7 +17,7 @@ class LandingPage extends Component {
   render() {
     return (
       <>
-        <Header onSetPage={this.showPage} />
+        <Header />
         <LandingBody />
       </>
     );

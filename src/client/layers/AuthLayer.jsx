@@ -34,7 +34,7 @@ class AuthLayer extends Component {
       })
       .then(({data}) => {
         return this.updateAuth(data.accessToken);
-      })
+      });
   }
 
   logout() {
