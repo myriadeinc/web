@@ -1,8 +1,10 @@
 
 import React, { Component, createContext } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import decode from 'jwt-decode';
 import axios from 'axios';
+import * as ROUTES from '../utils/routes.js'
+
 
 import config from '../utils/config.js';
 
@@ -25,7 +27,7 @@ class AuthLayer extends Component {
   }
 
   login(email, password) {
-    return axios.post(`${config.myriade_login_url}/v1/account/login`, 
+    return axios.post(`${config.identity_service_url}/v1/account/login`, 
       {
         email, 
         password
@@ -67,16 +69,16 @@ class AuthLayer extends Component {
   }
 }
 
-
-
-
-const ProtectedRoute = ({component: Component, authenticated: authenticated, ...rest}) => {
-  <Route {...rest} render={(props) => (
-    authenticated ? <Component {...props} /> : <Redirect to='/login' />
-  )} />
+export class ProtectedRoute extends Component {
+  render() {
+    return (
+      this.props.authenticated ?
+      <Route path={this.props.path} component={this.props.component} /> :
+      <Redirect to={ROUTES.LOGIN} />
+    )
+  }
 }
 
-
 export const AuthConsumer = authContext.Consumer;
-export const ProtectedRoute = ProtectedRoute;
+
 export default AuthLayer;

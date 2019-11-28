@@ -1,3 +1,5 @@
+up:
+	npm run start:dev
 build:
 	npm run build
 deploy-staging:

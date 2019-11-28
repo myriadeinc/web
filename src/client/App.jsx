@@ -19,8 +19,8 @@ class App extends React.Component {
                 {({authenticated, login}) => (
                   <Switch>
                       <Route exact path={ROUTES.LANDING} component={LandingPage} />
-                      <Route path={ROUTES.LOGIN} component={() => <LoginPage login={login}/>} />
-                      <Route path={ROUTES.SIGNUP} component={SignupPage} />
+                      <Route path={ROUTES.LOGIN} component={() => (<LoginPage login={login} /> )} />
+                      <Route path={ROUTES.SIGN_UP} component={SignupPage} />
                       
                       {/* Protected Routes that need authentication */}
                       <ProtectedRoute path={ROUTES.DASHBOARD} component={DashboardPage} authenticated={authenticated}/>
