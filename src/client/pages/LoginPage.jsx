@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 
 import { Col, Container } from 'react-bootstrap';
-import { Card, CardHeader, CardBody, CardFooter, Button } from 'shards-react';
-import { Form, FormInput, FormGroup, Alert } from "shards-react";
+import { Card, CardHeader, CardBody, CardFooter, Button, Form, FormInput, FormGroup, Alert } from 'shards-react';
 
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner'
-
-import { Link } from 'react-router-dom';
 
 import PageStyle from '../styles/pages/Login.less';
 import * as ROUTES from '../utils/routes.js';
