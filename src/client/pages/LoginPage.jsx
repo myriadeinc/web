@@ -6,6 +6,8 @@ import { Card, CardHeader, CardBody, CardFooter, Button, Form, FormInput, FormGr
 import { Redirect, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner'
 
+import { PrimaryButton } from '../components/common/Buttons.jsx';
+
 import PageStyle from '../styles/pages/Login.less';
 import * as ROUTES from '../utils/routes.js';
 
@@ -66,8 +68,9 @@ class LoginPage extends Component {
           {this.state.error && this.displayError()}
           <Col md={{offset: 3, size: 6}} lg={{offset: 3, size:6}}>
             <Card className={PageStyle.LoginCard}>
-              <CardHeader> Myriade Client </CardHeader>
+              
               <CardBody>
+                <h3>Dashboard Login</h3>
                 <Form onSubmit={this.handleLogin}>
                   <FormGroup>
                     <label htmlFor="#email">Email</label>
@@ -77,7 +80,7 @@ class LoginPage extends Component {
                     <label htmlFor="#password">Password</label>
                     <FormInput type="password" name="password" placeholder="Password" />
                   </FormGroup>
-                  <Button outline pill theme="primary" type="submit">login &rarr;</Button>
+                  <PrimaryButton pill type="submit">login &rarr;</PrimaryButton>
                 </Form>
               </CardBody>
               <CardFooter>Don't have a Myriade account? click <Link to={ROUTES.SIGN_UP}> here</Link> </CardFooter>

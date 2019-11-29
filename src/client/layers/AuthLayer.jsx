@@ -16,6 +16,7 @@ class AuthLayer extends Component {
     super(props);
     this.updateAuth = this.updateAuth.bind(this);
     this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
     this.state = {
         miner: null,
         authenticated: false,

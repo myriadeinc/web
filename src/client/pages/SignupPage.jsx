@@ -8,7 +8,7 @@ import * as ROUTES from '../utils/routes.js';
 import axios from 'axios';
 import config from '../utils/config.js';
 
-import PageStyle from '../styles/pages/Login.less';
+import PageStyle from '../styles/pages/Signup.less';
 
 class SignupPage extends Component {
 
@@ -105,7 +105,7 @@ class SignupPage extends Component {
 
       return (
         <Container className={PageStyle.LoginPageBackground}>
-          <Card className={PageStyle.LoginCard}>
+          <Card className={PageStyle.EmailCard}>
   
             {this.state.error !== null && this.displayError()}
             {
@@ -120,7 +120,11 @@ class SignupPage extends Component {
                           <FormInput name="email" placeholder="john@example.com" />
                           <br/>
                           <Button pill theme="primary" type="submit" disabled={this.state.email_confirmed}>
-                            Confirm
+                            Confirm 
+                          </Button>
+                          
+                          <Button outline pill onClick={this.nextStep}>
+                            Already confirmed email? Go next &rarr;
                           </Button>
                         </>
                         :
