@@ -14,6 +14,6 @@ library.add(fas);
 const wrapper = document.getElementById('main');
 wrapper ? ReactDOM.render((
     <Router>
-        <LandingPage />
+        <Dashboard />
     </Router>
 ), wrapper) : false;
