@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createContext } from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
 import { Card, CardBody, CardFooter, Button,  ListGroup, ListGroupItem, Alert } from 'shards-react';
 import { HashRouter as Router, Link, Switch} from 'react-router-dom';
@@ -20,6 +20,7 @@ import Mine from '../components/dashboard/Mine.jsx';
 import Gameroom from '../components/dashboard/Gameroom.jsx';
 import Gravatar from 'react-gravatar'
 
+const minerContext = createContext();
 
 class DashboardPage extends Component {
 
@@ -29,11 +30,15 @@ class DashboardPage extends Component {
       minerId: null,
       error: null,
       miner: {
+        id: null,
+        email: null,
         name: null,
         email: null,
         myriade_credits: [],
         myriade_credits_balance: null,
-        hashrates: [],
+        shares: [],
+        historical_hashrates: [],
+        average_hashrate: "0",
         monero_balance: null
       }
     }
@@ -53,7 +58,8 @@ class DashboardPage extends Component {
   }
 
   componentDidMount() {
-    let minerId = jwt_decode(localStorage.getItem('access_token')).sub;  
+    let minerId = jwt_decode(localStorage.getItem('access_token')).sub; 
+    let minerData = {}; 
     return gqlClient.query({
       query: gql`
         query ($minerId: ID!, $hashratePage: Int) {
@@ -78,8 +84,7 @@ class DashboardPage extends Component {
 
     }).then(({data}) => {
 
-      const minerData = data.minerData
-      console.log(minerData);
+      minerData = data.minerData;
       const mc = 0 < minerData.myriade_credits.length ? minerData.myriade_credits[0] : '0';
       const accountData = jwt_decode(localStorage.getItem('access_token')).account;
       return this.setState({
@@ -90,7 +95,9 @@ class DashboardPage extends Component {
           myriade_credits_balance: mc,
           myriade_credits: minerData.myriade_credits,
           monero_balance: minerData.monero_balance,
-          hashrates: minerData.hashrates
+          hashrates: minerData.hashrates,
+          average_hashrate: 0,
+          shares: [],
         }
       })
     }).catch(err => {
@@ -106,44 +113,49 @@ class DashboardPage extends Component {
       
       <AuthConsumer>
         {({authenticated, logout}) => (
-          <Row>
-            {this.state.error && this.displayError()}
-            <Col md={{span: 3}}>
-              <Card className={PageStyle.sidebar}>
-                <CardBody>
-                  <Gravatar className={PageStyle.gravatar} size={200} email={this.state.miner.email} />
-                  <br/>
-                  <h3>{this.state.miner.name}</h3>
-                  <p>{this.state.miner.email}</p>
-                  <p><strong>Myriade Credits: {this.state.miner.myriade_credits_balance}</strong></p>
-                  <p>Monero Balance: {this.state.miner.monero_balance}</p>
-                  <hr/>
-                  <ListGroup>
+          <minerContext.Provider value={this.state.miner}>
+            <Row>
+              {this.state.error && this.displayError()}
+              <Col md={{span: 3}}>
+                <Card className={PageStyle.sidebar}>
+                  <CardBody>
+                    <Gravatar className={PageStyle.gravatar} size={200} email={this.state.miner.email} />
+                    <br/>
+                    <h3>{this.state.miner.name}</h3>
+                    <p>{this.state.miner.email}</p>
+                    <p><strong>Mining Credits: {this.state.miner.myriade_credits_balance}</strong></p>
+                    <p>Monero Balance: {this.state.miner.monero_balance}</p>
+                    <hr/>
+                    <ListGroup>
 
-                    <BoldBlackLink to={`${this.props.match.path}/mining`} > Start Mining </BoldBlackLink>
-                    <BoldBlackLink to={`${this.props.match.path}/`} > Analytics </BoldBlackLink>
-                    <BoldBlackLink to={`${this.props.match.path}/gameroom`} > Gameroom </BoldBlackLink>
-                  </ListGroup>
-                   
-                </CardBody>
-                <CardFooter className={PageStyle.sidebarFooter} onClick={logout}>
-                  <SecondaryButton pill outline>Logout</SecondaryButton>
-                </CardFooter>
+                      <BoldBlackLink to={`${this.props.match.path}/`} > Mining Metrics </BoldBlackLink>
+                      <BoldBlackLink to={`${this.props.match.path}/mining`} > Start Mining </BoldBlackLink>
+                      <BoldBlackLink to={`${this.props.match.path}/gameroom`} > Game Room </BoldBlackLink>
+                    </ListGroup>
+                    
+                  </CardBody>
+                  <CardFooter className={PageStyle.sidebarFooter} onClick={logout}>
+                    <SecondaryButton pill outline>Logout</SecondaryButton>
+                  </CardFooter>
 
-              </Card>
-            </Col>
-            <Col md={{span: 9}}>
-              <Switch>
-                <ProtectedRoute exact path={`${this.props.match.url}/`} component={Analytics} authenticated={authenticated} />
-                <ProtectedRoute path={`${this.props.match.url}/mining`} component={Mine} authenticated={authenticated} />
-                <ProtectedRoute path={`${this.props.match.url}/gameroom`} component={Gameroom} authenticated={authenticated} />
-              </Switch>
-            </Col>
-          </Row>
+                </Card>
+              </Col>
+              <Col md={{span: 9}}>
+                  
+                <Switch>
+                  <ProtectedRoute exact path={`${this.props.match.path}/`} component={Analytics} authenticated={authenticated} />
+                  <ProtectedRoute path={`${this.props.match.url}/mining`} component={Mine} authenticated={authenticated} />
+                  <ProtectedRoute path={`${this.props.match.url}/gameroom`} component={Gameroom} authenticated={authenticated} />
+                </Switch>
+              </Col>
+            </Row>
+          </minerContext.Provider>
         )}
       </AuthConsumer>
     )
   }
 }
+
+export const MinerConsumer = minerContext.Consumer;
 
 export default DashboardPage;
