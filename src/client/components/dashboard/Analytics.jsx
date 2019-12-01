@@ -1,56 +1,81 @@
 import React, { Component } from 'react';
-import { Card, CardDeck, Row, Col } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import LineChart from './LineChart.jsx';
 
-import PageStyle from '../../styles/components/AnalyticsComponent.less';
+import {  Card, 
+          CardImg, 
+          CardDeck, 
+          CardImgOverlay, 
+          CardHeader, 
+          CardBody 
+        } from 'shards-react';
+
+import { MinerConsumer } from '../../pages/Dashboard.jsx';
+
+import gqlClient from '../../utils/graphql.js';
+
+import ComponentStyle from '../../styles/components/Analytics.less'
+
+import _ from 'lodash';
 
 class AnalyticsComponent extends Component {
+
   render() {
     return (
-      <div className="h-100 w-100 d-flex flex-column p-5">
-        <h1 className={PageStyle.title}>Analytics</h1>
-        <CardDeck className="text-white">
-          <Card>
-            {/*<img src={window.location.origin + '/images/dashboard1.svg'} />*/}
-            <Card.Img src="https://ak7.picdn.net/shutterstock/videos/1019866207/thumb/1.jpg" alt="Card image" />
-            <Card.ImgOverlay className="d-flex flex-column justify-content-end">
-              <Card.Text>Average Hashrate</Card.Text>
-              <h1>598H/sec</h1>
-            </Card.ImgOverlay>
-          </Card>
-          <Card>
-            <Card.Img src="https://cdn.slidemodel.com/wp-content/uploads/7382-01-duotone-gradients-powerpoint-templates-16x9-4.jpg" alt="Card image" />
-            <Card.ImgOverlay className="d-flex flex-column justify-content-end">
-              <Card.Text>Total MC Earned</Card.Text>
-              <h1>598H/sec</h1>
-            </Card.ImgOverlay>
-          </Card>
-          <Card>
-            <Card.Img src="https://ak2.picdn.net/shutterstock/videos/1024941782/thumb/1.jpg" alt="Card image" />
-            <Card.ImgOverlay className="d-flex flex-column justify-content-end">
-              <Card.Text>XMR/USD</Card.Text>
-              <h1>598H/sec</h1>
-            </Card.ImgOverlay>
-          </Card>
-        </CardDeck>
-        <Row className="h-50 mt-4">
-          <Col md="8 pt-4 pb-5">
-            <Card className="h-100">
-              <Card.Header>
-                <h1>Daily MC Earned</h1>
-              </Card.Header>
-              <LineChart />
-            </Card>
-          </Col>
-          <Col md="4 pt-4 pb-5">
-            <Card className="h-100">
-              <Card.Header>
-                <h1>Partner Activity</h1>
-              </Card.Header>
-            </Card>
-          </Col>
-        </Row>
-      </div >
+      <MinerConsumer>
+        {(miner) => (
+          <Container className={ComponentStyle.MetricsStyle}>
+            <Row className={ComponentStyle.Row}>
+              <Col>
+                <Card small={true}>
+                  <CardImg className="card-img-top card-img-bottom" src="https://ak7.picdn.net/shutterstock/videos/1019866207/thumb/1.jpg" alt="Card image" />
+                  <CardImgOverlay>
+                    <h4>Your average hashrate </h4>
+                    <h3>{miner.average_hashrate}</h3>
+                  </CardImgOverlay>
+                </Card>
+              </Col>
+              <Col>
+                <Card small={true}>
+                  <CardImg className="card-img-top card-img-bottom" src="https://cdn.slidemodel.com/wp-content/uploads/7382-01-duotone-gradients-powerpoint-templates-16x9-4.jpg" alt="Card image" />
+                  <CardImgOverlay>
+                    <h4>Pool hashrate </h4>
+                    <h3>N/A</h3>
+                  </CardImgOverlay>
+                  
+                </Card>
+              </Col>
+              <Col>
+                <Card small={true}>
+                  <CardImg className="card-img-top card-img-bottom" src="https://ak7.picdn.net/shutterstock/videos/1019866207/thumb/1.jpg" alt="Card image" />
+                  <CardImgOverlay>
+                    <h4>Mining credits balance </h4>
+                    <h3>{miner.myriade_credits_balance}</h3>
+                  </CardImgOverlay>
+                </Card>
+              </Col>
+            </Row>
+            <Row className={ComponentStyle.Row}>
+              <Col>
+                <Card className={ComponentStyle.HashrateChart}>
+                  <CardHeader>
+                    <h3>Historical Metrics</h3>
+                    <p>An overview of hashrates, shares and mining credits</p>
+                  </CardHeader>
+                  <CardBody>
+                    <LineChart data={{
+                       hashrates: miner.historical_hashrates,
+                       credits: miner.myriade_credits,
+                       shares: miner.shares
+                      }}/>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
+        )}
+      </MinerConsumer>
+
     )
   }
 }

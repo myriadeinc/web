@@ -34,11 +34,11 @@ const Scene = () => {
   const particlesYRef = useRef()
 
   const createOctahedron = (radius) => {
-    return new THREE.OctahedronGeometry(radius, 1);
+    return new THREE.OctahedronGeometry(radius, 3);
   }
 
   const createPolysphere = (radius) => {
-    return new THREE.IcosahedronGeometry(radius, 2);
+    return new THREE.IcosahedronGeometry(radius, 4);
   }
 
   const createParticles = (numParticles) => {
@@ -46,18 +46,18 @@ const Scene = () => {
   }
 
   useRender(() => {
-    particlesXRef.current.rotation.x -= 0.005;
+    particlesXRef.current.rotation.x -= 0.010;
     particlesYRef.current.rotation.y += 0.005;
-    wireframeIsoRef.current.rotation.x += 0.002;
+    wireframeIsoRef.current.rotation.x += 0.004;
     wireframeIsoRef.current.rotation.y -= 0.002;
     isoRef.current.rotation.x += 0.001;
     isoRef.current.rotation.y -= 0.003;
   });
 
-  const smallIso = createPolysphere(1.2);
-  const bigIso = createOctahedron(1.8);
-  const particlesX = createParticles(150);
-  const particlesY = createParticles(150);
+  const smallIso = createOctahedron(1.2);
+  const bigIso = createPolysphere(2.0);
+  const particlesX = createParticles(200);
+  const particlesY = createParticles(200);
 
   return (
     React.createElement('group', null,

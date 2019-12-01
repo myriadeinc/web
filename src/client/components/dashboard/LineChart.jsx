@@ -1,17 +1,65 @@
 import React, { Component } from 'react'
 import { ResponsiveLine } from '@nivo/line';
-import data from './data.json';
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
+import _ from 'lodash';
+
 class LineChart extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            hashrates: [],
+            credits: [],
+            shares: [],
+        }
+    }
+
+    componentWillMount(){
+        let hashrates = _.map(this.props.data.hashrates, (h) => {
+            return {
+                x: h.time,
+                y: h.rate
+            }
+        })
+        let credits = _.map(this.props.data.credits, (c) => {
+            return {
+                x: c.time,
+                y: c.credit
+            }
+        })
+        let shares = _.map(this.props.data.shares, (s) => {
+            return {
+                x: s.time,
+                y: s.share
+            }
+        })
+        return this.setState({
+            hashrates,
+            credits,
+            shares,
+        })
+    }
+
     render() {
         return (
             <ResponsiveLine
-                data={data}
+                data={[
+                    {
+                        id: 'hashrates',
+                        color: "hsl(239, 70%, 50%)",
+                        data: this.state.hashrates,
+                    },
+                    {
+                        id: 'credits',
+                        color: "hsl(342, 70%, 50%)",
+                        data: this.state.credits,
+                    },
+                    {
+                        id: 'shares',
+                        color: "hsl(230, 70%, 50%)",
+                        data: this.state.shares,
+                    }
+                ]}
                 margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                 xScale={{ type: 'point' }}
                 yScale={{ type: 'linear', stacked: true, min: 'auto', max: 'auto' }}
@@ -23,7 +71,7 @@ class LineChart extends Component {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'transportation',
+                    legend: 'Time',
                     legendOffset: 36,
                     legendPosition: 'middle'
                 }}
@@ -32,18 +80,20 @@ class LineChart extends Component {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'count',
+                    legend: 'Hashrate/Credits/Shares',
                     legendOffset: -40,
                     legendPosition: 'middle'
                 }}
-                colors={{ scheme: 'nivo' }}
-                enablePoints={false}
+                colors={{ scheme: 'oranges' }}
+                lineWidth={3}
                 pointSize={10}
                 pointColor={{ theme: 'background' }}
                 pointBorderWidth={2}
-                pointBorderColor={{ from: 'serieColor', modifiers: [] }}
+                pointBorderColor={{ from: 'serieColor' }}
                 pointLabel="y"
                 pointLabelYOffset={-12}
+                enableArea={true}
+                areaOpacity={0.9}
                 useMesh={true}
                 legends={[
                     {

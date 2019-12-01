@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Card, CardColumns, Button, Modal, Form, Row, Col, ButtonToolbar } from 'react-bootstrap';
 
+import { Alert } from 'shards-react';
+import axios from 'axios';
+
 function GameCardModal(props) {
     let listings = props.options.map((listing, index) =>
         <Button key={index} variant="secondary" className="m-1">
@@ -112,11 +115,13 @@ function GameCard() {
     );
 }
 
+
 class GameroomComponent extends Component {
     render() {
         return (
-            <div className="h-100 w-100 d-flex flex-column p-5">
+            <Container>
                 <h1>Game Room</h1>
+                {/*
                 <CardColumns>
                     <GameCard />
                     <Card>
@@ -128,8 +133,12 @@ class GameroomComponent extends Component {
                             </Card.Text>
                         </Card.Body>
                     </Card>
-                </CardColumns>
-            </div>
+                </CardColumns>*/}
+                <Alert theme='danger'>
+                    Our game room is currently under construction, we will notify you as soon as it is completed.
+                </Alert>
+            </Container>
+
         )
     }
 }

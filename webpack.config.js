@@ -68,13 +68,9 @@ module.exports = {
         open: true,
         compress: true
     },
-    // externals: {
-    //   'config': JSON.stringify(config)
-    // },
     plugins: [
         new HtmlWebPackPlugin({
             template: './public/index.html',
-            favicon: './public/logo/myriade.svg',
         }),
     ],
 };

@@ -10,6 +10,8 @@ import config from '../utils/config.js';
 
 import PageStyle from '../styles/pages/Signup.less';
 
+import { PrimaryButton, SecondaryButton } from '../components/common/Buttons.jsx';
+
 class SignupPage extends Component {
 
   constructor(props) {
@@ -119,18 +121,18 @@ class SignupPage extends Component {
                         <>
                           <FormInput name="email" placeholder="john@example.com" />
                           <br/>
-                          <Button pill theme="primary" type="submit" disabled={this.state.email_confirmed}>
+                          <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
                             Confirm 
-                          </Button>
+                          </PrimaryButton>
                           
-                          <Button outline pill onClick={this.nextStep}>
+                          <SecondaryButton pill onClick={this.nextStep}>
                             Already confirmed email? Go next &rarr;
-                          </Button>
+                          </SecondaryButton>
                         </>
                         :
-                        <Button outline pill onClick={this.nextStep}>
+                        <SecondaryButton pill onClick={this.nextStep}>
                           Next
-                        </Button>
+                        </SecondaryButton>
                       }
   
                     </FormGroup>
@@ -158,9 +160,9 @@ class SignupPage extends Component {
                       <label htmlFor="#password_confirm">Confirm Password</label>
                       <FormInput type="password" name="password_confirm" />
                     </FormGroup>
-                    <Button outline pill theme="primary" type="submit">
+                    <SecondaryButton pill type="submit">
                       Create Account
-                    </Button>
+                    </SecondaryButton>
                   </Form>
               </CardBody>
             }
