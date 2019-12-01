@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardColumns, Button, Modal, Form, Row, Col, ButtonToolbar } from 'react-bootstrap';
+import { Card, Container, Button, Modal, Form, Row, Col, ButtonToolbar } from 'react-bootstrap';
 
 import { Alert } from 'shards-react';
 import axios from 'axios';
