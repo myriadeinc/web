@@ -7,7 +7,7 @@ import ComponentStyle from '../../styles/components/Mine.less';
 
 class Mine extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       type: 'l'
@@ -38,7 +38,7 @@ class Mine extends Component {
   }
 
   renderInstructions() {
-    return 'w' === this.state.type? this.windowsInstruction() : this.linuxInstruction();
+    return 'w' === this.state.type ? this.windowsInstruction() : this.linuxInstruction();
   }
 
 
@@ -54,27 +54,27 @@ class Mine extends Component {
         <Row>
           <h1></h1>
         </Row>
-        <br/>
+        <br />
         <Row>
-          <Col md={12}> 
+          <Col md={12}>
             <Nav tabs>
               <NavItem>
-                <NavLink onClick={(e) => {this.handleTabSwitch('l')}} className={this.state.type === 'l' ? 'active': ''} >
+                <NavLink onClick={(e) => { this.handleTabSwitch('l') }} className={this.state.type === 'l' ? 'active' : ''} className={ComponentStyle.tab}>
                   Linux / MacOs
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={(e) => {this.handleTabSwitch('w')}}  className={this.state.type === 'w' ? 'active': ''}>
-                Windows
+                <NavLink onClick={(e) => { this.handleTabSwitch('w') }} className={this.state.type === 'w' ? 'active' : ''} className={ComponentStyle.tab}>
+                  Windows
                 </NavLink>
               </NavItem>
             </Nav>
           </Col>
         </Row>
         <Row>
-        
-            {this.renderInstructions()}
-        
+
+          {this.renderInstructions()}
+
         </Row>
       </Container>
     )
