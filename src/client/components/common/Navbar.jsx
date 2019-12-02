@@ -32,10 +32,9 @@ class NavigationBar extends Component {
         </NavbarBrand>
         <Nav navbar className="ml-auto">
           <NavItem >
-
-            <Button pill outline theme='secondary'>
-              <BlackLink to={ROUTES.DASHBOARD}> Dashboard </BlackLink>
-            </Button>
+            <BlackLink to={ROUTES.DASHBOARD}>
+              <Button pill outline theme='secondary'> Dashboard </Button>
+            </BlackLink>
           </NavItem>
         </Nav>
 

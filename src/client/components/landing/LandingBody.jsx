@@ -24,8 +24,8 @@ class LandingBody extends Component {
             <h1>The first Fortune-Mining Pool.</h1>
             <h1>Made for Monero.</h1>
             <br />
-            <PrimaryButton pill ><WhiteLink to={ROUTES.DASHBOARD}>Get Started</WhiteLink> </PrimaryButton>
-            <SecondaryButton pill outline><BlueLink to={ROUTES.SIGN_UP}>Sign up </BlueLink></SecondaryButton>
+            <WhiteLink to={ROUTES.SIGN_UP}><PrimaryButton pill >Get Started</PrimaryButton></WhiteLink>
+            <BlueLink to={ROUTES.DASHBOARD}><SecondaryButton pill outline>Log In</SecondaryButton></BlueLink>
           </div>
         </Col>
         <Col md={6}>
