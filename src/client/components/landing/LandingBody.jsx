@@ -17,25 +17,25 @@ class LandingBody extends Component {
 
   render() {
     return (
- 
-        <Row className={Style.Header}>
-          <Col md={6}>
-            <div className={Style.Hero}>
 
-              <h1>Myriade mining pool for Monero RandomX</h1>
-              <br/>
-              <PrimaryButton pill ><WhiteLink to={ROUTES.DASHBOARD}>Get Started</WhiteLink> </PrimaryButton>
-              <SecondaryButton pill outline><BlueLink to={ROUTES.SIGN_UP}>Sign up </BlueLink></SecondaryButton>
-            </div>
-          </Col>
-          <Col md={6}>
+      <Row className={Style.Header}>
+        <Col md={6}>
+          <div className={Style.Hero}>
+            <h1>The first Fortune-Mining Pool.</h1>
+            <h1>Made for Monero.</h1>
+            <br />
+            <PrimaryButton pill ><WhiteLink to={ROUTES.DASHBOARD}>Get Started</WhiteLink> </PrimaryButton>
+            <SecondaryButton pill outline><BlueLink to={ROUTES.SIGN_UP}>Sign up </BlueLink></SecondaryButton>
+          </div>
+        </Col>
+        <Col md={6}>
 
-            <Canvas camera={{fov: 75, near: 1, far: 1000}} pixelRatio={window.devicePixelRatio}>
-              <Scene />
-            </Canvas>
-          </Col>
+          <Canvas camera={{ fov: 75, near: 1, far: 1000 }} pixelRatio={window.devicePixelRatio}>
+            <Scene />
+          </Canvas>
+        </Col>
 
-        </Row>
+      </Row>
     );
   }
 }
