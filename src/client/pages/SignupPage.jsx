@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Card,  CardBody, Button, Form, FormInput, FormGroup, Alert } from 'shards-react';
+import { Card, CardBody, Button, Form, FormInput, FormGroup, Alert } from 'shards-react';
 import { Col, Container } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner'
@@ -35,12 +35,12 @@ class SignupPage extends Component {
     axios.post(`${config.identity_service_url}/v1/email/`, {
       email
     })
-    .then(() => {
-      return this.setState({email_confirmed: true});
-    })
-    .catch(err => {
-      return this.setState({error: "Failed to send email confirmation, please double check your email address"});
-    })
+      .then(() => {
+        return this.setState({ email_confirmed: true });
+      })
+      .catch(err => {
+        return this.setState({ error: "Failed to send email confirmation, please double check your email address" });
+      })
   }
 
   createAccount(e) {
@@ -52,7 +52,7 @@ class SignupPage extends Component {
     const password_confirm = e.target.elements.password_confirm.value;
 
     if (password !== password_confirm) {
-      return this.setState({error: "Password does not match"})
+      return this.setState({ error: "Password does not match" })
     }
 
     return axios.post(`${config.identity_service_url}/v1/account/create/`, {
@@ -61,20 +61,20 @@ class SignupPage extends Component {
       password,
       wallet_address: wallet,
     })
-    .then(({data}) => {
-      return this.setState({
-        complete: true
+      .then(({ data }) => {
+        return this.setState({
+          complete: true
+        })
       })
-    })
-    .catch(err => {
-      return this.setState({
-        error: "Failed to create an account, please check your inputs and try again"
+      .catch(err => {
+        return this.setState({
+          error: "Failed to create an account, please check your inputs and try again"
+        })
       })
-    })
   }
 
-  dismissError(){
-    this.setState({error: null});
+  dismissError() {
+    this.setState({ error: null });
   }
 
   displayError() {
@@ -94,11 +94,11 @@ class SignupPage extends Component {
   }
 
   nextStep() {
-    return this.setState({next_step : true});
+    return this.setState({ next_step: true });
   }
 
   render() {
-    if (this.state.complete){
+    if (this.state.complete) {
       return (
         <Redirect to={ROUTES.LOGIN} />
       )
@@ -108,23 +108,26 @@ class SignupPage extends Component {
       return (
         <Container className={PageStyle.LoginPageBackground}>
           <Card className={PageStyle.EmailCard}>
-  
+
             {this.state.error !== null && this.displayError()}
             {
-              !this.state.next_step ? 
-              <CardBody>
+              !this.state.next_step ?
+                <CardBody>
                   {this.state.email_confirmed && this.displaySuccess()}
-                  <h2>Step 1: Confirm your e-mail address</h2>
+                  <div className={PageStyle.inline}>
+                    <h2>Step 1: Enter your e-mail address</h2>
+                    <p className={PageStyle.redText}> *</p>
+                  </div>
                   <Form onSubmit={this.sendEmailConfirmation} >
                     <FormGroup>
-                      {!this.state.email_confirmed ? 
+                      {!this.state.email_confirmed ?
                         <>
-                          <FormInput name="email" placeholder="john@example.com" />
-                          <br/>
+                          <FormInput name="email" placeholder="john@example.com" required />
+                          <br />
                           <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
-                            Confirm 
+                            Confirm
                           </PrimaryButton>
-                          
+
                           <SecondaryButton pill onClick={this.nextStep}>
                             Already confirmed email? Go next &rarr;
                           </SecondaryButton>
@@ -134,37 +137,49 @@ class SignupPage extends Component {
                           Next
                         </SecondaryButton>
                       }
-  
+
                     </FormGroup>
                   </Form>
-              </CardBody> 
-              :    
-              <CardBody>
-                  <h2>Step 2: Create an account on Myriade</h2>
+                </CardBody>
+                :
+                <CardBody>
+                  <h2>Step 2: Create a Myriade account</h2>
                   <Form onSubmit={this.createAccount}>
+                    <FormGroup >
+                      <label className={PageStyle.inline} htmlFor="#name">
+                        Username
+                        <p className={PageStyle.redText}> *</p>
+                      </label>
+                      <FormInput name="name" placeholder="John Doe" required />
+                    </FormGroup>
                     <FormGroup>
-                      <label htmlFor="#name">Name</label>
-                      <FormInput name="name" placeholder="John Doe" />
+                      <label className={PageStyle.inline} htmlFor="#token">
+                        Email Confirmation Token (Check your email)
+                        <p className={PageStyle.redText}> *</p>
+                      </label>
+                      <FormInput name="email_token" placeholder="ABCDEFGHIJ" required />
                     </FormGroup>
                     <FormGroup>
                       <label htmlFor="#wallet">Monero Wallet Address</label>
                       <FormInput name="wallet" placeholder="Paste in your wallet address here" />
                     </FormGroup>
                     <FormGroup>
-                      <label htmlFor="#token">Email Confirmation Token (Check your emails)</label>
-                      <FormInput name="email_token" placeholder="ABCDEFGHIJ" />
-                    </FormGroup>
-                    <FormGroup>
-                      <label htmlFor="#password">Password</label>
-                      <FormInput type="password" name="password" />
-                      <label htmlFor="#password_confirm">Confirm Password</label>
-                      <FormInput type="password" name="password_confirm" />
+                      <label className={PageStyle.inline} htmlFor="#password">
+                        Password
+                        <p className={PageStyle.redText}> *</p>
+                      </label>
+                      <FormInput type="password" name="password" required />
+                      <label className={PageStyle.inline} htmlFor="#password_confirm">
+                        Confirm Password
+                        <p className={PageStyle.redText}> *</p>
+                      </label>
+                      <FormInput type="password" name="password_confirm" required />
                     </FormGroup>
                     <SecondaryButton pill type="submit">
                       Create Account
                     </SecondaryButton>
                   </Form>
-              </CardBody>
+                </CardBody>
             }
           </Card>
         </Container>
