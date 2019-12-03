@@ -26,7 +26,7 @@ class NavigationBar extends Component {
         <NavbarBrand href="#">
           <img
             alt=""
-            src="./public/icons/logo_text.svg"
+            src="https://res.cloudinary.com/cardboard32/image/upload/v1575344489/Myriade/logo_text_ql9qpd.svg"
             height="45"
           />
         </NavbarBrand>
