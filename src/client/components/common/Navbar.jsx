@@ -23,22 +23,21 @@ class NavigationBar extends Component {
   render() {
     return (
       <Navbar type="light" theme="white" expand="md" className={NavStyle.Main}>
-          <NavbarBrand href="#">
-            <img
-              alt=""
-              src="https://res.cloudinary.com/dtocmcjrg/image/upload/v1575006713/myriade_logo_m9gab5.svg"
-              width="150"
-            /> 
-          </NavbarBrand>
-          <Nav navbar className="ml-auto">
-            <NavItem >
-              
-              <Button pill outline theme='secondary'>
-                <BlackLink to={ROUTES.DASHBOARD}> Dashboard </BlackLink>
-              </Button>
-            </NavItem>
-          </Nav>
-        
+        <NavbarBrand href="#">
+          <img
+            alt=""
+            src="https://res.cloudinary.com/cardboard32/image/upload/v1575344489/Myriade/logo_text_ql9qpd.svg"
+            height="45"
+          />
+        </NavbarBrand>
+        <Nav navbar className="ml-auto">
+          <NavItem >
+            <BlackLink to={ROUTES.DASHBOARD}>
+              <Button pill outline theme='secondary'> Dashboard </Button>
+            </BlackLink>
+          </NavItem>
+        </Nav>
+
       </Navbar>
     );
   }
