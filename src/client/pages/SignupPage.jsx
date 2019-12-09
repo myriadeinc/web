@@ -26,6 +26,34 @@ class SignupPage extends Component {
       next_step: false,
       error: null,
       complete: false,
+      token: null,
+    }
+  }
+
+  componentWillMount(){
+    // Grab token if it is a redirect
+    const token_string = this.props.location.search;
+    if ("" === token_string) {
+      console.log('No token provided')
+      return this.setState({
+        next_step: false
+      })
+    }
+    else {
+      let token = token_string.slice(1).split("=")[1]
+      let valid_char = /^[A-Z]+$/;
+      if (token.match(valid_char)){
+        console.log(token);
+        return this.setState({
+          next_step: true,
+          token
+        })
+      }
+      else {
+        return this.setState({
+          error: "Invalid email confirmation URL"
+        });
+      }
     }
   }
 
@@ -45,7 +73,7 @@ class SignupPage extends Component {
 
   createAccount(e) {
     e.preventDefault();
-    const email_token = e.target.elements.email_token.value;
+    const email_token = this.state.token;
     const name = e.target.elements.name.value;
     const wallet = e.target.elements.wallet.value;
     const password = e.target.elements.password.value;
@@ -88,7 +116,8 @@ class SignupPage extends Component {
   displaySuccess() {
     return (
       <Alert theme="success" dismissible={this.dismissError}>
-        Successfully sent e-mail confirmation, make sure to check your inbox including spam folder.
+        Great! A confirmation e-mail has been sent to you, make sure to check your inbox including spam folder to find it.
+        Follow the link inside that e-mail to continue with your account creation!
       </Alert>
     )
   }
@@ -107,43 +136,32 @@ class SignupPage extends Component {
 
       return (
         <Container className={PageStyle.LoginPageBackground}>
+          {this.state.error !== null && this.displayError()}
           <Card className={PageStyle.EmailCard}>
-
-            {this.state.error !== null && this.displayError()}
             {
               !this.state.next_step ?
                 <CardBody>
                   {this.state.email_confirmed && this.displaySuccess()}
+                  <h2>Please confirm your e-mail address</h2>
                   <div className={PageStyle.inline}>
-                    <h2>Step 1: Enter your e-mail address</h2>
                     <p className={PageStyle.redText}> *</p>
                   </div>
                   <Form onSubmit={this.sendEmailConfirmation} >
                     <FormGroup>
-                      {!this.state.email_confirmed ?
                         <>
                           <FormInput name="email" placeholder="john@example.com" required />
                           <br />
                           <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
                             Confirm
                           </PrimaryButton>
-
-                          <SecondaryButton pill onClick={this.nextStep}>
-                            Already confirmed email? Go next &rarr;
-                          </SecondaryButton>
                         </>
-                        :
-                        <SecondaryButton pill onClick={this.nextStep}>
-                          Next
-                        </SecondaryButton>
-                      }
-
                     </FormGroup>
                   </Form>
                 </CardBody>
                 :
                 <CardBody>
-                  <h2>Step 2: Create a Myriade account</h2>
+                  <h2>Create your Myriade account</h2>
+                  <p>Thank you for confirming your email address, now you can create your Myriade account!</p>
                   <Form onSubmit={this.createAccount}>
                     <FormGroup >
                       <label className={PageStyle.inline} htmlFor="#name">
@@ -151,13 +169,6 @@ class SignupPage extends Component {
                         <p className={PageStyle.redText}> *</p>
                       </label>
                       <FormInput name="name" placeholder="John Doe" required />
-                    </FormGroup>
-                    <FormGroup>
-                      <label className={PageStyle.inline} htmlFor="#token">
-                        Email Confirmation Token (Check your email)
-                        <p className={PageStyle.redText}> *</p>
-                      </label>
-                      <FormInput name="email_token" placeholder="ABCDEFGHIJ" required />
                     </FormGroup>
                     <FormGroup>
                       <label htmlFor="#wallet">Monero Wallet Address</label>

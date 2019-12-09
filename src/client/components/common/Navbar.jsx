@@ -27,7 +27,7 @@ class NavigationBar extends Component {
           <img
             alt=""
             src="https://res.cloudinary.com/cardboard32/image/upload/v1575344489/Myriade/logo_text_ql9qpd.svg"
-            height="45"
+            height="35"
           />
         </NavbarBrand>
         <Nav navbar className="ml-auto">
