@@ -46,6 +46,7 @@
     "@fortawesome/free-solid-svg-icons": "~5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
     "@nivo/line": "^0.59.3",
+    "@typeform/embed": "^0.15.0",
     "apollo-boost": "^0.4.4",
     "apollo-link-context": "^1.0.19",
     "apollo-link-http": "^1.5.16",
