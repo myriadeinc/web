@@ -137,6 +137,7 @@ class SignupPage extends Component {
       return (
         <Container>
           {this.state.error !== null && this.displayError()}
+<<<<<<< HEAD
           <Row className={PageStyle.LoginPageBackground + ' justify-content-center'}>
             <Card className={PageStyle.EmailCard}>
               {
@@ -198,6 +199,67 @@ class SignupPage extends Component {
               }
             </Card>
           </Row>
+=======
+          <Card className={PageStyle.EmailCard}>
+            {
+              !this.state.next_step ?
+                <CardBody>
+                  {this.state.email_confirmed && this.displaySuccess()}
+                  <h2>Please confirm your e-mail address</h2>
+                  <div className={PageStyle.inline}>
+                    <p className={PageStyle.redText}> *</p>
+                  </div>
+                  <Form onSubmit={this.sendEmailConfirmation} >
+                    <FormGroup>
+                      <>
+                        <FormInput name="email" placeholder="e.g. john@example.com" required />
+                        <br />
+                        <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
+                          Confirm
+                          </PrimaryButton>
+                      </>
+                    </FormGroup>
+                  </Form>
+                </CardBody>
+                :
+                <CardBody>
+                  <h2>Create your Myriade account</h2>
+                  <p>Thanks for confirming your email address, now you can create your Myriade account!</p>
+                  <Form onSubmit={this.createAccount}>
+                    <FormGroup >
+                      <label className={PageStyle.inline} htmlFor="#name">
+                        Username
+                        <p className={PageStyle.redText}> *</p>
+                      </label>
+                      <FormInput name="name" placeholder="e.g. thankful_for_today" required />
+                    </FormGroup>
+                    <FormGroup>
+                      <Row className="m-0">
+                        <label htmlFor="#wallet" >Monero Wallet Address &nbsp;&nbsp;&nbsp;</label>
+                        <Badge className={PageStyle.badge} target="_blank" href="https://medium.com/@paul_70212/how-to-get-yourself-a-monero-xmr-wallet-address-2edb75a0a575" pill outline theme="info">What's this?</Badge>
+                      </Row>
+                      <FormInput name="wallet" placeholder="Paste in your wallet address here" />
+                    </FormGroup>
+                    <FormGroup>
+                      <label className={PageStyle.inline} htmlFor="#password">
+                        Password
+                        <p className={PageStyle.redText}> *</p>
+                      </label>
+                      <FormInput type="password" name="password" required />
+                      <label className={PageStyle.inline} htmlFor="#password_confirm">
+                        Confirm Password
+                        <p className={PageStyle.redText}> *</p>
+                      </label>
+                      <FormInput type="password" name="password_confirm" required />
+                    </FormGroup>
+                    <SecondaryButton pill type="submit">
+                      Create Account
+                    </SecondaryButton>
+                  </Form>
+                </CardBody>
+            }
+          </Card>
+>>>>>>> updating signup UI
         </Container>
 
       )
