@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { Card, CardBody, Button, Form, FormInput, FormGroup, Alert } from 'shards-react';
-import { Col, Container } from 'react-bootstrap';
+import { Card, CardBody, Badge, Form, FormInput, FormGroup, Alert } from 'shards-react';
+import { Row, Container } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner'
 import * as ROUTES from '../utils/routes.js';
@@ -30,7 +30,7 @@ class SignupPage extends Component {
     }
   }
 
-  componentWillMount(){
+  componentWillMount() {
     // Grab token if it is a redirect
     const token_string = this.props.location.search;
     if ("" === token_string) {
@@ -42,7 +42,7 @@ class SignupPage extends Component {
     else {
       let token = token_string.slice(1).split("=")[1]
       let valid_char = /^[A-Z]+$/;
-      if (token.match(valid_char)){
+      if (token.match(valid_char)) {
         console.log(token);
         return this.setState({
           next_step: true,
@@ -148,30 +148,33 @@ class SignupPage extends Component {
                   </div>
                   <Form onSubmit={this.sendEmailConfirmation} >
                     <FormGroup>
-                        <>
-                          <FormInput name="email" placeholder="john@example.com" required />
-                          <br />
-                          <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
-                            Confirm
+                      <>
+                        <FormInput name="email" placeholder="e.g. john@example.com" required />
+                        <br />
+                        <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
+                          Confirm
                           </PrimaryButton>
-                        </>
+                      </>
                     </FormGroup>
                   </Form>
                 </CardBody>
                 :
                 <CardBody>
                   <h2>Create your Myriade account</h2>
-                  <p>Thank you for confirming your email address, now you can create your Myriade account!</p>
+                  <p>Thanks for confirming your email address, now you can create your Myriade account!</p>
                   <Form onSubmit={this.createAccount}>
                     <FormGroup >
                       <label className={PageStyle.inline} htmlFor="#name">
                         Username
                         <p className={PageStyle.redText}> *</p>
                       </label>
-                      <FormInput name="name" placeholder="John Doe" required />
+                      <FormInput name="name" placeholder="e.g. thankful_for_today" required />
                     </FormGroup>
                     <FormGroup>
-                      <label htmlFor="#wallet">Monero Wallet Address</label>
+                      <Row className="m-0">
+                        <label htmlFor="#wallet" >Monero Wallet Address &nbsp;&nbsp;&nbsp;</label>
+                        <Badge className={PageStyle.badge} target="_blank" href="https://medium.com/@paul_70212/how-to-get-yourself-a-monero-xmr-wallet-address-2edb75a0a575" pill outline theme="info">What's this?</Badge>
+                      </Row>
                       <FormInput name="wallet" placeholder="Paste in your wallet address here" />
                     </FormGroup>
                     <FormGroup>
