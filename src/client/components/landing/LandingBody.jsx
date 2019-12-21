@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import * as ROUTES from '../../utils/routes.js';
 
-import Style from '../../styles/main.less';
+import Style from '../../styles/landingComponents/main.less';
 
 import { Canvas } from 'react-three-fiber';
 
@@ -103,7 +103,7 @@ class LandingBody extends Component {
           </Card>
         </Accordion>
 
-        <div ref={(el) => this.el = el} style={{ width: '100%', height: '500px' }} />
+        <div ref={(el) => this.el = el} className={Style.mailingForm} />
 
       </Container >
     );
