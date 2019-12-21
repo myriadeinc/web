@@ -149,7 +149,7 @@ class SignupPage extends Component {
                   <Form onSubmit={this.sendEmailConfirmation} >
                     <FormGroup>
                       <>
-                        <FormInput name="email" placeholder="john@example.com" required />
+                        <FormInput name="email" placeholder="e.g. john@example.com" required />
                         <br />
                         <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
                           Confirm
@@ -168,7 +168,7 @@ class SignupPage extends Component {
                         Username
                         <p className={PageStyle.redText}> *</p>
                       </label>
-                      <FormInput name="name" placeholder="John Doe" required />
+                      <FormInput name="name" placeholder="e.g. thankful_for_today" required />
                     </FormGroup>
                     <FormGroup>
                       <Row className="m-0">
