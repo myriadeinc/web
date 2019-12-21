@@ -58,7 +58,7 @@ class LandingBody extends Component {
               What is Myriade?
               </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
-              <Card.Body>Myriade is a crypto asset service company that is for the moment focusing on mining, specifically on Monero’s (XMR) new POW algorithm.</Card.Body>
+              <Card.Body>Myriade is a crypto asset service company that is for the moment focusing on mining, specifically: Monero (XMR).</Card.Body>
             </Accordion.Collapse>
           </Card>
           <Card>
@@ -98,7 +98,7 @@ class LandingBody extends Component {
               Who is this for?
               </Accordion.Toggle>
             <Accordion.Collapse eventKey="4">
-              <Card.Body>Myriade hopes to offer an alternative for the average user, who doesn’t own the top tier graphics cards. We hope to allow everyday people to see potential value in using their hardware to mine again. By creating a community pool that people can win from, Myriade helps to democratize the mining process, while making it easy for newcomers to be onboarded.</Card.Body>
+              <Card.Body>Myriade hopes to offer an alternative for the average user, who doesn’t own the top tier CPU. We hope to allow everyday people to see potential value in using their hardware to mine again. By creating a community pool that people can win from, Myriade helps to democratize the mining process, while making it easy for newcomers to be onboarded.</Card.Body>
             </Accordion.Collapse>
           </Card>
         </Accordion>
