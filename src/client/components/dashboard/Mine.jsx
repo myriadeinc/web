@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import { Alert, Nav, NavItem, NavLink, Container } from 'shards-react';
 
-import ComponentStyle from '../../styles/components/Mine.less';
+import ComponentStyle from '../../styles/components/dashboard/Mine.less';
 
 class Mine extends Component {
 

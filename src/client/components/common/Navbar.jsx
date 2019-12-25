@@ -17,7 +17,7 @@ import {
   Button
 } from "shards-react";
 
-import NavStyle from '../../styles/components/Navbar.less';
+import NavStyle from '../../styles/components/common/Navbar.less';
 
 class NavigationBar extends Component {
   render() {

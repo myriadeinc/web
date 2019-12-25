@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "react-bootstrap";
 import LineChart from './LineChart.jsx';
 
-import {  Card, 
-          CardImg, 
-          CardDeck, 
-          CardImgOverlay, 
-          CardHeader, 
-          CardBody 
-        } from 'shards-react';
+import {
+  Card,
+  CardImg,
+  CardDeck,
+  CardImgOverlay,
+  CardHeader,
+  CardBody
+} from 'shards-react';
 
 import { MinerConsumer } from '../../pages/Dashboard.jsx';
 
 import gqlClient from '../../utils/graphql.js';
 
-import ComponentStyle from '../../styles/components/Analytics.less'
+import ComponentStyle from '../../styles/components/dashboard/Analytics.less'
 
 import _ from 'lodash';
 
@@ -42,7 +43,7 @@ class AnalyticsComponent extends Component {
                     <h4>Pool hashrate </h4>
                     <h3>N/A</h3>
                   </CardImgOverlay>
-                  
+
                 </Card>
               </Col>
               <Col>
@@ -64,10 +65,10 @@ class AnalyticsComponent extends Component {
                   </CardHeader>
                   <CardBody>
                     <LineChart data={{
-                       hashrates: miner.historical_hashrates,
-                       credits: miner.myriade_credits,
-                       shares: miner.shares
-                      }}/>
+                      hashrates: miner.historical_hashrates,
+                      credits: miner.myriade_credits,
+                      shares: miner.shares
+                    }} />
                   </CardBody>
                 </Card>
               </Col>
