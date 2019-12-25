@@ -7,9 +7,6 @@ import axios from 'axios';
 
 
 class GameroomComponent extends Component {
-
-
-
     render() {
         return (
             <Container>
@@ -17,8 +14,8 @@ class GameroomComponent extends Component {
                 <Alert theme='danger'>
                     Our game room is currently under construction, we will notify you as soon as it is completed.
                 </Alert>
-            </Container>        
-            
+            </Container>
+
         )
     }
 }
