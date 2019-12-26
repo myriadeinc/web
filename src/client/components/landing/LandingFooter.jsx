@@ -8,20 +8,14 @@ class LandingFooter extends Component {
     return (
       <div className={Style.footer}>
         <Row className="justify-content-md-center pt-5 mb-2">
-          <a href="support@myriade.io" target="_blank">
-            <Badge pill variant="dark" className="m-1">
-              <i class="fas fa-envelope"></i>
-            </Badge>
+          <a href="mailto:support@myriade.io" target="_blank" className={Style.link}>
+            <i className="fas fa-envelope fa-2x m-2"></i>
           </a>
-          <a href="https://discord.gg/hQum2Cj m-2" target="_blank">
-            <Badge pill variant="dark" className="m-1">
-              <i class="fab fa-discord"></i>
-            </Badge>
+          <a href="https://discord.gg/hQum2Cj" target="_blank" className={Style.link}>
+            <i className="fab fa-discord fa-2x m-2"></i>
           </a>
-          <a href="https://www.reddit.com/r/MyriadeMining/" target="_blank">
-            <Badge pill variant="dark" className="m-1">
-              <i class="fab fa-reddit"></i>
-            </Badge>
+          <a href="https://www.reddit.com/r/MyriadeMining/" target="_blank" className={Style.link}>
+            <i className="fab fa-reddit fa-2x m-2"></i>
           </a>
         </Row>
         <Row className="justify-content-md-center m-2">
