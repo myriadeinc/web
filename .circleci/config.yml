@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     docker:
-      # Primary
       - image: myriadeinc/node-ci:latest
     steps:
       - checkout
@@ -13,38 +12,8 @@ jobs:
       - run:
           name: Build using Webpack
           command: |
-            npm run build
-      - run:
-          name: Login to Firebase CLI
-          command: |
-            do stuff
+            make build
       - deploy:
-          name: Deploying to myriade-web-staging
+          name: Deploying to myriade-web
           command: |
-            make deploy-staging
-  # deloy_staging:
-  #   docker:
-  #     - image: myriadeinc/node-ci:latest
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Login to Firebase CLI
-  #         command: |
-  #           do stuff
-  #     - run:
-  #         name: Deploying to myriade-web-staging
-  #         command: |
-  #           make deploy-staging
-# workflows:
-#   version: 2
-#   build_and_test:
-#     jobs:
-#       - build
-#       - deploy_staging
-#       - hold: 
-#           type: approval
-#           requires: build
-#       - deploy:
-#           name: Deploy build
-#           command: |
-#             firebase deploy
+            make deploy-ci
