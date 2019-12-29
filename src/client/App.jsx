@@ -33,7 +33,7 @@ class App extends React.Component {
 
                 <Route path={ROUTES.COOKIES} component={Cookies} />
                 <Route path={ROUTES.PRIVACY} component={Privacy} />
-                <Route path={ROUTES.TERM} component={Terms} />
+                <Route path={ROUTES.TERMS} component={Terms} />
 
                 {/* Protected Routes that need authentication */}
                 <ProtectedRoute path={ROUTES.DASHBOARD} component={DashboardPage} authenticated={authenticated} />
