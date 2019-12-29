@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Badge } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import * as ROUTES from '../../utils/routes.js';
