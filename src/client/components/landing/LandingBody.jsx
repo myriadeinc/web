@@ -54,7 +54,7 @@ class LandingBody extends Component {
         <h3 className={Style.Title}>Frequently Asked Questions</h3>
         <Accordion>
           <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="0">
+            <Accordion.Toggle as={Card.Header} eventKey="0" className={Style.faqToggle}>
               <Card.Title>What is Myriade?</Card.Title>
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">

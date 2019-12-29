@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Row, Col, Container, Badge } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+import * as ROUTES from '../../utils/routes.js';
 
 import Style from '../../styles/components/landing/footer.less';
 
@@ -19,9 +22,9 @@ class LandingFooter extends Component {
           </a>
         </Row>
         <Row className="justify-content-md-center m-2">
-          <a className="m-1" target="_blank">Privacy Policy</a>
-          <a className="m-1" target="_blank">Cookies Policy</a>
-          <a className="m-1" target="_blank">Terms of Service</a>
+          <Link className={'m-1 ' + Style.link} to={ROUTES.PRIVACY}>Privacy Policy</Link>
+          <Link className={'m-1 ' + Style.link} to={ROUTES.COOKIES}>Cookies Policy</Link>
+          <Link className={'m-1 ' + Style.link} to={ROUTES.TERMS}>Terms of Service</Link>
         </Row>
         <Row className="justify-content-md-center mt-2 pb-3">
           <p>Copyright © 2019, Myriade Inc.</p>
