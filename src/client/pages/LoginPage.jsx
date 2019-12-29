@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Col, Container } from 'react-bootstrap';
+import { Col, Row, Container } from 'react-bootstrap';
 import { Card, CardHeader, CardBody, CardFooter, Button, Form, FormInput, FormGroup, Alert } from 'shards-react';
 
 import { Redirect, Link } from 'react-router-dom';
@@ -13,9 +13,9 @@ import * as ROUTES from '../utils/routes.js';
 
 class LoginPage extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state ={
+    this.state = {
       loggin_in: false,
       error: false
     }
@@ -27,15 +27,15 @@ class LoginPage extends Component {
     e.preventDefault();
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
-    this.setState({logging_in: true});
+    this.setState({ logging_in: true });
     return this.props.login(email, password)
-    .catch(err => {
-      this.setState({loggin_in: false, error: true})
-    })
+      .catch(err => {
+        this.setState({ loggin_in: false, error: true })
+      })
   }
 
-  dismissError(){
-    this.setState({error: false});
+  dismissError() {
+    this.setState({ error: false });
   }
 
   displayError() {
@@ -49,26 +49,25 @@ class LoginPage extends Component {
   displayLoading() {
     return (
       <Loader
-	     type="Mutating Dots"
-	     color="#00BFFF"
-	     height={100}
-	     width={100}
-	     timeout={3000} //3 secs
-	  />
+        type="Mutating Dots"
+        color="#00BFFF"
+        height={100}
+        width={100}
+        timeout={3000} //3 secs
+      />
     )
   }
 
   render() {
-    if (this.props.authenticated){
+    if (this.props.authenticated) {
       return (<Redirect to={ROUTES.DASHBOARD} />)
     }
-    else{
+    else {
       return (
-        <Container className={PageStyle.LoginPageBackground}>
+        <Container>
           {this.state.error && this.displayError()}
-          <Col md={{offset: 3, size: 6}} lg={{offset: 3, size:6}}>
+          <Row className={' justify-content-center'}>
             <Card className={PageStyle.LoginCard}>
-              
               <CardBody>
                 <h3>Dashboard Login</h3>
                 <Form onSubmit={this.handleLogin}>
@@ -85,12 +84,11 @@ class LoginPage extends Component {
               </CardBody>
               <CardFooter>Don't have a Myriade account? click <Link to={ROUTES.SIGN_UP}> here</Link> </CardFooter>
             </Card>
-          </Col>    
+          </Row>
         </Container>
-        
+
       );
     }
-
   }
 }
 
