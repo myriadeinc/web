@@ -70,7 +70,7 @@ class LandingBody extends Component {
             </Canvas>
              */}
 
-        <div className="m-5">
+        <div className={Style.faq}>
           <h3 className={Style.Title}>Frequently Asked Questions</h3>
           <Accordion>
             <Card>
@@ -123,7 +123,6 @@ class LandingBody extends Component {
             </Card>
           </Accordion>
         </div>
-
 
         <div ref={(el) => this.el = el} className={Style.mailingForm} />
 
