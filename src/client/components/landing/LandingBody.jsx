@@ -36,7 +36,8 @@ class LandingBody extends Component {
       THREE: THREE,
       color: 0xF07C00,
       color2: 0x0,
-      backgroundColor: 0xffffff
+      backgroundColor: 0xffffff,
+      size: 0.6
     })
   }
   componentWillUnmount() {
