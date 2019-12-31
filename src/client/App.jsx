@@ -16,6 +16,7 @@ import Cookies from './components/landing/CookiesPolicy.jsx';
 import Privacy from './components/landing/PrivacyPolicy.jsx';
 import Terms from './components/landing/TermsOfService.jsx';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
 
