@@ -45,17 +45,14 @@ class LandingBody extends Component {
 
       <div>
         <div ref={this.vantaRef} className="vh-100">
-          <Row className={Style.TitleDiv}>
-            <Col>
-              <div className={Style.Hero} >
-                <h1 className="text-white"><strong>The First Fortune-Mining Pool.</strong></h1>
-                <h1 className="text-white"><strong>Made for Monero.</strong></h1>
-                <br />
-                <WhiteLink to={ROUTES.SIGN_UP} className="ml-5"><PrimaryButton pill >Get Started</PrimaryButton></WhiteLink>
-                <BlueLink to={ROUTES.DASHBOARD}><SecondaryButton pill outline>Log In</SecondaryButton></BlueLink>
-              </div>
-            </Col>
-          </Row>
+          <div className={Style.TitleDiv}>
+            <h1 className="text-white"><strong>The World’s First Fortune-Mining Pool.</strong></h1>
+            <h1 className="text-white"><strong>Made for Monero.</strong></h1>
+            <Row className="ml-5 pl-3">
+              <WhiteLink to={ROUTES.SIGN_UP}><PrimaryButton pill >Get Started</PrimaryButton></WhiteLink>
+              <BlueLink to={ROUTES.DASHBOARD}><SecondaryButton pill>Log In</SecondaryButton></BlueLink>
+            </Row>
+          </div>
         </div>
         {/*
             <Canvas camera={{ fov: 75, near: 1, far: 1000 }} pixelRatio={window.devicePixelRatio}>
