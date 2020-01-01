@@ -34,9 +34,9 @@ class LandingBody extends Component {
     this.vantaEffect = GLOBE({
       el: this.vantaRef.current,
       THREE: THREE,
-      color: 0xF07C00,
-      color2: 0x0,
-      backgroundColor: 0xffffff,
+      color: 0xf05c1f,
+      color2: 0xFFFFFF,
+      backgroundColor: 0xe0222,
       size: 0.6
     })
   }
@@ -50,18 +50,14 @@ class LandingBody extends Component {
       <div>
         <div ref={this.vantaRef} className="vh-100">
           <Row className={Style.Header} className="loremIpsum"> {/* ClassName needed to help init globe animation */}
-            <Col md={6}>
+            <Col>
               <div className={Style.Hero} >
-                <h1>The First Fortune-Mining Pool.</h1>
-                <h1>Made for Monero.</h1>
+                <h1 className="text-white"><strong>The First Fortune-Mining Pool.</strong></h1>
+                <h1 className="text-white"><strong>Made for Monero.</strong></h1>
                 <br />
-                <WhiteLink to={ROUTES.SIGN_UP}><PrimaryButton pill >Get Started</PrimaryButton></WhiteLink>
+                <WhiteLink to={ROUTES.SIGN_UP} className="ml-5"><PrimaryButton pill >Get Started</PrimaryButton></WhiteLink>
                 <BlueLink to={ROUTES.DASHBOARD}><SecondaryButton pill outline>Log In</SecondaryButton></BlueLink>
               </div>
-            </Col>
-            <Col md={6}>
-
-
             </Col>
           </Row>
         </div>

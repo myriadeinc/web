@@ -13,7 +13,7 @@ class LandingPage extends Component {
   render() {
     return (
       <>
-        <Alert theme="warning" className={PageStyle.amber}> Our mining pool is currently under Beta testing and not fully operational yet. </Alert>
+        <Alert theme="warning" className={PageStyle.amber} dismissible={this.dismiss}> Our mining pool is currently under Beta testing and not fully operational yet. </Alert>
         <LandingBody />
         <LandingFooter />
       </>
