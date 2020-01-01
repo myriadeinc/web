@@ -26,8 +26,13 @@ class LandingFooter extends Component {
           <Link className={'m-1 ' + Style.link} to={ROUTES.COOKIES}>Cookies Policy</Link>
           <Link className={'m-1 ' + Style.link} to={ROUTES.TERMS}>Terms of Service</Link>
         </Row>
+<<<<<<< HEAD
         <Row className="justify-content-md-center mt-2 pb-3">
           <p>Copyright © 2020, Myriade Inc.</p>
+=======
+        <Row className="justify-content-center mt-2 pb-3">
+          <p>Copyright © 2019, Myriade Inc.</p>
+>>>>>>> footer centering bug
         </Row>
       </div>
     );
