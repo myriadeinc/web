@@ -3,13 +3,9 @@ import React, { Component } from 'react';
 import * as ROUTES from '../../utils/routes.js';
 
 import Style from '../../styles/components/landing/main.less';
+import { Row, Col, Accordion, Card } from 'react-bootstrap';
 
-import { Canvas } from 'react-three-fiber';
-
-import { Row, Col, Container, Accordion, Card } from 'react-bootstrap';
-
-//import Scene from './Scene.jsx';
-import GLOBE from './vanta.globe.js';
+import GLOBE from '../../vendor/vanta.globe.min.js';
 import * as THREE from 'three';
 
 import * as typeformEmbed from '@typeform/embed';
@@ -49,7 +45,7 @@ class LandingBody extends Component {
 
       <div>
         <div ref={this.vantaRef} className="vh-100">
-          <Row className={Style.Header} className="loremIpsum"> {/* ClassName needed to help init globe animation */}
+          <Row className={Style.TitleDiv}>
             <Col>
               <div className={Style.Hero} >
                 <h1 className="text-white"><strong>The First Fortune-Mining Pool.</strong></h1>
