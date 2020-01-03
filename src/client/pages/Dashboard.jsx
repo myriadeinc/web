@@ -130,7 +130,7 @@ class DashboardPage extends Component {
 
                       <BoldBlackLink to={`${this.props.match.path}/`} > Mining Metrics </BoldBlackLink>
                       <BoldBlackLink to={`${this.props.match.path}/mining`} > Start Mining </BoldBlackLink>
-                      <BoldBlackLink to={`${this.props.match.path}/gameroom`} > Game Room </BoldBlackLink>
+                      {/* <BoldBlackLink to={`${this.props.match.path}/gameroom`} > Game Room </BoldBlackLink> */}
                     </ListGroup>
                     
                   </CardBody>
@@ -145,7 +145,7 @@ class DashboardPage extends Component {
                 <Switch>
                   <ProtectedRoute exact path={`${this.props.match.path}/`} component={Analytics} authenticated={authenticated} />
                   <ProtectedRoute path={`${this.props.match.url}/mining`} component={Mine} authenticated={authenticated} />
-                  <ProtectedRoute path={`${this.props.match.url}/gameroom`} component={Gameroom} authenticated={authenticated} />
+                  {/* <ProtectedRoute path={`${this.props.match.url}/gameroom`} component={Gameroom} authenticated={authenticated} /> */}
                 </Switch>
               </Col>
             </Row>
