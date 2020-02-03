@@ -6,7 +6,7 @@ import { MinerConsumer } from '../../pages/Dashboard.jsx';
 
 import gqlClient from '../../utils/graphql.js';
 
-import ComponentStyle from '../../styles/components/dashboard/Analytics.less'
+import Style from '../../styles/components/dashboard/Analytics.less'
 
 import _ from 'lodash';
 
@@ -18,28 +18,34 @@ class AnalyticsComponent extends Component {
     return (
       <MinerConsumer>
         {(miner) => (
-          <Container className={ComponentStyle.MetricsStyle}>
+          <Container className={Style.MetricsStyle}>
             {width > 800 ? (
               <CardDeck className="mt-5">
                 <Card>
-                  <Card.Img src="https://ak7.picdn.net/shutterstock/videos/1019866207/thumb/1.jpg" alt="Card image" />
-                  <Card.ImgOverlay className="p-3">
-                    <h1 className={ComponentStyle.dynamicTitle}>Your average hashrate </h1>
-                    <h1 className={ComponentStyle.dynamicSubtitle}>{miner.average_hashrate}</h1>
+                  <Card.Img className={Style.CardBg} src="https://i.ibb.co/h21M3Dr/Triangle-Pattern-1.png" alt="Card image" />
+                  <Card.ImgOverlay className={Style.CardOverlay + " p-3"} >
+                    <div>
+                      <h1 className={Style.dynamicSubtitle}>Average Hashrate </h1>
+                      <h1 className={Style.dynamicTitle}>{miner.average_hashrate} H/sec</h1>
+                    </div>
                   </Card.ImgOverlay>
                 </Card>
                 <Card small={true}>
-                  <Card.Img src="https://cdn.slidemodel.com/wp-content/uploads/7382-01-duotone-gradients-powerpoint-templates-16x9-4.jpg" alt="Card image" />
-                  <Card.ImgOverlay className="p-3">
-                    <h1 className={ComponentStyle.dynamicTitle}>Pool hashrate </h1>
-                    <h1 className={ComponentStyle.dynamicSubtitle}>N/A</h1>
+                  <Card.Img className={Style.CardBg} src="https://i.ibb.co/Tr40bKY/green.png" alt="Card image" />
+                  <Card.ImgOverlay className={Style.CardOverlay + " p-3"}>
+                    <div>
+                      <h1 className={Style.dynamicSubtitle}>Total MC Earned</h1>
+                      <h1 className={Style.dynamicTitle}>{miner.monero_balance ? miner.monero_balance : "N/A"}</h1>
+                    </div>
                   </Card.ImgOverlay>
                 </Card>
                 <Card small={true}>
-                  <Card.Img src="https://ak7.picdn.net/shutterstock/videos/1019866207/thumb/1.jpg" alt="Card image" />
-                  <Card.ImgOverlay className="p-3">
-                    <h1 className={ComponentStyle.dynamicTitle}>Mining credits balance </h1>
-                    <h1 className={ComponentStyle.dynamicSubtitle}>{miner.myriade_credits_balance}</h1>
+                  <Card.Img className={Style.CardBg} src="https://i.ibb.co/0BGXJ9H/Triangle-Pattern-1.png" alt="Card image" />
+                  <Card.ImgOverlay className={Style.CardOverlay + " p-3"}>
+                    <div>
+                      <h1 className={Style.dynamicSubtitle}>Pool Hashrate</h1>
+                      <h1 className={Style.dynamicTitle}>{miner.myriade_credits_balance} MH/sec</h1>
+                    </div>
                   </Card.ImgOverlay>
                 </Card>
               </CardDeck>
@@ -52,7 +58,7 @@ class AnalyticsComponent extends Component {
                   </Card.Body>
                 </Card>
               )}
-            <Card className={ComponentStyle.HashrateChart + " mt-5 mb-5"}>
+            <Card className={Style.HashrateChart + " mt-5 mb-5"}>
               <Card.Header>
                 <h3>Historical Metrics</h3>
                 <p>An overview of hashrates, shares and mining credits</p>

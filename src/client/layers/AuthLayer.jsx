@@ -11,29 +11,29 @@ import config from '../utils/config.js';
 const authContext = createContext();
 
 class AuthLayer extends Component {
-  
+
   constructor(props) {
     super(props);
     this.updateAuth = this.updateAuth.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.state = {
-        miner: null,
-        authenticated: false,
-        logout: this.logout,
-        login: this.login,
-        jwtToken: null
+      miner: null,
+      authenticated: true, // Change back later
+      logout: this.logout,
+      login: this.login,
+      jwtToken: null
     }
-    
+
   }
 
   login(email, password) {
-    return axios.post(`${config.identity_service_url}/v1/account/login`, 
+    return axios.post(`${config.identity_service_url}/v1/account/login`,
       {
-        email, 
+        email,
         password
       })
-      .then(({data}) => {
+      .then(({ data }) => {
         return this.updateAuth(data.accessToken);
       });
   }
@@ -41,9 +41,9 @@ class AuthLayer extends Component {
   logout() {
     localStorage.removeItem('access_token');
     this.setState({
-        authenticated: false,
-        accessToken: '',
-        miner: null,
+      authenticated: false,
+      accessToken: '',
+      miner: null,
     });
   }
 
@@ -51,22 +51,22 @@ class AuthLayer extends Component {
     localStorage.setItem('access_token', accessToken);
     const decodedToken = decode(accessToken);
     this.setState({
-        miner: {
-            id: decodedToken.sub,
-            address: decodedToken.account.address,
-            name: decodedToken.account.name
-        },
-        jwtToken: accessToken,
-        authenticated: true,
+      miner: {
+        id: decodedToken.sub,
+        address: decodedToken.account.address,
+        name: decodedToken.account.name
+      },
+      jwtToken: accessToken,
+      authenticated: true,
     });
   }
 
-  render(){
+  render() {
     return (
       <authContext.Provider value={this.state}>
-          {this.props.children}
+        {this.props.children}
       </authContext.Provider>
-  );
+    );
   }
 }
 
@@ -74,8 +74,8 @@ export class ProtectedRoute extends Component {
   render() {
     return (
       this.props.authenticated ?
-      <Route path={this.props.path} component={this.props.component} /> :
-      <Redirect to={ROUTES.LOGIN} />
+        <Route path={this.props.path} component={this.props.component} /> :
+        <Redirect to={ROUTES.LOGIN} />
     )
   }
 }
