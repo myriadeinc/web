@@ -14,7 +14,7 @@ class LandingFooter extends Component {
           <a href="mailto:support@myriade.io" target="_blank" className={Style.link}>
             <i className="fas fa-envelope fa-2x m-2"></i>
           </a>
-          <a href="https://discord.gg/hQum2Cj" target="_blank" className={Style.link}>
+          <a href="https://discord.gg/J9Pn7Dk" target="_blank" className={Style.link}>
             <i className="fab fa-discord fa-2x m-2"></i>
           </a>
           <a href="https://www.reddit.com/r/MyriadeMining/" target="_blank" className={Style.link}>
