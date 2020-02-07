@@ -27,7 +27,7 @@ class LandingFooter extends Component {
           <Link className={'m-1 ' + Style.link} to={ROUTES.TERMS}>Terms of Service</Link>
         </Row>
         <Row className="justify-content-md-center mt-2 pb-3">
-          <p>Copyright © 2019, Myriade Inc.</p>
+          <p>Copyright © 2020, Myriade Inc.</p>
         </Row>
       </div>
     );
