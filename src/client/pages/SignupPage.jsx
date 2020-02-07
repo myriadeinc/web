@@ -169,7 +169,7 @@ class SignupPage extends Component {
                           Username
                           <p className={PageStyle.redText}> *</p>
                         </label>
-                        <FormInput name="name" placeholder="e.g. thankful_for_today" required />
+                        <FormInput name="name" placeholder="e.g. thankful_for_today" autocomplete="username" required />
                       </FormGroup>
                       <FormGroup>
                         <Row className="m-0">
@@ -183,12 +183,12 @@ class SignupPage extends Component {
                           Password
                           <p className={PageStyle.redText}> *</p>
                         </label>
-                        <FormInput type="password" name="password" required />
+                        <FormInput type="password" name="password" autocomplete="new-password" required />
                         <label className={PageStyle.inline} htmlFor="#password_confirm">
                           Confirm Password
                           <p className={PageStyle.redText}> *</p>
                         </label>
-                        <FormInput type="password" name="password_confirm" required />
+                        <FormInput type="password" name="password_confirm" autocomplete="new-password" required />
                       </FormGroup>
                       <SecondaryButton pill type="submit">
                         Create Account
