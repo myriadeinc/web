@@ -4,7 +4,6 @@
 
 .card {
   background-color: $card-bg;
-  border: none;
 
   @include border-radius($card-border-radius);
   @include box-shadow($card-box-shadow);
