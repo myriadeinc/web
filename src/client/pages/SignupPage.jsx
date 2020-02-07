@@ -150,7 +150,7 @@ class SignupPage extends Component {
                     <Form onSubmit={this.sendEmailConfirmation} >
                       <FormGroup>
                         <>
-                          <FormInput name="email" placeholder="e.g. john@example.com" required />
+                          <FormInput name="email" placeholder="e.g. john@example.com" autocomplete="email" required />
                           <br />
                           <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
                             Confirm
