@@ -88,7 +88,7 @@ const Faq = () => (
           <Card.Title>What is Myriade?</Card.Title>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="0" className={Style.faqCollapse}>
-          <Card.Body>Myriade is a crypto asset service company that is for the moment focusing on mining, specifically: Monero (XMR).</Card.Body>
+          <Card.Body>Myriade is a crypto asset service company that is for the moment focusing on mining, specifically: Monero (XMR). Though look out, we plan on offering other services in the near future.</Card.Body>
         </Accordion.Collapse>
       </Card>
       <Card>
@@ -96,7 +96,7 @@ const Faq = () => (
           <Card.Title>So... You’re a mining pool... we have plenty of those already.</Card.Title>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="1" className={Style.faqCollapse}>
-          <Card.Body>What sets us apart from traditional mining pools is our novel payout method. Rather than using classic systems such as PPS and PPLNS, we’re using something completely different; Fortune Mining.</Card.Body>
+          <Card.Body>What sets us apart from traditional mining pools is our novel payout method. Rather than using classic systems such as PPS and PPLNS, we’re using something completely different. Something we call: Fortune Mining.</Card.Body>
         </Accordion.Collapse>
       </Card>
       <Card>
@@ -104,7 +104,8 @@ const Faq = () => (
           <Card.Title>How does Fortune Mining work?</Card.Title>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="2" className={Style.faqCollapse}>
-          <Card.Body>When you sign in and mine on the Myriade mining pool, your account will be credited in Mining Credits (MC), which are proportionally distributed based off your hashing power. MCs are NOT a crypto asset in any way, shape, or form. It does not have a set value. You will be mining on the Monero network, and there will be no scenario where you would be able to pull MC out to an exchange. Instead, think of MC like tokens at an arcade or credit card rebate points that are only redeemable here.</Card.Body>
+          <Card.Body>When you sign in and mine on the Myriade mining pools, your account will be
+credited in Mining Credits (MC), which are proportionally distributed based off your hashing power (similar to current mining pools). To be clear. MCs are NOT a crypto asset in any way, shape, or form. It does not have a set value, it is not mineable. You will be mining on the Monero network, and there will be no scenario where you would be able to pull MC out to an exchange or use it anywhere other than the Myriade ecosystem. Instead, think of MC like tokens at an arcade or credit card rebate points that are exclusively redeemable here. </Card.Body>
         </Accordion.Collapse>
       </Card>
       <Card>
@@ -112,7 +113,7 @@ const Faq = () => (
           <Card.Title>Why Fortune Mining?</Card.Title>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="3" className={Style.faqCollapse}>
-          <Card.Body>The goal of Myriade’s Fortune Mining system is to create value from personal gaming systems that aren’t being used during downtime. Myriade allows gamers to put their old and unused devices to use, by creating a means to use that extra hashing power.</Card.Body>
+          <Card.Body>The goal of Myriade’s Fortune Mining system is to create value from personal gaming computers that aren’t being used during downtime. Myriade allows gamers and people with spare hashing power laying around to put their old and unused devices to use, by creating a potentially profitable means of earning Monero.</Card.Body>
         </Accordion.Collapse>
       </Card>
       <Card>
@@ -120,15 +121,31 @@ const Faq = () => (
           <Card.Title>What is MC used for?</Card.Title>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="4" className={Style.faqCollapse}>
-          <Card.Body>MC can be used in the game room, where you can stake it for the chance to win Monero in a raffle type game. For one day’s worth of mining on a CPU that would normally earn you $0.11 USD /day you could walk out with a full block reward, and cash out whenever you’d like.</Card.Body>
+          <Card.Body>We invite you to create an account, if anything, just to see how the service works. You’ll see that MC can be used in the game room, where you can stake them for the chance to win Monero in a “raffle type game”. For example, for one day’s worth of mining on a CPU that would normally earn you $0.13 USD /day of XMR,  you could instead walk out with a full block reward, cash out, and never touch Myriade again.</Card.Body>
         </Accordion.Collapse>
       </Card>
       <Card>
         <Accordion.Toggle as={Card.Header} eventKey="5" className={Style.faqToggle}>
-          <Card.Title>Who is this for?</Card.Title>
+          <Card.Title>How does Myriade make money?</Card.Title>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="5" className={Style.faqCollapse}>
-          <Card.Body>Myriade hopes to offer an alternative for the average user, who doesn’t own the top tier CPU. We hope to allow everyday people to see potential value in using their hardware to mine again. By creating a community pool that people can win from, Myriade helps to democratize the mining process, while making it easy for newcomers to be onboarded.</Card.Body>
+          <Card.Body>For the moment, we only have one game in our game room so we will focus on that. The drawings happen in 4 stages: Creation, Funding, Profit, and Execution. We make our money in the profit stage. The creation stage is where we determine the amount of XMR that will be in play based off the current price of XMR/USD. The price will then be frozen for the remaining life of that drawing, no matter how the market may fluctuate. Then comes the funding stage. This is where people can start purchasing tickets with MC for the drawing. Once the amount of MC in the drawing has reached the point where it is fully funded, then we enter the profit stage. The profit stage lasts 20 minutes and the tickets will cost more MC to purchase. Purchasing a ticket during the profit stage is generally for the people who do not want to wait however long it takes the other drawings to become funded. Finally, execution: this is where a winner is chosen and their Myriade account is credited with XMR.</Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle as={Card.Header} eventKey="6" className={Style.faqToggle}>
+          <Card.Title>Are there any special events?</Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="6" className={Style.faqCollapse}>
+          <Card.Body>We plan on having many special events where there will be huge jackpots that will be on a timer and will not require the drawing to be fully funded. Theoretically, you can buy 1 ticket, and if no one else plays against you then you will be the only winner. The way that we do this is by giving everyone a little bit less MC so we can store up big pools of XMR which we will be giving out either in big jackpot prizes, or by giving users small amounts of XMR randomly throughout their time mining just to say thank you for using Myriade.</Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle as={Card.Header} eventKey="7" className={Style.faqToggle}>
+          <Card.Title>Who is this for?</Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="7" className={Style.faqCollapse}>
+          <Card.Body>Myriade is for the people who don’t have a full time mining rig (though those who do are also welcome) it’s for people who truly believe in the project and want to contribute any way they can. Before Myriade, the only way to do that was to either solo mine and have a low chance to win the whole block reward or mine in a pool and earn $4.18 /month of 24/7 mining (Intel I7-7700k, Dec 28 2019). The fact is: we’ve seen so many reddit posts where people ask “can I mine profitably with CPU X,Y,Z?” The responses are usually: no and that if they want Monero, they should just buy it instead. That doesn’t really follow with the Monero ethos of decentralisation. Now, with Myriade, that’s no longer true. So, who is Myriade for? Honestly, we made the service for ourselves since it’s something we would want to use and we think you all would like it too.</Card.Body>
         </Accordion.Collapse>
       </Card>
     </Accordion>
