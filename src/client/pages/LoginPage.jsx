@@ -73,11 +73,11 @@ class LoginPage extends Component {
                 <Form onSubmit={this.handleLogin}>
                   <FormGroup>
                     <label htmlFor="#email">Email</label>
-                    <FormInput name="email" placeholder="john@example.com" autocomplete="email" />
+                    <FormInput name="email" placeholder="john@example.com" autoComplete="email" />
                   </FormGroup>
                   <FormGroup>
                     <label htmlFor="#password">Password</label>
-                    <FormInput type="password" name="password" placeholder="Password" autocomplete="current-password" />
+                    <FormInput type="password" name="password" placeholder="Password" autoComplete="current-password" />
                   </FormGroup>
                   <PrimaryButton pill type="submit">login &rarr;</PrimaryButton>
                 </Form>
