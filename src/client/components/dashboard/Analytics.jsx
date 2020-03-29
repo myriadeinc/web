@@ -25,12 +25,12 @@ class AnalyticsComponent extends Component {
                   <Card.Img className={Style.CardBg} src="https://i.ibb.co/h21M3Dr/Triangle-Pattern-1.png" alt="Card image" />
                   <Card.ImgOverlay className={Style.CardOverlay + " p-3"} >
                     <div>
-                      <h1 className={Style.dynamicSubtitle}>Average Hashrate </h1>
+                      <h1 className={Style.dynamicSubtitle}>Average Hashrate</h1>
                       <h1 className={Style.dynamicTitle}>{miner.average_hashrate} H/sec</h1>
                     </div>
                   </Card.ImgOverlay>
                 </Card>
-                <Card small={true}>
+                <Card small="true">
                   <Card.Img className={Style.CardBg} src="https://i.ibb.co/Tr40bKY/green.png" alt="Card image" />
                   <Card.ImgOverlay className={Style.CardOverlay + " p-3"}>
                     <div>
@@ -39,7 +39,7 @@ class AnalyticsComponent extends Component {
                     </div>
                   </Card.ImgOverlay>
                 </Card>
-                <Card small={true}>
+                <Card small="true">
                   <Card.Img className={Style.CardBg} src="https://i.ibb.co/0BGXJ9H/Triangle-Pattern-1.png" alt="Card image" />
                   <Card.ImgOverlay className={Style.CardOverlay + " p-3"}>
                     <div>
