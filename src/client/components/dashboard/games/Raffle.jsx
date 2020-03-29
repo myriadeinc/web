@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Modal, Button, InputGroup, FormControl, ButtonToolbar, ButtonGroup, Row, Col, Container } from 'react-bootstrap';
 
 class Raffle extends Component {
   constructor(props) {
     super(props);
+    this.goBack = this.goBack.bind(this);
     this.state = {
       modalShow: false,
       setModalShow: false,
@@ -61,6 +61,10 @@ class Raffle extends Component {
     this.setState({ tickets: e.target.value })
   }
 
+  goBack() {
+    this.props.history.goBack();
+  }
+
   render() {
     let drawingCards = this.drawingOptions.map((value, index) =>
       <ButtonGroup className="m-2" key={index}>
@@ -82,11 +86,11 @@ class Raffle extends Component {
     );
 
     return (
-      <Container>
-        <Button onClick={this.handleShow}>Click me</Button>
-        <Link to={this.props.back}>
-          <Button>Back</Button>
-        </Link>
+      <div>
+        <h4>Weekly Raffle Drawings</h4>
+        <h5 className="text-muted">Participate in weekly draws to take a part in winning the group block award. Spend Myriade Credits to buy tickets for XMR pot prizes.</h5>
+        <Button onClick={this.handleShow}>Buy Tickets!</Button>
+        <Button onClick={this.goBack}>Back</Button>
         <Modal centered size="lg" show={this.state.modalShow} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Game Drawings</Modal.Title>
@@ -123,7 +127,7 @@ class Raffle extends Component {
                     </Button>
           </Modal.Footer>
         </Modal>
-      </Container>
+      </div>
     );
   }
 }
