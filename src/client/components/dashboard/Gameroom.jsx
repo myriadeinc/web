@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Link, withRouter } from 'react-router-dom';
 
-import { Card, CardColumns, Container, Button } from 'react-bootstrap';
+import { Card, CardColumns, Container, Navbar } from 'react-bootstrap';
 
 import Raffles from './games/Raffle.jsx';
 import Grid from './games/Grid.jsx';
@@ -12,32 +12,37 @@ import Style from '../../styles/components/dashboard/Gameroom.less'
 
 function Menu() {
   return (
-    <CardColumns>
-      <Link to={`/dashboard/gameroom/raffles`}>
-        <Card >
-          <Card.Img className={Style.cardImg} variant="top" src="https://picsum.photos/200/300" />
-          <Card.Body>
-            <Card.Title>Drawings</Card.Title>
-            <Card.Text>
-              Use your Myriade Credits to take part in raffles for USD.
-                </Card.Text>
-          </Card.Body>
-        </Card>
-      </Link>
+    <>
+      <h3 className={Style.orange + " mb-3"} >Gameroom</h3>
+      <p>Use your Mining Credits to play a selection of games and win XMR!</p>
 
-      <Link to={`/dashboard/gameroom/grid`}>
-        <Card>
-          <Card.Img className={Style.cardImg} variant="top" src="https://picsum.photos/200/300" />
-          <Card.Body>
-            <Card.Title>Grid</Card.Title>
-            <Card.Text>
-              The classic card flipping game, now with Myriade Credits.
+      <CardColumns>
+        <Link className={Style.noDecoration} to={`/dashboard/gameroom/raffles`}>
+          <Card >
+            <Card.Img className={Style.cardImg} variant="top" src="https://i.ibb.co/pbhvp64/arcade.png" />
+            <Card.Body>
+              <Card.Title>Drawings</Card.Title>
+              <Card.Text>
+                Use your Mining Credits to take part in raffles for USD.
+            </Card.Text>
+            </Card.Body>
+          </Card>
+        </Link>
+
+        <Link className={Style.noDecoration} to={`/dashboard/gameroom/grid`}>
+          <Card>
+            <Card.Img className={Style.cardImg} variant="top" src="https://picsum.photos/200/300" />
+            <Card.Body>
+              <Card.Title>Grid</Card.Title>
+              <Card.Text>
+                The classic card flipping game, now with Myriade Credits.
               </Card.Text>
-          </Card.Body>
-        </Card>
-      </Link>
+            </Card.Body>
+          </Card>
+        </Link>
 
-    </CardColumns>
+      </CardColumns>
+    </>
   )
 }
 
@@ -47,8 +52,7 @@ class GameroomComponent extends Component {
     return (
       <AuthConsumer>
         {({ authenticated }) => (
-          <Container>
-            <h3>Game Room</h3>
+          <Container className="pt-4">
             <Switch>
               <ProtectedRoute exact path={`/dashboard/gameroom/`} component={Menu} authenticated={authenticated} />
               <ProtectedRoute path={`/dashboard/gameroom/raffles`} component={Raffles} authenticated={authenticated} />
