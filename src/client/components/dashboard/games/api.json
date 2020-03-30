@@ -1,0 +1,89 @@
+{
+  "miner": {
+    "name": "Jonathan Xu",
+    "email": "jonathan@gmail.com",
+    "myriade_credits_balance": 23553,
+    "myriade_credits": 23553,
+    "monero_balance": 123943,
+    "hashrates": 43234,
+    "average_hashrate": 0,
+    "shares": [],
+    "raffles": {
+      "ticketNum": 3,
+      "tickets": [
+        {
+          "usd": 5,
+          "xmr": 0.040,
+          "price": 4000,
+          "expired": false,
+          "expiry": "1585582897",
+          "win": false
+        },
+        {
+          "usd": 5,
+          "xmr": 0.040,
+          "price": 4000,
+          "expired": true,
+          "expiry": "1546300800",
+          "win": true
+        },
+        {
+          "usd": 20,
+          "xmr": 0.160,
+          "price": 12000,
+          "expired": true,
+          "expiry": "1546300800",
+          "win": false
+        }
+      ],
+      "wins": {
+        "usd": 5,
+        "xmr": 0.040
+      },
+      "spent": {
+        "mc": 20000
+      }
+    }
+  },
+  "raffles": {
+    "reset": "1585582897",
+    "options": [
+      {
+        "usd": 1,
+        "xmr": 0.008,
+        "price": "-",
+        "border": "light"
+      },
+      {
+        "usd": 5,
+        "xmr": 0.040,
+        "price": 4000
+      },
+      {
+        "usd": 10,
+        "xmr": 0.080,
+        "price": 8000
+      },
+      {
+        "usd": 20,
+        "xmr": 0.160,
+        "price": 12000
+      },
+      {
+        "usd": 50,
+        "xmr": 0.400,
+        "price": 18000
+      },
+      {
+        "usd": 100,
+        "xmr": 0.800,
+        "price": 22000
+      },
+      {
+        "usd": 262.5,
+        "xmr": 2.100,
+        "price": "-"
+      }
+    ]
+  }
+}

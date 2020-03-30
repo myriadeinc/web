@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Modal, Button, InputGroup, FormControl, ButtonToolbar, ButtonGroup, Row, Col, Container } from 'react-bootstrap';
+import { Modal, Button, InputGroup, FormControl, ButtonToolbar, ButtonGroup, Row, Col, Table } from 'react-bootstrap';
+import { Container } from 'shards-react';
+
+import Style from '../../../styles/components/dashboard/Gameroom.less';
+import { MinerConsumer } from '../../../pages/Dashboard.jsx';
+
+import * as tempData from './api.json';
 
 class Raffle extends Component {
   constructor(props) {
@@ -72,62 +78,95 @@ class Raffle extends Component {
           ${value.usd} USD
       </Button>
       </ButtonGroup>
-      /*
-        <Card border="light" as="Button" className={Style.optionCard + " p-0"}>
-            <Card.Body>
-              <Card.Title>${value.usd} USD</Card.Title>
-              <Card.Text>{value.mc} MC</Card.Text>
-            </Card.Body>
-            <Card.Footer>
-              <small className="text-muted">Min: {value.min}</small>
-            </Card.Footer>
-          </Card>
-       */
     );
 
     return (
-      <div>
-        <h4>Weekly Raffle Drawings</h4>
-        <h5 className="text-muted">Participate in weekly draws to take a part in winning the group block award. Spend Myriade Credits to buy tickets for XMR pot prizes.</h5>
-        <Button onClick={this.handleShow}>Buy Tickets!</Button>
-        <Button onClick={this.goBack}>Back</Button>
-        <Modal centered size="lg" show={this.state.modalShow} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Game Drawings</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Choose your drawing amount. Please play responsibly.</p>
-            <ButtonToolbar className="mb-2">
-              {drawingCards}
-            </ButtonToolbar>
-            <h4>
-              <small class="text-muted">Drawing Amount:</small> ${this.drawingOptions[this.state.drawOption].usd}USD <small class="text-muted">({this.drawingOptions[this.state.drawOption].xmr}XMR)</small>
-            </h4>
-            <h4><small class="text-muted">Ticket Price:</small> {this.drawingOptions[this.state.drawOption].price}MC</h4>
-            <h4><small class="text-muted">Minutes Remaining:</small></h4>
-            <Row className="justify-content-md-center mb-2">
-              <Col md="6">
-                <h4><small class="text-muted">Tickets:</small></h4>
+      <MinerConsumer>
+        {(miner) => (
+          <div>
+            <Row>
+              <Col>
+                <h3 className={Style.orange}>Weekly Raffle Drawings</h3>
               </Col>
-              <Col md="6">
-                <InputGroup clasName="w-25">
-                  <FormControl defaultValue={this.state.tickets} type="number" min="1" max="10" onChange={this.updateTicketNum.bind(this)} />
-                </InputGroup>
+              <Col md="auto">
+                <Button onClick={this.goBack}>Back to Gameroom</Button>
               </Col>
             </Row>
-            <h3><small class="text-muted">Total Price: </small>{this.drawingOptions[this.state.drawOption].price * this.state.tickets}MC</h3>
+            <p>Participate in weekly draws to take a part in winning the group block award. Spend Mining Credits to buy tickets for XMR pot prizes.</p>
 
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Cancel
-                    </Button>
-            <Button variant="primary" onClick={this.handleClose}>
-              Confirm Purchase
-                    </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+            <Container className={Style.Scrollbox}>
+              <h4>Your tickets</h4>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td colSpan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Container>
+
+            <Button onClick={this.handleShow}>Buy Tickets!</Button>
+            <Modal centered size="lg" show={this.state.modalShow} onHide={this.handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Game Drawings</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <p>Choose your drawing amount. Please play responsibly.</p>
+                <ButtonToolbar className="mb-2">
+                  {drawingCards}
+                </ButtonToolbar>
+                <h4>
+                  <small class="text-muted">Drawing Amount:</small> ${this.drawingOptions[this.state.drawOption].usd}USD <small class="text-muted">({this.drawingOptions[this.state.drawOption].xmr}XMR)</small>
+                </h4>
+                <h4><small class="text-muted">Ticket Price:</small> {this.drawingOptions[this.state.drawOption].price}MC</h4>
+                <h4><small class="text-muted">Minutes Remaining:</small></h4>
+                <Row className="justify-content-md-center mb-2">
+                  <Col md="6">
+                    <h4><small class="text-muted">Tickets:</small></h4>
+                  </Col>
+                  <Col md="6">
+                    <InputGroup clasName="w-25">
+                      <FormControl defaultValue={this.state.tickets} type="number" min="1" max="10" onChange={this.updateTicketNum.bind(this)} />
+                    </InputGroup>
+                  </Col>
+                </Row>
+                <h3><small class="text-muted">Total Price: </small>{this.drawingOptions[this.state.drawOption].price * this.state.tickets}MC</h3>
+
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={this.handleClose}>
+                  Cancel
+            </Button>
+                <Button variant="primary" onClick={this.handleClose}>
+                  Confirm Purchase
+            </Button>
+              </Modal.Footer>
+            </Modal>
+          </div>
+        )}
+      </MinerConsumer>
     );
   }
 }

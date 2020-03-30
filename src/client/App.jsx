@@ -17,6 +17,7 @@ import Privacy from './components/landing/PrivacyPolicy.jsx';
 import Terms from './components/landing/TermsOfService.jsx';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/components/common/Theme.less';
 
 class App extends React.Component {
 

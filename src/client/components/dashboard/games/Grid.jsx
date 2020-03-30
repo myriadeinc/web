@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Alert } from 'shards-react';
 
 class Grid extends Component {
@@ -14,13 +14,13 @@ class Grid extends Component {
 
     render() {
         return (
-            <Container>
+            <div>
                 <h3>Grid Game</h3>
                 <Alert theme='danger'>
                     Our grid game is currently under construction, we will notify you as soon as it is completed.
                  </Alert>
-                <Button onClick={this.goBack}>Back</Button>
-            </Container>
+                <Button onClick={this.goBack}>Back to Gameroom</Button>
+            </div>
         );
     }
 }
