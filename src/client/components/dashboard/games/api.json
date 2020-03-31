@@ -9,31 +9,30 @@
     "average_hashrate": 0,
     "shares": [],
     "raffles": {
-      "ticketNum": 3,
       "tickets": [
         {
           "usd": 5,
           "xmr": 0.040,
           "price": 4000,
-          "expired": false,
-          "expiry": "1585582897",
-          "win": false
+          "purchased": 1582588800,
+          "expiry": 1585582897,
+          "status": "No winnings"
         },
         {
           "usd": 5,
           "xmr": 0.040,
           "price": 4000,
-          "expired": true,
-          "expiry": "1546300800",
-          "win": true
+          "purchased": 1582588800,
+          "expiry": 1546300800,
+          "status": "Won raffle"
         },
         {
           "usd": 20,
           "xmr": 0.160,
           "price": 12000,
-          "expired": true,
-          "expiry": "1546300800",
-          "win": false
+          "purchased": 1582588800,
+          "expiry": 1546300800,
+          "status": "Raffle Pending"
         }
       ],
       "wins": {
@@ -46,7 +45,7 @@
     }
   },
   "raffles": {
-    "reset": "1585582897",
+    "reset": 1585582897,
     "options": [
       {
         "usd": 1,

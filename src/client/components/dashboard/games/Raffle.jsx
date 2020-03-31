@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { Modal, Button, InputGroup, FormControl, ButtonToolbar, ButtonGroup, Row, Col, Table } from 'react-bootstrap';
+import { Modal, Button, InputGroup, FormControl, ButtonToolbar, ButtonGroup, Row, Col, Table, ListGroup } from 'react-bootstrap';
 import { Container } from 'shards-react';
 
 import Style from '../../../styles/components/dashboard/Gameroom.less';
 import { MinerConsumer } from '../../../pages/Dashboard.jsx';
 
 import * as tempData from './api.json';
+
+//TODO: Connect with endpoint
+const raffle = tempData.raffles;
+const puchasedTickets = tempData.miner.raffles;
 
 class Raffle extends Component {
   constructor(props) {
@@ -15,46 +19,13 @@ class Raffle extends Component {
       modalShow: false,
       setModalShow: false,
       drawOption: 0,
-      tickets: 1
+      tickets: 1,
+      countdownString: ""
     };
-    this.drawingOptions = [
-      {
-        usd: 1,
-        xmr: 0.008,
-        price: "-",
-        border: "light"
-      },
-      {
-        usd: 5,
-        xmr: 0.040,
-        price: 4000
-      },
-      {
-        usd: 10,
-        xmr: 0.080,
-        price: 8000
-      },
-      {
-        usd: 20,
-        xmr: 0.160,
-        price: 12000
-      },
-      {
-        usd: 50,
-        xmr: 0.400,
-        price: 18000
-      },
-      {
-        usd: 100,
-        xmr: 0.800,
-        price: 22000
-      },
-      {
-        usd: 262.5,
-        xmr: 2.100,
-        price: "-"
-      },
-    ];
+  }
+
+  componentDidMount() {
+    setInterval(this.countdown, 1000);
   }
 
   handleClose = () => this.setState({ modalShow: false });
@@ -71,14 +42,51 @@ class Raffle extends Component {
     this.props.history.goBack();
   }
 
+  countdown() {
+    // Get today's date and time
+    var now = new Date().getTime();
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Output the result in an element with id="demo"
+    this.setState({ countdownString: days + "d " + hours + "h " + minutes + "m " + seconds + "s " });
+
+    // If the count down is over, write some text 
+    if (distance < 0) {
+      this.setState({ countdownString: "EXPIRED" });
+    }
+  }
+
   render() {
-    let drawingCards = this.drawingOptions.map((value, index) =>
+    let drawingCards = raffle.options.map((value, index) =>
       <ButtonGroup className="m-2" key={index}>
         <Button variant="outline-primary" size="lg" onClick={() => this.selectOption(index)}>
           ${value.usd} USD
       </Button>
       </ButtonGroup>
     );
+
+    let ticketList = puchasedTickets.tickets.map((value, index) => {
+      let p = new Date(value.purchased * 1000);
+      let purchaseDate = p.getUTCFullYear() + "/" + (p.getUTCMonth() + 1) + "/" + p.getUTCDate() + " " + p.getUTCHours() + ":" + p.getUTCMinutes() + ":" + p.getUTCSeconds();
+      let e = new Date(value.expiry * 1000);
+      let expiryDate = e.getUTCFullYear() + "/" + (e.getUTCMonth() + 1) + "/" + e.getUTCDate() + " " + e.getUTCHours() + ":" + e.getUTCMinutes() + ":" + e.getUTCSeconds();
+      let status = value.status;
+
+      return (
+        <tr key={index}>
+          <td>{"$" + value.usd}</td>
+          <td>{purchaseDate}</td>
+          <td>{status}</td>
+          <td>{expiryDate}</td>
+        </tr>
+      );
+    });
 
     return (
       <MinerConsumer>
@@ -94,40 +102,39 @@ class Raffle extends Component {
             </Row>
             <p>Participate in weekly draws to take a part in winning the group block award. Spend Mining Credits to buy tickets for XMR pot prizes.</p>
 
-            <Container className={Style.Scrollbox}>
+            <Container className={Style.Scrollbox + " mb-4"}>
               <h4>Your tickets</h4>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td colSpan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </Table>
+              {puchasedTickets.tickets.length ?
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Prize Amount (USD)</th>
+                      <th>Purchase Time (UTC)</th>
+                      <th>Status</th>
+                      <th>Raffle Draw Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ticketList}
+                  </tbody>
+                </Table>
+                :
+                <p>You don't have any tickets :/</p>
+              }
+              <ListGroup horizontal>
+                <ListGroup.Item variant="success">Raffle wins: ${puchasedTickets.wins.usd}USD</ListGroup.Item>
+                <ListGroup.Item variant="warning">MC spent: {puchasedTickets.spent.mc}MC</ListGroup.Item>
+              </ListGroup>
             </Container>
 
-            <Button onClick={this.handleShow}>Buy Tickets!</Button>
+            <Row>
+              <Col>
+                <Button onClick={this.handleShow}>Buy Tickets!</Button>
+              </Col>
+              <Col md="auto">
+                <h5>Current round ends in {this.state.countdownString}</h5>
+              </Col>
+            </Row>
             <Modal centered size="lg" show={this.state.modalShow} onHide={this.handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Game Drawings</Modal.Title>
@@ -138,9 +145,9 @@ class Raffle extends Component {
                   {drawingCards}
                 </ButtonToolbar>
                 <h4>
-                  <small class="text-muted">Drawing Amount:</small> ${this.drawingOptions[this.state.drawOption].usd}USD <small class="text-muted">({this.drawingOptions[this.state.drawOption].xmr}XMR)</small>
+                  <small class="text-muted">Drawing Amount:</small> ${raffle.options[this.state.drawOption].usd}USD <small class="text-muted">({raffle.options[this.state.drawOption].xmr}XMR)</small>
                 </h4>
-                <h4><small class="text-muted">Ticket Price:</small> {this.drawingOptions[this.state.drawOption].price}MC</h4>
+                <h4><small class="text-muted">Ticket Price:</small> {raffle.options[this.state.drawOption].price}MC</h4>
                 <h4><small class="text-muted">Minutes Remaining:</small></h4>
                 <Row className="justify-content-md-center mb-2">
                   <Col md="6">
@@ -152,7 +159,7 @@ class Raffle extends Component {
                     </InputGroup>
                   </Col>
                 </Row>
-                <h3><small class="text-muted">Total Price: </small>{this.drawingOptions[this.state.drawOption].price * this.state.tickets}MC</h3>
+                <h3><small class="text-muted">Total Price: </small>{raffle.options[this.state.drawOption].price * this.state.tickets}MC</h3>
 
               </Modal.Body>
               <Modal.Footer>
