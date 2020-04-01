@@ -19,7 +19,7 @@ function Menu() {
       <CardColumns>
         <Link className={Style.noDecoration} to={`/dashboard/gameroom/raffles`}>
           <Card >
-            <Card.Img className={Style.cardImg} variant="top" src="https://i.ibb.co/pbhvp64/arcade.png" />
+            <Card.Img className={Style.cardImg} variant="top" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/047ceb32844729.5695f00736611.jpg" />
             <Card.Body>
               <Card.Title>Drawings</Card.Title>
               <Card.Text>
@@ -31,7 +31,7 @@ function Menu() {
 
         <Link className={Style.noDecoration} to={`/dashboard/gameroom/grid`}>
           <Card>
-            <Card.Img className={Style.cardImg} variant="top" src="https://picsum.photos/200/300" />
+            <Card.Img className={Style.cardImg} variant="top" src="https://i.pinimg.com/originals/68/d7/a2/68d7a2dad75925c01f7e5c296bd04f86.jpg" />
             <Card.Body>
               <Card.Title>Grid</Card.Title>
               <Card.Text>
