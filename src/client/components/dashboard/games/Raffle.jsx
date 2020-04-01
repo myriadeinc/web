@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, InputGroup, FormControl, ButtonToolbar, ButtonGroup, Row, Col, Table, ListGroup } from 'react-bootstrap';
+import { Modal, Button, InputGroup, FormControl, ButtonToolbar, ButtonGroup, Row, Col, Table, ListGroup, Card, CardColumns, Badge } from 'react-bootstrap';
 import { Container } from 'shards-react';
 
 import Style from '../../../styles/components/dashboard/Gameroom.less';
@@ -21,12 +21,19 @@ class Raffle extends Component {
       setModalShow: false,
       drawOption: 0,
       tickets: 1,
-      countdownString: ""
+      countdownString: []
     };
   }
 
   componentDidMount() {
-    setInterval(this.countdown, 1000);
+    this.contdownTimer = setInterval(
+      () => this.countdown(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.contdownTimer);
   }
 
   handleClose = () => this.setState({ modalShow: false });
@@ -44,34 +51,77 @@ class Raffle extends Component {
   }
 
   countdown() {
-    let countDownDate = new Date(raffle.reset * 1000).getTime();
-    // Get today's date and time
-    let now = new Date().getTime();
-    // Find the distance between now and the count down date
-    let distance = countDownDate - now;
-    // Time calculations for days, hours, minutes and seconds
-    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    let cds = {};
+    raffle.map((value, index) => {
+      if (value.close === -1) {
+        cds[index] = "-";
+      } else {
+        let countDownDate = new Date(value.close * 1000).getTime();
+        // Get today's date and time
+        let now = new Date().getTime();
+        // Find the distance between now and the count down date
+        let distance = countDownDate - now;
+        // Time calculations for days, hours, minutes and seconds
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Output the result in an element with id="demo"
-    this.setState({ countdownString: days + "d " + hours + "h " + minutes + "m " + seconds + "s " });
-
-    // If the count down is over, write some text 
-    if (distance < 0) {
-      this.setState({ countdownString: "EXPIRED" });
-    }
+        cds[index] = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        // If the count down is over, write some text 
+        if (distance < 0) {
+          cds[index] = "EXPIRED";
+        }
+      }
+    });
+    this.setState({ countdownString: cds });
+    //console.log(cds);
+    console.log(this.state.countdownString);
   }
 
   render() {
-    let drawingCards = raffle.options.map((value, index) =>
+    let purchaseButtons = raffle.map((value, index) =>
       <ButtonGroup className="m-2" key={index}>
         <Button variant="outline-primary" size="lg" onClick={() => this.selectOption(index)}>
           ${value.usd} USD
       </Button>
       </ButtonGroup>
     );
+
+    let drawingCards = raffle.map((value, index) => {
+      let badge;
+      if (value.close === -1) {
+        badge = <Badge variant="warning">Funding</Badge>;
+      } else {
+        if (this.state.countdownString[index] === "EXPIRED") {
+          badge = <Badge variant="secondary">Expired</Badge>;
+        } else {
+          badge = <Badge variant="success">Funded!</Badge>;
+        }
+      }
+
+      return (
+        <Card key={index}>
+          <Card.Body>
+            <Row>
+              <Col>
+                <Card.Title>${value.usd}USD</Card.Title>
+              </Col>
+              <Col md="auto">
+                <Card.Title>{badge}</Card.Title>
+              </Col>
+            </Row>
+            <Card.Subtitle className="mb-2 text-muted"><i className="fab fa-monero" /> {value.xmr}XMR</Card.Subtitle>
+            <Card.Text>
+              Ticket price: {value.price}MC
+          </Card.Text>
+          </Card.Body>
+          <Card.Footer>
+            <small className="text-muted">Closes in: {this.state.countdownString[index]}</small>
+          </Card.Footer>
+        </Card >
+      );
+    });
 
     let ticketList = puchasedTickets.tickets.map((value, index) => {
       let p = new Date(value.purchased * 1000);
@@ -105,6 +155,11 @@ class Raffle extends Component {
             <p>Participate in weekly draws to take a part in winning the group block award. Spend Mining Credits to buy tickets for XMR pot prizes.</p>
 
             <Container className={Style.Scrollbox + " mb-4"}>
+              <h4>Current Drawings</h4>
+              <CardColumns>
+                {drawingCards}
+              </CardColumns>
+
               <h4>Your tickets</h4>
               {puchasedTickets.tickets.length ?
                 <Table striped bordered hover>
@@ -130,12 +185,7 @@ class Raffle extends Component {
             </Container>
 
             <Row>
-              <Col>
-                <Button onClick={this.handleShow}>Buy Tickets!</Button>
-              </Col>
-              <Col md="auto">
-                <h5>Current round ends in {this.state.countdownString}</h5>
-              </Col>
+              <Button size="lg" onClick={this.handleShow}>Buy Tickets!</Button>
             </Row>
             <Modal centered size="lg" show={this.state.modalShow} onHide={this.handleClose}>
               <Modal.Header closeButton>
@@ -144,12 +194,12 @@ class Raffle extends Component {
               <Modal.Body>
                 <p>Choose your drawing amount. Please play responsibly.</p>
                 <ButtonToolbar className="mb-2">
-                  {drawingCards}
+                  {purchaseButtons}
                 </ButtonToolbar>
                 <h4>
-                  <small class="text-muted">Drawing Amount:</small> ${raffle.options[this.state.drawOption].usd}USD <small class="text-muted">({raffle.options[this.state.drawOption].xmr}XMR)</small>
+                  <small class="text-muted">Drawing Amount:</small> ${raffle[this.state.drawOption].usd}USD <small class="text-muted">({raffle[this.state.drawOption].xmr}XMR)</small>
                 </h4>
-                <h4><small class="text-muted">Ticket Price:</small> {raffle.options[this.state.drawOption].price}MC</h4>
+                <h4><small class="text-muted">Ticket Price:</small> {raffle[this.state.drawOption].price}MC</h4>
                 <h4><small class="text-muted">Minutes Remaining:</small></h4>
                 <Row className="justify-content-md-center mb-2">
                   <Col md="6">
@@ -161,7 +211,7 @@ class Raffle extends Component {
                     </InputGroup>
                   </Col>
                 </Row>
-                <h3><small class="text-muted">Total Price: </small>{raffle.options[this.state.drawOption].price * this.state.tickets}MC</h3>
+                <h3><small class="text-muted">Total Price: </small>{raffle[this.state.drawOption].price * this.state.tickets}MC</h3>
 
               </Modal.Body>
               <Modal.Footer>
