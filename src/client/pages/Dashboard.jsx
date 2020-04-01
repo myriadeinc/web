@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { Card, CardBody, CardFooter, ListGroup, Alert } from 'shards-react';
 import { HashRouter as Router, Link, Switch } from 'react-router-dom';
 
-import { BoldBlackLink } from '../components/common/Link.jsx';
+import { BlackLink } from '../components/common/Link.jsx';
 import { SecondaryButton } from '../components/common/Buttons.jsx';
 
 import { gql } from 'apollo-boost';
@@ -15,7 +15,6 @@ import { ProtectedRoute, AuthConsumer } from '../layers/AuthLayer.jsx';
 import PageStyle from '../styles/pages/Dashboard.less';
 
 import Analytics from '../components/dashboard/Analytics.jsx';
-import Counter from '../components/dashboard/Counter.jsx';
 import Mine from '../components/dashboard/Mine.jsx';
 import Gameroom from '../components/dashboard/Gameroom.jsx';
 import Gravatar from 'react-gravatar'
@@ -124,13 +123,12 @@ class DashboardPage extends Component {
                     <h3>{this.state.miner.name}</h3>
                     <p>{this.state.miner.email}</p>
                     <p><strong>Mining Credits: {this.state.miner.myriade_credits_balance}</strong></p>
-                    <p>Monero Balance: {this.state.miner.monero_balance}</p>
+                    <p><i className="fab fa-monero" /> Monero Balance: {this.state.miner.monero_balance}</p>
                     <hr />
                     <ListGroup>
-
-                      <BoldBlackLink to={`${this.props.match.path}/`} > Mining Metrics </BoldBlackLink>
-                      <BoldBlackLink to={`${this.props.match.path}/mining`} > Start Mining </BoldBlackLink>
-                      <BoldBlackLink to={`${this.props.match.path}/gameroom`} > Game Room </BoldBlackLink>
+                      <h5><BlackLink to={`${this.props.match.path}/`} > Mining Metrics </BlackLink></h5>
+                      <h5><BlackLink to={`${this.props.match.path}/mining`} > Start Mining </BlackLink></h5>
+                      <h5><BlackLink to={`${this.props.match.path}/gameroom`} > Game Room </BlackLink></h5>
                     </ListGroup>
 
                   </CardBody>

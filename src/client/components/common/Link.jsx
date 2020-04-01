@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -35,7 +33,7 @@ export const BoldBlackLink = styled(Link)`
     text-decoration: none;
     color: black;
     font-weight: 600;
-    font-weight: 300;
+    
     &:focus, &:hover, &:visited, &:link, &:active {
         text-decoration: none;
         color: black;
