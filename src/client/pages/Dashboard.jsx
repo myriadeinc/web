@@ -7,7 +7,7 @@ import { BlackLink } from '../components/common/Link.jsx';
 import { SecondaryButton } from '../components/common/Buttons.jsx';
 
 import { gql } from 'apollo-boost';
-import gqlClient from '../utils/graphql.js';
+import { gqlMiner } from '../utils/graphql.js';
 import jwt_decode from 'jwt-decode';
 
 import { ProtectedRoute, AuthConsumer } from '../layers/AuthLayer.jsx';
@@ -59,7 +59,7 @@ class DashboardPage extends Component {
   componentDidMount() {
     let minerId = jwt_decode(localStorage.getItem('access_token')).sub;
     let minerData = {};
-    return gqlClient.query({
+    return gqlMiner.query({
       query: gql`
         query ($minerId: ID!, $hashratePage: Int) {
           minerData(id: $minerId) {
