@@ -4,10 +4,16 @@ import { Container } from 'shards-react';
 
 import Style from '../../../styles/components/dashboard/Gameroom.less';
 import { MinerConsumer } from '../../../pages/Dashboard.jsx';
+import { gqlRaffles } from '../../../utils/graphql.js'
 
 import * as tempData from './api.json';
 
+import { gql } from 'apollo-boost';
+import { formatMoney } from 'accounting-js'
+
+
 //TODO: Connect with endpoint
+const EXPIRYTHRESHOLD = 1000 * 60 * 60 * 24 * 30; // The theshold at which any raffle x miliseconds in the future is considered to not have an expiry
 const raffle = tempData.raffles;
 const puchasedTickets = tempData.miner.raffles;
 
@@ -21,19 +27,55 @@ class Raffle extends Component {
       setModalShow: false,
       drawOption: 0,
       tickets: 1,
-      countdownString: []
+      countdownString: [],
+      raffle: null,
+      raffleCloses: [],
+      error: null
     };
   }
 
   componentDidMount() {
-    this.contdownTimer = setInterval(
+    gqlRaffles.query({
+      query: gql`
+        {
+          myriade_alpha_raffles {
+            exchange_rate
+            expiry_date
+            prize
+            status
+            base_price
+          }
+        }
+      `
+    }).then(({ data }) => {
+      let raffleData = data.myriade_alpha_raffles;
+      console.log(raffleData);
+      const dateUnix = raffleData.map((data) => {
+        let d = new Date(data.expiry_date);
+        if ((d - (new Date)) < EXPIRYTHRESHOLD) {
+          return d.getTime();
+        }
+        return -1;
+      });
+      this.setState({
+        raffle: raffleData,
+        raffleCloses: dateUnix
+      })
+    }).catch(err => {
+      console.log(err)
+      this.setState({
+        error: 'Unable to fetch your data, please check your connection, your login and try again later'
+      });
+    })
+
+    this.countdownTimer = setInterval(
       () => this.countdown(),
       1000
     );
   }
 
   componentWillUnmount() {
-    clearInterval(this.contdownTimer);
+    clearInterval(this.countdownTimer);
   }
 
   handleClose = () => this.setState({ modalShow: false });
@@ -52,11 +94,11 @@ class Raffle extends Component {
 
   countdown() {
     let cds = {};
-    raffle.map((value, index) => {
-      if (value.close === -1) {
+    this.state.raffleCloses.map((value, index) => {
+      if (value === -1) {
         cds[index] = "-";
       } else {
-        let countDownDate = new Date(value.close * 1000).getTime();
+        let countDownDate = value;
         // Get today's date and time
         let now = new Date().getTime();
         // Find the distance between now and the count down date
@@ -76,52 +118,59 @@ class Raffle extends Component {
     });
     this.setState({ countdownString: cds });
     //console.log(cds);
-    console.log(this.state.countdownString);
+    //console.log(this.state.countdownString);
   }
 
   render() {
-    let purchaseButtons = raffle.map((value, index) =>
-      <ButtonGroup className="m-2" key={index}>
-        <Button variant="outline-primary" size="lg" onClick={() => this.selectOption(index)}>
-          ${value.usd} USD
-      </Button>
-      </ButtonGroup>
-    );
-
-    let drawingCards = raffle.map((value, index) => {
-      let badge;
-      if (value.close === -1) {
-        badge = <Badge variant="warning">Funding</Badge>;
-      } else {
-        if (this.state.countdownString[index] === "EXPIRED") {
-          badge = <Badge variant="secondary">Expired</Badge>;
-        } else {
-          badge = <Badge variant="success">Funded!</Badge>;
-        }
-      }
-
-      return (
-        <Card key={index}>
-          <Card.Body>
-            <Row>
-              <Col>
-                <Card.Title>${value.usd}USD</Card.Title>
-              </Col>
-              <Col md="auto">
-                <Card.Title>{badge}</Card.Title>
-              </Col>
-            </Row>
-            <Card.Subtitle className="mb-2 text-muted"><i className="fab fa-monero" /> {value.xmr}XMR</Card.Subtitle>
-            <Card.Text>
-              Ticket price: {value.price}MC
-          </Card.Text>
-          </Card.Body>
-          <Card.Footer>
-            <small className="text-muted">Closes in: {this.state.countdownString[index]}</small>
-          </Card.Footer>
-        </Card >
+    let purchaseButtons, drawingCards;
+    if (this.state.raffle) {
+      purchaseButtons = this.state.raffle.map((value, index) =>
+        <ButtonGroup className="m-2" key={index}>
+          <Button variant="outline-primary" size="lg" onClick={() => this.selectOption(index)}>
+            ${value.prize * value.exchange_rate} USD
+          </Button>
+        </ButtonGroup>
       );
-    });
+
+      drawingCards = this.state.raffle.map((value, index) => {
+        let badge;
+        if (value.status === 1) {
+          badge = <Badge variant="warning">Funding</Badge>;
+        } else if (value.status === 1) {
+          badge = <Badge variant="success">Funded!</Badge>;
+        } else {
+          if (value.status === 0 || this.state.countdownString[index] === "EXPIRED") {
+            badge = <Badge variant="secondary">Expired</Badge>;
+          }
+        }
+
+        return (
+          <Card key={index}>
+            <Card.Body>
+              <Row>
+                <Col>
+                  <Card.Title>{formatMoney(value.prize * value.exchange_rate)}USD</Card.Title>
+                </Col>
+                <Col md="auto">
+                  <Card.Title>{badge}</Card.Title>
+                </Col>
+              </Row>
+              <Card.Subtitle className="mb-2 text-muted"><i className="fab fa-monero" /> {value.prize}XMR</Card.Subtitle>
+              <Card.Text>
+                Ticket price: {value.base_price}MC
+          </Card.Text>
+            </Card.Body>
+            <Card.Footer>
+              <small className="text-muted">Closes in: {this.state.countdownString[index]}</small>
+            </Card.Footer>
+          </Card >
+        );
+      });
+
+    } else {
+      purchaseButtons = <h5>Loading purchase options...</h5>
+      drawingCards = <h5>Loading drawing info...</h5>
+    }
 
     let ticketList = puchasedTickets.tickets.map((value, index) => {
       let p = new Date(value.purchased * 1000);
@@ -179,7 +228,7 @@ class Raffle extends Component {
                 <p>You don't have any tickets :/</p>
               }
               <ListGroup horizontal>
-                <ListGroup.Item variant="success">Raffle wins: ${puchasedTickets.wins.usd}USD</ListGroup.Item>
+                <ListGroup.Item variant="success">Raffle wins: {formatMoney(puchasedTickets.wins.usd)}USD</ListGroup.Item>
                 <ListGroup.Item variant="warning">MC spent: {puchasedTickets.spent.mc}MC</ListGroup.Item>
               </ListGroup>
             </Container>
@@ -196,22 +245,33 @@ class Raffle extends Component {
                 <ButtonToolbar className="mb-2">
                   {purchaseButtons}
                 </ButtonToolbar>
-                <h4>
-                  <small class="text-muted">Drawing Amount:</small> ${raffle[this.state.drawOption].usd}USD <small class="text-muted">({raffle[this.state.drawOption].xmr}XMR)</small>
-                </h4>
-                <h4><small class="text-muted">Ticket Price:</small> {raffle[this.state.drawOption].price}MC</h4>
-                <h4><small class="text-muted">Minutes Remaining:</small></h4>
-                <Row className="justify-content-md-center mb-2">
-                  <Col md="6">
-                    <h4><small class="text-muted">Tickets:</small></h4>
-                  </Col>
-                  <Col md="6">
-                    <InputGroup clasName="w-25">
-                      <FormControl defaultValue={this.state.tickets} type="number" min="1" max="10" onChange={this.updateTicketNum.bind(this)} />
-                    </InputGroup>
-                  </Col>
-                </Row>
-                <h3><small class="text-muted">Total Price: </small>{raffle[this.state.drawOption].price * this.state.tickets}MC</h3>
+                {this.state.raffles ?
+                  <div>
+                    <h4>
+                      <small class="text-muted">Drawing Amount:</small>
+                      {formatMoney(this.state.raffle[this.state.drawOption].prize * this.state.raffle[this.state.drawOption].exchange_rate)}USD
+                      <small class="text-muted">({this.state.raffle[this.state.drawOption].prize}XMR)</small>
+                    </h4>
+                    <h4><small class="text-muted">Ticket Price:</small> {this.state.raffle[this.state.drawOption].price}MC</h4>
+                    <h4><small class="text-muted">Minutes Remaining:</small></h4>
+                    <Row className="justify-content-md-center mb-2">
+                      <Col md="6">
+                        <h4><small class="text-muted">Tickets:</small></h4>
+                      </Col>
+                      <Col md="6">
+                        <InputGroup clasName="w-25">
+                          <FormControl defaultValue={this.state.tickets} type="number" min="1" max="10" onChange={this.updateTicketNum.bind(this)} />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <h3>
+                      <small class="text-muted">Total Price: </small>
+                      {this.state.raffle[this.state.drawOption].price * this.state.tickets}MC
+                    </h3>
+                  </div>
+                  : <h4>No purchase options available :/</h4>
+                }
+
 
               </Modal.Body>
               <Modal.Footer>
