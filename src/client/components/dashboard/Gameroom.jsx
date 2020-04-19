@@ -13,7 +13,7 @@ import Style from '../../styles/components/dashboard/Gameroom.less'
 function Menu() {
   return (
     <>
-      <h3 className={Style.orange + " mb-3"} >Gameroom</h3>
+      <h3 className={"mb-3"} >Gameroom</h3>
       <p>Use your Mining Credits to play a selection of games and win XMR!</p>
 
       <CardColumns>
