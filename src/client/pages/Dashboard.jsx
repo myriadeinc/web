@@ -17,6 +17,8 @@ import PageStyle from '../styles/pages/Dashboard.less';
 import Analytics from '../components/dashboard/Analytics.jsx';
 import Mine from '../components/dashboard/Mine.jsx';
 import Gameroom from '../components/dashboard/Gameroom.jsx';
+import Withdraw from '../components/dashboard/Withrdraw.jsx';
+import Support from '../components/dashboard/Support.jsx';
 import Gravatar from 'react-gravatar'
 
 const minerContext = createContext();
@@ -32,13 +34,14 @@ class DashboardPage extends Component {
         id: null,
         email: null,
         name: null,
-        email: null,
         myriade_credits: [],
         myriade_credits_balance: null,
         shares: [],
         historical_hashrates: [],
         average_hashrate: "0",
-        monero_balance: null
+        monero_balance: null,
+        monero_wallet: null,
+        withdrawing: false
       }
     }
     this.dismissError = this.dismissError.bind(this);
@@ -93,7 +96,8 @@ class DashboardPage extends Component {
           email: accountData.email,
           myriade_credits_balance: mc,
           myriade_credits: minerData.myriade_credits,
-          monero_balance: minerData.monero_balance,
+          //monero_balance: minerData.monero_balance,
+          monero_balance: 10,
           hashrates: minerData.hashrates,
           average_hashrate: 0,
           shares: [],
@@ -129,6 +133,8 @@ class DashboardPage extends Component {
                       <h5><BlackLink to={`${this.props.match.path}/`} > Mining Metrics </BlackLink></h5>
                       <h5><BlackLink to={`${this.props.match.path}/mining`} > Start Mining </BlackLink></h5>
                       <h5><BlackLink to={`${this.props.match.path}/gameroom`} > Game Room </BlackLink></h5>
+                      <h5><BlackLink to={`${this.props.match.path}/withdraw`} > Withdraw </BlackLink></h5>
+                      <h5><BlackLink to={`${this.props.match.path}/support`} > Support </BlackLink></h5>
                     </ListGroup>
 
                   </CardBody>
@@ -144,6 +150,8 @@ class DashboardPage extends Component {
                   <ProtectedRoute exact path={`${this.props.match.path}/`} component={Analytics} authenticated={authenticated} />
                   <ProtectedRoute path={`${this.props.match.url}/mining`} component={Mine} authenticated={authenticated} />
                   <ProtectedRoute path={`${this.props.match.url}/gameroom`} component={Gameroom} authenticated={authenticated} />
+                  <ProtectedRoute path={`${this.props.match.url}/withdraw`} component={Withdraw} authenticated={authenticated} />
+                  <ProtectedRoute path={`${this.props.match.url}/support`} component={Support} authenticated={authenticated} />
                 </Switch>
               </Col>
             </Row>
