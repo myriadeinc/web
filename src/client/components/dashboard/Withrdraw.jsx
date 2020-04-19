@@ -142,7 +142,7 @@ class Withdraw extends Component {
               :
               this.state.confirmScreen ?
                 <Form onSubmit={this.withdraw}>
-                  <p>I am about to withdraw {this.state.amount} XMR from my account. I know that this is a manual process and it may take a few hours for my request to be processed.</p>
+                  <p>I am about to request to withdraw {this.state.amount} XMR from my account. I know that this is a manual process and it may take a few hours for my request to be processed.</p>
                   <Row>
                     <Col>
                       <Button variant="primary" onClick={this.goBack}>Cancel</Button>
