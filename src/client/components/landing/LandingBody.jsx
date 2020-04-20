@@ -5,7 +5,7 @@ import * as ROUTES from '../../utils/routes.js';
 import Style from '../../styles/components/landing/main.less';
 import { Row, Container, Accordion, Card, ResponsiveEmbed, Jumbotron } from 'react-bootstrap';
 
-import GLOBE from '../../vendor/vanta.globe.min.js';
+import RINGS from '../../vendor/vanta.rings.min.js';
 import * as THREE from 'three';
 
 import * as typeformEmbed from '@typeform/embed';
@@ -27,13 +27,9 @@ class LandingBody extends Component {
         opacity: 0
       });
     }
-    this.vantaEffect = GLOBE({
+    this.vantaEffect = RINGS({
       el: this.vantaRef.current,
       THREE: THREE,
-      color: 0xf05c1f,
-      color2: 0xFFFFFF,
-      backgroundColor: 0xe0222,
-      size: 0.6
     })
   }
   componentWillUnmount() {
