@@ -21,11 +21,11 @@ class LandingBody extends Component {
   }
   componentDidMount() {
     if (this.el) {
-      typeformEmbed.makeWidget(this.el, "https://myriade.typeform.com/to/Y6daMA", {
-        hideFooter: true,
-        hideHeaders: true,
-        opacity: 0
-      });
+      // typeformEmbed.makeWidget(this.el, "https://myriade.typeform.com/to/Y6daMA", {
+      //   hideFooter: true,
+      //   hideHeaders: true,
+      //   opacity: 0
+      // });
     }
     this.vantaEffect = RINGS({
       el: this.vantaRef.current,
@@ -54,9 +54,9 @@ class LandingBody extends Component {
         <Container>
           <Video />
           <Faq />
-          <Jumbotron className="mt-5">
+          {/* <Jumbotron className="mt-5">
             <div ref={(el) => this.el = el} className={Style.mailingForm} />
-          </Jumbotron>
+          </Jumbotron> */}
         </Container>
 
       </div >
