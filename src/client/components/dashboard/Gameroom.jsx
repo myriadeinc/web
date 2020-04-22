@@ -13,12 +13,12 @@ import Style from '../../styles/components/dashboard/Gameroom.less'
 function Menu() {
   return (
     <>
-      <h3 className={"mb-3"} >Gameroom</h3>
+      <h3 className="mb-3" >Gameroom</h3>
       <p>Use your Mining Credits to play a selection of games and win XMR!</p>
 
-      <CardColumns>
-        <Link className={Style.noDecoration} to={`/dashboard/gameroom/raffles`}>
-          <Card >
+      <CardColumns className="pt-4">
+        <Card className={Style.hoverCard}>
+          <Link className={Style.noDecoration} to={`/dashboard/gameroom/raffles`}>
             <Card.Img className={Style.cardImg} variant="top" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/047ceb32844729.5695f00736611.jpg" />
             <Card.Body>
               <Card.Title>Drawings</Card.Title>
@@ -26,11 +26,11 @@ function Menu() {
                 Use your Mining Credits to take part in raffles for USD.
             </Card.Text>
             </Card.Body>
-          </Card>
-        </Link>
+          </Link>
+        </Card>
 
-        <Link className={Style.noDecoration} to={`/dashboard/gameroom/grid`}>
-          <Card>
+        <Card className={Style.hoverCard}>
+          <Link className={Style.noDecoration} to={`/dashboard/gameroom/grid`}>
             <Card.Img className={Style.cardImg} variant="top" src="https://i.pinimg.com/originals/68/d7/a2/68d7a2dad75925c01f7e5c296bd04f86.jpg" />
             <Card.Body>
               <Card.Title>Grid</Card.Title>
@@ -38,8 +38,8 @@ function Menu() {
                 The classic card flipping game, now with Myriade Credits.
               </Card.Text>
             </Card.Body>
-          </Card>
-        </Link>
+          </Link>
+        </Card>
 
       </CardColumns>
     </>
