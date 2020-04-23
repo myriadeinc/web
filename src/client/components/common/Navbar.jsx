@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import styled from 'styled-components';
-
 import * as ROUTES from '../../utils/routes.js';
 
 import { Link } from 'react-router-dom';
@@ -17,12 +15,12 @@ import {
   Button
 } from "shards-react";
 
-import NavStyle from '../../styles/components/common/Navbar.less';
+import NavStyle from '../../styles/components/common/Common.less';
 
 class NavigationBar extends Component {
   render() {
     return (
-      <Navbar type="light" theme="white" expand="md" className={NavStyle.Main}>
+      <Navbar type="light" theme="white" expand="md" className={NavStyle.navBg}>
         <NavbarBrand href="#">
           <img
             alt=""
