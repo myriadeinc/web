@@ -28,7 +28,6 @@ class AuthLayer extends Component {
   }
 
   login(email, password) {
-
     console.log("here " + config.identity_service_url);
     return axios.post(`${config.identity_service_url}/v1/account/login`,
       {
@@ -36,8 +35,6 @@ class AuthLayer extends Component {
         password
       })
       .then(({ data }) => {
-
-
         return this.updateAuth(data.accessToken);
       });
   }
