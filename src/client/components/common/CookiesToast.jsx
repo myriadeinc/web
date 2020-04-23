@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { Toast, Button, Row, Col } from 'react-bootstrap';
-import styled from 'styled-components';
 
-const FixedToast = styled(Toast)`
-    position: fixed;
-    left: 20px;
-    bottom: 20px;
-`;
+import Style from '../../styles/components/common/Common.less';
 
 class CookiesToast extends Component {
     constructor(props) {
@@ -44,8 +39,8 @@ class CookiesToast extends Component {
 
     render() {
         return (
-            <FixedToast show={this.state.show} onClose={this.dismiss}>
-                <Toast.Header>
+            <Toast show={this.state.show} onClose={this.dismiss} className={Style.FixedToast}>
+                <Toast.Header className={Style.ColorHeader}>
                     <i className="fas fa-cookie-bite" />
                     <strong className="mr-auto">This website uses cookeis.</strong>
                     <small>They're tasty!</small>
@@ -66,7 +61,7 @@ class CookiesToast extends Component {
                         </Col>
                     </Row>
                 </Toast.Body>
-            </FixedToast>
+            </Toast>
         );
     }
 }
