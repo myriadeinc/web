@@ -10,7 +10,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import NavigationBar from './components/common/Navbar.jsx';
-
+import CookiesToast from './components/common/CookiesToast.jsx';
 
 import Cookies from './components/landing/CookiesPolicy.jsx';
 import Privacy from './components/landing/PrivacyPolicy.jsx';
@@ -40,7 +40,7 @@ class App extends React.Component {
                 {/* Protected Routes that need authentication */}
                 <ProtectedRoute path={ROUTES.DASHBOARD} component={DashboardPage} authenticated={authenticated} />
               </Switch>
-
+              <CookiesToast />
             </>
           )}
         </AuthConsumer>
