@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Toast, Button, Row, Col } from 'react-bootstrap';
+import { Toast } from 'react-bootstrap';
 
 import Style from '../../styles/components/common/Common.less';
 
@@ -26,16 +26,20 @@ class CookiesToast extends Component {
 
     render() {
         return (
-            <Toast show={this.state.show} onClose={this.dismiss} className={Style.FixedToast}>
-                <Toast.Header className={Style.ColorHeader}>
-                    <i className="fas fa-cookie-bite" />
-                    <strong className="mr-auto">This website uses cookies.</strong>
-                    <small>They're tasty!</small>
-                </Toast.Header>
-                <Toast.Body>
-                    <small>Our web app requires cookies to work properly. We use cookies to remember dashboard actions, and personalize the mining analytics we display. By continuing to use our site, you agree to our <a href="https://myriade.io/#/cookies">use of cookies</a>.</small>
-                </Toast.Body>
-            </Toast>
+            <>
+                {this.state.show &&
+                    <Toast onClose={this.dismiss} className={Style.FixedToast}>
+                        <Toast.Header className={Style.ColorHeader}>
+                            <i className="fas fa-cookie-bite" />
+                            <strong className="mr-auto">This website uses cookies.</strong>
+                            <small>They're tasty!</small>
+                        </Toast.Header>
+                        <Toast.Body>
+                            <small>Our web app requires cookies to work properly. We use cookies to remember dashboard actions, and personalize the mining analytics we display. By continuing to use our site, you agree to our <a href="https://myriade.io/#/cookies">use of cookies</a>.</small>
+                        </Toast.Body>
+                    </Toast>
+                }
+            </>
         );
     }
 }
