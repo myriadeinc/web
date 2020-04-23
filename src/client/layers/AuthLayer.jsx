@@ -5,7 +5,6 @@ import decode from 'jwt-decode';
 import axios from 'axios';
 import * as ROUTES from '../utils/routes.js'
 
-
 import config from '../utils/config.js';
 
 const authContext = createContext();
@@ -24,8 +23,15 @@ class AuthLayer extends Component {
       login: this.login,
       jwtToken: null
     }
-
   }
+
+  // componentDidMount() {
+  //   if (localStorage.hasOwnProperty("access_token")) {
+  //     let decodedToken = decode(localStorage.getItem("access_token"));
+  //     let expired = Date.now() > decodedToken.exp * 1000;
+  //     this.setState({ authenticated: !expired });
+  //   }
+  // }
 
   login(email, password) {
     console.log("here " + config.identity_service_url);
@@ -50,7 +56,7 @@ class AuthLayer extends Component {
 
   updateAuth(accessToken) {
     localStorage.setItem('access_token', accessToken);
-    const decodedToken = decode(accessToken);
+    let decodedToken = decode(accessToken);
     this.setState({
       miner: {
         id: decodedToken.sub,
