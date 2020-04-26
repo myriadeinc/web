@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { Card, CardBody, CardFooter, ListGroup, Alert } from 'shards-react';
 import { HashRouter as Router, Link, Switch } from 'react-router-dom';
 
-import { BlackLink } from '../components/common/Link.jsx';
+import { DynamicBlackLink } from '../components/common/Link.jsx';
 import { SecondaryButton } from '../components/common/Buttons.jsx';
 
 import { gql } from 'apollo-boost';
@@ -119,7 +119,7 @@ class DashboardPage extends Component {
           <minerContext.Provider value={this.state.miner}>
             <Row>
               {this.state.error && this.displayError()}
-              <Col md={{ span: 3 }}>
+              <Col lg={3}>
                 <Card className={PageStyle.sidebar}>
                   <CardBody>
                     <Gravatar className={PageStyle.gravatar} size={200} email={this.state.miner.email} />
@@ -130,11 +130,11 @@ class DashboardPage extends Component {
                     <p><i className="fab fa-monero" /> Monero Balance: {this.state.miner.monero_balance}</p>
                     <hr />
                     <ListGroup>
-                      <h5><BlackLink to={`${this.props.match.path}/`} > Mining Metrics </BlackLink></h5>
-                      <h5><BlackLink to={`${this.props.match.path}/mining`} > Start Mining </BlackLink></h5>
-                      <h5><BlackLink to={`${this.props.match.path}/gameroom`} > Game Room </BlackLink></h5>
-                      <h5><BlackLink to={`${this.props.match.path}/withdraw`} > Withdraw </BlackLink></h5>
-                      <h5><BlackLink to={`${this.props.match.path}/support`} > Support </BlackLink></h5>
+                      <DynamicBlackLink to={`${this.props.match.path}/`}>Mining Metrics</DynamicBlackLink>
+                      <DynamicBlackLink to={`${this.props.match.path}/mining`} > Start Mining </DynamicBlackLink>
+                      <DynamicBlackLink to={`${this.props.match.path}/gameroom`} > Game Room </DynamicBlackLink>
+                      <DynamicBlackLink to={`${this.props.match.path}/withdraw`} > Withdraw </DynamicBlackLink>
+                      <DynamicBlackLink to={`${this.props.match.path}/support`} > Support </DynamicBlackLink>
                     </ListGroup>
 
                   </CardBody>
@@ -144,7 +144,7 @@ class DashboardPage extends Component {
 
                 </Card>
               </Col>
-              <Col md={{ span: 9 }}>
+              <Col lg={9}>
 
                 <Switch>
                   <ProtectedRoute exact path={`${this.props.match.path}/`} component={Analytics} authenticated={authenticated} />
