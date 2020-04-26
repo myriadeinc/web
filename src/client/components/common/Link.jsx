@@ -11,6 +11,17 @@ export const BlackLink = styled(Link)`
     }
 `;
 
+export const DynamicBlackLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+    font-size: clamp(16px, 1vw, 22px);
+    font-size: clamp(16px, 1vw, 22px);
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+        color: black;
+    }
+`;
+
 export const WhiteLink = styled(Link)`
     text-decoration: none;
     color: white;

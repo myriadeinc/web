@@ -9,7 +9,7 @@ class Withdraw extends Component {
             <Container className="pt-4 h-100">
                 <h3>Support</h3>
                 <p>We're here to help! Got any questions, comments, or concerns? Contact us through any of these channels and we'll do our best to make it work out.</p>
-                <div className="d-flex align-items-center h-50">
+                <div className="pt-5">
                     <CardDeck>
                         <a href="https://discord.gg/J9Pn7Dk" target="_blank" className={Style.link}>
                             <Card className={Style.hoverCard}>

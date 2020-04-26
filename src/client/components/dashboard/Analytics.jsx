@@ -4,8 +4,6 @@ import LineChart from './LineChart.jsx';
 
 import { MinerConsumer } from '../../pages/Dashboard.jsx';
 
-import gqlClient from '../../utils/graphql.js';
-
 import Style from '../../styles/components/dashboard/Analytics.less'
 
 import _ from 'lodash';
