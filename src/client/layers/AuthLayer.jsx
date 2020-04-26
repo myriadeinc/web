@@ -25,13 +25,13 @@ class AuthLayer extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   if (localStorage.hasOwnProperty("access_token")) {
-  //     let decodedToken = decode(localStorage.getItem("access_token"));
-  //     let expired = Date.now() > decodedToken.exp * 1000;
-  //     this.setState({ authenticated: !expired });
-  //   }
-  // }
+  componentDidMount() {
+    if (localStorage.hasOwnProperty("access_token")) {
+      let decodedToken = decode(localStorage.getItem("access_token"));
+      let expired = Date.now() > decodedToken.exp;
+      this.setState({ authenticated: !expired });
+    }
+  }
 
   login(email, password) {
     console.log("here " + config.identity_service_url);
