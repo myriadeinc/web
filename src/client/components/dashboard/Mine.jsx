@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Row, Col, ResponsiveEmbed, Modal } from 'react-bootstrap';
+import { Row, Col, ResponsiveEmbed, Jumbotron } from 'react-bootstrap';
 
 import { Alert, Nav, NavItem, NavLink, Container } from 'shards-react';
-import { Badge, Button } from "shards-react";
-import ComponentStyle from '../../styles/components/dashboard/Mine.less';
+import { Badge } from "shards-react";
+import Style from '../../styles/components/dashboard/Mine.less';
 
 import { AuthConsumer } from '../../layers/AuthLayer.jsx';
 
@@ -16,15 +16,17 @@ class Mine extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: 'l',
-      modalShow: false
+      type: 'w',
+      windowsVideo: false
     }
     this.handleTabSwitch = this.handleTabSwitch.bind(this);
     this.handleDownloadConfig = this.handleDownloadConfig.bind(this);
+    this.showWindowsVideo = this.showWindowsVideo.bind(this);
   }
 
-  handleClose = () => this.setState({ modalShow: false });
-  handleShow = () => this.setState({ modalShow: true });
+  showWindowsVideo() {
+    this.setState({ windowsVideo: !this.state.windowsVideo });
+  }
 
   handleDownloadConfig(miner) {
 
@@ -50,21 +52,26 @@ class Mine extends Component {
   windowsInstruction() {
     return (
       <Container>
-        <Row>
-          <Col>
-            <h5>1. Requirements</h5>
+        <Row className="mb-3">
+          <Col></Col>
+          <Col md="auto" className="pr-0">
+            <section className={Style.sliderCheckbox}>
+              <input type="checkbox" id="1" onClick={this.showWindowsVideo} />
+              <label className={Style.label} for="1" />
+            </section>
           </Col>
-          <Col md="auto">
-            <Button onClick={this.handleShow}>Video Tutorial</Button>
-            <Modal centered size="lg" show={this.state.modalShow} onHide={this.handleClose}>
-              <Modal.Body>
-                <ResponsiveEmbed aspectRatio="16by9">
-                  <iframe src="https://www.youtube.com/embed/c2UduXLCf5Q" frameBorder="0" allowFullScreen></iframe>
-                </ResponsiveEmbed>
-              </Modal.Body>
-            </Modal>
+          <Col md="auto" className="mt-1 pl-0">
+            Toggle Video Tutorial
           </Col>
         </Row>
+        {this.state.windowsVideo &&
+          <Jumbotron className="p-2">
+            <ResponsiveEmbed aspectRatio="16by9">
+              <iframe src="https://www.youtube.com/embed/dCh8pOP6HBE" frameBorder="0" allowFullScreen></iframe>
+            </ResponsiveEmbed>
+          </Jumbotron>
+        }
+        <h5 className="mt-3">1. Requirements</h5>
         <p>You will need the following</p>
         <ul>
           <li>
@@ -121,9 +128,7 @@ class Mine extends Component {
 
   render() {
     return (
-      <Container className={ComponentStyle.Container}>
-
-
+      <Container className={Style.Container}>
         <Row>
           <h3>Getting started with mining [XMRig]</h3>
           <p>Stay tuned for our updates, we are currently working on desktop client app that will provide an easier mining experience for you.</p>
@@ -131,7 +136,7 @@ class Mine extends Component {
         <Alert theme="warning"> <strong>Important! </strong> Our pool is currently not open to the public. Learn more about our beta program and Testnet mining program by
           shooting us an email at info@myriade.io
         </Alert>
-        <div className={ComponentStyle.Scrollbox}>
+        <div className={Style.Scrollbox}>
           <Row>
             <Col md={1}>
               <Badge pill theme="primary">
@@ -148,13 +153,13 @@ class Mine extends Component {
 
               <Nav tabs>
                 <NavItem>
-                  <NavLink onClick={(e) => { this.handleTabSwitch('l') }} className={this.state.type === 'l' ? 'active' : ''} className={ComponentStyle.tab}>
-                    Linux / OSX
+                  <NavLink onClick={(e) => { this.handleTabSwitch('w') }} active={this.state.type === 'w' ? 'active' : ''} className={Style.tab}>
+                    Windows
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink onClick={(e) => { this.handleTabSwitch('w') }} className={this.state.type === 'w' ? 'active' : ''} className={ComponentStyle.tab}>
-                    Windows
+                  <NavLink onClick={(e) => { this.handleTabSwitch('l') }} active={this.state.type === 'l' ? 'active' : ''} className={Style.tab}>
+                    Linux / OSX
                   </NavLink>
                 </NavItem>
               </Nav>
