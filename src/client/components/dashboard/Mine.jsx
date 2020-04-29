@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Row, Col, ResponsiveEmbed, Jumbotron, Button } from 'react-bootstrap';
-
-import { Alert, Nav, NavItem, NavLink, Container } from 'shards-react';
-import { Badge } from "shards-react";
+import { Alert, Nav, NavItem, NavLink, Container, Badge } from 'shards-react';
+import { PrimaryButton } from '../common/Buttons.jsx';
 import Style from '../../styles/components/dashboard/Mine.less';
 
 import { AuthConsumer } from '../../layers/AuthLayer.jsx';
-
-import { PrimaryButton } from '../common/Buttons.jsx';
-
 import xmrConfigData from '../../utils/xmr_config.js';
+
+import * as ROUTES from '../../utils/routes.js';
+import { Link } from 'react-router-dom';
 
 class Mine extends Component {
 
@@ -96,7 +95,9 @@ class Mine extends Component {
             <h5>1. Requirements</h5>
           </Col>
           <Col md="auto">
-            <Button href="https://myriade.io/#/linux" target="_blank">Detailed Instructions</Button>
+            <Link target="_blank" to={ROUTES.LINUX}>
+              <Button>Detailed Instructions</Button>
+            </Link>
           </Col>
         </Row>
 
