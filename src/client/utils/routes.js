@@ -6,3 +6,4 @@ export const GAMEROOM = '/gameroom';
 export const COOKIES = '/cookies';
 export const PRIVACY = '/privacy';
 export const TERMS = '/terms';
+export const LINUX = '/linux'

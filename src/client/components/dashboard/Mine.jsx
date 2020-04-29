@@ -60,9 +60,7 @@ class Mine extends Component {
               <label className={Style.label} for="1" />
             </section>
           </Col>
-          <Col md="auto" className="mt-1 pl-0">
-            Toggle Video Tutorial
-          </Col>
+          <Col md="auto" className="mt-1 pl-0">Toggle Video Tutorial</Col>
         </Row>
         {this.state.windowsVideo &&
           <Jumbotron className="p-2">
@@ -93,7 +91,15 @@ class Mine extends Component {
   linuxInstruction() {
     return (
       <Container>
-        <h5>1. Requirements</h5>
+        <Row>
+          <Col>
+            <h5>1. Requirements</h5>
+          </Col>
+          <Col md="auto">
+            <Badge outline pill href="https://myriade.io/#/linux" target="_blank">Detailed Instructions</Badge>
+          </Col>
+        </Row>
+
         <p>You will need the following</p>
         <ul>
           <li>
