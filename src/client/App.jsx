@@ -15,6 +15,7 @@ import CookiesToast from './components/common/CookiesToast.jsx';
 import Cookies from './components/landing/CookiesPolicy.jsx';
 import Privacy from './components/landing/PrivacyPolicy.jsx';
 import Terms from './components/landing/TermsOfService.jsx';
+import LinuxInstructions from './components/landing/LinuxInstructions.jsx';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/components/common/Theme.less';
@@ -36,6 +37,8 @@ class App extends React.Component {
                 <Route path={ROUTES.COOKIES} component={Cookies} />
                 <Route path={ROUTES.PRIVACY} component={Privacy} />
                 <Route path={ROUTES.TERMS} component={Terms} />
+
+                <Route path={ROUTES.LINUX} component={LinuxInstructions} />
 
                 {/* Protected Routes that need authentication */}
                 <ProtectedRoute path={ROUTES.DASHBOARD} component={DashboardPage} authenticated={authenticated} />
