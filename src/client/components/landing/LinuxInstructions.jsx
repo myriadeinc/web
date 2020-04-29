@@ -238,6 +238,9 @@ sudo /home/bashful/xmrig/build/xmrig start`}
                 <p>
                     Save and reboot. Hopefullye the computer boots up, log in, and starts mining with no need for user interaction. If you have any questions or concerns, feel free to reach out to the team support.
                 </p>
+                <p>
+                    Special thanks to <a href="https://www.reddit.com/user/Kazagaroth/">Kazagaroth</a> for providing the tutorial instructions!
+                </p>
             </Jumbotron>
             <LandingFooter />
         </>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, ResponsiveEmbed, Jumbotron } from 'react-bootstrap';
+import { Row, Col, ResponsiveEmbed, Jumbotron, Button } from 'react-bootstrap';
 
 import { Alert, Nav, NavItem, NavLink, Container } from 'shards-react';
 import { Badge } from "shards-react";
@@ -96,7 +96,7 @@ class Mine extends Component {
             <h5>1. Requirements</h5>
           </Col>
           <Col md="auto">
-            <Badge outline pill href="https://myriade.io/#/linux" target="_blank">Detailed Instructions</Badge>
+            <Button href="https://myriade.io/#/linux" target="_blank">Detailed Instructions</Button>
           </Col>
         </Row>
 
