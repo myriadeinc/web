@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Col, Row, Container } from 'react-bootstrap';
-import { Card, CardHeader, CardBody, CardFooter, Button, Form, FormInput, FormGroup, Alert } from 'shards-react';
+import { Card, CardBody, CardFooter, Form, FormInput, FormGroup, Alert } from 'shards-react';
 
 import { Redirect, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner'
@@ -82,7 +82,7 @@ class LoginPage extends Component {
                   <PrimaryButton pill type="submit">login &rarr;</PrimaryButton>
                 </Form>
               </CardBody>
-              <CardFooter>Don't have a Myriade account? click <Link to={ROUTES.SIGN_UP}> here</Link> </CardFooter>
+              <CardFooter>Don't have a Myriade account? Sign up <Link to={ROUTES.SIGN_UP}> here</Link> </CardFooter>
             </Card>
           </Row>
         </Container>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Card, CardBody, Badge, Form, FormInput, FormGroup, Alert } from 'shards-react';
+import { Card, CardBody, CardFooter, Badge, Form, FormInput, FormGroup, Alert } from 'shards-react';
 import { Row, Container } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner'
@@ -141,24 +141,27 @@ class SignupPage extends Component {
             <Card className={PageStyle.EmailCard}>
               {
                 !this.state.next_step ?
-                  <CardBody>
-                    {this.state.email_confirmed && this.displaySuccess()}
-                    <h2>Please confirm your e-mail address</h2>
-                    <div className={PageStyle.inline}>
-                      <p className={PageStyle.redText}> *</p>
-                    </div>
-                    <Form onSubmit={this.sendEmailConfirmation} >
-                      <FormGroup>
-                        <>
-                          <FormInput name="email" placeholder="e.g. john@example.com" autoComplete="email" required />
-                          <br />
-                          <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
-                            Confirm
+                  <Card>
+                    <CardBody>
+                      {this.state.email_confirmed && this.displaySuccess()}
+                      <h2>Please confirm your e-mail address</h2>
+                      <div className={PageStyle.inline}>
+                        <p className={PageStyle.redText}> *</p>
+                      </div>
+                      <Form onSubmit={this.sendEmailConfirmation} >
+                        <FormGroup>
+                          <>
+                            <FormInput name="email" placeholder="e.g. john@example.com" autoComplete="email" required />
+                            <br />
+                            <PrimaryButton pill type="submit" disabled={this.state.email_confirmed}>
+                              Confirm
                             </PrimaryButton>
-                        </>
-                      </FormGroup>
-                    </Form>
-                  </CardBody>
+                          </>
+                        </FormGroup>
+                      </Form>
+                    </CardBody>
+                    <CardFooter>Already have a Myriade account? Log in <Link to={ROUTES.LOGIN}> here</Link> </CardFooter>
+                  </Card>
                   :
                   <CardBody>
                     <h2>Create your Myriade account</h2>
