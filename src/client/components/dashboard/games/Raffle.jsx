@@ -78,12 +78,15 @@ class Raffle extends Component {
     clearInterval(this.countdownTimer);
   }
 
-  handleClose = () => this.setState({ modalShow: false });
-  handleShow = () => this.setState({ modalShow: true });
-
-  selectOption(i) {
-    this.setState({ drawOption: i });
+  handleClose = (purchsae) => {
+    this.setState({ modalShow: false });
   }
+
+  handleShow = (i) => this.setState({
+    modalShow: true,
+    drawOption: i
+  });
+
   updateTicketNum(e) {
     this.setState({ tickets: e.target.value })
   }
@@ -122,16 +125,8 @@ class Raffle extends Component {
   }
 
   render() {
-    let purchaseButtons, drawingCards;
+    let drawingCards;
     if (this.state.raffle) {
-      purchaseButtons = this.state.raffle.map((value, index) =>
-        <ButtonGroup className="m-2" key={index}>
-          <Button variant="outline-primary" size="lg" onClick={() => this.selectOption(index)}>
-            ${value.prize * value.exchange_rate} USD
-          </Button>
-        </ButtonGroup>
-      );
-
       drawingCards = this.state.raffle.map((value, index) => {
         let badge;
         if (value.status === 1) {
@@ -145,7 +140,7 @@ class Raffle extends Component {
         }
 
         return (
-          <Card key={index}>
+          <Card className={Style.hoverCard} onClick={() => this.handleShow(index)} key={index}>
             <Card.Body>
               <Row>
                 <Col>
@@ -158,7 +153,7 @@ class Raffle extends Component {
               <Card.Subtitle className="mb-2 text-muted"><i className="fab fa-monero" /> {value.prize}XMR</Card.Subtitle>
               <Card.Text>
                 Ticket price: {value.base_price}MC
-          </Card.Text>
+              </Card.Text>
             </Card.Body>
             <Card.Footer>
               <small className="text-muted">Closes in: {this.state.countdownString[index]}</small>
@@ -168,7 +163,6 @@ class Raffle extends Component {
       });
 
     } else {
-      purchaseButtons = <h5>Loading purchase options...</h5>
       drawingCards = <h5>Loading drawing info...</h5>
     }
 
@@ -195,13 +189,13 @@ class Raffle extends Component {
           <div>
             <Row>
               <Col>
-                <h3 className={Style.orange}>Weekly Raffle Drawings</h3>
+                <h3 className={Style.orange}>Monero Giveaways</h3>
               </Col>
               <Col md="auto">
                 <Button onClick={this.goBack}>Back to Gameroom</Button>
               </Col>
             </Row>
-            <p>Participate in weekly draws to take a part in winning the group block award. Spend Mining Credits to buy tickets for XMR pot prizes.</p>
+            <p>Enter your Mining Credits for a chance to win an XMR Prize! Choose your drawing amount from the cards below. Please play responsibly.</p>
 
             <Container className={Style.Scrollbox + " mb-4"}>
               <h4>Current Drawings</h4>
@@ -209,7 +203,7 @@ class Raffle extends Component {
                 {drawingCards}
               </CardColumns>
 
-              <h4>Your tickets</h4>
+              <h4>History</h4>
               {puchasedTickets.tickets.length ?
                 <Table striped bordered hover>
                   <thead>
@@ -233,54 +227,47 @@ class Raffle extends Component {
               </ListGroup>
             </Container>
 
-            <Row>
-              <Button size="lg" onClick={this.handleShow}>Buy Tickets!</Button>
-            </Row>
-            <Modal centered size="lg" show={this.state.modalShow} onHide={this.handleClose}>
+            <Modal centered show={this.state.modalShow} onHide={() => this.handleClose(false)}>
               <Modal.Header closeButton>
-                <Modal.Title>Game Drawings</Modal.Title>
+                <Modal.Title>Ticket Purchase</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <p>Choose your drawing amount. Please play responsibly.</p>
-                <ButtonToolbar className="mb-2">
-                  {purchaseButtons}
-                </ButtonToolbar>
-                {this.state.raffles ?
+                {this.state.raffle ?
                   <div>
-                    <h4>
-                      <small class="text-muted">Drawing Amount:</small>
+                    <h5>
+                      <small className="text-muted">Drawing Amount: </small>
                       {formatMoney(this.state.raffle[this.state.drawOption].prize * this.state.raffle[this.state.drawOption].exchange_rate)}USD
-                      <small class="text-muted">({this.state.raffle[this.state.drawOption].prize}XMR)</small>
-                    </h4>
-                    <h4><small class="text-muted">Ticket Price:</small> {this.state.raffle[this.state.drawOption].price}MC</h4>
-                    <h4><small class="text-muted">Minutes Remaining:</small></h4>
+                      <small className="text-muted">({this.state.raffle[this.state.drawOption].prize}XMR)</small>
+                    </h5>
+                    <h5><small className="text-muted">Ticket Price: </small> {this.state.raffle[this.state.drawOption].base_price}MC</h5>
+                    <h5><small className="text-muted">Closes in: </small>{this.state.countdownString[this.state.drawOption]}</h5>
                     <Row className="justify-content-md-center mb-2">
                       <Col md="6">
-                        <h4><small class="text-muted">Tickets:</small></h4>
+                        <h5><small className="text-muted">Tickets: </small></h5>
                       </Col>
                       <Col md="6">
-                        <InputGroup clasName="w-25">
+                        <InputGroup>
                           <FormControl defaultValue={this.state.tickets} type="number" min="1" max="10" onChange={this.updateTicketNum.bind(this)} />
                         </InputGroup>
                       </Col>
                     </Row>
-                    <h3>
-                      <small class="text-muted">Total Price: </small>
-                      {this.state.raffle[this.state.drawOption].price * this.state.tickets}MC
-                    </h3>
+                    <h4>
+                      <small className="text-muted">Total Price: </small>
+                      {this.state.raffle[this.state.drawOption].base_price * this.state.tickets}MC
+                    </h4>
                   </div>
-                  : <h4>No purchase options available :/</h4>
+                  : <h5>No purchase options available :/</h5>
                 }
 
 
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={this.handleClose}>
+                <Button variant="secondary" onClick={() => this.handleClose(false)}>
                   Cancel
-            </Button>
-                <Button variant="primary" onClick={this.handleClose}>
+                </Button>
+                <Button variant="primary" onClick={() => this.handleClose(true)}>
                   Confirm Purchase
-            </Button>
+                </Button>
               </Modal.Footer>
             </Modal>
           </div>

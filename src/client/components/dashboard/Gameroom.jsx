@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Switch, Link, withRouter } from 'react-router-dom';
+import { Switch, Link } from 'react-router-dom';
 
-import { Card, CardColumns, Container, Navbar } from 'react-bootstrap';
+import { Card, CardColumns, Container } from 'react-bootstrap';
 
 import Raffles from './games/Raffle.jsx';
 import Grid from './games/Grid.jsx';
@@ -21,9 +21,9 @@ function Menu() {
           <Link className={Style.noDecoration} to={`/dashboard/gameroom/raffles`}>
             <Card.Img className={Style.cardImg} variant="top" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/047ceb32844729.5695f00736611.jpg" />
             <Card.Body>
-              <Card.Title>Drawings</Card.Title>
+              <Card.Title>Giveaways</Card.Title>
               <Card.Text>
-                Use your Mining Credits to take part in raffles for USD.
+                Enter your Mining Credits for a chance at winning some Monero!
             </Card.Text>
             </Card.Body>
           </Link>
@@ -35,7 +35,7 @@ function Menu() {
             <Card.Body>
               <Card.Title>Grid</Card.Title>
               <Card.Text>
-                The classic card flipping game, now with Myriade Credits.
+                New game coming soon!
               </Card.Text>
             </Card.Body>
           </Link>

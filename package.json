@@ -6,8 +6,8 @@
   "scripts": {
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "build": "webpack --mode production",
-    "start": "npm run build",
-    "start:dev": "npm run client"
+    "start": "set NODE_ENV='production' && npm run build",
+    "start:dev": "set NODE_ENV='development' && npm run client"
   },
   "author": "",
   "license": "ISC",
