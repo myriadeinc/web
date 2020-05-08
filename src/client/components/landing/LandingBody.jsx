@@ -10,7 +10,7 @@ import * as THREE from 'three';
 
 import * as typeformEmbed from '@typeform/embed';
 
-import { PrimaryButton, SecondaryButton } from '../common/Buttons.jsx';
+import { PrimaryButtonOutline, SecondaryButtonOutline } from '../common/Buttons.jsx';
 import { WhiteLink, BlueLink } from '../common/Link.jsx';
 
 class LandingBody extends Component {
@@ -30,6 +30,7 @@ class LandingBody extends Component {
     this.vantaEffect = RINGS({
       el: this.vantaRef.current,
       THREE: THREE,
+      backgroundColor: 0x1122,
     })
   }
   componentWillUnmount() {
@@ -45,8 +46,8 @@ class LandingBody extends Component {
             <h1 className="text-white"><strong>The World’s First Fortune-Mining Pool.</strong></h1>
             <h1 className="text-white"><strong>Made for Monero.</strong></h1>
             <Row className="ml-5 pl-3">
-              <WhiteLink to={ROUTES.SIGN_UP}><PrimaryButton pill size="lg">Get Started</PrimaryButton></WhiteLink>
-              {/* <BlueLink to={ROUTES.DASHBOARD}><SecondaryButton pill>Log In</SecondaryButton></BlueLink> */}
+              <WhiteLink to={ROUTES.SIGN_UP}><PrimaryButtonOutline pill size="lg">Get Started</PrimaryButtonOutline></WhiteLink>
+              <BlueLink to={ROUTES.DASHBOARD}><SecondaryButtonOutline pill size="lg">Log In</SecondaryButtonOutline></BlueLink>
             </Row>
           </div>
         </div>
@@ -66,7 +67,10 @@ class LandingBody extends Component {
 
 const Video = () => (
   <div className="mt-5 pt-5">
-    <h3 className={Style.Title}>What It's All About</h3>
+    <h3 className={Style.Title}>
+      What It's All About
+      <small><small className="text-muted"> (3:07)</small></small>
+    </h3>
     <Jumbotron className="p-3">
       <ResponsiveEmbed aspectRatio="16by9">
         <iframe src="https://www.youtube.com/embed/U0uYO3xVTDU" frameBorder="0" allowFullScreen></iframe>
