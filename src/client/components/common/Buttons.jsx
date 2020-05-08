@@ -30,3 +30,11 @@ export const SecondaryButton = styled(Button)`
     color: white;
   }
 `;
+
+export const PrimaryButtonOutline = styled(PrimaryButton)`
+  border: solid 3px white !important;
+`;
+
+export const SecondaryButtonOutline = styled(SecondaryButton)`
+  border: solid 3px white !important;
+`;

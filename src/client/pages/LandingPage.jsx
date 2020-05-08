@@ -25,7 +25,7 @@ class LandingPage extends Component {
     return (
       <>
         <Alert theme="warning" className={PageStyle.amber} dismissible={this.dismiss} open={this.state.poolAlert}>
-          Our mining pool is currently under Beta testing and not fully operational yet.
+          Our Mining Pool is in beta so there may be some issues. Thanks for your patience!
         </Alert>
         <LandingBody />
         <LandingFooter />
