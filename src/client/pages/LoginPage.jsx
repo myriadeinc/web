@@ -1,24 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { Col, Row, Container } from 'react-bootstrap';
-import { Card, CardBody, CardFooter, Form, FormInput, FormGroup, Alert } from 'shards-react';
+import { Col, Row, Container } from "react-bootstrap";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Form,
+  FormInput,
+  FormGroup,
+  Alert,
+} from "shards-react";
 
-import { Redirect, Link } from 'react-router-dom';
-import Loader from 'react-loader-spinner'
+import { Redirect, Link } from "react-router-dom";
+import Loader from "react-loader-spinner";
 
-import { PrimaryButton } from '../components/common/Buttons.jsx';
+import { PrimaryButton } from "../components/common/Buttons.jsx";
 
-import PageStyle from '../styles/pages/Login.less';
-import * as ROUTES from '../utils/routes.js';
+import PageStyle from "../styles/pages/Login.less";
+import * as ROUTES from "../utils/routes.js";
 
 class LoginPage extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       loggin_in: false,
-      error: false
-    }
+      error: false,
+    };
     this.handleLogin = this.handleLogin.bind(this);
     this.dismissError = this.dismissError.bind(this);
   }
@@ -28,10 +35,9 @@ class LoginPage extends Component {
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
     this.setState({ logging_in: true });
-    return this.props.login(email, password)
-      .catch(err => {
-        this.setState({ loggin_in: false, error: true })
-      })
+    return this.props.login(email, password).catch((err) => {
+      this.setState({ loggin_in: false, error: true });
+    });
   }
 
   dismissError() {
@@ -43,7 +49,7 @@ class LoginPage extends Component {
       <Alert theme="warning" dismissible={this.dismissError}>
         Login failed. Try again
       </Alert>
-    )
+    );
   }
 
   displayLoading() {
@@ -55,38 +61,51 @@ class LoginPage extends Component {
         width={100}
         timeout={3000} //3 secs
       />
-    )
+    );
   }
 
   render() {
     if (this.props.authenticated) {
-      return (<Redirect to={ROUTES.DASHBOARD} />)
-    }
-    else {
+      return <Redirect to={ROUTES.DASHBOARD} />;
+    } else {
       return (
         <Container>
           {this.state.error && this.displayError()}
-          <Row className={' justify-content-center'}>
+          <Row className={" justify-content-center"}>
             <Card className={PageStyle.LoginCard}>
               <CardBody>
                 <h3>Dashboard Login</h3>
                 <Form onSubmit={this.handleLogin}>
                   <FormGroup>
                     <label htmlFor="#email">Email</label>
-                    <FormInput name="email" placeholder="john@example.com" autoComplete="email" />
+                    <FormInput
+                      name="email"
+                      placeholder="john@example.com"
+                      autoComplete="email"
+                    />
                   </FormGroup>
                   <FormGroup>
                     <label htmlFor="#password">Password</label>
-                    <FormInput type="password" name="password" placeholder="Password" autoComplete="current-password" />
+                    <FormInput
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                      autoComplete="current-password"
+                    />
                   </FormGroup>
-                  <PrimaryButton pill type="submit">login &rarr;</PrimaryButton>
+                  <PrimaryButton pill type="submit">
+                    login &rarr;
+                  </PrimaryButton>
                 </Form>
               </CardBody>
-              <CardFooter>Don't have a Myriade account? Sign up <Link to={ROUTES.SIGN_UP}> here</Link> </CardFooter>
+              <CardFooter>
+                Don't have a Myriade account? Sign up{" "}
+                <Link to={ROUTES.SIGN_UP}> here</Link>.{" "}
+                <Link to={ROUTES.PASSWORD_FORGET}> Forgot your password?</Link>
+              </CardFooter>
             </Card>
           </Row>
         </Container>
-
       );
     }
   }
