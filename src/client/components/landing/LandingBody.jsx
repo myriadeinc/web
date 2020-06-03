@@ -113,7 +113,7 @@ const Timeline = () => (
             <Col sm={6} xl={4} className={Style.timeline__left}>
                 <img
                     className={Style.timeline__image}
-                    src="https://i.ibb.co/sbq90Sh/Step-1.png"
+                    src="https://i.ibb.co/WgcH6cz/Step-1.png"
                 />
                 <span className={Style.timeline__bullet} />
             </Col>
@@ -138,7 +138,7 @@ const Timeline = () => (
             <Col sm={6} xl={4} className={Style.timeline__left}>
                 <img
                     className={Style.timeline__image}
-                    src="https://i.ibb.co/Hdxjg4V/Step-2.png"
+                    src="https://i.ibb.co/qJff9PF/Step-2.png"
                 />
                 <span className={Style.timeline__bullet} />
             </Col>
@@ -157,7 +157,7 @@ const Timeline = () => (
             <Col sm={6} xl={4} className={Style.timeline__left}>
                 <img
                     className={Style.timeline__image}
-                    src="https://i.ibb.co/hFxS2Gp/Step-3.png"
+                    src="https://i.ibb.co/dgppq2S/Step-3.png"
                 />
                 <span className={Style.timeline__bullet} />
             </Col>
@@ -176,7 +176,7 @@ const Timeline = () => (
             <Col sm={6} xl={4} className={Style.timeline__leftLast}>
                 <img
                     className={Style.timeline__image}
-                    src="https://i.ibb.co/vBrpNQ1/Step-4.png"
+                    src="https://i.ibb.co/dbr0x1W/Step-4.png"
                 />
                 <span className={Style.timeline__bullet} />
             </Col>
