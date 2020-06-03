@@ -18,6 +18,8 @@ import { Redirect, Link } from "react-router-dom";
 import PageStyle from "../styles/pages/Login.less";
 import * as ROUTES from "../utils/routes.js";
 
+var qs = require("qs");
+
 class PasswordForget extends Component {
   constructor(props) {
     super(props);
@@ -26,32 +28,32 @@ class PasswordForget extends Component {
       error: null,
       reset_step: false,
       token: null,
+      email: null,
       complete: false,
     };
   }
 
   componentWillMount() {
     // Grab token if it is a redirect
-    const token_string = this.props.location.search;
-    if ("" === token_string) {
-      console.log("No token provided");
+    const token_string = qs.parse(this.props.location.search, {
+      ignoreQueryPrefix: true,
+    }).token;
+    const email_string = qs.parse(this.props.location.search, {
+      ignoreQueryPrefix: true,
+    }).email;
+    this.setState({ email: email_string });
+    this.setState({ token: token_string });
+    let valid_char = /^[A-Z]+$/;
+
+    if (token_string && token.match(valid_char) && email_string) {
       this.setState({
-        reset_step: false,
+        reset_step: true,
+        token,
       });
     } else {
-      let token = token_string.slice(1).split("=")[1];
-      let valid_char = /^[A-Z]+$/;
-      if (token.match(valid_char)) {
-        console.log(token);
-        return this.setState({
-          reset_step: true,
-          token,
-        });
-      } else {
-        return this.setState({
-          error: "Invalid email confirmation URL",
-        });
-      }
+      this.setState({
+        error: "Invalid password reset URL",
+      });
     }
   }
 
@@ -75,6 +77,7 @@ class PasswordForget extends Component {
 
   resetPassword = (e) => {
     e.preventDefault();
+    const email = this.state.email;
     const email_token = this.state.token;
     const password = e.target.elements.newPassword.value;
     const confirmPassword = e.target.elements.confirmPassword.value;
@@ -83,6 +86,7 @@ class PasswordForget extends Component {
     } else {
       axios
         .post(`${config.identity_service_url}/v1/account/resetPassword/`, {
+          email,
           email_token,
           password,
         })

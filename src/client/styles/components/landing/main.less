@@ -18,7 +18,7 @@
     font-size: 16px;
 }
 
-hr { 
+hr {
     display: solid;
     border-width: 100px;
     color: white;
@@ -36,28 +36,122 @@ hr {
     padding-top: 50px;
 }
 
-.Title{
-    color: #F07C00;
+.Title {
+    color: #f07c00;
 }
 
-.mailingForm{
+.greyText {
+    color: #bababa;
+}
+
+.mediumSemibold {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.mailingForm {
     width: 100%;
-    height: 500px; 
+    height: 500px;
 }
 
-.faqToggle{
+.faqToggle {
     cursor: pointer;
 }
 
-.faqCollapse{
+.faqCollapse {
     cursor: default;
 }
 
 code {
-  display: block;
-  white-space: pre-wrap   
+    display: block;
+    white-space: pre-wrap;
 }
 
-p{
+p {
     margin-bottom: 1rem !important;
+}
+
+.timeline {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.timeline__right {
+    border-left: 3px solid #212121;
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+    // margin-left: 2rem;
+}
+
+.timeline__rightLast {
+    border-left: 3px solid transparent;
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+    //margin-left: 2rem;
+}
+
+@media (min-width: 575.98px) {
+    .timeline__row {
+        flex-wrap: nowrap;
+    }
+    .timeline__right {
+        padding-left: 3vw !important;
+        // margin-left: 3vw;
+    }
+
+    .timeline__rightLast {
+        padding-left: 3vw !important;
+        //margin-left: 3vw;
+    }
+
+    .timeline__left {
+        padding-right: 3vw !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .timeline__left {
+        border-left: 3px solid #212121;
+        padding-left: 2rem;
+        padding-bottom: 2rem;
+        margin-left: 2rem;
+    }
+    .timeline__leftLast {
+        border-left: 3px solid transparent;
+        padding-left: 2rem;
+        padding-bottom: 2rem;
+        margin-left: 2rem;
+    }
+
+    .timeline__right {
+        margin-left: 2rem;
+    }
+}
+
+.timeline__image {
+    width: 100%;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.timeline__bullet {
+    height: 25px;
+    width: 25px;
+    background-color: #212121;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
+
+@media (max-width: 575.98px) {
+    .timeline__bullet {
+        left: -0.875rem;
+    }
+}
+
+@media (min-width: 575.98px) {
+    .timeline__bullet {
+        right: -0.9rem;
+    }
 }
