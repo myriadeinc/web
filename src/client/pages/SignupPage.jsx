@@ -149,7 +149,6 @@ class SignupPage extends Component {
             return (
                 <div>
                     {this.state.error !== null && this.displayError()}
-
                     <Container>
                         <Row className={' justify-content-center'}>
                             <Card className={PageStyle.EmailCard}>
@@ -159,14 +158,12 @@ class SignupPage extends Component {
                                             {this.state.email_confirmed &&
                                                 this.displaySuccess()}
                                             <h2>
-                                                Please confirm your e-mail
-                                                address
+                                                Please enter your e-mail address
                                                 <span
                                                     className={
                                                         PageStyle.asterisk
                                                     }
                                                 >
-                                                    {' '}
                                                     *
                                                 </span>
                                             </h2>
@@ -220,19 +217,58 @@ class SignupPage extends Component {
                                                     htmlFor="#name"
                                                 >
                                                     Username
-                                                    <p
+                                                    <span
                                                         className={
-                                                            PageStyle.redText
+                                                            PageStyle.asterisk
                                                         }
                                                     >
-                                                        {' '}
                                                         *
-                                                    </p>
+                                                    </span>
                                                 </label>
                                                 <FormInput
                                                     name="name"
                                                     placeholder="e.g. thankful_for_today"
                                                     autoComplete="username"
+                                                    required
+                                                />
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <label
+                                                    className={PageStyle.inline}
+                                                    htmlFor="#password"
+                                                >
+                                                    Password
+                                                    <span
+                                                        className={
+                                                            PageStyle.asterisk
+                                                        }
+                                                    >
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <FormInput
+                                                    type="password"
+                                                    name="password"
+                                                    autoComplete="new-password"
+                                                    required
+                                                />
+                                                <label
+                                                    className={PageStyle.inline}
+                                                    htmlFor="#password_confirm"
+                                                >
+                                                    Confirm Password
+                                                    <span
+                                                        className={
+                                                            PageStyle.asterisk
+                                                        }
+                                                    >
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <FormInput
+                                                    type="password"
+                                                    name="password_confirm"
+                                                    autoComplete="new-password"
                                                     required
                                                 />
                                             </FormGroup>
@@ -258,48 +294,6 @@ class SignupPage extends Component {
                                                 <FormInput
                                                     name="wallet"
                                                     placeholder="Paste in your wallet address here"
-                                                />
-                                            </FormGroup>
-                                            <FormGroup>
-                                                <label
-                                                    className={PageStyle.inline}
-                                                    htmlFor="#password"
-                                                >
-                                                    Password
-                                                    <p
-                                                        className={
-                                                            PageStyle.redText
-                                                        }
-                                                    >
-                                                        {' '}
-                                                        *
-                                                    </p>
-                                                </label>
-                                                <FormInput
-                                                    type="password"
-                                                    name="password"
-                                                    autoComplete="new-password"
-                                                    required
-                                                />
-                                                <label
-                                                    className={PageStyle.inline}
-                                                    htmlFor="#password_confirm"
-                                                >
-                                                    Confirm Password
-                                                    <p
-                                                        className={
-                                                            PageStyle.redText
-                                                        }
-                                                    >
-                                                        {' '}
-                                                        *
-                                                    </p>
-                                                </label>
-                                                <FormInput
-                                                    type="password"
-                                                    name="password_confirm"
-                                                    autoComplete="new-password"
-                                                    required
                                                 />
                                             </FormGroup>
                                             <SecondaryButton pill type="submit">
