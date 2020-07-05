@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Myriade</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Poppins&display=swap"
+            rel="stylesheet"
+        />
 
-<head>
-    <!-- Google analytics tracking-->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154698655-1"></script>
-    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-154698655-1'); </script>
+        <script
+            src="https://kit.fontawesome.com/179f45f5a7.js"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="stylesheet" type="text/css" href="myriadewebsite.css" />
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"
+        ></script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Myriade</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
-
-    <script src="https://kit.fontawesome.com/179f45f5a7.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="myriadewebsite.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
-    <!-- Chatra widget code -->
-    <script>
-        window.ChatraSetup = {
-            colors: {
-                buttonText: '#f0f0f0', /* chat button text color */
-                buttonBg: '#f68600'    /* chat button background color */
+        <!-- Chatra widget code -->
+        <script>
+            window.ChatraSetup = {
+                colors: {
+                    buttonText: '#f0f0f0' /* chat button text color */,
+                    buttonBg: '#f68600' /* chat button background color */,
+                },
             }
-        };
-        (function (d, w, c) {
-            w.ChatraID = 'kzQzfDagyXR78mcF3';
-            var s = d.createElement('script');
-            w[c] = w[c] || function () {
-                (w[c].q = w[c].q || []).push(arguments);
-            };
-            s.async = true;
-            s.src = 'https://call.chatra.io/chatra.js';
-            if (d.head) d.head.appendChild(s);
-        })(document, window, 'Chatra');
-    </script>
+            ;(function (d, w, c) {
+                w.ChatraID = 'kzQzfDagyXR78mcF3'
+                var s = d.createElement('script')
+                w[c] =
+                    w[c] ||
+                    function () {
+                        ;(w[c].q = w[c].q || []).push(arguments)
+                    }
+                s.async = true
+                s.src = 'https://call.chatra.io/chatra.js'
+                if (d.head) d.head.appendChild(s)
+            })(document, window, 'Chatra')
+        </script>
 
-    <style>
-        /*Fixes extra space on the right*/
-        html {
-            overflow-x: hidden !important;
-        }
-    </style>
-</head>
+        <style>
+            /*Fixes extra space on the right*/
+            html {
+                overflow-x: hidden !important;
+            }
+        </style>
+    </head>
 
-
-<body>
-    <div id="main" />
-</body>
-
+    <body>
+        <div id="main" />
+    </body>
 </html>
