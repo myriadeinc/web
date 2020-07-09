@@ -16,9 +16,11 @@ import {
 import RINGS from '../../vendor/vanta.rings.min.js'
 import * as THREE from 'three'
 
-import * as typeformEmbed from '@typeform/embed'
-
-import { LightButton, LightSecondaryButton } from '../common/Buttons.jsx'
+import {
+    LightButton,
+    LightSecondaryButton,
+    DarkGradientButton,
+} from '../common/Buttons.jsx'
 import { WhiteLink, BlueLink } from '../common/Link.jsx'
 
 class LandingBody extends Component {
@@ -26,6 +28,9 @@ class LandingBody extends Component {
         super(props)
         this.el = null
         this.vantaRef = React.createRef()
+        this.state = {
+            hashRate: 1000,
+        }
     }
     componentDidMount() {
         if (this.el) {
@@ -43,6 +48,10 @@ class LandingBody extends Component {
     }
     componentWillUnmount() {
         if (this.vantaEffect) this.vantaEffect.destroy()
+    }
+
+    hashrateChange = (event) => {
+        this.setState({ hashRate: event.target.value })
     }
 
     render() {
@@ -75,6 +84,12 @@ class LandingBody extends Component {
 
                 <Container>
                     <Video />
+                </Container>
+                <Compare
+                    hashRate={this.state.hashRate}
+                    handleChange={this.hashrateChange}
+                />
+                <Container>
                     <Timeline />
                     <Faq />
                     {/* <Jumbotron className="mt-5">
@@ -87,7 +102,7 @@ class LandingBody extends Component {
 }
 
 const Video = () => (
-    <div className="mt-5 pt-5">
+    <div style={{ paddingTop: 60, paddingBottom: 100 }}>
         <h3 className={Style.Title}>
             What It's All About
             <small>
@@ -106,8 +121,59 @@ const Video = () => (
     </div>
 )
 
+const Compare = (props) => (
+    <div
+        style={{
+            backgroundColor: '#031D3C',
+            paddingTop: 120,
+            paddingBottom: 120,
+        }}
+    >
+        <Container>
+            <Row>
+                <Col md={6}>
+                    <div
+                        style={{ color: '#4689D6' }}
+                        className={Style.medium + ' pb-3'}
+                    >
+                        Fortune mine with confidence
+                    </div>
+                    <h1 style={{ color: 'white' }} className="pb-4">
+                        <strong>Maximize</strong> your pool mining profits
+                    </h1>
+                    <div
+                        style={{ color: 'white' }}
+                        className={Style.medium + ' pb-3'}
+                    >
+                        At current prices, your computer can mine around
+                        $3.25/month. With Myriade, you could make up to the
+                        entire block reward of $2432.45.
+                    </div>
+                    <div
+                        style={{ color: 'white' }}
+                        className={Style.medium + ' pb-3 d-flex'}
+                    >
+                        <div>Your hashrate: </div>
+                        <input
+                            type="number"
+                            value={props.hashRate}
+                            onChange={props.handleChange}
+                            className={Style.transparentInputDark}
+                        />
+                    </div>
+                    <DarkGradientButton pill>Get Started</DarkGradientButton>
+                </Col>
+                <Col md={6}>asdfasdf</Col>
+            </Row>
+        </Container>
+    </div>
+)
+
 const Timeline = () => (
-    <div className={Style.timeline + ' pt-5 pb-5'}>
+    <div
+        className={Style.timeline}
+        style={{ paddingBottom: 60, paddingTop: 120 }}
+    >
         <h3 className={Style.Title + ' mb-4'}>How Myriade Works</h3>
         <Row className={Style.timeline__row}>
             <Col sm={6} xl={4} className={Style.timeline__left}>
