@@ -23,13 +23,18 @@ import {
 } from '../common/Buttons.jsx'
 import { WhiteLink, BlueLink } from '../common/Link.jsx'
 
+import moment from 'moment'
+
 class LandingBody extends Component {
     constructor(props) {
         super(props)
         this.el = null
         this.vantaRef = React.createRef()
         this.state = {
-            hashRate: 1000,
+            minerHashrate: 1000,
+            hashrate: 1465330752.3138,
+            USD: 69.82,
+            reward: 1.57,
         }
     }
     componentDidMount() {
@@ -45,13 +50,43 @@ class LandingBody extends Component {
             THREE: THREE,
             backgroundColor: 0x1122,
         })
+        this.getHashrate()
+        this.getConversion()
     }
     componentWillUnmount() {
         if (this.vantaEffect) this.vantaEffect.destroy()
     }
 
+    getHashrate = () => {
+        fetch('https://www.cryptunit.com/api/history/?5')
+            .then((resp) => resp.json())
+            .then(
+                (result) => {
+                    print(moment().format('YYYY-MM-DD'))
+                    this.setState(
+                        result[0]['history'][moment().format('YYYY-MM-DD')]
+                    )
+                    this.setState({ hashrate: this.state.hashrate * 1000000 })
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+    }
+
+    getConversion = () => {
+        fetch('https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD')
+            .then((res) => res.json())
+            .then((result) => {
+                this.setState(result),
+                    (error) => {
+                        console.log(error)
+                    }
+            })
+    }
+
     hashrateChange = (event) => {
-        this.setState({ hashRate: event.target.value })
+        this.setState({ minerHashrate: event.target.value })
     }
 
     render() {
@@ -86,7 +121,10 @@ class LandingBody extends Component {
                     <Video />
                 </Container>
                 <Compare
-                    hashRate={this.state.hashRate}
+                    minerHashrate={this.state.minerHashrate}
+                    hashrate={this.state.hashrate}
+                    usd={this.state.USD}
+                    reward={this.state.reward}
                     handleChange={this.hashrateChange}
                 />
                 <Container>
@@ -145,9 +183,15 @@ const Compare = (props) => (
                         style={{ color: 'white' }}
                         className={Style.medium + ' pb-3'}
                     >
-                        At current prices, your computer can mine around
-                        $3.25/month. With Myriade, you could make up to the
-                        entire block reward of $2432.45.
+                        As of {moment().format('MMMM Do')}, your computer can
+                        mine around $
+                        {(props.minerHashrate / props.hashrate) *
+                            props.reward *
+                            props.usd *
+                            21600}
+                        USD/month. With Myriade, you could make up to the entire
+                        block reward of ${props.reward * props.usd}
+                        USD.
                     </div>
                     <div
                         style={{ color: 'white' }}
@@ -156,10 +200,11 @@ const Compare = (props) => (
                         <div>Your hashrate: </div>
                         <input
                             type="number"
-                            value={props.hashRate}
+                            value={props.minerHashrate}
                             onChange={props.handleChange}
                             className={Style.transparentInputDark}
                         />
+                        <div> H/s</div>
                     </div>
                     <DarkGradientButton pill>Get Started</DarkGradientButton>
                 </Col>

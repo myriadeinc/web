@@ -69,7 +69,7 @@ export const DarkGradientButton = styled(Button)`
     border-radius: 100rem;
     font-size: 1rem !important;
     font-weight: 500 !important;
-    padding: 0.5rem 1.5rem !important;
+    padding: 0.8rem 1.8rem !important;
     border-radius: 25px;
     color: white;
     background-image: linear-gradient(to right, #5fb8fb 0%, #d533c6 100%);
