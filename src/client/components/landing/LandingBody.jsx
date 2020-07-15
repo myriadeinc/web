@@ -23,6 +23,15 @@ import {
 } from '../common/Buttons.jsx'
 import { WhiteLink, BlueLink } from '../common/Link.jsx'
 
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    Tooltip,
+    ResponsiveContainer,
+} from 'recharts'
+
 import moment from 'moment'
 
 class LandingBody extends Component {
@@ -64,7 +73,9 @@ class LandingBody extends Component {
                 (result) => {
                     print(moment().format('YYYY-MM-DD'))
                     this.setState(
-                        result[0]['history'][moment().format('YYYY-MM-DD')]
+                        result[0]['history'][
+                            moment().subtract(1, 'day').format('YYYY-MM-DD')
+                        ]
                     )
                     this.setState({ hashrate: this.state.hashrate * 1000000 })
                 },
@@ -159,60 +170,107 @@ const Video = () => (
     </div>
 )
 
-const Compare = (props) => (
-    <div
-        style={{
-            backgroundColor: '#031D3C',
-            paddingTop: 120,
-            paddingBottom: 120,
-        }}
-    >
-        <Container>
-            <Row>
-                <Col md={6}>
-                    <div
-                        style={{ color: '#4689D6' }}
-                        className={Style.medium + ' pb-3'}
-                    >
-                        Fortune mine with confidence
-                    </div>
-                    <h1 style={{ color: 'white' }} className="pb-4">
-                        <strong>Maximize</strong> your pool mining profits
-                    </h1>
-                    <div
-                        style={{ color: 'white' }}
-                        className={Style.medium + ' pb-3'}
-                    >
-                        As of {moment().format('MMMM Do')}, your computer can
-                        mine around $
-                        {(props.minerHashrate / props.hashrate) *
-                            props.reward *
-                            props.usd *
-                            21600}
-                        USD/month. With Myriade, you could make up to the entire
-                        block reward of ${props.reward * props.usd}
-                        USD.
-                    </div>
-                    <div
-                        style={{ color: 'white' }}
-                        className={Style.medium + ' pb-3 d-flex'}
-                    >
-                        <div>Your hashrate: </div>
-                        <input
-                            type="number"
-                            value={props.minerHashrate}
-                            onChange={props.handleChange}
-                            className={Style.transparentInputDark}
-                        />
-                        <div> H/s</div>
-                    </div>
-                    <DarkGradientButton pill>Get Started</DarkGradientButton>
-                </Col>
-                <Col md={6}>asdfasdf</Col>
-            </Row>
-        </Container>
-    </div>
-)
+const Compare = (props) => {
+    let poorProfit = (
+        (props.minerHashrate / props.hashrate) *
+        props.reward *
+        props.usd *
+        21600
+    ).toFixed(2)
+    let richProfit = (props.reward * props.usd).toFixed(2)
+    let chartData = [
+        { name: 'Monero', amt: poorProfit },
+        { name: 'Myriade', amt: richProfit },
+    ]
+
+    return (
+        <div
+            style={{
+                backgroundColor: '#031D3C',
+                paddingTop: 120,
+                paddingBottom: 120,
+            }}
+        >
+            <Container>
+                <Row>
+                    <Col md={6}>
+                        <div
+                            style={{ color: '#4689D6' }}
+                            className={Style.medium + ' pb-3'}
+                        >
+                            Fortune mine with confidence
+                        </div>
+                        <h1 style={{ color: 'white' }} className="pb-4">
+                            <strong>Maximize</strong> your pool mining profits
+                        </h1>
+                        <div
+                            style={{ color: 'white' }}
+                            className={Style.medium + ' pb-3'}
+                        >
+                            As of {moment().format('MMMM Do')}, your computer
+                            can mine around ${poorProfit} USD/month. With
+                            Myriade, you could make up to the entire block
+                            reward of ${richProfit}
+                            USD.
+                        </div>
+                        <div
+                            style={{ color: 'white' }}
+                            className={Style.medium + ' pb-3 d-flex'}
+                        >
+                            <div>Your hashrate: </div>
+                            <input
+                                type="number"
+                                value={props.minerHashrate}
+                                onChange={props.handleChange}
+                                className={Style.transparentInputDark}
+                            />
+                            <div> H/s</div>
+                        </div>
+                        <DarkGradientButton pill>
+                            Get Started
+                        </DarkGradientButton>
+                    </Col>
+                    <Col md={6}>
+                        <div style={{ width: '100%', height: 300 }}>
+                            <ResponsiveContainer>
+                                <BarChart
+                                    data={chartData}
+                                    margin={{
+                                        top: 5,
+                                        right: 30,
+                                        left: 20,
+                                        bottom: 5,
+                                    }}
+                                >
+                                    <XAxis
+                                        dataKey="name"
+                                        tickLine={false}
+                                        tick={{
+                                            fontFamily: 'poppins',
+                                            fill: 'white',
+                                        }}
+                                        stroke="white"
+                                    />
+                                    <YAxis
+                                        tickLine={false}
+                                        tick={false}
+                                        stroke="white"
+                                    />
+                                    <Tooltip />
+                                    <Bar
+                                        dataKey="amt"
+                                        fill="#487CBB"
+                                        barSize={50}
+                                    />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+    )
+}
 
 const Timeline = () => (
     <div
