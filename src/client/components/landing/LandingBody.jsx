@@ -171,13 +171,14 @@ const Video = () => (
 )
 
 const Compare = (props) => {
-    let poorProfit = (
+    let poorProfit = +(
         (props.minerHashrate / props.hashrate) *
         props.reward *
         props.usd *
         21600
     ).toFixed(2)
-    let richProfit = (props.reward * props.usd).toFixed(2)
+
+    let richProfit = +(props.reward * props.usd).toFixed(2)
     let chartData = [
         { name: 'Monero', amt: poorProfit },
         { name: 'Myriade', amt: richProfit },
@@ -211,7 +212,7 @@ const Compare = (props) => {
                             can mine around ${poorProfit} USD/month. With
                             Myriade, you could make up to the entire block
                             reward of ${richProfit}
-                            USD.
+                            USD/month.
                         </div>
                         <div
                             style={{ color: 'white' }}
@@ -231,15 +232,19 @@ const Compare = (props) => {
                         </DarkGradientButton>
                     </Col>
                     <Col md={6}>
-                        <div style={{ width: '100%', height: 300 }}>
+                        <div
+                            style={{
+                                width: '100%',
+                                height: 400,
+                            }}
+                        >
                             <ResponsiveContainer>
                                 <BarChart
                                     data={chartData}
                                     margin={{
-                                        top: 5,
-                                        right: 30,
-                                        left: 20,
+                                        top: 75,
                                         bottom: 5,
+                                        right: 20,
                                     }}
                                 >
                                     <XAxis
@@ -256,10 +261,34 @@ const Compare = (props) => {
                                         tick={false}
                                         stroke="white"
                                     />
-                                    <Tooltip />
+                                    <Tooltip
+                                        cursor={false}
+                                        formatter={(value, name, props) => {
+                                            return ['$' + value, 'Profit']
+                                        }}
+                                    />
+                                    <defs>
+                                        <linearGradient
+                                            id="colorUv"
+                                            x1="0"
+                                            y1="0"
+                                            x2="0"
+                                            y2="100%"
+                                            spreadMethod="reflect"
+                                        >
+                                            <stop
+                                                offset="0"
+                                                stopColor="#D732C6"
+                                            />
+                                            <stop
+                                                offset="1"
+                                                stopColor="#5EBAFC"
+                                            />
+                                        </linearGradient>
+                                    </defs>
                                     <Bar
                                         dataKey="amt"
-                                        fill="#487CBB"
+                                        fill="url(#colorUv)"
                                         barSize={50}
                                     />
                                 </BarChart>
