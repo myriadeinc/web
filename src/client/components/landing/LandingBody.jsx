@@ -227,9 +227,11 @@ const Compare = (props) => {
                             />
                             <div> H/s</div>
                         </div>
-                        <DarkGradientButton pill>
-                            Get Started
-                        </DarkGradientButton>
+                        <WhiteLink to={ROUTES.SIGN_UP}>
+                            <DarkGradientButton pill>
+                                Get Started
+                            </DarkGradientButton>
+                        </WhiteLink>
                     </Col>
                     <Col md={6}>
                         <div
