@@ -16,16 +16,35 @@ import {
 import RINGS from '../../vendor/vanta.rings.min.js'
 import * as THREE from 'three'
 
-import * as typeformEmbed from '@typeform/embed'
-
-import { LightButton, LightSecondaryButton } from '../common/Buttons.jsx'
+import {
+    LightButton,
+    LightSecondaryButton,
+    DarkGradientButton,
+} from '../common/Buttons.jsx'
 import { WhiteLink, BlueLink } from '../common/Link.jsx'
+
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    Tooltip,
+    ResponsiveContainer,
+} from 'recharts'
+
+import moment from 'moment'
 
 class LandingBody extends Component {
     constructor(props) {
         super(props)
         this.el = null
         this.vantaRef = React.createRef()
+        this.state = {
+            minerHashrate: 1000,
+            hashrate: 1465330752.3138,
+            USD: 69.82,
+            reward: 1.57,
+        }
     }
     componentDidMount() {
         if (this.el) {
@@ -40,9 +59,45 @@ class LandingBody extends Component {
             THREE: THREE,
             backgroundColor: 0x1122,
         })
+        this.getHashrate()
+        this.getConversion()
     }
     componentWillUnmount() {
         if (this.vantaEffect) this.vantaEffect.destroy()
+    }
+
+    getHashrate = () => {
+        fetch('https://www.cryptunit.com/api/history/?5')
+            .then((resp) => resp.json())
+            .then(
+                (result) => {
+                    print(moment().format('YYYY-MM-DD'))
+                    this.setState(
+                        result[0]['history'][
+                            moment().subtract(1, 'day').format('YYYY-MM-DD')
+                        ]
+                    )
+                    this.setState({ hashrate: this.state.hashrate * 1000000 })
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+    }
+
+    getConversion = () => {
+        fetch('https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD')
+            .then((res) => res.json())
+            .then((result) => {
+                this.setState(result),
+                    (error) => {
+                        console.log(error)
+                    }
+            })
+    }
+
+    hashrateChange = (event) => {
+        this.setState({ minerHashrate: event.target.value })
     }
 
     render() {
@@ -75,6 +130,15 @@ class LandingBody extends Component {
 
                 <Container>
                     <Video />
+                </Container>
+                <Compare
+                    minerHashrate={this.state.minerHashrate}
+                    hashrate={this.state.hashrate}
+                    usd={this.state.USD}
+                    reward={this.state.reward}
+                    handleChange={this.hashrateChange}
+                />
+                <Container>
                     <Timeline />
                     <Faq />
                     {/* <Jumbotron className="mt-5">
@@ -87,7 +151,7 @@ class LandingBody extends Component {
 }
 
 const Video = () => (
-    <div className="mt-5 pt-5">
+    <div style={{ paddingTop: 60, paddingBottom: 100 }}>
         <h3 className={Style.Title}>
             What It's All About
             <small>
@@ -106,8 +170,142 @@ const Video = () => (
     </div>
 )
 
+const Compare = (props) => {
+    let poorProfit = +(
+        (props.minerHashrate / props.hashrate) *
+        props.reward *
+        props.usd *
+        21600
+    ).toFixed(2)
+
+    let richProfit = +(props.reward * props.usd).toFixed(2)
+    let chartData = [
+        { name: 'Monero', amt: poorProfit },
+        { name: 'Myriade', amt: richProfit },
+    ]
+
+    return (
+        <div
+            style={{
+                backgroundColor: '#031D3C',
+                paddingTop: 120,
+                paddingBottom: 120,
+            }}
+        >
+            <Container>
+                <Row>
+                    <Col md={6}>
+                        <div
+                            style={{ color: '#4689D6' }}
+                            className={Style.medium + ' pb-3'}
+                        >
+                            Fortune mine with confidence
+                        </div>
+                        <h1 style={{ color: 'white' }} className="pb-4">
+                            <strong>Maximize</strong> your pool mining profits
+                        </h1>
+                        <div
+                            style={{ color: 'white' }}
+                            className={Style.medium + ' pb-3'}
+                        >
+                            As of {moment().format('MMMM Do')}, your computer
+                            can mine around ${poorProfit} USD/month. With
+                            Myriade, you could make up to the entire block
+                            reward of ${richProfit}
+                            USD/month.
+                        </div>
+                        <div
+                            style={{ color: 'white' }}
+                            className={Style.medium + ' pb-3 d-flex'}
+                        >
+                            <div>Your hashrate: </div>
+                            <input
+                                type="number"
+                                value={props.minerHashrate}
+                                onChange={props.handleChange}
+                                className={Style.transparentInputDark}
+                            />
+                            <div> H/s</div>
+                        </div>
+                        <DarkGradientButton pill>
+                            Get Started
+                        </DarkGradientButton>
+                    </Col>
+                    <Col md={6}>
+                        <div
+                            style={{
+                                width: '100%',
+                                height: 400,
+                            }}
+                        >
+                            <ResponsiveContainer>
+                                <BarChart
+                                    data={chartData}
+                                    margin={{
+                                        top: 75,
+                                        bottom: 5,
+                                        right: 20,
+                                    }}
+                                >
+                                    <XAxis
+                                        dataKey="name"
+                                        tickLine={false}
+                                        tick={{
+                                            fontFamily: 'poppins',
+                                            fill: 'white',
+                                        }}
+                                        stroke="white"
+                                    />
+                                    <YAxis
+                                        tickLine={false}
+                                        tick={false}
+                                        stroke="white"
+                                    />
+                                    <Tooltip
+                                        cursor={false}
+                                        formatter={(value, name, props) => {
+                                            return ['$' + value, 'Profit']
+                                        }}
+                                    />
+                                    <defs>
+                                        <linearGradient
+                                            id="colorUv"
+                                            x1="0"
+                                            y1="0"
+                                            x2="0"
+                                            y2="100%"
+                                            spreadMethod="reflect"
+                                        >
+                                            <stop
+                                                offset="0"
+                                                stopColor="#D732C6"
+                                            />
+                                            <stop
+                                                offset="1"
+                                                stopColor="#5EBAFC"
+                                            />
+                                        </linearGradient>
+                                    </defs>
+                                    <Bar
+                                        dataKey="amt"
+                                        fill="url(#colorUv)"
+                                        barSize={50}
+                                    />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+    )
+}
+
 const Timeline = () => (
-    <div className={Style.timeline + ' pt-5 pb-5'}>
+    <div
+        className={Style.timeline}
+        style={{ paddingBottom: 60, paddingTop: 120 }}
+    >
         <h3 className={Style.Title + ' mb-4'}>How Myriade Works</h3>
         <Row className={Style.timeline__row}>
             <Col sm={6} xl={4} className={Style.timeline__left}>
