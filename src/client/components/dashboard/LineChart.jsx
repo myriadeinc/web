@@ -1,129 +1,341 @@
 import React, { Component } from 'react'
-import { ResponsiveLine } from '@nivo/line';
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    Tooltip,
+    Legend,
+    ResponsiveContainer,
+} from 'recharts'
+import _ from 'lodash'
+import moment from 'moment'
 
-import _ from 'lodash';
-
-class LineChart extends Component {
-
-    constructor(props){
-        super(props);
+class Chart extends Component {
+    constructor(props) {
+        super(props)
         this.state = {
             hashrates: [],
-            credits: [],
-            shares: [],
         }
     }
 
-    componentWillMount(){
-        let hashrates = _.map(this.props.data.hashrates, (h) => {
-            return {
-                x: h.time,
-                y: h.rate
-            }
-        })
-        let credits = _.map(this.props.data.credits, (c) => {
-            return {
-                x: c.time,
-                y: c.credit
-            }
-        })
-        let shares = _.map(this.props.data.shares, (s) => {
-            return {
-                x: s.time,
-                y: s.share
-            }
-        })
-        return this.setState({
-            hashrates,
-            credits,
-            shares,
-        })
+    componentWillMount() {
+        this.updateChart()
     }
+
+    updateChart = () => {
+        let hashrates = this.getHashrates().map((entry) => {
+            return {
+                time: new Date(entry.time).getTime(),
+                rate: entry.rate,
+            }
+        })
+        this.setState({ hashrates: hashrates })
+    }
+
+    getHashrates = () => [
+        {
+            blockHeight: '0',
+            time: '2020-08-11T02:18:18.891Z',
+            rate: '0',
+        },
+        {
+            blockHeight: '1',
+            time: '2020-08-11T02:18:18.902Z',
+            rate: '1000',
+        },
+        {
+            blockHeight: '2',
+            time: '2020-08-11T02:18:18.908Z',
+            rate: '2000',
+        },
+        {
+            blockHeight: '3',
+            time: '2020-08-11T02:18:18.916Z',
+            rate: '3000',
+        },
+        {
+            blockHeight: '4',
+            time: '2020-08-11T02:18:18.923Z',
+            rate: '4000',
+        },
+        {
+            blockHeight: '5',
+            time: '2020-08-11T02:18:18.931Z',
+            rate: '5000',
+        },
+        {
+            blockHeight: '6',
+            time: '2020-08-11T02:18:18.937Z',
+            rate: '6000',
+        },
+        {
+            blockHeight: '7',
+            time: '2020-08-11T02:18:18.944Z',
+            rate: '7000',
+        },
+        {
+            blockHeight: '8',
+            time: '2020-08-11T02:18:18.951Z',
+            rate: '8000',
+        },
+        {
+            blockHeight: '9',
+            time: '2020-08-11T02:18:18.959Z',
+            rate: '9000',
+        },
+        {
+            blockHeight: '10',
+            time: '2020-08-11T02:18:18.965Z',
+            rate: '10000',
+        },
+        {
+            blockHeight: '11',
+            time: '2020-08-11T02:18:18.972Z',
+            rate: '11000',
+        },
+        {
+            blockHeight: '12',
+            time: '2020-08-11T02:18:18.978Z',
+            rate: '12000',
+        },
+        {
+            blockHeight: '13',
+            time: '2020-08-11T02:18:18.985Z',
+            rate: '13000',
+        },
+        {
+            blockHeight: '14',
+            time: '2020-08-11T02:18:18.992Z',
+            rate: '14000',
+        },
+        {
+            blockHeight: '15',
+            time: '2020-08-11T02:18:18.999Z',
+            rate: '15000',
+        },
+        {
+            blockHeight: '16',
+            time: '2020-08-11T02:18:19.012Z',
+            rate: '16000',
+        },
+        {
+            blockHeight: '17',
+            time: '2020-08-11T02:18:19.018Z',
+            rate: '17000',
+        },
+        {
+            blockHeight: '18',
+            time: '2020-08-11T02:18:19.028Z',
+            rate: '18000',
+        },
+        {
+            blockHeight: '19',
+            time: '2020-08-11T02:18:19.035Z',
+            rate: '19000',
+        },
+        {
+            blockHeight: '20',
+            time: '2020-08-11T02:18:19.049Z',
+            rate: '20000',
+        },
+        {
+            blockHeight: '21',
+            time: '2020-08-11T02:18:19.059Z',
+            rate: '21000',
+        },
+        {
+            blockHeight: '22',
+            time: '2020-08-11T02:18:19.067Z',
+            rate: '22000',
+        },
+        {
+            blockHeight: '23',
+            time: '2020-08-11T02:18:19.080Z',
+            rate: '23000',
+        },
+        {
+            blockHeight: '24',
+            time: '2020-08-11T02:18:19.088Z',
+            rate: '24000',
+        },
+        {
+            blockHeight: '25',
+            time: '2020-08-11T02:18:19.099Z',
+            rate: '25000',
+        },
+        {
+            blockHeight: '26',
+            time: '2020-08-11T02:18:19.107Z',
+            rate: '26000',
+        },
+        {
+            blockHeight: '27',
+            time: '2020-08-11T02:18:19.116Z',
+            rate: '27000',
+        },
+        {
+            blockHeight: '28',
+            time: '2020-08-11T02:18:19.123Z',
+            rate: '28000',
+        },
+        {
+            blockHeight: '29',
+            time: '2020-08-11T02:18:19.130Z',
+            rate: '29000',
+        },
+        {
+            blockHeight: '30',
+            time: '2020-08-11T02:18:19.139Z',
+            rate: '30000',
+        },
+        {
+            blockHeight: '31',
+            time: '2020-08-11T02:18:19.147Z',
+            rate: '31000',
+        },
+        {
+            blockHeight: '32',
+            time: '2020-08-11T02:18:19.154Z',
+            rate: '32000',
+        },
+        {
+            blockHeight: '33',
+            time: '2020-08-11T02:18:19.161Z',
+            rate: '33000',
+        },
+        {
+            blockHeight: '34',
+            time: '2020-08-11T02:18:19.170Z',
+            rate: '34000',
+        },
+        {
+            blockHeight: '35',
+            time: '2020-08-11T02:18:19.181Z',
+            rate: '35000',
+        },
+        {
+            blockHeight: '36',
+            time: '2020-08-11T02:18:19.191Z',
+            rate: '36000',
+        },
+        {
+            blockHeight: '37',
+            time: '2020-08-11T02:18:19.199Z',
+            rate: '37000',
+        },
+        {
+            blockHeight: '38',
+            time: '2020-08-11T02:18:19.208Z',
+            rate: '38000',
+        },
+        {
+            blockHeight: '39',
+            time: '2020-08-11T02:18:19.215Z',
+            rate: '39000',
+        },
+        {
+            blockHeight: '40',
+            time: '2020-08-11T02:18:19.221Z',
+            rate: '40000',
+        },
+        {
+            blockHeight: '41',
+            time: '2020-08-11T02:18:19.227Z',
+            rate: '41000',
+        },
+        {
+            blockHeight: '42',
+            time: '2020-08-11T02:18:19.234Z',
+            rate: '42000',
+        },
+        {
+            blockHeight: '43',
+            time: '2020-08-11T02:18:19.243Z',
+            rate: '43000',
+        },
+        {
+            blockHeight: '44',
+            time: '2020-08-11T02:18:19.251Z',
+            rate: '44000',
+        },
+        {
+            blockHeight: '45',
+            time: '2020-08-11T02:18:19.258Z',
+            rate: '45000',
+        },
+        {
+            blockHeight: '46',
+            time: '2020-08-11T02:18:19.265Z',
+            rate: '46000',
+        },
+        {
+            blockHeight: '47',
+            time: '2020-08-11T02:18:19.272Z',
+            rate: '47000',
+        },
+        {
+            blockHeight: '48',
+            time: '2020-08-11T02:18:19.278Z',
+            rate: '48000',
+        },
+        {
+            blockHeight: '49',
+            time: '2020-08-11T02:18:19.285Z',
+            rate: '49000',
+        },
+    ]
 
     render() {
         return (
-            <ResponsiveLine
-                data={[
-                    {
-                        id: 'hashrates',
-                        color: "hsl(239, 70%, 50%)",
-                        data: this.state.hashrates,
-                    },
-                    {
-                        id: 'credits',
-                        color: "hsl(342, 70%, 50%)",
-                        data: this.state.credits,
-                    },
-                    {
-                        id: 'shares',
-                        color: "hsl(230, 70%, 50%)",
-                        data: this.state.shares,
-                    }
-                ]}
-                margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-                xScale={{ type: 'point' }}
-                yScale={{ type: 'linear', stacked: true, min: 'auto', max: 'auto' }}
-                curve="natural"
-                axisTop={null}
-                axisRight={null}
-                axisBottom={{
-                    orient: 'bottom',
-                    tickSize: 5,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                    legend: 'Time',
-                    legendOffset: 36,
-                    legendPosition: 'middle'
-                }}
-                axisLeft={{
-                    orient: 'left',
-                    tickSize: 5,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                    legend: 'Hashrate/Credits/Shares',
-                    legendOffset: -40,
-                    legendPosition: 'middle'
-                }}
-                colors={{ scheme: 'oranges' }}
-                lineWidth={3}
-                pointSize={10}
-                pointColor={{ theme: 'background' }}
-                pointBorderWidth={2}
-                pointBorderColor={{ from: 'serieColor' }}
-                pointLabel="y"
-                pointLabelYOffset={-12}
-                enableArea={true}
-                areaOpacity={0.9}
-                useMesh={true}
-                legends={[
-                    {
-                        anchor: 'bottom-right',
-                        direction: 'column',
-                        justify: false,
-                        translateX: 100,
-                        translateY: 0,
-                        itemsSpacing: 0,
-                        itemDirection: 'left-to-right',
-                        itemWidth: 80,
-                        itemHeight: 20,
-                        itemOpacity: 0.75,
-                        symbolSize: 12,
-                        symbolShape: 'circle',
-                        symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                        effects: [
-                            {
-                                on: 'hover',
-                                style: {
-                                    itemBackground: 'rgba(0, 0, 0, .03)',
-                                    itemOpacity: 1
-                                }
-                            }
-                        ]
-                    }
-                ]}
-            />
+            <ResponsiveContainer>
+                <LineChart data={this.state.hashrates}>
+                    <XAxis
+                        dataKey="time"
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{
+                            fontSize: 12,
+                            transform: 'translate(0, 10)',
+                        }}
+                        domain={['auto', 'auto']}
+                        tickFormatter={(unixTime) =>
+                            moment(unixTime).format('LTS')
+                        }
+                        type="number"
+                        scale="time"
+                    />
+                    <YAxis
+                        dataKey="rate"
+                        axisLine={false}
+                        tickLine={false}
+                        allowDecimals={false}
+                        tick={{
+                            fontSize: 12,
+                        }}
+                        domain={[0, 50000]}
+                    />
+                    <Tooltip
+                        contentStyle={{
+                            border: 'none',
+                            fontSize: 14,
+                        }}
+                        tickFormatter={(unixTime) =>
+                            moment(unixTime).format('lll')
+                        }
+                    />
+                    <Legend />
+                    <Line
+                        type="monotone"
+                        dataKey="rate"
+                        dot={false}
+                        strokeWidth={2}
+                        stroke="#4636a6"
+                    />
+                </LineChart>
+            </ResponsiveContainer>
         )
     }
 }
 
-export default LineChart;
+export default Chart
