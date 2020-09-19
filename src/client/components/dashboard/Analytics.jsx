@@ -109,10 +109,7 @@ class AnalyticsComponent extends Component {
                         <Card className={Style.HashrateChart + ' mt-5 mb-5'}>
                             <Card.Header>
                                 <h3>Historical Metrics</h3>
-                                <p>
-                                    An overview of hashrates, shares and mining
-                                    credits
-                                </p>
+                                <p>See how your hashrate changes over time.</p>
                             </Card.Header>
                             <Card.Body>
                                 <Chart />

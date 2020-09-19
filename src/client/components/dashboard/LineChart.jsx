@@ -5,7 +5,7 @@ import {
     XAxis,
     YAxis,
     Tooltip,
-    Legend,
+    Label,
     ResponsiveContainer,
 } from 'recharts'
 import _ from 'lodash'
@@ -300,7 +300,7 @@ class Chart extends Component {
                         }}
                         domain={['auto', 'auto']}
                         tickFormatter={(unixTime) =>
-                            moment(unixTime).format('LTS')
+                            moment(unixTime).format('MMM D LT')
                         }
                         type="number"
                         scale="time"
@@ -314,23 +314,42 @@ class Chart extends Component {
                             fontSize: 12,
                         }}
                         domain={[0, 50000]}
-                    />
+                    >
+                        <Label
+                            value="Hashrate (H/s)"
+                            position="insideLeft"
+                            angle={-90}
+                            style={{ textAnchor: 'middle', fontSize: 12 }}
+                        />
+                    </YAxis>
                     <Tooltip
                         contentStyle={{
                             border: 'none',
                             fontSize: 14,
                         }}
-                        tickFormatter={(unixTime) =>
-                            moment(unixTime).format('lll')
+                        itemStyle={{ color: '#f07c00' }}
+                        labelFormatter={(unixTime) =>
+                            moment(unixTime).format('LLLL')
                         }
                     />
-                    <Legend />
+                    <defs>
+                        <linearGradient
+                            id="colorUv"
+                            x1="0%"
+                            y1="0%"
+                            x2="0%"
+                            y2="100%"
+                        >
+                            <stop offset="0%" stopColor="orange" />
+                            <stop offset="100%" stopColor="blue" />
+                        </linearGradient>
+                    </defs>
                     <Line
                         type="monotone"
                         dataKey="rate"
                         dot={false}
-                        strokeWidth={2}
-                        stroke="#4636a6"
+                        strokeWidth={4}
+                        stroke="url(#colorUv)"
                     />
                 </LineChart>
             </ResponsiveContainer>
