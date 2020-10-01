@@ -71,7 +71,6 @@ class LandingBody extends Component {
             .then((resp) => resp.json())
             .then(
                 (result) => {
-                    print(moment().format('YYYY-MM-DD'))
                     this.setState(
                         result[0]['history'][
                             moment().subtract(1, 'day').format('YYYY-MM-DD')
