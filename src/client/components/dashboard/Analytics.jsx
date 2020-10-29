@@ -12,7 +12,7 @@ class AnalyticsComponent extends Component {
     render() {
         let width = window.innerWidth
 
-        return (
+        let output = (
             <MinerConsumer>
                 {(miner) => (
                     <Container className={Style.MetricsStyle}>
@@ -33,7 +33,8 @@ class AnalyticsComponent extends Component {
                                                     Style.dynamicSubtitle
                                                 }
                                             >
-                                                Average Hashrate
+                                                Average Hashrate{' '}
+                                                {miner.myriade_credits_balance}
                                             </h1>
                                             <h1 className={Style.dynamicTitle}>
                                                 {miner.average_hashrate} H/sec
@@ -59,9 +60,7 @@ class AnalyticsComponent extends Component {
                                                 Total MC Earned
                                             </h1>
                                             <h1 className={Style.dynamicTitle}>
-                                                {miner.monero_balance
-                                                    ? miner.monero_balance
-                                                    : 'N/A'}
+                                                {miner.myriade_credits_balance}
                                             </h1>
                                         </div>
                                     </Card.ImgOverlay>
@@ -84,7 +83,9 @@ class AnalyticsComponent extends Component {
                                                 Pool Hashrate
                                             </h1>
                                             <h1 className={Style.dynamicTitle}>
-                                                {miner.myriade_credits_balance}{' '}
+                                                {miner.myriade_credits_balance
+                                                    ? miner.myriade_credits_balance
+                                                    : 0}{' '}
                                                 MH/sec
                                             </h1>
                                         </div>
@@ -119,6 +120,7 @@ class AnalyticsComponent extends Component {
                 )}
             </MinerConsumer>
         )
+        return output
     }
 }
 

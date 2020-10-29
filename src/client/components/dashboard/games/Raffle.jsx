@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import config from '../../../utils/config.js'
+import moment from 'moment'
+
 import {
     Modal,
     Button,
@@ -7,26 +11,25 @@ import {
     Row,
     Col,
     Table,
-    ListGroup,
     Card,
     CardColumns,
     Badge,
 } from 'react-bootstrap'
-import { Container } from 'shards-react'
+import { Container, Alert } from 'shards-react'
 
 import Style from '../../../styles/components/dashboard/Gameroom.less'
 import { MinerConsumer } from '../../../pages/Dashboard.jsx'
-import { gqlRaffles } from '../../../utils/graphql.js'
+// import { gqlRaffles } from '../../../utils/graphql.js'
 
-import * as tempData from './api.json'
+// import * as tempData from './api.json'
 
-import { gql } from 'apollo-boost'
+// import { gql } from 'apollo-boost'
 import { formatMoney } from 'accounting-js'
 
 //TODO: Connect with endpoint
 const EXPIRYTHRESHOLD = 1000 * 60 * 60 * 24 * 30 // The theshold at which any raffle x miliseconds in the future is considered to not have an expiry
-const raffle = tempData.raffles
-const puchasedTickets = tempData.miner.raffles
+// const raffle = tempData.raffles
+// const purchasedTickets = tempData.miner.raffles
 
 class Raffle extends Component {
     constructor(props) {
@@ -36,51 +39,96 @@ class Raffle extends Component {
             setModalShow: false,
             drawOption: 0,
             tickets: 1,
+            purchasedTickets: [],
             countdownString: [],
             raffle: null,
-            raffleCloses: [],
             error: null,
+            USD: 121.36,
+            success: null
         }
     }
 
+    displaySuccess() {
+        return (
+            <Alert theme="success" dismissible={() => this.setState({ success: null })}>
+                {this.state.success}
+            </Alert>
+        )
+    }
+
     componentDidMount() {
+        axios.get(`${config.miner_metrics_url}/v1/eventContent/active`)
+        .then((response) => {
+            this.setState({ raffle: response.data })
+        })
+        .catch((error) => {
+            console.error('There was an error!', error)
+            return this.setState({
+                error:
+                    'Unable to fetch your data, please check your connection, your login and try again later',
+            })
+        })
+
+        axios.get(`${config.miner_metrics_url}/v1/credits/allEvents`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    'access_token'
+                )}`,
+            },
+        })
+        .then((response) => {
+            this.setState({ purchasedTickets: response.data.entries })
+        })
+        .catch((error) => {
+            console.error('There was an error!', error)
+            return this.setState({
+                error:'Unable to fetch your data, please check your connection, your login and try again later',
+            })
+        })
+
+        axios.get(`https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD`).then((response) => {
+            this.setState(response.data)
+        })
+        .catch((error) => {
+            console.error('There was an error!', error)
+        })
         // TODO: Query description field once supported on Onyx
-        gqlRaffles
-            .query({
-                query: gql`
-                    {
-                        myriade_alpha_raffles {
-                            exchange_rate
-                            expiry_date
-                            prize
-                            status
-                            base_price
-                        }
-                    }
-                `,
-            })
-            .then(({ data }) => {
-                let raffleData = data.myriade_alpha_raffles
-                console.log(raffleData)
-                const dateUnix = raffleData.map((data) => {
-                    let d = new Date(data.expiry_date)
-                    if (d - new Date() < EXPIRYTHRESHOLD) {
-                        return d.getTime()
-                    }
-                    return -1
-                })
-                this.setState({
-                    raffle: raffleData,
-                    raffleCloses: dateUnix,
-                })
-            })
-            .catch((err) => {
-                console.log(err)
-                this.setState({
-                    error:
-                        'Unable to fetch your data, please check your connection, your login and try again later',
-                })
-            })
+        // gqlRaffles
+        //     .query({
+        //         query: gql`
+        //             {
+        //                 myriade_alpha_raffles {
+        //                     exchange_rate
+        //                     expiry_date
+        //                     prize
+        //                     status
+        //                     base_price
+        //                 }
+        //             }
+        //         `,
+        //     })
+        //     .then(({ data }) => {
+        //         let raffleData = data.myriade_alpha_raffles
+        //         console.log(raffleData)
+        //         const dateUnix = raffleData.map((data) => {
+        //             let d = new Date(data.expiry_date)
+        //             if (d - new Date() < EXPIRYTHRESHOLD) {
+        //                 return d.getTime()
+        //             }
+        //             return -1
+        //         })
+        //         this.setState({
+        //             raffle: raffleData,
+        //             raffleCloses: dateUnix,
+        //         })
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //         this.setState({
+        //             error:
+        //                 'Unable to fetch your data, please check your connection, your login and try again later',
+        //         })
+        //     })
 
         this.countdownTimer = setInterval(() => this.countdown(), 1000)
     }
@@ -89,8 +137,43 @@ class Raffle extends Component {
         clearInterval(this.countdownTimer)
     }
 
-    handleClose = (purchsae) => {
+    handleClose = (purchase) => {
         this.setState({ modalShow: false })
+        let component = this
+        // Buy a raffle ticket if purchase = true
+        if(purchase){
+            const options = {
+                method: 'post',
+                url: `${config.miner_metrics_url}/v1/credits/buy`,
+                data: {
+                    amount: this.state.tickets,
+                    contentId: this.state.raffle[this.state.drawOption].id
+                },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        'access_token'
+                    )}`,
+                },
+              };
+
+            axios(options)
+              .then(function (response) {
+                if(response.status == 200){
+                    component.setState({success: "Ticket purchase successful!"})
+                } else {
+                    return component.setState({
+                        error:'Unable to purchase the ticket, please check your connection, and try again later',
+                    })
+                }
+              })
+              .catch(function (error) {
+                console.error('There was an error!', error)
+                return this.setState({
+                    error:
+                        'Unable to purchase the ticket, please check your connection, and try again later',
+                })
+              })
+        }
     }
 
     handleShow = (i) =>
@@ -109,11 +192,11 @@ class Raffle extends Component {
 
     countdown = () => {
         let cds = {}
-        this.state.raffleCloses.map((value, index) => {
-            if (value === -1) {
+        this.state.raffle.map((value, index) => {
+            if (value.public.expiry === -1) {
                 cds[index] = '-'
             } else {
-                let countDownDate = value
+                let countDownDate = value.public.expiry
                 // Get today's date and time
                 let now = new Date().getTime()
                 // Find the distance between now and the count down date
@@ -165,12 +248,12 @@ class Raffle extends Component {
                         onClick={() => this.handleShow(index)}
                         key={index}
                     >
-                        <Card.Body>
+                        <Card.Body className="pb-0">
                             <Row>
                                 <Col>
                                     <Card.Title>
                                         {formatMoney(
-                                            value.prize * value.exchange_rate
+                                            value.public.prizeAmount * this.state.USD
                                         )}
                                         USD
                                     </Card.Title>
@@ -180,13 +263,16 @@ class Raffle extends Component {
                                 </Col>
                             </Row>
                             <Card.Subtitle className="mb-2 text-muted">
-                                <i className="fab fa-monero" /> {value.prize}XMR
+                                <i className="fab fa-monero" /> {value.public.prizeAmount}XMR
                             </Card.Subtitle>
-                            <Card.Text>
-                                Ticket price: {value.base_price}MC
+                            <Card.Text className={Style.orange + " mb-0"}>
+                            {value.public.title}
                             </Card.Text>
-                            {value.description && (
-                                <Card.Text>{value.description}</Card.Text>
+                            <Card.Text>
+                                Ticket price: {value.public.entryPrice}MC
+                            </Card.Text>
+                            {value.public.description && (
+                                <Card.Text>{value.public.description}</Card.Text>
                             )}
                         </Card.Body>
                         <Card.Footer>
@@ -201,7 +287,7 @@ class Raffle extends Component {
             drawingCards = <h5>Loading drawing info...</h5>
         }
 
-        let ticketList = puchasedTickets.tickets.map((value, index) => {
+        let ticketList = this.state.purchasedTickets.map((value, index) => {
             let p = new Date(value.purchased * 1000)
             let purchaseDate =
                 p.getUTCFullYear() +
@@ -215,24 +301,12 @@ class Raffle extends Component {
                 p.getUTCMinutes() +
                 ':' +
                 p.getUTCSeconds()
-            let e = new Date(value.expiry * 1000)
-            let expiryDate =
-                e.getUTCFullYear() +
-                '/' +
-                (e.getUTCMonth() + 1) +
-                '/' +
-                e.getUTCDate() +
-                ' ' +
-                e.getUTCHours() +
-                ':' +
-                e.getUTCMinutes() +
-                ':' +
-                e.getUTCSeconds()
+            let expiryDate = moment(value.eventTime).format('lll') 
             let status = value.status
 
             return (
                 <tr key={index}>
-                    <td>{'$' + value.usd}</td>
+                    <td>{'$' + value.amount}</td>
                     <td>{purchaseDate}</td>
                     <td>{status}</td>
                     <td>{expiryDate}</td>
@@ -244,6 +318,7 @@ class Raffle extends Component {
             <MinerConsumer>
                 {(miner) => (
                     <div>
+                        {this.state.success && this.displaySuccess()}
                         <Row>
                             <Col>
                                 <h3 className={Style.orange}>
@@ -267,7 +342,7 @@ class Raffle extends Component {
                             <CardColumns>{drawingCards}</CardColumns>
 
                             <h4>History</h4>
-                            {puchasedTickets.tickets.length ? (
+                            {this.state.purchasedTickets.length ? (
                                 <Table striped bordered hover>
                                     <thead>
                                         <tr>
@@ -282,15 +357,15 @@ class Raffle extends Component {
                             ) : (
                                 <p>You don't have any tickets :/</p>
                             )}
-                            <ListGroup horizontal>
+                            {/* <ListGroup horizontal>
                                 <ListGroup.Item variant="success">
                                     Raffle wins:{' '}
-                                    {formatMoney(puchasedTickets.wins.usd)}USD
+                                    {formatMoney(this.purchasedTickets.wins.usd)}USD
                                 </ListGroup.Item>
                                 <ListGroup.Item variant="warning">
-                                    MC spent: {puchasedTickets.spent.mc}MC
+                                    MC spent: {this.purchasedTickets.spent.mc}MC
                                 </ListGroup.Item>
-                            </ListGroup>
+                            </ListGroup> */}
                         </Container>
 
                         <Modal
@@ -311,10 +386,8 @@ class Raffle extends Component {
                                             {formatMoney(
                                                 this.state.raffle[
                                                     this.state.drawOption
-                                                ].prize *
-                                                    this.state.raffle[
-                                                        this.state.drawOption
-                                                    ].exchange_rate
+                                                ].public.prizeAmount *
+                                                this.state.USD
                                             )}
                                             USD
                                             <small className="text-muted">
@@ -322,7 +395,7 @@ class Raffle extends Component {
                                                 {
                                                     this.state.raffle[
                                                         this.state.drawOption
-                                                    ].prize
+                                                    ].public.prizeAmount
                                                 }
                                                 XMR)
                                             </small>
@@ -334,7 +407,7 @@ class Raffle extends Component {
                                             {
                                                 this.state.raffle[
                                                     this.state.drawOption
-                                                ].base_price
+                                                ].public.entryPrice
                                             }
                                             MC
                                         </h5>
@@ -378,7 +451,7 @@ class Raffle extends Component {
                                             </small>
                                             {this.state.raffle[
                                                 this.state.drawOption
-                                            ].base_price * this.state.tickets}
+                                            ].public.entryPrice * this.state.tickets}
                                             MC
                                         </h4>
                                     </div>
@@ -395,7 +468,9 @@ class Raffle extends Component {
                                 </Button>
                                 <Button
                                     variant="primary"
-                                    onClick={() => this.handleClose(true)}
+                                    onClick={() => {
+                                        this.handleClose(true)}
+                                    }
                                 >
                                     Confirm Purchase
                                 </Button>

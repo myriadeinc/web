@@ -67,24 +67,16 @@ class DashboardPage extends Component {
         newMinerObj.email = tokenInfo.account.email
         newMinerObj.name = tokenInfo.account.name
 
-        axios
-            .post(
-                `${config.miner_metrics_url}/v1/stats/credit`,
-                {
-                    minerId: newMinerObj.id,
+        axios.get(`${config.miner_metrics_url}/v1/stats/credit`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        'access_token'
+                    )}`,
                 },
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            'access_token'
-                        )}`,
-                    },
-                }
-            )
-            .then(
-                (response) =>
-                    (newMinerObj.myriade_credits_balance = response.data)
-            )
+            })
+            .then((response) => {
+                newMinerObj.myriade_credits_balance = response.data
+            })
             .catch((error) => {
                 console.error('There was an error!', error)
                 return this.setState({
@@ -94,19 +86,13 @@ class DashboardPage extends Component {
             })
 
         axios
-            .post(
-                `${config.miner_metrics_url}/v1/stats/hashrates`,
-                {
-                    minerId: newMinerObj.id,
+            .get(`${config.miner_metrics_url}/v1/stats/hashrates`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        'access_token'
+                    )}`,
                 },
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            'access_token'
-                        )}`,
-                    },
-                }
-            )
+            })
             .then(
                 (response) => (newMinerObj.historical_hashrates = response.data)
             )
@@ -176,6 +162,9 @@ class DashboardPage extends Component {
     }
 
     render() {
+        console.log(this.state.miner)
+        console.log(this.state.miner.myriade_credits_balance)
+        console.log(this.state.miner.email)
         return (
             <AuthConsumer>
                 {({ authenticated, logout }) => (

@@ -42,7 +42,7 @@ class LandingBody extends Component {
         this.state = {
             minerHashrate: 1000,
             hashrate: 1465330752.3138,
-            USD: 69.82,
+            USD: 121.36,
             reward: 1.57,
         }
     }
