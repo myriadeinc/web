@@ -34,7 +34,6 @@ class AnalyticsComponent extends Component {
                                                 }
                                             >
                                                 Average Hashrate{' '}
-                                                {miner.myriade_credits_balance}
                                             </h1>
                                             <h1 className={Style.dynamicTitle}>
                                                 {miner.average_hashrate} H/sec
@@ -83,9 +82,7 @@ class AnalyticsComponent extends Component {
                                                 Pool Hashrate
                                             </h1>
                                             <h1 className={Style.dynamicTitle}>
-                                                {miner.myriade_credits_balance
-                                                    ? miner.myriade_credits_balance
-                                                    : 0}{' '}
+                                                {'0 '}
                                                 MH/sec
                                             </h1>
                                         </div>
