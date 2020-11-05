@@ -40,7 +40,7 @@ class DashboardPage extends Component {
                 shares: [],
                 historical_hashrates: [],
                 average_hashrate: '0',
-                monero_balance: null,
+                monero_balance: '0',
                 monero_wallet: null,
                 withdrawing: false,
             },
@@ -77,6 +77,7 @@ class DashboardPage extends Component {
             })
             .then((response) => {
                 newMinerObj.myriade_credits_balance = response.data.credits
+                this.forceUpdate()
             })
             .catch((error) => {
                 console.error('There was an error!', error)
