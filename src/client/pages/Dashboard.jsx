@@ -40,7 +40,7 @@ class DashboardPage extends Component {
                 shares: [],
                 historical_hashrates: [],
                 average_hashrate: '0',
-                monero_balance: null,
+                monero_balance: '0',
                 monero_wallet: null,
                 withdrawing: false,
             },
@@ -67,7 +67,8 @@ class DashboardPage extends Component {
         newMinerObj.email = tokenInfo.account.email
         newMinerObj.name = tokenInfo.account.name
 
-        axios.get(`${config.miner_metrics_url}/v1/stats/credit`, {
+        axios
+            .get(`${config.miner_metrics_url}/v1/stats/credit`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(
                         'access_token'
@@ -75,7 +76,8 @@ class DashboardPage extends Component {
                 },
             })
             .then((response) => {
-                newMinerObj.myriade_credits_balance = response.data
+                newMinerObj.myriade_credits_balance = response.data.credits
+                this.forceUpdate()
             })
             .catch((error) => {
                 console.error('There was an error!', error)

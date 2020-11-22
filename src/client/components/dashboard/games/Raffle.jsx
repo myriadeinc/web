@@ -44,49 +44,62 @@ class Raffle extends Component {
             raffle: null,
             error: null,
             USD: 121.36,
-            success: null
+            success: null,
+            minerCredits: 0
         }
     }
 
     displaySuccess() {
         return (
-            <Alert theme="success" dismissible={() => this.setState({ success: null })}>
+            <Alert
+                theme="success"
+                dismissible={() => this.setState({ success: null })}
+            >
                 {this.state.success}
             </Alert>
         )
     }
 
     componentDidMount() {
-        axios.get(`${config.miner_metrics_url}/v1/eventContent/active`)
-        .then((response) => {
-            this.setState({ raffle: response.data })
-        })
-        .catch((error) => {
-            console.error('There was an error!', error)
-            return this.setState({
-                error:
-                    'Unable to fetch your data, please check your connection, your login and try again later',
+        axios
+            .get(`${config.miner_metrics_url}/v1/eventContent/active`)
+            .then((response) => {
+                this.setState({ raffle: response.data })
             })
-        })
-
-        axios.get(`${config.miner_metrics_url}/v1/credits/allEvents`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                    'access_token'
-                )}`,
-            },
-        })
-        .then((response) => {
-            this.setState({ purchasedTickets: response.data.entries })
-        })
-        .catch((error) => {
-            console.error('There was an error!', error)
-            return this.setState({
-                error:'Unable to fetch your data, please check your connection, your login and try again later',
+            .catch((error) => {
+                console.error('There was an error!', error)
+                return this.setState({
+                    error:
+                        'Unable to fetch your data, please check your connection, your login and try again later',
+                })
             })
-        })
 
-        axios.get(`${config.miner_metrics_url}/v1/stats/credit`)
+        axios
+            .get(`${config.miner_metrics_url}/v1/credits/allEvents`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        'access_token'
+                    )}`,
+                },
+            })
+            .then((response) => {
+                this.setState({ purchasedTickets: response.data.entries })
+            })
+            .catch((error) => {
+                console.error('There was an error!', error)
+                return this.setState({
+                    error:
+                        'Unable to fetch your data, please check your connection, your login and try again later',
+                })
+            })
+
+        axios.get(`${config.miner_metrics_url}/v1/stats/credit`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        'access_token'
+                    )}`,
+                },
+            })
         .then((response) => {
             this.setState({ minerCredits: response.data.credits })
         })
@@ -153,38 +166,41 @@ class Raffle extends Component {
         this.setState({ modalShow: false })
         let component = this
         // Buy a raffle ticket if purchase = true
-        if(purchase){
+        if (purchase) {
             const options = {
                 method: 'post',
                 url: `${config.miner_metrics_url}/v1/credits/buy`,
                 data: {
                     amount: this.state.tickets,
-                    contentId: this.state.raffle[this.state.drawOption].id
+                    contentId: this.state.raffle[this.state.drawOption].id,
                 },
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(
                         'access_token'
                     )}`,
                 },
-              };
+            }
 
             axios(options)
-              .then(function (response) {
-                if(response.status == 200){
-                    component.setState({success: "Ticket purchase successful!"})
-                } else {
-                    return component.setState({
-                        error:'Unable to purchase the ticket, please check your connection, and try again later',
-                    })
-                }
-              })
-              .catch(function (error) {
-                console.error('There was an error!', error)
-                return this.setState({
-                    error:
-                        'Unable to purchase the ticket, please check your connection, and try again later',
+                .then(function (response) {
+                    if (response.status == 200) {
+                        component.setState({
+                            success: 'Ticket purchase successful!',
+                        })
+                    } else {
+                        return component.setState({
+                            error:
+                                'Unable to purchase the ticket, please check your connection, and try again later',
+                        })
+                    }
                 })
-              })
+                .catch(function (error) {
+                    console.error('There was an error!', error)
+                    return this.setState({
+                        error:
+                            'Unable to purchase the ticket, please check your connection, and try again later',
+                    })
+                })
         }
     }
 
@@ -265,7 +281,8 @@ class Raffle extends Component {
                                 <Col>
                                     <Card.Title>
                                         {formatMoney(
-                                            value.public.prizeAmount * this.state.USD
+                                            value.public.prizeAmount *
+                                                this.state.USD
                                         )}
                                         USD
                                     </Card.Title>
@@ -275,16 +292,19 @@ class Raffle extends Component {
                                 </Col>
                             </Row>
                             <Card.Subtitle className="mb-2 text-muted">
-                                <i className="fab fa-monero" /> {value.public.prizeAmount}XMR
+                                <i className="fab fa-monero" />{' '}
+                                {value.public.prizeAmount}XMR
                             </Card.Subtitle>
-                            <Card.Text className={Style.orange + " mb-0"}>
-                            {value.public.title}
+                            <Card.Text className={Style.orange + ' mb-0'}>
+                                {value.public.title}
                             </Card.Text>
                             <Card.Text>
                                 Ticket price: {value.public.entryPrice}MC
                             </Card.Text>
                             {value.public.description && (
-                                <Card.Text>{value.public.description}</Card.Text>
+                                <Card.Text>
+                                    {value.public.description}
+                                </Card.Text>
                             )}
                         </Card.Body>
                         <Card.Footer>
@@ -300,20 +320,8 @@ class Raffle extends Component {
         }
 
         let ticketList = this.state.purchasedTickets.map((value, index) => {
-            let p = new Date(value.purchased * 1000)
-            let purchaseDate =
-                p.getUTCFullYear() +
-                '/' +
-                (p.getUTCMonth() + 1) +
-                '/' +
-                p.getUTCDate() +
-                ' ' +
-                p.getUTCHours() +
-                ':' +
-                p.getUTCMinutes() +
-                ':' +
-                p.getUTCSeconds()
-            let expiryDate = moment(value.eventTime).format('lll') 
+            let purchaseDate = moment(value.purchaseTime).format('lll')
+            let expiryDate = moment(value.eventTime).format('lll')
             let status = value.status
 
             return (
@@ -399,7 +407,7 @@ class Raffle extends Component {
                                                 this.state.raffle[
                                                     this.state.drawOption
                                                 ].public.prizeAmount *
-                                                this.state.USD
+                                                    this.state.USD
                                             )}
                                             USD
                                             <small className="text-muted">
@@ -463,7 +471,8 @@ class Raffle extends Component {
                                             </small>
                                             {this.state.raffle[
                                                 this.state.drawOption
-                                            ].public.entryPrice * this.state.tickets}
+                                            ].public.entryPrice *
+                                                this.state.tickets}
                                             MC
                                         </h4>
                                     </div>
@@ -481,10 +490,18 @@ class Raffle extends Component {
                                 <Button
                                     variant="primary"
                                     onClick={() => {
-                                        this.handleClose(true)}
-                                    }
-                                >
-                                    Confirm Purchase
+                                        this.handleClose(true)
+                                    }}
+                                    disabled={
+                                        this.state.countdownString[
+                                            this.state.drawOption
+                                        ] === 'EXPIRED' || (this.state.raffle == undefined) || this.state.minerCredits < (this.state.raffle[
+                                            this.state.drawOption
+                                        ].public.entryPrice *
+                                            this.state.tickets)
+                                    
+                                    }>
+                                    Purchase Tickets
                                 </Button>
                             </Modal.Footer>
                         </Modal>
