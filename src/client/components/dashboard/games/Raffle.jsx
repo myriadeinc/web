@@ -86,6 +86,18 @@ class Raffle extends Component {
             })
         })
 
+        axios.get(`${config.miner_metrics_url}/v1/stats/credit`)
+        .then((response) => {
+            this.setState({ minerCredits: response.data.credits })
+        })
+        .catch((error) => {
+            console.error('There was an error!', error)
+            return this.setState({
+                error:
+                    'Unable to fetch your data, please check your connection, your login and try again later',
+            })
+        })
+
         axios.get(`https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD`).then((response) => {
             this.setState(response.data)
         })
