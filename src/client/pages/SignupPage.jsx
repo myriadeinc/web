@@ -70,7 +70,7 @@ class SignupPage extends Component {
         e.preventDefault()
         const email = e.target.elements.email.value
         axios
-            .post(`${config.identity_service_url}/v1/email/create`, {
+            .post(`${config.identity_service_url}/v1/email/`, {
                 email,
             })
             .then(() => {
