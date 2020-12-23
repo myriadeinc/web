@@ -90,18 +90,30 @@ class Mine extends Component {
                 </ul>
                 <h5>2. Download and installing XMRig</h5>
                 <p>
-                    You can download the official XMRig{' '}
+                    You can download alternate official releases of XMRig{' '}
                     <a
                         target="_blank"
                         href="https://github.com/xmrig/xmrig/releases"
                     >
                         {' '}
                         here
-                    </a>
-                    . Once on that page select xmrig-5.5.0-gcc-win64.zip for
-                    64-bit and xmrig-5.5.0-gcc-win32.zip for 32-bit, or
-                    alternatively, select any other release and versions.
+                    </a>{' '}
+                    or you can use the dowload button below for v6.6.2.
                 </p>
+                <Row>
+                    <Col
+                        md={{ offset: 4, span: 4 }}
+                        style={{ textAlign: 'center' }}
+                    >
+                        <PrimaryButton
+                            pill
+                            style={{ margin: 10 }}
+                            href="https://github.com/xmrig/xmrig/releases/download/v6.6.2/xmrig-6.6.2-gcc-win64.zip"
+                        >
+                            Download Miner (64-bit)
+                        </PrimaryButton>
+                    </Col>
+                </Row>
                 <h5>3. Extract the downloaded zip file</h5>
                 <p>
                     Et voila! You have an executable XMRig client downloaded.
@@ -140,17 +152,30 @@ class Mine extends Component {
                 </ul>
                 <h5>2. Download and installing XMRig</h5>
                 <p>
-                    You can download the official XMRig{' '}
+                    You can download alternate official releases of XMRig{' '}
                     <a
                         target="_blank"
                         href="https://github.com/xmrig/xmrig/releases"
                     >
                         {' '}
                         here
-                    </a>
-                    . Once on that page select xmrig-5.5.0-xenial-x64.tar.gz, or
-                    alternatively, select any other release and versions.
+                    </a>{' '}
+                    or you can use the dowload button below for v6.6.2.
                 </p>
+                <Row>
+                    <Col
+                        md={{ offset: 4, span: 4 }}
+                        style={{ textAlign: 'center' }}
+                    >
+                        <PrimaryButton
+                            pill
+                            style={{ margin: 10 }}
+                            href="https://github.com/xmrig/xmrig/releases/download/v6.6.2/xmrig-6.6.2-linux-x64.tar.gz"
+                        >
+                            Download Miner
+                        </PrimaryButton>
+                    </Col>
+                </Row>
                 <h5>3. Extract the downloaded tar file</h5>
                 <p>
                     Et voila! You have an executable XMRig client downloaded.
@@ -270,7 +295,10 @@ class Mine extends Component {
                                 configuration file can impersonate you during
                                 mining.
                             </Col>
-                            <Col md={{ offset: 4, span: 4 }}>
+                            <Col
+                                md={{ offset: 4, span: 4 }}
+                                style={{ textAlign: 'center' }}
+                            >
                                 <AuthConsumer>
                                     {({ miner }) => (
                                         <PrimaryButton
