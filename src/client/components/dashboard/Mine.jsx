@@ -70,7 +70,7 @@ class Mine extends Component {
                     <Jumbotron className="p-2">
                         <ResponsiveEmbed aspectRatio="16by9">
                             <iframe
-                                src="https://www.youtube.com/embed/dCh8pOP6HBE"
+                                src="https://www.youtube.com/embed/9EZTGp5wbm4"
                                 frameBorder="0"
                                 allowFullScreen
                             ></iframe>
@@ -210,12 +210,6 @@ class Mine extends Component {
                         experience for you.
                     </p>
                 </Row>
-                <Alert theme="warning">
-                    {' '}
-                    <strong>Important! </strong> Our pool is currently not open
-                    to the public. Learn more about our beta program and Testnet
-                    mining program by shooting us an email at info@myriade.io
-                </Alert>
                 <div className={Style.Scrollbox}>
                     <Row>
                         <Col md={1}>
