@@ -178,7 +178,7 @@ class SignupPage extends Component {
                                                         <FormInput
                                                             name="email"
                                                             placeholder="e.g. john@example.com"
-                                                            autoComplete="email"
+                                                            autoComplete="username"
                                                             required
                                                         />
                                                         <br />
@@ -228,7 +228,6 @@ class SignupPage extends Component {
                                                 <FormInput
                                                     name="name"
                                                     placeholder="e.g. thankful_for_today"
-                                                    autoComplete="username"
                                                     required
                                                 />
                                             </FormGroup>
