@@ -251,6 +251,9 @@ class SignupPage extends Component {
                                                     name="password"
                                                     autoComplete="new-password"
                                                     required
+                                                    style={{
+                                                        marginBottom: '1rem',
+                                                    }}
                                                 />
                                                 <label
                                                     className={PageStyle.inline}
@@ -276,6 +279,7 @@ class SignupPage extends Component {
                                                 <Row className="m-0">
                                                     <label htmlFor="#wallet">
                                                         Monero Wallet Address
+                                                        (optional)
                                                         &nbsp;&nbsp;&nbsp;
                                                     </label>
                                                     <Badge
