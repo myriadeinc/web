@@ -45,6 +45,7 @@ class Raffle extends Component {
             error: null,
             USD: 121.36,
             success: null,
+            minerCredits: 0
         }
     }
 
@@ -92,16 +93,30 @@ class Raffle extends Component {
                 })
             })
 
-        axios
-            .get(
-                `https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD`
-            )
-            .then((response) => {
-                this.setState(response.data)
+        axios.get(`${config.miner_metrics_url}/v1/stats/credit`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        'access_token'
+                    )}`,
+                },
             })
-            .catch((error) => {
-                console.error('There was an error!', error)
+        .then((response) => {
+            this.setState({ minerCredits: response.data.credits })
+        })
+        .catch((error) => {
+            console.error('There was an error!', error)
+            return this.setState({
+                error:
+                    'Unable to fetch your data, please check your connection, your login and try again later',
             })
+        })
+
+        axios.get(`https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD`).then((response) => {
+            this.setState(response.data)
+        })
+        .catch((error) => {
+            console.error('There was an error!', error)
+        })
         // TODO: Query description field once supported on Onyx
         // gqlRaffles
         //     .query({
@@ -305,19 +320,7 @@ class Raffle extends Component {
         }
 
         let ticketList = this.state.purchasedTickets.map((value, index) => {
-            let p = new Date(value.purchased * 1000)
-            let purchaseDate =
-                p.getUTCFullYear() +
-                '/' +
-                (p.getUTCMonth() + 1) +
-                '/' +
-                p.getUTCDate() +
-                ' ' +
-                p.getUTCHours() +
-                ':' +
-                p.getUTCMinutes() +
-                ':' +
-                p.getUTCSeconds()
+            let purchaseDate = moment(value.purchaseTime).format('lll')
             let expiryDate = moment(value.eventTime).format('lll')
             let status = value.status
 
@@ -492,10 +495,13 @@ class Raffle extends Component {
                                     disabled={
                                         this.state.countdownString[
                                             this.state.drawOption
-                                        ] === 'EXPIRED'
-                                    }
-                                >
-                                    Confirm Purchase
+                                        ] === 'EXPIRED' || (this.state.raffle == undefined) || this.state.minerCredits < (this.state.raffle[
+                                            this.state.drawOption
+                                        ].public.entryPrice *
+                                            this.state.tickets)
+                                    
+                                    }>
+                                    Purchase Tickets
                                 </Button>
                             </Modal.Footer>
                         </Modal>
