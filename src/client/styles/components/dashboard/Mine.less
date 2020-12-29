@@ -1,93 +1,94 @@
 .Container {
-  top: 8vh;
-  padding: 25px;
+    top: 8vh;
+    padding: 25px;
 }
 
-.tab{
-  cursor: pointer;
-  /*Makes text non-selectable*/
-  -webkit-user-select: none; /* Safari */        
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
+.tab {
+    cursor: pointer;
+    /*Makes text non-selectable*/
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .Scrollbox {
-  overflow-y: scroll;
-  height: 63vh;
-  border: thin;
-  border-style: solid;
-  border-color: grey;
-  padding: 20px;
-  padding-top: 20px;
-  border-radius: 15px;
+    overflow-y: scroll;
+    height: 75vh;
+    border: thin;
+    border-style: solid;
+    border-color: grey;
+    padding: 20px;
+    padding-top: 20px;
+    border-radius: 15px;
 }
 
 .sliderCheckbox {
-  position: relative;
-  input {
-    margin: 0px;
-    margin-top: 1px;
-    cursor: pointer;
-    opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    -moz-opacity: 0;
-    -khtml-opacity: 0;
-    opacity: 0;
-    position: absolute;
-    z-index: 1;
-    top: 0px;
-    left: 0px;
-    background: red;
-    width: 40px;
-    height: 20px;
-    &:checked + .label {
-      &:before {
-        background-color: #007bff; // Checked color
-        content: "\f00c";
-        padding-left: 6px;
-      }
-      &:after {
-        left: 21px;
-      }
-    }
-  }
-  .label {
     position: relative;
-    padding-left: 46px;
-    &:before, &:after {
-      position: absolute;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-      transition: background-color 0.3s, left 0.3s;
+    input {
+        margin: 0px;
+        margin-top: 1px;
+        cursor: pointer;
+        opacity: 0;
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+        filter: alpha(opacity=0);
+        -moz-opacity: 0;
+        -khtml-opacity: 0;
+        opacity: 0;
+        position: absolute;
+        z-index: 1;
+        top: 0px;
+        left: 0px;
+        background: red;
+        width: 40px;
+        height: 20px;
+        &:checked + .label {
+            &:before {
+                background-color: #007bff; // Checked color
+                content: '\f00c';
+                padding-left: 6px;
+            }
+            &:after {
+                left: 21px;
+            }
+        }
     }
-    &:before {
-      content: "\f00d";
-      color: #fff;
-      box-sizing: border-box;
-      font-family: 'FontAwesome', sans-serif;
-      padding-left: 23px;
-      font-size: 12px;
-      line-height: 20px;
-      background-color: #888; // Unchecked color
-      left: 0px;
-      top: 0px;
-      height: 20px;
-      width: 40px;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
+    .label {
+        position: relative;
+        padding-left: 46px;
+        &:before,
+        &:after {
+            position: absolute;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            transition: background-color 0.3s, left 0.3s;
+        }
+        &:before {
+            content: '\f00d';
+            color: #fff;
+            box-sizing: border-box;
+            font-family: 'FontAwesome', sans-serif;
+            padding-left: 23px;
+            font-size: 12px;
+            line-height: 20px;
+            background-color: #888; // Unchecked color
+            left: 0px;
+            top: 0px;
+            height: 20px;
+            width: 40px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
+        &:after {
+            content: '';
+            letter-spacing: 20px;
+            background: #fff;
+            left: 1px;
+            top: 1px;
+            height: 18px;
+            width: 18px;
+        }
     }
-    &:after {
-      content: "";
-      letter-spacing: 20px;
-      background: #fff;
-      left: 1px;
-      top: 1px;
-      height: 18px;
-      width: 18px;
-    }
-  }
 }
