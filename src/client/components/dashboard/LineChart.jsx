@@ -25,8 +25,8 @@ class Chart extends Component {
         this.updateChart()
     }
 
-    updateChart = async () => {
-        const rawHashrates = await this.getHashrates()
+    updateChart = () => {
+        const rawHashrates = []
 
         let hashrates = rawHashrates.map((entry) => {
             return {
@@ -37,8 +37,8 @@ class Chart extends Component {
         this.setState({ hashrates })
     }
 
-    getHashrates = async () => {
-        const rates = await Axios.get(
+    getHashrates = () => {
+        const rates = Axios.get(
             `${config.miner_metrics_url}/v1/stats/hashrates`,
             {
                 headers: {
