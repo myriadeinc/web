@@ -49,7 +49,7 @@ class Chart extends Component {
                                 tick={{
                                     fontSize: 12,
                                 }}
-                                domain={[0, 50000]}
+                                domain={[0, 8000]}
                             >
                                 <Label
                                     value="Hashrate (H/s)"
