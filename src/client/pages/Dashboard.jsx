@@ -95,9 +95,17 @@ class DashboardPage extends Component {
                     )}`,
                 },
             })
-            .then(
-                (response) => (newMinerObj.historical_hashrates = response.data)
-            )
+            .then((response) => {
+                newMinerObj.historical_hashrates = response.data.map(
+                    (entry) => {
+                        return {
+                            time: new Date(entry.time).getTime(),
+                            rate: entry.rate,
+                        }
+                    }
+                )
+                this.forceUpdate()
+            })
             .catch((error) => {
                 console.error('There was an error!', error)
                 return this.setState({
@@ -106,7 +114,6 @@ class DashboardPage extends Component {
                 })
             })
 
-        console.log(newMinerObj)
         this.setState({ miner: newMinerObj })
         // return gqlMiner
         //     .query({
@@ -164,9 +171,6 @@ class DashboardPage extends Component {
     }
 
     render() {
-        console.log(this.state.miner)
-        console.log(this.state.miner.myriade_credits_balance)
-        console.log(this.state.miner.email)
         return (
             <AuthConsumer>
                 {({ authenticated, logout }) => (
