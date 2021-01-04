@@ -44,6 +44,7 @@ class DashboardPage extends Component {
                 monero_wallet: null,
                 withdrawing: false,
             },
+            USD: 0.0,
         }
         this.dismissError = this.dismissError.bind(this)
     }
@@ -112,6 +113,17 @@ class DashboardPage extends Component {
                     error:
                         'Unable to fetch your data, please check your connection, your login and try again later',
                 })
+            })
+
+        axios
+            .get(
+                `https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD`
+            )
+            .then((response) => {
+                this.setState(response.data)
+            })
+            .catch((error) => {
+                console.error('There was an error!', error)
             })
 
         this.setState({ miner: newMinerObj })
@@ -199,7 +211,12 @@ class DashboardPage extends Component {
                                         <p>
                                             <i className="fab fa-monero" />{' '}
                                             Monero Balance:{' '}
-                                            {this.state.miner.monero_balance}
+                                            {`${
+                                                this.state.miner.monero_balance
+                                            } ($${(
+                                                this.state.USD *
+                                                this.state.miner.monero_balance
+                                            ).toFixed(2)} USD)`}
                                         </p>
                                         <hr />
                                         <ListGroup>
