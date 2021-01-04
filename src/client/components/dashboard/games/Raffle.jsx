@@ -82,7 +82,7 @@ class Raffle extends Component {
                 },
             })
             .then((response) => {
-                this.setState({ purchasedTickets: response.data.entries })
+                this.setState({ purchasedTickets: response.data })
             })
             .catch((error) => {
                 console.error('There was an error!', error)
