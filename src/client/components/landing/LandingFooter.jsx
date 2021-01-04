@@ -59,7 +59,7 @@ class LandingFooter extends Component {
                     </Link>
                 </Row>
                 <Row className="justify-content-md-center mt-2 pb-3">
-                    <p>Copyright © 2020, Myriade Inc.</p>
+                    <p>Copyright © 2019-2021, Myriade Inc.</p>
                 </Row>
             </div>
         )
