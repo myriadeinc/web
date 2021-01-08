@@ -156,7 +156,8 @@ class Raffle extends Component {
                 method: 'post',
                 url: `${config.miner_metrics_url}/v1/credits/buy`,
                 data: {
-                    amount: this.state.tickets,
+                    // Replace 1000 with ticket entry price
+                    amount: Number(this.state.tickets) * 1000,
                     contentId: this.state.raffle[this.state.drawOption].id,
                 },
                 headers: {
@@ -167,7 +168,7 @@ class Raffle extends Component {
             }
 
             axios(options)
-                .then(function (response) {
+                .then(response => {
                     if (response.status == 200) {
                         component.setState({
                             success: 'Ticket purchase successful!',
