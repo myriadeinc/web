@@ -102,43 +102,6 @@ class Raffle extends Component {
             .catch((error) => {
                 console.error('There was an error!', error)
             })
-        // TODO: Query description field once supported on Onyx
-        // gqlRaffles
-        //     .query({
-        //         query: gql`
-        //             {
-        //                 myriade_alpha_raffles {
-        //                     exchange_rate
-        //                     expiry_date
-        //                     prize
-        //                     status
-        //                     base_price
-        //                 }
-        //             }
-        //         `,
-        //     })
-        //     .then(({ data }) => {
-        //         let raffleData = data.myriade_alpha_raffles
-        //         console.log(raffleData)
-        //         const dateUnix = raffleData.map((data) => {
-        //             let d = new Date(data.expiry_date)
-        //             if (d - new Date() < EXPIRYTHRESHOLD) {
-        //                 return d.getTime()
-        //             }
-        //             return -1
-        //         })
-        //         this.setState({
-        //             raffle: raffleData,
-        //             raffleCloses: dateUnix,
-        //         })
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //         this.setState({
-        //             error:
-        //                 'Unable to fetch your data, please check your connection, your login and try again later',
-        //         })
-        //     })
 
         this.countdownTimer = setInterval(() => this.countdown(), 1000)
     }
@@ -168,7 +131,7 @@ class Raffle extends Component {
             }
 
             axios(options)
-                .then(response => {
+                .then((response) => {
                     if (response.status == 200) {
                         component.setState({
                             success: 'Ticket purchase successful!',
@@ -212,18 +175,15 @@ class Raffle extends Component {
             } else {
                 let countDownDate = value.public.expiry
                 // Get today's date and time
-                let now = new Date().getTime()
+                let now = Math.floor(new Date().getTime() / 1000)
                 // Find the distance between now and the count down date
                 let distance = countDownDate - now
+                console.log(distance)
                 // Time calculations for days, hours, minutes and seconds
-                let days = Math.floor(distance / (1000 * 60 * 60 * 24))
-                let hours = Math.floor(
-                    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-                )
-                let minutes = Math.floor(
-                    (distance % (1000 * 60 * 60)) / (1000 * 60)
-                )
-                let seconds = Math.floor((distance % (1000 * 60)) / 1000)
+                let days = Math.floor(distance / (60 * 60 * 24))
+                let hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60))
+                let minutes = Math.floor((distance % (60 * 60)) / 60)
+                let seconds = Math.floor(distance % 60)
 
                 cds[index] =
                     days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's '
@@ -233,72 +193,72 @@ class Raffle extends Component {
                 }
             }
         })
+
         this.setState({ countdownString: cds })
-        //console.log(cds);
-        //console.log(this.state.countdownString);
+    }
+
+    validateRaffle = (raffle) => {
+        return (
+            raffle.public &&
+            raffle.public.title &&
+            raffle.public.description &&
+            raffle.public.entryPrice &&
+            raffle.public.prizeAmount &&
+            raffle.public.expiry
+        )
     }
 
     render() {
         let drawingCards
         if (this.state.raffle) {
             drawingCards = this.state.raffle.map((value, index) => {
-                let badge
-                if (value.status === 1) {
-                    badge = <Badge variant="warning">Funding</Badge>
-                } else if (value.status === 1) {
-                    badge = <Badge variant="success">Funded!</Badge>
-                } else {
-                    if (
-                        value.status === 0 ||
-                        this.state.countdownString[index] === 'EXPIRED'
-                    ) {
-                        badge = <Badge variant="secondary">Expired</Badge>
-                    }
-                }
-
+                const valid = this.validateRaffle(value)
                 return (
-                    <Card
-                        className={Style.hoverCard}
-                        onClick={() => this.handleShow(index)}
-                        key={index}
-                    >
-                        <Card.Body className="pb-0">
-                            <Row>
-                                <Col>
-                                    <Card.Title>
-                                        {formatMoney(
-                                            value.public.prizeAmount *
-                                                this.state.USD
-                                        )}
-                                        USD
-                                    </Card.Title>
-                                </Col>
-                                <Col md="auto">
-                                    <Card.Title>{badge}</Card.Title>
-                                </Col>
-                            </Row>
-                            <Card.Subtitle className="mb-2 text-muted">
-                                <i className="fab fa-monero" />{' '}
-                                {value.public.prizeAmount}XMR
-                            </Card.Subtitle>
-                            <Card.Text className={Style.orange + ' mb-0'}>
-                                {value.public.title}
-                            </Card.Text>
-                            <Card.Text>
-                                Ticket price: {value.public.entryPrice}MC
-                            </Card.Text>
-                            {value.public.description && (
-                                <Card.Text>
-                                    {value.public.description}
+                    valid && (
+                        <Card
+                            className={Style.hoverCard}
+                            onClick={() => this.handleShow(index)}
+                            key={index}
+                        >
+                            <Card.Body className="pb-0">
+                                <Row>
+                                    <Col>
+                                        <Card.Title>
+                                            {formatMoney(
+                                                value.public.prizeAmount *
+                                                    this.state.USD
+                                            )}
+                                            USD
+                                        </Card.Title>
+                                    </Col>
+                                    <Col md="auto">
+                                        <Card.Title></Card.Title>
+                                    </Col>
+                                </Row>
+                                <Card.Subtitle className="mb-2 text-muted">
+                                    <i className="fab fa-monero" />{' '}
+                                    {value.public.prizeAmount}XMR
+                                </Card.Subtitle>
+                                <Card.Text className={Style.orange + ' mb-0'}>
+                                    {value.public.title}
                                 </Card.Text>
-                            )}
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">
-                                Closes in: {this.state.countdownString[index]}
-                            </small>
-                        </Card.Footer>
-                    </Card>
+                                <Card.Text>
+                                    Ticket price: {value.public.entryPrice}MC
+                                </Card.Text>
+                                {value.public.description && (
+                                    <Card.Text>
+                                        {value.public.description}
+                                    </Card.Text>
+                                )}
+                            </Card.Body>
+                            <Card.Footer>
+                                <small className="text-muted">
+                                    Closes in:{' '}
+                                    {this.state.countdownString[index]}
+                                </small>
+                            </Card.Footer>
+                        </Card>
+                    )
                 )
             })
         } else {
