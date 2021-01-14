@@ -46,6 +46,9 @@ class Raffle extends Component {
             USD: 121.36,
             success: null,
         }
+
+        this.getEvent = this.getEvent.bind(this)
+        this.validateRaffle = this.validateRaffle.bind(this)
     }
 
     displaySuccess() {
@@ -82,7 +85,18 @@ class Raffle extends Component {
                 },
             })
             .then((response) => {
-                this.setState({ purchasedTickets: response.data })
+                this.setState({
+                    purchasedTickets: response.data.map((ticket) => {
+                        const event = this.getEvent(ticket.contentId)
+
+                        ticket.amount = event.public.prizeAmount
+                        ticket.purchased =
+                            new Date(ticket.eventTime).getTime() / 1000
+                        ticket.eventTime = event.public.expiry
+                        console.log(ticket)
+                        return ticket
+                    }),
+                })
             })
             .catch((error) => {
                 console.error('There was an error!', error)
@@ -110,18 +124,40 @@ class Raffle extends Component {
         clearInterval(this.countdownTimer)
     }
 
-    handleClose = (purchase) => {
+    getEvent(contentId) {
+        return this.state.raffle.find((raffle) => raffle.id === contentId)
+    }
+
+    appendPurchase(raffle) {
+        const purchase = {
+            id: 1,
+            amount: raffle.public.prizeAmount,
+            lockType: 10,
+            eventTime: raffle.public.expiry,
+            contentId: raffle.id,
+            status: 1,
+            purchased: new Date().getTime() / 1000,
+        }
+
+        const purchasedTickets = this.state.purchasedTickets.slice()
+        purchasedTickets.push(purchase)
+        this.setState({ purchasedTickets })
+    }
+
+    handleClose = (purchase, miner) => {
         this.setState({ modalShow: false })
         let component = this
         // Buy a raffle ticket if purchase = true
         if (purchase) {
+            const raffle = this.state.raffle[this.state.drawOption]
+
             const options = {
                 method: 'post',
                 url: `${config.miner_metrics_url}/v1/credits/buy`,
                 data: {
-                    // Replace 1000 with ticket entry price
-                    amount: Number(this.state.tickets) * 1000,
-                    contentId: this.state.raffle[this.state.drawOption].id,
+                    amount:
+                        Number(this.state.tickets) * raffle.public.entryPrice,
+                    contentId: raffle.id,
                 },
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(
@@ -133,6 +169,9 @@ class Raffle extends Component {
             axios(options)
                 .then((response) => {
                     if (response.status == 200) {
+                        miner.myriade_credits_balance -= options.data.amount
+                        miner.refresh()
+                        this.appendPurchase(raffle)
                         component.setState({
                             success: 'Ticket purchase successful!',
                         })
@@ -266,25 +305,13 @@ class Raffle extends Component {
         }
 
         let ticketList = this.state.purchasedTickets.map((value, index) => {
-            let p = new Date(value.purchased * 1000)
-            let purchaseDate =
-                p.getUTCFullYear() +
-                '/' +
-                (p.getUTCMonth() + 1) +
-                '/' +
-                p.getUTCDate() +
-                ' ' +
-                p.getUTCHours() +
-                ':' +
-                p.getUTCMinutes() +
-                ':' +
-                p.getUTCSeconds()
-            let expiryDate = moment(value.eventTime).format('lll')
+            let purchaseDate = moment(value.purchased * 1000).format('lll')
+            let expiryDate = moment(value.eventTime * 1000).format('lll')
             let status = value.status
 
             return (
                 <tr key={index}>
-                    <td>{'$' + value.amount}</td>
+                    <td>{value.amount + ' XMR'}</td>
                     <td>{purchaseDate}</td>
                     <td>{status}</td>
                     <td>{expiryDate}</td>
@@ -318,7 +345,7 @@ class Raffle extends Component {
                                 <Table striped bordered hover>
                                     <thead>
                                         <tr>
-                                            <th>Prize Amount (USD)</th>
+                                            <th>Prize Amount (XMR)</th>
                                             <th>Purchase Time (UTC)</th>
                                             <th>Status</th>
                                             <th>Raffle Draw Time</th>
@@ -442,7 +469,7 @@ class Raffle extends Component {
                                 <Button
                                     variant="primary"
                                     onClick={() => {
-                                        this.handleClose(true)
+                                        this.handleClose(true, miner)
                                     }}
                                     disabled={
                                         this.state.countdownString[

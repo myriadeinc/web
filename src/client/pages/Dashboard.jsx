@@ -43,10 +43,12 @@ class DashboardPage extends Component {
                 monero_balance: '0',
                 monero_wallet: null,
                 withdrawing: false,
+                refresh: this.forceUpdate,
             },
             USD: 0.0,
         }
         this.dismissError = this.dismissError.bind(this)
+        this.state.miner.refresh = this.state.miner.refresh.bind(this)
     }
 
     dismissError() {
