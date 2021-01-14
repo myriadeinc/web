@@ -309,12 +309,6 @@ class Raffle extends Component {
                                 </Button>
                             </Col>
                         </Row>
-                        <p>
-                            Enter your Mining Credits for a chance to win an XMR
-                            Prize! Choose your drawing amount from the cards
-                            below. Please play responsibly.
-                        </p>
-
                         <Container className={Style.Scrollbox + ' mb-4'}>
                             <h4>Current Drawings</h4>
                             <CardColumns>{drawingCards}</CardColumns>
