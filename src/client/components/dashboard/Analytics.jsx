@@ -36,7 +36,8 @@ class AnalyticsComponent extends Component {
                                                 Average Hashrate{' '}
                                             </h1>
                                             <h1 className={Style.dynamicTitle}>
-                                                {miner.average_hashrate} H/sec
+                                                N/A
+                                                {/*miner.average_hashrate H/sec*/}
                                             </h1>
                                         </div>
                                     </Card.ImgOverlay>
@@ -82,8 +83,7 @@ class AnalyticsComponent extends Component {
                                                 Pool Hashrate
                                             </h1>
                                             <h1 className={Style.dynamicTitle}>
-                                                {'0 '}
-                                                MH/sec
+                                                N/A
                                             </h1>
                                         </div>
                                     </Card.ImgOverlay>
