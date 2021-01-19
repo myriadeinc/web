@@ -108,7 +108,7 @@ class Mine extends Component {
                         <PrimaryButton
                             pill
                             style={{ margin: 10 }}
-                            href="https://github.com/xmrig/xmrig/releases/download/v6.7.1/xmrig-6.7.1-msvc-win64.zip"
+                            href="https://github.com/xmrig/xmrig/releases/download/v6.7.2/xmrig-6.7.2-msvc-win64.zip"
                         >
                             Download Miner (64-bit)
                         </PrimaryButton>
@@ -170,7 +170,7 @@ class Mine extends Component {
                         <PrimaryButton
                             pill
                             style={{ margin: 10 }}
-                            href="https://github.com/xmrig/xmrig/releases/download/v6.7.1/xmrig-6.7.1-linux-x64.tar.gz"
+                            href="https://github.com/xmrig/xmrig/releases/download/v6.7.2/xmrig-6.7.2-linux-x64.tar.gz"
                         >
                             Download Miner
                         </PrimaryButton>
