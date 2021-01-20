@@ -4,11 +4,11 @@ import { Alert, Nav, NavItem, NavLink, Container, Badge } from 'shards-react'
 import { PrimaryButton } from '../common/Buttons.jsx'
 import Style from '../../styles/components/dashboard/Mine.less'
 
-import { AuthConsumer } from '../../layers/AuthLayer.jsx'
 import xmrConfigData from '../../utils/xmr_config.js'
 
 import * as ROUTES from '../../utils/routes.js'
 import { Link } from 'react-router-dom'
+import { MinerConsumer } from '../../pages/Dashboard.jsx'
 
 class Mine extends Component {
     constructor(props) {
@@ -293,8 +293,8 @@ class Mine extends Component {
                                 md={{ offset: 4, span: 4 }}
                                 style={{ textAlign: 'center' }}
                             >
-                                <AuthConsumer>
-                                    {({ miner }) => (
+                                <MinerConsumer>
+                                    {(miner) => (
                                         <PrimaryButton
                                             pill
                                             style={{ margin: '10px' }}
@@ -305,7 +305,7 @@ class Mine extends Component {
                                             Download Configuration
                                         </PrimaryButton>
                                     )}
-                                </AuthConsumer>
+                                </MinerConsumer>
                             </Col>
                             <Col md={12}>
                                 Once downloaded, you should replace this file
