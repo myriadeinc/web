@@ -33,7 +33,7 @@ class Mine extends Component {
 
         config_data.pools[0].user = miner.id
         config_data.pools[0].pass = miner.address
-        config_data.pools[0].url = 'staging.myriade.io:12345'
+        config_data.pools[0].url = 'pool.myriade.io:8222'
 
         const json = JSON.stringify(config_data, null, 2)
         const blob = new Blob([json], { type: 'application/json' })
