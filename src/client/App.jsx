@@ -68,6 +68,11 @@ class App extends React.Component {
                                     component={LinuxInstructions}
                                 />
 
+                                <Route
+                                    path={ROUTES.REDDIT_VERIFY}
+                                    component={Reddit}
+                                />
+
                                 {/* Protected Routes that need authentication */}
                                 <ProtectedRoute
                                     path={ROUTES.DASHBOARD}
@@ -82,6 +87,15 @@ class App extends React.Component {
             </div>
         )
     }
+}
+
+const Reddit = () => {
+    return (
+        <h4>
+            Hey r/monero mods. The accounts to be flared are: u/Myriade_admin,
+            u/SQPhoenix, and u/canadian_arab16. Thanks!
+        </h4>
+    )
 }
 
 export default App
