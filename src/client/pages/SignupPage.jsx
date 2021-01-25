@@ -278,7 +278,14 @@ class SignupPage extends Component {
                                                 <Row className="m-0">
                                                     <label htmlFor="#wallet">
                                                         Monero Wallet Address
-                                                        (optional)
+                                                        <b
+                                                            style={{
+                                                                color: 'red',
+                                                            }}
+                                                        >
+                                                            {' '}
+                                                            (optional)
+                                                        </b>
                                                         &nbsp;&nbsp;&nbsp;
                                                     </label>
                                                     <Badge
