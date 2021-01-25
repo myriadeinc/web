@@ -71,6 +71,26 @@ class DashboardPage extends Component {
         newMinerObj.name = tokenInfo.account.name
 
         axios
+            .get(`${config.identity_service_url}/v1/account/self`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        'access_token'
+                    )}`,
+                },
+            })
+            .then((response) => {
+                console.log(response)
+                newMinerObj.monero_balance = response.data.balance
+            })
+            .catch((error) => {
+                console.error('There was an error!', error)
+                return this.setState({
+                    error:
+                        'Unable to fetch your data, please check your connection, your login and try again later',
+                })
+            })
+
+        axios
             .get(`${config.miner_metrics_url}/v1/stats/credit`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(
