@@ -199,7 +199,9 @@ class Raffle extends Component {
         })
 
     updateTicketNum(e) {
-        this.setState({ tickets: e.target.value })
+        const tickets = e.target.value < 1 ? 1 : Math.round(e.target.value)
+
+        this.setState({ tickets })
     }
 
     goBack = () => {
@@ -432,6 +434,9 @@ class Raffle extends Component {
                                                 <InputGroup>
                                                     <FormControl
                                                         defaultValue={
+                                                            this.state.tickets
+                                                        }
+                                                        value={
                                                             this.state.tickets
                                                         }
                                                         type="number"
