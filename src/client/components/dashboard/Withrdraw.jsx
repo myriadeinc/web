@@ -76,6 +76,7 @@ class Withdraw extends Component {
                 this.setState({ confirmScreen: true })
                 this.setState({ minerName: miner.miner.name })
                 this.setState({ minerEmail: miner.miner.email })
+                this.setState({ amount: miner.miner.monero_balance })
             }
 
             setValidated(true)
@@ -99,7 +100,6 @@ class Withdraw extends Component {
                         </Col>
                     </Row>
                 </Form.Group>
-
                 <Form.Group>
                     <Form.Label>Monero Wallet Address</Form.Label>
                     <Form.Control

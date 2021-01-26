@@ -82,6 +82,7 @@ class DashboardPage extends Component {
                 console.log(response)
                 newMinerObj.monero_balance =
                     response.data.balance / Math.pow(10, 12)
+                this.forceUpdate()
             })
             .catch((error) => {
                 console.error('There was an error!', error)

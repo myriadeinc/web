@@ -286,16 +286,10 @@ class Raffle extends Component {
                                 <Card.Text>
                                     Ticket price: {value.public.entryPrice}MC
                                 </Card.Text>
-                                {value.public.description && (
-                                    <Card.Text>
-                                        {value.public.description}
-                                    </Card.Text>
-                                )}
                             </Card.Body>
                             <Card.Footer>
                                 <small className="text-muted">
-                                    Closes in:{' '}
-                                    {this.state.countdownString[index]}
+                                    {value.public.description}
                                 </small>
                             </Card.Footer>
                         </Card>
@@ -411,16 +405,6 @@ class Raffle extends Component {
                                                 ].public.entryPrice
                                             }
                                             MC
-                                        </h5>
-                                        <h5>
-                                            <small className="text-muted">
-                                                Closes in:{' '}
-                                            </small>
-                                            {
-                                                this.state.countdownString[
-                                                    this.state.drawOption
-                                                ]
-                                            }
                                         </h5>
                                         <Row className="justify-content-md-center mb-2">
                                             <Col md="6">
