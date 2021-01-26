@@ -80,7 +80,8 @@ class DashboardPage extends Component {
             })
             .then((response) => {
                 console.log(response)
-                newMinerObj.monero_balance = response.data.balance
+                newMinerObj.monero_balance =
+                    response.data.balance / Math.pow(10, 12)
             })
             .catch((error) => {
                 console.error('There was an error!', error)
@@ -149,59 +150,6 @@ class DashboardPage extends Component {
             })
 
         this.setState({ miner: newMinerObj })
-        // return gqlMiner
-        //     .query({
-        //         query: gql`
-        //             query($minerId: ID!, $hashratePage: Int) {
-        //                 minerData(id: $minerId) {
-        //                     id
-        //                     myriade_credits {
-        //                         credit
-        //                         time
-        //                     }
-        //                     monero_balance
-        //                     hashrates(page: $hashratePage) {
-        //                         rate
-        //                         time
-        //                     }
-        //                 }
-        //             }
-        //         `,
-        //         variables: {
-        //             minerId: minerId,
-        //             hashratePage: 1,
-        //         },
-        //     })
-        //     .then(({ data }) => {
-        //         minerData = data.minerData
-        //         const mc =
-        //             0 < minerData.myriade_credits.length
-        //                 ? minerData.myriade_credits[0]
-        //                 : '0'
-        //         const accountData = jwt_decode(
-        //             localStorage.getItem('access_token')
-        //         ).account
-        //         return this.setState({
-        //             minerId: minerId,
-        //             miner: {
-        //                 name: accountData.name,
-        //                 email: accountData.email,
-        //                 myriade_credits_balance: mc,
-        //                 myriade_credits: minerData.myriade_credits,
-        //                 monero_balance: minerData.monero_balance,
-        //                 //monero_balance: 10,
-        //                 hashrates: minerData.hashrates,
-        //                 average_hashrate: 0,
-        //                 shares: [],
-        //             },
-        //         })
-        //     })
-        //     .catch((err) => {
-        //         return this.setState({
-        //             error:
-        //                 'Unable to fetch your data, please check your connection, your login and try again later',
-        //         })
-        //     })
     }
 
     render() {
