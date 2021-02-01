@@ -52,7 +52,6 @@ class App extends React.Component {
                                     path={ROUTES.PASSWORD_FORGET}
                                     component={PasswordForget}
                                 />
-
                                 <Route
                                     path={ROUTES.COOKIES}
                                     component={Cookies}
@@ -62,17 +61,10 @@ class App extends React.Component {
                                     component={Privacy}
                                 />
                                 <Route path={ROUTES.TERMS} component={Terms} />
-
                                 <Route
                                     path={ROUTES.LINUX}
                                     component={LinuxInstructions}
                                 />
-
-                                <Route
-                                    path={ROUTES.REDDIT_VERIFY}
-                                    component={Reddit}
-                                />
-
                                 {/* Protected Routes that need authentication */}
                                 <ProtectedRoute
                                     path={ROUTES.DASHBOARD}
