@@ -17,8 +17,8 @@
 }
 
 .progress {
-  height: $progress-height;
-  font-size: $progress-font-size;
+  height: 1.13rem;
+  font-size: 0.8rem;
   line-height: $progress-height;
   background-color: $progress-bg;
   margin-top: 6px;
@@ -32,11 +32,13 @@
 
 .progress-lg {
   height: $progress-lg-height;
-  .progress-bar { height: $progress-lg-height; }
+  .progress-bar {
+    height: $progress-lg-height;
+  }
 }
 
 .progress-bar {
-  height: $progress-height;
+  height: 1.11rem;
   line-height: $progress-height;
   color: $progress-bar-color;
   background-color: $progress-bar-bg;

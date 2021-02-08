@@ -14,6 +14,7 @@ import {
   Card,
   CardColumns,
   Badge,
+  ProgressBar,
 } from 'react-bootstrap';
 import { Container, Alert } from 'shards-react';
 
@@ -67,35 +68,35 @@ class Raffle extends Component {
       .get(`${config.miner_metrics_url}/v1/eventContent/active`)
       .then((response) => {
         this.setState({ raffle: response.data });
-      })
-      .catch((error) => {
-        console.error('There was an error!', error);
-        return this.setState({
-          error:
-            'Unable to fetch your data, please check your connection, your login and try again later',
-        });
-      });
 
-    axios
-      .get(`${config.miner_metrics_url}/v1/credits/allEvents`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      })
-      .then((response) => {
-        this.setState({
-          purchasedTickets: response.data.map((ticket) => {
-            const event = this.getEvent(ticket.contentId);
+        axios
+          .get(`${config.miner_metrics_url}/v1/credits/allEvents`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+          })
+          .then((response) => {
+            this.setState({
+              purchasedTickets: response.data.map((ticket) => {
+                const event = this.getEvent(ticket.contentId);
 
-            ticket.title = event.public.title;
-            ticket.tickets = ticket.amount / event.public.entryPrice;
-            ticket.amount = event.public.prizeAmount;
-            ticket.purchased = new Date(ticket.eventTime).getTime() / 1000;
-            ticket.eventTime = event.public.expiry;
-            console.log(ticket);
-            return ticket;
-          }),
-        });
+                ticket.title = event.public.title;
+                ticket.tickets = ticket.amount / event.public.entryPrice;
+                ticket.amount = event.public.prizeAmount;
+                ticket.purchased = new Date(ticket.eventTime).getTime() / 1000;
+                ticket.eventTime = event.public.expiry;
+
+                return ticket;
+              }),
+            });
+          })
+          .catch((error) => {
+            console.error('There was an error!', error);
+            return this.setState({
+              error:
+                'Unable to fetch your data, please check your connection, your login and try again later',
+            });
+          });
       })
       .catch((error) => {
         console.error('There was an error!', error);
@@ -248,7 +249,9 @@ class Raffle extends Component {
     let drawingCards;
     if (this.state.raffle) {
       drawingCards = this.state.raffle.map((value, index) => {
-        const valid = this.validateRaffle(value);
+        const valid =
+          this.validateRaffle(value) &&
+          this.state.countdownString[index] != 'EXPIRED';
         return (
           valid && (
             <Card
@@ -276,8 +279,21 @@ class Raffle extends Component {
                 </Card.Text>
                 <Card.Text>Ticket price: {value.public.entryPrice}MC</Card.Text>
               </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">{value.public.description}</small>
+              <Card.Footer style={{ textAlign: 'center' }}>
+                {value.public.totalTickets ? (
+                  <>
+                    <ProgressBar
+                      min={0}
+                      max={value.public.totalTickets}
+                      now={value.public.numTickets}
+                    />{' '}
+                    {`${value.public.numTickets} of ${value.public.totalTickets} purchased`}
+                  </>
+                ) : (
+                  <small className="text-muted">
+                    Closes in: {this.state.countdownString[index]}
+                  </small>
+                )}
               </Card.Footer>
             </Card>
           )
