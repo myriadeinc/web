@@ -40,7 +40,7 @@ class DashboardPage extends Component {
         myriade_credits_balance: null,
         shares: [],
         historical_hashrates: [],
-        average_hashrate: '0',
+        average_hashrate: 0,
         monero_balance: '0',
         monero_wallet: null,
         withdrawing: false,
@@ -121,12 +121,18 @@ class DashboardPage extends Component {
         },
       })
       .then((response) => {
+        let avg = 0;
+
         newMinerObj.historical_hashrates = response.data.map((entry) => {
+          avg += parseInt(entry.rate);
           return {
             time: new Date(entry.time).getTime(),
             rate: entry.rate,
           };
         });
+
+        avg /= newMinerObj.historical_hashrates.length;
+        newMinerObj.average_hashrate = avg.toFixed(2);
         this.forceUpdate();
       })
       .catch((error) => {
