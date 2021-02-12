@@ -15,16 +15,13 @@ import {
   CardColumns,
   Badge,
   ProgressBar,
+  Tabs,
+  Tab,
 } from 'react-bootstrap';
 import { Container, Alert } from 'shards-react';
 
 import Style from '../../../styles/components/dashboard/Gameroom.less';
 import { MinerConsumer } from '../../../pages/Dashboard.jsx';
-// import { gqlRaffles } from '../../../utils/graphql.js'
-
-// import * as tempData from './api.json'
-
-// import { gql } from 'apollo-boost'
 import { formatMoney } from 'accounting-js';
 
 //TODO: Connect with endpoint
@@ -76,18 +73,20 @@ class Raffle extends Component {
             },
           })
           .then((response) => {
+            const purchasedTickets = response.data.map((ticket) => {
+              const event = this.getEvent(ticket.contentId);
+
+              ticket.title = event.public.title;
+              ticket.tickets = ticket.amount / event.public.entryPrice;
+              ticket.amount = event.public.prizeAmount;
+              ticket.purchased = new Date(ticket.eventTime).getTime() / 1000;
+              ticket.eventTime = event.public.expiry;
+
+              return ticket;
+            });
+
             this.setState({
-              purchasedTickets: response.data.map((ticket) => {
-                const event = this.getEvent(ticket.contentId);
-
-                ticket.title = event.public.title;
-                ticket.tickets = ticket.amount / event.public.entryPrice;
-                ticket.amount = event.public.prizeAmount;
-                ticket.purchased = new Date(ticket.eventTime).getTime() / 1000;
-                ticket.eventTime = event.public.expiry;
-
-                return ticket;
-              }),
+              purchasedTickets: this.getHistory(purchasedTickets),
             });
           })
           .catch((error) => {
@@ -126,6 +125,29 @@ class Raffle extends Component {
     return this.state.raffle.find((raffle) => raffle.id === contentId);
   }
 
+  getHistory(purchasedTickets) {
+    const historyMap = {};
+    const history = [];
+
+    purchasedTickets.forEach((entry) => {
+      let cur = historyMap[entry.contentId];
+      if (cur) {
+        cur.tickets += entry.tickets;
+        cur.purchased = Math.max(cur.purchased, entry.purchased);
+      } else {
+        cur = Object.assign({}, entry);
+      }
+
+      historyMap[entry.contentId] = cur;
+    });
+
+    for (const entry in historyMap) {
+      history.push(historyMap[entry]);
+    }
+
+    return history;
+  }
+
   appendPurchase(raffle) {
     const purchase = {
       id: 1,
@@ -141,7 +163,7 @@ class Raffle extends Component {
 
     const purchasedTickets = this.state.purchasedTickets.slice();
     purchasedTickets.push(purchase);
-    this.setState({ purchasedTickets });
+    this.setState({ purchasedTickets: this.getHistory(purchasedTickets) });
   }
 
   handleClose = (purchase, miner) => {
@@ -303,11 +325,14 @@ class Raffle extends Component {
       drawingCards = <h5>Loading drawing info...</h5>;
     }
 
-    let ticketList = this.state.purchasedTickets.map((value, index) => {
+    let ticketListUpcoming = [];
+    let ticketListExpired = [];
+
+    this.state.purchasedTickets.forEach((value, index) => {
       let purchaseDate = moment(value.purchased * 1000).format('lll');
       let status = value.status;
 
-      return (
+      let entry = (
         <tr key={index}>
           <td>{value.title}</td>
           <td>{value.tickets}</td>
@@ -316,6 +341,12 @@ class Raffle extends Component {
           <td>{status == 1 ? 'Pending' : 'Expired'}</td>
         </tr>
       );
+
+      if (status == 1) {
+        ticketListUpcoming.push(entry);
+      } else {
+        ticketListExpired.push(entry);
+      }
     });
 
     return (
@@ -336,22 +367,40 @@ class Raffle extends Component {
               <CardColumns>{drawingCards}</CardColumns>
 
               <h4>History</h4>
-              {this.state.purchasedTickets.length ? (
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>Drawing Title</th>
-                      <th>Number of Tickets</th>
-                      <th>Prize Amount (XMR)</th>
-                      <th>Purchase Time</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>{ticketList}</tbody>
-                </Table>
-              ) : (
-                <p>You don't have any tickets :/</p>
-              )}
+              <Tabs defaultActiveKey="upcoming">
+                <Tab eventKey="upcoming" title="Upcoming">
+                  {this.state.purchasedTickets.length ? (
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Drawing Title</th>
+                          <th>Number of Tickets</th>
+                          <th>Prize Amount (XMR)</th>
+                          <th>Last Purchased</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>{ticketListUpcoming}</tbody>
+                    </Table>
+                  ) : (
+                    <p>You don't have any tickets :/</p>
+                  )}
+                </Tab>
+                <Tab eventKey="expired" title="Expired">
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Drawing Title</th>
+                        <th>Number of Tickets</th>
+                        <th>Prize Amount (XMR)</th>
+                        <th>Last Purchased</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>{ticketListExpired}</tbody>
+                  </Table>
+                </Tab>
+              </Tabs>
             </Container>
 
             <Modal
