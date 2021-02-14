@@ -15,7 +15,7 @@ class NavigationBar extends Component {
         <NavbarBrand href="#">
           <img
             alt="navbar logo"
-            src="https://svgshare.com/i/Ty1.svg"
+            src="https://svgshare.com/i/U0F.svg"
             height="35"
           />
         </NavbarBrand>

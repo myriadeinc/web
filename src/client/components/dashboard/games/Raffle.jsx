@@ -339,7 +339,7 @@ class Raffle extends Component {
           <td>{value.tickets}</td>
           <td>{value.amount + ' XMR'}</td>
           <td>{purchaseDate}</td>
-          <td>{status == 1 ? 'Pending' : 'Expired'}</td>
+          <td>{status == 1 ? 'Pending' : status == 2 ? 'Won' : 'Expired'}</td>
         </tr>
       );
 
