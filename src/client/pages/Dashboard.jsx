@@ -24,6 +24,8 @@ import GetStarted from '../components/dashboard/GetStarted.jsx';
 import Support from '../components/dashboard/Support.jsx';
 import Gravatar from 'react-gravatar';
 
+import Style from '../styles/pages/Landing.less';
+
 const minerContext = createContext();
 
 class DashboardPage extends Component {
@@ -31,6 +33,8 @@ class DashboardPage extends Component {
     super(props);
     this.state = {
       minerId: null,
+      alert:
+        'We will be performing weekly maintenance on Monday at 2:00 p.m. EST. This may result in downtime for the pool.',
       error: null,
       miner: {
         id: null,
@@ -48,12 +52,25 @@ class DashboardPage extends Component {
       },
       USD: 0.0,
     };
+    this.dismissAlert = this.dismissAlert.bind(this);
     this.dismissError = this.dismissError.bind(this);
     this.state.miner.refresh = this.state.miner.refresh.bind(this);
   }
 
+  dismissAlert() {
+    this.setState({ alert: null });
+  }
+
   dismissError() {
     this.setState({ error: null });
+  }
+
+  displayAlert() {
+    return (
+      <Alert className={Style.amber} dismissible={this.dismissAlert}>
+        {this.state.alert}
+      </Alert>
+    );
   }
 
   displayError() {
@@ -242,6 +259,7 @@ class DashboardPage extends Component {
                 </Card>
               </Col>
               <Col lg={9}>
+                {this.state.alert && this.displayAlert()}
                 {this.state.error && this.displayError()}
                 <Switch>
                   <ProtectedRoute

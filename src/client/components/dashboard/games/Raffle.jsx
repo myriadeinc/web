@@ -47,6 +47,7 @@ class Raffle extends Component {
 
     this.getEvent = this.getEvent.bind(this);
     this.validateRaffle = this.validateRaffle.bind(this);
+    this.updateTicketNum = this.updateTicketNum.bind(this);
   }
 
   displaySuccess() {
@@ -217,8 +218,8 @@ class Raffle extends Component {
       drawOption: i,
     });
 
-  updateTicketNum(e) {
-    const tickets = e.target.value < 1 ? 1 : Math.round(e.target.value);
+  updateTicketNum(val) {
+    const tickets = val < 1 ? 0 : Math.floor(val);
 
     this.setState({ tickets });
   }
@@ -380,7 +381,7 @@ class Raffle extends Component {
                           <th>Status</th>
                         </tr>
                       </thead>
-                      <tbody>{ticketListUpcoming}</tbody>
+                      <tbody>{ticketListUpcoming.reverse()}</tbody>
                     </Table>
                   ) : (
                     <p>You don't have any tickets :/</p>
@@ -397,7 +398,7 @@ class Raffle extends Component {
                         <th>Status</th>
                       </tr>
                     </thead>
-                    <tbody>{ticketListExpired}</tbody>
+                    <tbody>{ticketListExpired.reverse()}</tbody>
                   </Table>
                 </Tab>
               </Tabs>
@@ -439,20 +440,77 @@ class Raffle extends Component {
                       MC
                     </h5>
                     <Row className="justify-content-md-center mb-2">
-                      <Col md="6">
+                      <Col md="4">
                         <h5>
                           <small className="text-muted">Tickets: </small>
                         </h5>
                       </Col>
-                      <Col md="6">
+                      <Col md="8">
+                        <Button
+                          size="sm"
+                          className={Style.ticketButton}
+                          onClick={() =>
+                            this.updateTicketNum(
+                              miner.myriade_credits_balance /
+                                this.state.raffle[this.state.drawOption].public
+                                  .entryPrice
+                            )
+                          }
+                        >
+                          Max
+                        </Button>
+                        <Button
+                          size="sm"
+                          className={Style.ticketButton}
+                          onClick={() =>
+                            this.updateTicketNum(
+                              (0.75 * miner.myriade_credits_balance) /
+                                this.state.raffle[this.state.drawOption].public
+                                  .entryPrice
+                            )
+                          }
+                        >
+                          75%
+                        </Button>
+                        <Button
+                          size="sm"
+                          className={Style.ticketButton}
+                          onClick={() =>
+                            this.updateTicketNum(
+                              (0.5 * miner.myriade_credits_balance) /
+                                this.state.raffle[this.state.drawOption].public
+                                  .entryPrice
+                            )
+                          }
+                        >
+                          50%
+                        </Button>
+                        <Button
+                          size="sm"
+                          className={Style.ticketButton}
+                          onClick={() =>
+                            this.updateTicketNum(
+                              (0.25 * miner.myriade_credits_balance) /
+                                this.state.raffle[this.state.drawOption].public
+                                  .entryPrice
+                            )
+                          }
+                        >
+                          25%
+                        </Button>
+                      </Col>
+                    </Row>
+                    <Row className="justify-content-md-center mb-2">
+                      <Col md="12">
                         <InputGroup>
                           <FormControl
                             defaultValue={this.state.tickets}
                             value={this.state.tickets}
                             type="number"
-                            min="1"
-                            max="10"
-                            onChange={this.updateTicketNum.bind(this)}
+                            min="0"
+                            onChange={(e) =>
+                              this.updateTicketNum(e.target.value)
+                            }
                           />
                         </InputGroup>
                       </Col>
