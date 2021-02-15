@@ -33,8 +33,7 @@ class DashboardPage extends Component {
     super(props);
     this.state = {
       minerId: null,
-      alert:
-        'We will be performing weekly maintenance on Monday at 2:00 p.m. EST. This may result in downtime for the pool.',
+      alert: null,
       error: null,
       miner: {
         id: null,
