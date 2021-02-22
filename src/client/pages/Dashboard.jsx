@@ -47,6 +47,7 @@ class DashboardPage extends Component {
         monero_balance: '0',
         monero_wallet: null,
         withdrawing: false,
+        shortId: null,
         refresh: this.forceUpdate,
       },
       USD: 0.0,
@@ -100,8 +101,8 @@ class DashboardPage extends Component {
         },
       })
       .then((response) => {
-        console.log(response);
         newMinerObj.monero_balance = response.data.balance / Math.pow(10, 12);
+        newMinerObj.shortId = response.data.shortId;
         this.forceUpdate();
       })
       .catch((error) => {
@@ -205,7 +206,12 @@ class DashboardPage extends Component {
                       email={this.state.miner.email}
                     />
                     <br />
-                    <h3>{this.state.miner.name}</h3>
+                    <h3>
+                      {`${this.state.miner.name}`}
+                      <span
+                        style={{ fontSize: '1rem' }}
+                      >{`#${this.state.miner.shortId}`}</span>
+                    </h3>
                     <p>{this.state.miner.email}</p>
                     <p>
                       <strong>

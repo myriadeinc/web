@@ -82,6 +82,9 @@ class Raffle extends Component {
               ticket.amount = event.public.prizeAmount;
               ticket.purchased = new Date(ticket.eventTime).getTime() / 1000;
               ticket.eventTime = event.public.expiry;
+              ticket.winner = event.public.winner
+                ? `Miner #${event.public.winner}`
+                : '-';
 
               return ticket;
             });
@@ -135,6 +138,9 @@ class Raffle extends Component {
       if (cur) {
         cur.tickets += entry.tickets;
         cur.purchased = Math.max(cur.purchased, entry.purchased);
+        if (entry.status == 2) {
+          cur.status = 2;
+        }
       } else {
         cur = Object.assign({}, entry);
       }
@@ -160,6 +166,7 @@ class Raffle extends Component {
       contentId: raffle.id,
       status: 1,
       purchased: new Date().getTime() / 1000,
+      winner: '-',
     };
 
     const purchasedTickets = this.state.purchasedTickets.slice();
@@ -334,12 +341,15 @@ class Raffle extends Component {
       let status = value.status;
 
       let entry = (
-        <tr key={index}>
+        <tr
+          key={index}
+          style={status == 2 ? { backgroundColor: '#85d088' } : {}}
+        >
           <td>{value.title}</td>
           <td>{value.tickets}</td>
           <td>{value.amount + ' XMR'}</td>
           <td>{purchaseDate}</td>
-          <td>{status == 1 ? 'Pending' : status == 2 ? 'Won' : 'Expired'}</td>
+          <td>{value.winner}</td>
         </tr>
       );
 
@@ -378,7 +388,7 @@ class Raffle extends Component {
                           <th>Number of Tickets</th>
                           <th>Prize Amount (XMR)</th>
                           <th>Last Purchased</th>
-                          <th>Status</th>
+                          <th>Winner</th>
                         </tr>
                       </thead>
                       <tbody>{ticketListUpcoming.reverse()}</tbody>
@@ -395,7 +405,7 @@ class Raffle extends Component {
                         <th>Number of Tickets</th>
                         <th>Prize Amount (XMR)</th>
                         <th>Last Purchased</th>
-                        <th>Status</th>
+                        <th>Winner</th>
                       </tr>
                     </thead>
                     <tbody>{ticketListExpired.reverse()}</tbody>
