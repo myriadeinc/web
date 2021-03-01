@@ -75,6 +75,6 @@
     "recharts": "^1.8.5",
     "shards-react": "^1.0.3",
     "styled-components": "^4.4.1",
-    "three": "^0.111.0"
+    "three": "^0.125.0"
   }
 }
