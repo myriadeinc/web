@@ -6,8 +6,6 @@ import { HashRouter as Router, Link, Switch } from 'react-router-dom';
 import { DynamicBlackLink } from '../components/common/Link.jsx';
 import { SecondaryButton } from '../components/common/Buttons.jsx';
 
-import { gql } from 'apollo-boost';
-import { gqlMiner } from '../utils/graphql.js';
 import config from '../utils/config.js';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
@@ -18,13 +16,13 @@ import PageStyle from '../styles/pages/Dashboard.less';
 
 import Analytics from '../components/dashboard/Analytics.jsx';
 import Mine from '../components/dashboard/Mine.jsx';
-import Gameroom from '../components/dashboard/Gameroom.jsx';
 import Withdraw from '../components/dashboard/Withrdraw.jsx';
 import GetStarted from '../components/dashboard/GetStarted.jsx';
 import Support from '../components/dashboard/Support.jsx';
 import Gravatar from 'react-gravatar';
 
 import Style from '../styles/pages/Landing.less';
+import Raffle from '../components/dashboard/games/Raffle.jsx';
 
 const minerContext = createContext();
 
@@ -280,7 +278,7 @@ class DashboardPage extends Component {
                   />
                   <ProtectedRoute
                     path={`${this.props.match.url}/gameroom`}
-                    component={Gameroom}
+                    component={Raffle}
                     authenticated={authenticated}
                   />
                   <ProtectedRoute

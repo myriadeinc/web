@@ -231,10 +231,6 @@ class Raffle extends Component {
     this.setState({ tickets });
   }
 
-  goBack = () => {
-    this.props.history.goBack();
-  };
-
   countdown = () => {
     let cds = {};
     this.state.raffle.map((value, index) => {
@@ -368,9 +364,6 @@ class Raffle extends Component {
             <Row>
               <Col>
                 <h3 className={Style.orange}>Monero Giveaways</h3>
-              </Col>
-              <Col md="auto">
-                <Button onClick={this.goBack}>Back to Gameroom</Button>
               </Col>
             </Row>
             <Container className="mb-4">

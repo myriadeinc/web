@@ -100,7 +100,7 @@ class Mine extends Component {
             <PrimaryButton
               pill
               style={{ margin: 10 }}
-              href="https://github.com/xmrig/xmrig/releases/download/v6.8.1/xmrig-6.8.1-msvc-win64.zip"
+              href="https://github.com/xmrig/xmrig/releases/download/v6.9.0/xmrig-6.9.0-msvc-win64.zip"
             >
               Download Miner (64-bit)
             </PrimaryButton>
@@ -153,7 +153,7 @@ class Mine extends Component {
             <PrimaryButton
               pill
               style={{ margin: 10 }}
-              href="https://github.com/xmrig/xmrig/releases/download/v6.8.1/xmrig-6.8.1-linux-x64.tar.gz"
+              href="https://github.com/xmrig/xmrig/releases/download/v6.9.0/xmrig-6.9.0-linux-x64.tar.gz"
             >
               Download Miner for Linux
             </PrimaryButton>
@@ -162,7 +162,7 @@ class Mine extends Component {
             <PrimaryButton
               pill
               style={{ margin: 10 }}
-              href="https://github.com/xmrig/xmrig/releases/download/v6.8.1/xmrig-6.8.1-macos-x64.tar.gz"
+              href="https://github.com/xmrig/xmrig/releases/download/v6.9.0/xmrig-6.9.0-macos-x64.tar.gz"
             >
               Download Miner for OSX
             </PrimaryButton>
