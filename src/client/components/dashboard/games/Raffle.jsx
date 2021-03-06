@@ -45,7 +45,6 @@ class Raffle extends Component {
       success: null,
     };
 
-    this.getEvent = this.getEvent.bind(this);
     this.validateRaffle = this.validateRaffle.bind(this);
     this.updateTicketNum = this.updateTicketNum.bind(this);
   }
@@ -66,40 +65,25 @@ class Raffle extends Component {
       .get(`${config.miner_metrics_url}/v1/eventContent/active`)
       .then((response) => {
         this.setState({ raffle: response.data });
+      })
+      .catch((error) => {
+        console.error('There was an error!', error);
+        return this.setState({
+          error:
+            'Unable to fetch your data, please check your connection, your login and try again later',
+        });
+      });
 
-        axios
-          .get(`${config.miner_metrics_url}/v1/credits/allEvents`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-            },
-          })
-          .then((response) => {
-            const purchasedTickets = response.data.map((ticket) => {
-              const event = this.getEvent(ticket.contentId);
-
-              ticket.title = event.public.title;
-              ticket.tickets = ticket.amount / event.public.entryPrice;
-              ticket.amount = event.public.prizeAmount;
-              ticket.purchased = new Date(ticket.eventTime).getTime() / 1000;
-              ticket.eventTime = event.public.expiry;
-              ticket.winner = event.public.winner
-                ? `Miner #${event.public.winner}`
-                : '-';
-
-              return ticket;
-            });
-
-            this.setState({
-              purchasedTickets: this.getHistory(purchasedTickets),
-            });
-          })
-          .catch((error) => {
-            console.error('There was an error!', error);
-            return this.setState({
-              error:
-                'Unable to fetch your data, please check your connection, your login and try again later',
-            });
-          });
+    axios
+      .get(`${config.miner_metrics_url}/v1/credits/allEvents`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
+      .then((response) => {
+        this.setState({
+          purchasedTickets: this.getHistory(response.data),
+        });
       })
       .catch((error) => {
         console.error('There was an error!', error);
@@ -123,10 +107,6 @@ class Raffle extends Component {
 
   componentWillUnmount() {
     clearInterval(this.countdownTimer);
-  }
-
-  getEvent(contentId) {
-    return this.state.raffle.find((raffle) => raffle.id === contentId);
   }
 
   getHistory(purchasedTickets) {
@@ -177,7 +157,7 @@ class Raffle extends Component {
   handleClose = (purchase, miner) => {
     this.setState({ modalShow: false });
     let component = this;
-    // Buy a raffle ticket if purchase = true
+
     if (purchase) {
       const raffle = this.state.raffle[this.state.drawOption];
 
@@ -267,7 +247,7 @@ class Raffle extends Component {
       raffle.public.description &&
       raffle.public.entryPrice &&
       raffle.public.prizeAmount &&
-      raffle.public.expiry
+      (raffle.public.expiry || raffle.public.totalTickets)
     );
   };
 
