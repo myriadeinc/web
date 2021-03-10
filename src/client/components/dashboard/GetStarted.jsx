@@ -30,7 +30,7 @@ class GetStarted extends Component {
             <h3>1. How to Start Earning MC</h3>
             <hr />
             <h5>
-              To start earning MC, simply headover to the{' '}
+              To start earning MC, simply head over to the{' '}
               <a href="/#/dashboard/mining">Start Mining</a> page where you will
               find a step-by-step guide and video tutorial on mining with your
               computer.
