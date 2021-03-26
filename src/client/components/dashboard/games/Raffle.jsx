@@ -361,7 +361,7 @@ class Raffle extends Component {
                           <th>Number of Tickets</th>
                           <th>Prize Amount (XMR)</th>
                           <th>Last Purchased</th>
-                          <th>Winner</th>
+                          <th>Past Winner</th>
                         </tr>
                       </thead>
                       <tbody>{ticketListUpcoming.reverse()}</tbody>
@@ -378,7 +378,7 @@ class Raffle extends Component {
                         <th>Number of Tickets</th>
                         <th>Prize Amount (XMR)</th>
                         <th>Last Purchased</th>
-                        <th>Winner</th>
+                        <th>Past Winner</th>
                       </tr>
                     </thead>
                     <tbody>{ticketListExpired.reverse()}</tbody>
