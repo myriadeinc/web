@@ -1,43 +1,49 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import LandingBody from '../components/landing/LandingBody.jsx'
-import LandingFooter from '../components/landing/LandingFooter.jsx'
+import LandingBody from '../components/landing/LandingBody.jsx';
+import LandingFooter from '../components/landing/LandingFooter.jsx';
 
-import { Alert } from 'shards-react'
+import { Alert } from 'shards-react';
 
-import PageStyle from '../styles/pages/Landing.less'
+import PageStyle from '../styles/pages/Landing.less';
+import { Redirect } from 'react-router';
+import * as ROUTES from '../utils/routes.js';
 
 class LandingPage extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.dismiss = this.dismiss.bind(this)
-        this.state = {
-            poolAlert: true,
-        }
-    }
+    this.dismiss = this.dismiss.bind(this);
+    this.state = {
+      poolAlert: true,
+    };
+  }
 
-    dismiss() {
-        this.setState({ poolAlert: false })
-    }
+  dismiss() {
+    this.setState({ poolAlert: false });
+  }
 
-    render() {
-        return (
-            <>
-                <Alert
-                    theme="warning"
-                    className={PageStyle.amber}
-                    dismissible={this.dismiss}
-                    open={this.state.poolAlert}
-                >
-                    Our Mining Pool is in alpha so there may be some issues.
-                    Thanks for your patience!
-                </Alert>
-                <LandingBody />
-                <LandingFooter />
-            </>
-        )
+  render() {
+    if (this.props.authenticated) {
+      return <Redirect to={ROUTES.DASHBOARD} />;
+    } else {
+      return (
+        <>
+          <Alert
+            theme="warning"
+            className={PageStyle.amber}
+            dismissible={this.dismiss}
+            open={this.state.poolAlert}
+          >
+            Our Mining Pool is in alpha so there may be some issues. Thanks for
+            your patience!
+          </Alert>
+          <LandingBody />
+          <LandingFooter />
+        </>
+      );
     }
+  }
 }
 
-export default LandingPage
+export default LandingPage;
