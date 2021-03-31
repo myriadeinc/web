@@ -112,24 +112,6 @@ class DashboardPage extends Component {
       });
 
     axios
-      .get(`${config.miner_metrics_url}/v1/stats/credit`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      })
-      .then((response) => {
-        newMinerObj.myriade_credits_balance = response.data.credits;
-        this.forceUpdate();
-      })
-      .catch((error) => {
-        console.error('There was an error!', error);
-        return this.setState({
-          error:
-            'Unable to fetch your data, please check your connection, your login and try again later',
-        });
-      });
-
-    axios
       .get(`${config.miner_metrics_url}/v1/stats/hashrates`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -167,7 +149,50 @@ class DashboardPage extends Component {
         console.error('There was an error!', error);
       });
 
+    this.getMiningCredits(newMinerObj);
+
     this.setState({ miner: newMinerObj });
+  }
+
+  getMiningCredits(minerObj) {
+    axios
+      .get(`${config.miner_metrics_url}/v1/stats/credit`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
+      .then((response) => {
+        minerObj.myriade_credits_balance = response.data.credits;
+        this.forceUpdate();
+      })
+      .catch((error) => {
+        console.error('There was an error!', error);
+        return this.setState({
+          error:
+            'Unable to fetch your data, please check your connection, your login and try again later',
+        });
+      });
+  }
+
+  getMoneroBalance() {
+    axios
+      .get(`${config.identity_service_url}/v1/account/self`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
+      .then((response) => {
+        this.state.miner.monero_balance =
+          response.data.balance / Math.pow(10, 12);
+        this.forceUpdate();
+      })
+      .catch((error) => {
+        console.error('There was an error!', error);
+        return this.setState({
+          error:
+            'Unable to fetch your data, please check your connection, your login and try again later',
+        });
+      });
   }
 
   getTitleElement(title) {
@@ -211,18 +236,42 @@ class DashboardPage extends Component {
                       >{`#${this.state.miner.shortId}`}</span>
                     </h3>
                     <p>{this.state.miner.email}</p>
-                    <p>
-                      <strong>
-                        Mining Credits:{' '}
-                        {this.state.miner.myriade_credits_balance}
-                      </strong>
-                    </p>
-                    <p>
-                      <i className="fab fa-monero" /> Monero Balance:{' '}
-                      {`${this.state.miner.monero_balance} ($${(
-                        this.state.USD * this.state.miner.monero_balance
-                      ).toFixed(2)} USD)`}
-                    </p>
+
+                    <Card
+                      style={{
+                        padding: '16px 16px 0px 16px',
+                        borderRadius: '1rem',
+                      }}
+                    >
+                      <p>
+                        <strong>
+                          Mining Credits:{' '}
+                          {this.state.miner.myriade_credits_balance}{' '}
+                        </strong>
+                        <i
+                          className={[PageStyle.reload, 'fa fa-refresh'].join(
+                            ' '
+                          )}
+                          style={{
+                            float: 'right',
+                          }}
+                          aria-hidden="true"
+                          onClick={() => {
+                            this.state.miner.myriade_credits_balance =
+                              'loading...';
+                            this.getMiningCredits(this.state.miner);
+                            this.getMoneroBalance();
+                          }}
+                        ></i>
+                      </p>
+                      <p>
+                        <i className="fab fa-monero" /> Monero Balance:{' '}
+                        {`${this.state.miner.monero_balance} ($${(
+                          this.state.USD * this.state.miner.monero_balance
+                        ).toFixed(2)} USD)`}
+                      </p>
+                    </Card>
+
                     <hr />
                     <ListGroup>
                       <DynamicBlackLink to={`${this.props.match.path}`}>
