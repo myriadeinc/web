@@ -10,18 +10,43 @@ import {
 } from 'recharts';
 import _ from 'lodash';
 import moment from 'moment';
-import { MinerConsumer } from '../../pages/Dashboard.jsx';
+import { MinerConsumer, MinerContext } from '../../pages/Dashboard.jsx';
 
 class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      done: false,
       hashrates: [],
     };
   }
 
-  getMaxHashrate(hashrates) {
-    return Math.max(...hashrates.map((entry) => parseInt(entry.rate)));
+  getThirtyPointMovingAverage(hashrates) {
+    if (!this.state.done && hashrates.length != 0) {
+      const clone = JSON.parse(JSON.stringify(hashrates));
+
+      let sum = 0;
+      const arr = [];
+      for (let i = 0; i < clone.length; i++) {
+        const num = parseInt(clone[i].rate);
+
+        if (i < 30) {
+          arr.push(num);
+        } else {
+          sum -= arr[i % 30];
+          arr[i % 30] = num;
+        }
+
+        sum += num;
+
+        clone[i].rate = Math.floor(sum / Math.min(i + 1, 30));
+      }
+
+      this.setState({ done: true, hashrates: clone });
+      return clone;
+    }
+
+    return this.state.done ? this.state.hashrates : hashrates;
   }
 
   render() {
@@ -29,7 +54,11 @@ class Chart extends Component {
       <MinerConsumer>
         {(miner) => (
           <ResponsiveContainer>
-            <LineChart data={miner.historical_hashrates}>
+            <LineChart
+              data={this.getThirtyPointMovingAverage(
+                miner.historical_hashrates
+              )}
+            >
               <XAxis
                 dataKey="time"
                 axisLine={false}
@@ -53,7 +82,7 @@ class Chart extends Component {
                 tick={{
                   fontSize: 12,
                 }}
-                domain={[0, this.getMaxHashrate(miner.historical_hashrates)]}
+                domain={[0, 'auto']}
               >
                 <Label
                   value="Hashrate (H/s)"

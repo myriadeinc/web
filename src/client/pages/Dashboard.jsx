@@ -112,6 +112,24 @@ class DashboardPage extends Component {
       });
 
     axios
+      .get(`${config.miner_metrics_url}/v1/stats/credit`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
+      .then((response) => {
+        newMinerObj.myriade_credits_balance = response.data.credits;
+        this.forceUpdate();
+      })
+      .catch((error) => {
+        console.error('There was an error!', error);
+        return this.setState({
+          error:
+            'Unable to fetch your data, please check your connection, your login and try again later',
+        });
+      });
+
+    axios
       .get(`${config.miner_metrics_url}/v1/stats/hashrates`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -149,12 +167,10 @@ class DashboardPage extends Component {
         console.error('There was an error!', error);
       });
 
-    this.getMiningCredits(newMinerObj);
-
     this.setState({ miner: newMinerObj });
   }
 
-  getMiningCredits(minerObj) {
+  getMiningCredits() {
     axios
       .get(`${config.miner_metrics_url}/v1/stats/credit`, {
         headers: {
@@ -162,7 +178,7 @@ class DashboardPage extends Component {
         },
       })
       .then((response) => {
-        minerObj.myriade_credits_balance = response.data.credits;
+        this.state.miner.myriade_credits_balance = response.data.credits;
         this.forceUpdate();
       })
       .catch((error) => {
@@ -259,7 +275,7 @@ class DashboardPage extends Component {
                           onClick={() => {
                             this.state.miner.myriade_credits_balance =
                               'loading...';
-                            this.getMiningCredits(this.state.miner);
+                            this.getMiningCredits();
                             this.getMoneroBalance();
                           }}
                         ></i>
@@ -356,5 +372,4 @@ class DashboardPage extends Component {
 }
 
 export const MinerConsumer = minerContext.Consumer;
-
 export default DashboardPage;
