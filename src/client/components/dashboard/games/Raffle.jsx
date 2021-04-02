@@ -12,11 +12,10 @@ import {
   Col,
   Table,
   Card,
-  CardColumns,
-  Badge,
   ProgressBar,
   Tabs,
   Tab,
+  CardDeck,
 } from 'react-bootstrap';
 import { Container, Alert } from 'shards-react';
 
@@ -348,8 +347,8 @@ class Raffle extends Component {
             </Row>
             <Container className="mb-4">
               <h4>Current Drawings</h4>
-              <CardColumns>{drawingCards}</CardColumns>
-
+              <CardDeck>{drawingCards}</CardDeck>
+              <br />
               <h4>History</h4>
               <Tabs defaultActiveKey="upcoming">
                 <Tab eventKey="upcoming" title="Upcoming">
