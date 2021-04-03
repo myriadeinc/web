@@ -295,9 +295,18 @@ class Raffle extends Component {
                     {`${value.public.numTickets} of ${value.public.totalTickets} purchased`}
                   </>
                 ) : (
-                  <small className="text-muted">
-                    Closes in: {this.state.countdownString[index]}
-                  </small>
+                  <>
+                    <ProgressBar
+                      animated
+                      min={0}
+                      max={100}
+                      now={100}
+                      label={`${value.public.numTickets} tickets purchased`}
+                    />
+                    <small className="text-muted">
+                      Closes in: {this.state.countdownString[index]}
+                    </small>
+                  </>
                 )}
               </Card.Footer>
             </Card>
