@@ -235,7 +235,7 @@ class DashboardPage extends Component {
       <AuthConsumer>
         {({ authenticated, logout }) => (
           <minerContext.Provider value={this.state.miner}>
-            <Row>
+            <Row style={{ marginRight: '0px' }}>
               <Col lg={3}>
                 <Card className={PageStyle.sidebar}>
                   <CardBody>
@@ -326,7 +326,10 @@ class DashboardPage extends Component {
                   </CardFooter>
                 </Card>
               </Col>
-              <Col lg={9}>
+              <Col
+                lg={9}
+                style={{ height: 'calc(100vh - 80px)', overflow: 'scroll' }}
+              >
                 {this.state.alert && this.displayAlert()}
                 {this.state.error && this.displayError()}
                 <Switch>
