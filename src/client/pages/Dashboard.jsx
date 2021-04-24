@@ -99,7 +99,6 @@ class DashboardPage extends Component {
         },
       })
       .then((response) => {
-        newMinerObj.monero_balance = response.data.balance / Math.pow(10, 12);
         newMinerObj.shortId = response.data.shortId;
         this.forceUpdate();
       })
@@ -119,6 +118,8 @@ class DashboardPage extends Component {
       })
       .then((response) => {
         newMinerObj.myriade_credits_balance = response.data.credits;
+        newMinerObj.monero_balance =
+          response.data.monero_balance / Math.pow(10, 12);
         this.forceUpdate();
       })
       .catch((error) => {
@@ -179,27 +180,8 @@ class DashboardPage extends Component {
       })
       .then((response) => {
         this.state.miner.myriade_credits_balance = response.data.credits;
-        this.forceUpdate();
-      })
-      .catch((error) => {
-        console.error('There was an error!', error);
-        return this.setState({
-          error:
-            'Unable to fetch your data, please check your connection, your login and try again later',
-        });
-      });
-  }
-
-  getMoneroBalance() {
-    axios
-      .get(`${config.identity_service_url}/v1/account/self`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      })
-      .then((response) => {
         this.state.miner.monero_balance =
-          response.data.balance / Math.pow(10, 12);
+          response.data.monero_balance / Math.pow(10, 12);
         this.forceUpdate();
       })
       .catch((error) => {
@@ -276,7 +258,6 @@ class DashboardPage extends Component {
                             this.state.miner.myriade_credits_balance =
                               'loading...';
                             this.getMiningCredits();
-                            this.getMoneroBalance();
                           }}
                         ></i>
                       </p>
