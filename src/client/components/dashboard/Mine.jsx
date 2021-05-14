@@ -70,7 +70,7 @@ class Mine extends Component {
           <Jumbotron className="p-2">
             <ResponsiveEmbed aspectRatio="16by9">
               <iframe
-                src="https://www.youtube.com/embed/VYgMDP0td70"
+                src="https://www.youtube.com/embed/11i66_6rJSM"
                 frameBorder="0"
                 allowFullScreen
               ></iframe>
