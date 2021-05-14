@@ -43,6 +43,7 @@ class Withdraw extends Component {
     let templateParams = {
       minerName: this.state.minerName,
       minerEmail: this.state.minerEmail,
+      minerId: this.state.minerId,
       amount: this.state.amount,
       wallet: this.state.wallet,
     };
@@ -99,6 +100,7 @@ class Withdraw extends Component {
         this.setState({ confirmScreen: true });
         this.setState({ minerName: miner.miner.name });
         this.setState({ minerEmail: miner.miner.email });
+        this.setState({ minerId: miner.miner.shortId });
         this.setState({ amount: miner.miner.monero_balance });
         setValidated(true);
       }
