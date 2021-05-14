@@ -31,8 +31,8 @@ class GetStarted extends Component {
             </h5>
             <h5>
               The purpose of MC is to spend them on raffle tickets in the Game
-              Room to win more XMR than you'd otherwise earn while mining Monero
-              alone.
+              Room for a chance to win more XMR than you'd otherwise earn while
+              mining Monero alone.
             </h5>
           </Col>
         </Row>
