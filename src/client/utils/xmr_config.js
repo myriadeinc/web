@@ -1,6 +1,8 @@
 const data = {
     "autosave": true,
-    "cpu": true,
+    "cpu": {
+        "memory-pool": true
+    },
     "donate-level": 1,
     "donate-over-proxy": 1,
     "pools": [
