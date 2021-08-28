@@ -203,7 +203,7 @@ class DashboardPage extends Component {
         return ref.includes('gameroom') ? <strong>{title}</strong> : title;
       case 'Withdraw':
         return ref.includes('withdraw') ? <strong>{title}</strong> : title;
-      case 'Get Started':
+      case 'Tutorial':
         return ref.includes('getstarted') ? <strong>{title}</strong> : title;
       case 'Support':
         return ref.includes('support') ? <strong>{title}</strong> : title;
@@ -290,7 +290,7 @@ class DashboardPage extends Component {
                       <DynamicBlackLink
                         to={`${this.props.match.path}/getstarted`}
                       >
-                        {this.getTitleElement('Get Started')}
+                        {this.getTitleElement('Tutorial')}
                       </DynamicBlackLink>
                       <DynamicBlackLink to={`${this.props.match.path}/support`}>
                         {this.getTitleElement('Support')}
