@@ -68,13 +68,4 @@ class App extends React.Component {
   }
 }
 
-const Reddit = () => {
-  return (
-    <h4>
-      Hey r/monero mods. The accounts to be flared are: u/Myriade_admin,
-      u/SQPhoenix, and u/canadian_arab16. Thanks!
-    </h4>
-  );
-};
-
 export default App;
