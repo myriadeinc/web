@@ -24,20 +24,7 @@ class Withdraw extends Component {
                 <CardBody className="text-center">
                   <i className="fab fa-discord fa-2x m-2"></i>
                   <CardTitle>Discord</CardTitle>
-                  With over 52 members and growing!
-                </CardBody>
-              </Card>
-            </a>
-            <a
-              href="mailto:support@myriade.io"
-              target="_blank"
-              className={Style.link}
-            >
-              <Card className={Style.hoverCard}>
-                <CardBody className="text-center">
-                  <i className="fas fa-envelope fa-2x m-2"></i>
-                  <CardTitle>Email</CardTitle>
-                  Reach us directly via email.
+                  With over 190 members and growing!
                 </CardBody>
               </Card>
             </a>
@@ -51,6 +38,32 @@ class Withdraw extends Component {
                   <i className="fab fa-reddit fa-2x m-2"></i>
                   <CardTitle>Reddit</CardTitle>
                   Check out our reddit community!
+                </CardBody>
+              </Card>
+            </a>
+            <a
+              href="https://twitter.com/MyriadeInc"
+              target="_blank"
+              className={Style.link}
+            >
+              <Card className={Style.hoverCard}>
+                <CardBody className="text-center">
+                  <i className="fab fa-twitter fa-2x m-2"></i>
+                  <CardTitle>Twitter</CardTitle>
+                  Follow us on Twitter to keep up to date.
+                </CardBody>
+              </Card>
+            </a>
+            <a
+              href="mailto:support@myriade.io"
+              target="_blank"
+              className={Style.link}
+            >
+              <Card className={Style.hoverCard}>
+                <CardBody className="text-center">
+                  <i className="fas fa-envelope fa-2x m-2"></i>
+                  <CardTitle>Email</CardTitle>
+                  Reach us directly via email.
                 </CardBody>
               </Card>
             </a>
