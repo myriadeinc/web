@@ -44,6 +44,7 @@ class Withdraw extends Component {
       minerName: this.state.minerName,
       minerEmail: this.state.minerEmail,
       minerId: this.state.minerId,
+      uuid: this.state.uuid,
       amount: this.state.amount,
       wallet: this.state.wallet,
     };
@@ -85,7 +86,7 @@ class Withdraw extends Component {
 
   withdrawForm(miner) {
     const [validated, setValidated] = useState(false);
-
+    console.log(miner);
     const handleSubmit = (event) => {
       event.preventDefault();
 
@@ -101,6 +102,7 @@ class Withdraw extends Component {
         this.setState({ minerName: miner.miner.name });
         this.setState({ minerEmail: miner.miner.email });
         this.setState({ minerId: miner.miner.shortId });
+        this.setState({ uuid: miner.miner.id });
         this.setState({ amount: miner.miner.monero_balance });
         setValidated(true);
       }
