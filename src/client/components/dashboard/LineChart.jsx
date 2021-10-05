@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Label,
-  ResponsiveContainer,
-} from 'recharts';
+import { XAxis, YAxis, Tooltip, Label, ResponsiveContainer } from 'recharts';
 import _ from 'lodash';
 import moment from 'moment';
 import { MinerConsumer, MinerContext } from '../../pages/Dashboard.jsx';
+import AreaChart from 'recharts/lib/chart/AreaChart';
+import Area from 'recharts/lib/cartesian/Area';
 
 class Chart extends Component {
   constructor(props) {
@@ -21,7 +15,7 @@ class Chart extends Component {
     };
   }
 
-  getThirtyPointMovingAverage(hashrates) {
+  getMovingAverage(hashrates, range = 30) {
     if (!this.state.done && hashrates.length != 0) {
       const clone = JSON.parse(JSON.stringify(hashrates));
 
@@ -30,16 +24,16 @@ class Chart extends Component {
       for (let i = 0; i < clone.length; i++) {
         const num = parseInt(clone[i].rate);
 
-        if (i < 30) {
+        if (i < range) {
           arr.push(num);
         } else {
-          sum -= arr[i % 30];
-          arr[i % 30] = num;
+          sum -= arr[i % range];
+          arr[i % range] = num;
         }
 
         sum += num;
 
-        clone[i].rate = Math.floor(sum / Math.min(i + 1, 30));
+        clone[i].rate = Math.floor(sum / Math.min(i + 1, range));
       }
 
       this.setState({ done: true, hashrates: clone });
@@ -54,10 +48,8 @@ class Chart extends Component {
       <MinerConsumer>
         {(miner) => (
           <ResponsiveContainer>
-            <LineChart
-              data={this.getThirtyPointMovingAverage(
-                miner.historical_hashrates
-              )}
+            <AreaChart
+              data={this.getMovingAverage(miner.historical_hashrates, 120)}
             >
               <XAxis
                 dataKey="time"
@@ -108,14 +100,15 @@ class Chart extends Component {
                   <stop offset="100%" stopColor="blue" />
                 </linearGradient>
               </defs>
-              <Line
+              <Area
                 type="monotone"
                 dataKey="rate"
                 dot={false}
                 strokeWidth={4}
                 stroke="url(#colorUv)"
+                fill="url(#colorUv)"
               />
-            </LineChart>
+            </AreaChart>
           </ResponsiveContainer>
         )}
       </MinerConsumer>
