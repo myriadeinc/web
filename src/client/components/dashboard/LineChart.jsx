@@ -105,8 +105,8 @@ class Chart extends Component {
                 dataKey="rate"
                 dot={false}
                 strokeWidth={4}
-                stroke="url(#colorUv)"
-                fill="url(#colorUv)"
+                stroke="#4E69FF"
+                fill="#BAC1FF"
               />
             </AreaChart>
           </ResponsiveContainer>
