@@ -257,6 +257,25 @@ class Raffle extends Component {
         const valid =
           this.validateRaffle(value) &&
           this.state.countdownString[index] != 'EXPIRED';
+
+        const type = value.public.type;
+        const prizeAmount = value.public.prizeAmount;
+        let svg = 'public\\images\\blue.svg';
+
+        if (type) {
+          if (prizeAmount == 5) {
+            svg = 'public\\images\\red.svg';
+          }
+
+          if (prizeAmount == 10) {
+            svg = 'public\\images\\teal.svg';
+          }
+
+          if (prizeAmount == 20) {
+            svg = 'public\\images\\teal.svg';
+          }
+        }
+
         return (
           valid && (
             <Card
@@ -264,21 +283,29 @@ class Raffle extends Component {
               onClick={() => this.handleShow(index)}
               key={index}
             >
+              {type && <Card.Img variant="top" src={svg} />}
               <Card.Body className="pb-0">
-                <Row>
-                  <Col>
-                    <Card.Title>
-                      {formatMoney(value.public.prizeAmount * this.state.USD)}
-                      USD
-                    </Card.Title>
-                  </Col>
-                  <Col md="auto">
-                    <Card.Title></Card.Title>
-                  </Col>
-                </Row>
-                <Card.Subtitle className="mb-2 text-muted">
-                  <i className="fab fa-monero" /> {value.public.prizeAmount}XMR
-                </Card.Subtitle>
+                {!type && (
+                  <>
+                    <Row>
+                      <Col>
+                        <Card.Title>
+                          {formatMoney(
+                            value.public.prizeAmount * this.state.USD
+                          )}
+                          USD
+                        </Card.Title>
+                      </Col>
+                      <Col md="auto">
+                        <Card.Title></Card.Title>
+                      </Col>
+                    </Row>
+                    <Card.Subtitle className="mb-2 text-muted">
+                      <i className="fab fa-monero" /> {value.public.prizeAmount}
+                      XMR
+                    </Card.Subtitle>
+                  </>
+                )}
                 <Card.Text className={Style.orange + ' mb-0'}>
                   {value.public.title}
                 </Card.Text>
