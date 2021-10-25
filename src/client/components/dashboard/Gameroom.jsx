@@ -4,70 +4,96 @@ import { Switch, Link } from 'react-router-dom';
 import { Card, CardColumns, Container } from 'react-bootstrap';
 
 import Raffles from './games/Raffle.jsx';
-import Grid from './games/Grid.jsx';
+import GiftCards from './games/GiftCards.jsx';
 
 import { ProtectedRoute, AuthConsumer } from '../../layers/AuthLayer.jsx';
 
-import Style from '../../styles/components/dashboard/Gameroom.less'
+import Style from '../../styles/components/dashboard/Gameroom.less';
 
 function Menu() {
   return (
     <>
-      <h3 className="mb-3" >Gameroom</h3>
+      <h3 className="mb-3">Gameroom</h3>
       <p>Use your Mining Credits to play a selection of games and win XMR!</p>
 
       <CardColumns className="pt-4">
         <Card className={Style.hoverCard}>
-          <Link className={Style.noDecoration} to={`/dashboard/gameroom/raffles`}>
-            <Card.Img className={Style.cardImg} variant="top" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/047ceb32844729.5695f00736611.jpg" />
+          <Link
+            className={Style.noDecoration}
+            to={`/dashboard/gameroom/raffles`}
+          >
+            <Card.Img
+              className={Style.cardImg}
+              variant="top"
+              src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/047ceb32844729.5695f00736611.jpg"
+            />
             <Card.Body>
-              <Card.Title>Giveaways</Card.Title>
+              <Card.Title>Monero Giveaways</Card.Title>
               <Card.Text>
                 Enter your Mining Credits for a chance at winning some Monero!
-            </Card.Text>
+              </Card.Text>
             </Card.Body>
           </Link>
         </Card>
 
         <Card className={Style.hoverCard}>
           <Link className={Style.noDecoration} to={`/dashboard/gameroom/grid`}>
-            <Card.Img className={Style.cardImg} variant="top" src="https://i.pinimg.com/originals/68/d7/a2/68d7a2dad75925c01f7e5c296bd04f86.jpg" />
+            <Card.Img
+              className={Style.cardImg}
+              variant="top"
+              src="https://i.pinimg.com/originals/68/d7/a2/68d7a2dad75925c01f7e5c296bd04f86.jpg"
+            />
             <Card.Body>
-              <Card.Title>Grid</Card.Title>
+              <Card.Title>Gift Cards</Card.Title>
               <Card.Text>
-                New game coming soon!
+                Enter your Mining Credits for a chance at winning gift cards!
               </Card.Text>
             </Card.Body>
           </Link>
         </Card>
-
       </CardColumns>
     </>
-  )
+  );
 }
 
 class GameroomComponent extends Component {
-
   render() {
     return (
       <AuthConsumer>
         {({ authenticated }) => (
-          <Container className="pt-4">
+          <Container
+            className="pt-4"
+            style={{ paddingLeft: '0px', paddingRight: '0px' }}
+          >
             <Switch>
-              <ProtectedRoute exact path={`/dashboard/gameroom/`} component={Menu} authenticated={authenticated} />
-              <ProtectedRoute path={`/dashboard/gameroom/raffles`} component={Raffles} authenticated={authenticated} />
-              <ProtectedRoute path={`/dashboard/gameroom/grid`} component={Grid} authenticated={authenticated} />
+              <ProtectedRoute
+                exact
+                path={`/dashboard/gameroom/`}
+                component={Menu}
+                authenticated={authenticated}
+              />
+              <ProtectedRoute
+                path={`/dashboard/gameroom/raffles`}
+                component={Raffles}
+                authenticated={authenticated}
+              />
+              <ProtectedRoute
+                path={`/dashboard/gameroom/grid`}
+                component={GiftCards}
+                authenticated={authenticated}
+              />
             </Switch>
           </Container>
         )}
       </AuthConsumer>
-    )
+    );
   }
 }
 
 export default GameroomComponent;
 
-{/*
+{
+  /*
   
 $('.btn-number').click(function(e){
     e.preventDefault();
@@ -140,4 +166,5 @@ $(".input-number").keydown(function (e) {
             e.preventDefault();
         }
     });
-*/}
+*/
+}
