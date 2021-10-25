@@ -23,6 +23,7 @@ import Gravatar from 'react-gravatar';
 
 import Style from '../styles/pages/Landing.less';
 import Raffle from '../components/dashboard/games/Raffle.jsx';
+import GameroomComponent from '../components/dashboard/Gameroom.jsx';
 
 const minerContext = createContext();
 
@@ -138,16 +139,21 @@ class DashboardPage extends Component {
       })
       .then((response) => {
         let avg = 0;
+        let count = 0;
 
         newMinerObj.historical_hashrates = response.data.map((entry) => {
-          avg += parseInt(entry.rate);
+          if (count < 10) {
+            avg += parseInt(entry.rate);
+            count++;
+          }
+
           return {
             time: new Date(entry.time).getTime(),
             rate: entry.rate,
           };
         });
 
-        avg /= newMinerObj.historical_hashrates.length;
+        avg /= count;
         newMinerObj.average_hashrate = avg.toFixed(2);
         this.forceUpdate();
       })
@@ -327,7 +333,7 @@ class DashboardPage extends Component {
                   />
                   <ProtectedRoute
                     path={`${this.props.match.url}/gameroom`}
-                    component={Raffle}
+                    component={GameroomComponent}
                     authenticated={authenticated}
                   />
                   <ProtectedRoute

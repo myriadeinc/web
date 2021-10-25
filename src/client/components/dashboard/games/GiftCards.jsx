@@ -28,7 +28,7 @@ const EXPIRYTHRESHOLD = 1000 * 60 * 60 * 24 * 30; // The theshold at which any r
 // const raffle = tempData.raffles
 // const purchasedTickets = tempData.miner.raffles
 
-class Raffle extends Component {
+class GiftCards extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -259,7 +259,32 @@ class Raffle extends Component {
         const valid =
           this.validateRaffle(value) &&
           this.state.countdownString[index] != 'EXPIRED' &&
-          !type;
+          type;
+
+        const prizeAmount = value.public.prizeAmount;
+        let png = 'public\\images\\blue.svg';
+
+        if (type) {
+          if (prizeAmount == 5) {
+            png = 'public\\images\\red.png';
+          }
+
+          if (prizeAmount == 10) {
+            png = 'public\\images\\teal.png';
+          }
+
+          if (prizeAmount == 20) {
+            png = 'public\\images\\orange.png';
+          }
+
+          if (prizeAmount == 50) {
+            png = 'public\\images\\green.png';
+          }
+
+          if (prizeAmount == 100) {
+            png = 'public\\images\\purple.png';
+          }
+        }
 
         return (
           valid && (
@@ -268,21 +293,29 @@ class Raffle extends Component {
               onClick={() => this.handleShow(index)}
               key={index}
             >
+              {type && <Card.Img variant="top" src={png} />}
               <Card.Body className="pb-0">
-                <Row>
-                  <Col>
-                    <Card.Title>
-                      {formatMoney(value.public.prizeAmount * this.state.USD)}
-                      USD
-                    </Card.Title>
-                  </Col>
-                  <Col md="auto">
-                    <Card.Title></Card.Title>
-                  </Col>
-                </Row>
-                <Card.Subtitle className="mb-2 text-muted">
-                  <i className="fab fa-monero" /> {value.public.prizeAmount}XMR
-                </Card.Subtitle>
+                {!type && (
+                  <>
+                    <Row>
+                      <Col>
+                        <Card.Title>
+                          {formatMoney(
+                            value.public.prizeAmount * this.state.USD
+                          )}
+                          USD
+                        </Card.Title>
+                      </Col>
+                      <Col md="auto">
+                        <Card.Title></Card.Title>
+                      </Col>
+                    </Row>
+                    <Card.Subtitle className="mb-2 text-muted">
+                      <i className="fab fa-monero" /> {value.public.prizeAmount}
+                      XMR
+                    </Card.Subtitle>
+                  </>
+                )}
                 <Card.Text className={Style.orange + ' mb-0'}>
                   {value.public.title}
                 </Card.Text>
@@ -328,6 +361,8 @@ class Raffle extends Component {
       let purchaseDate = moment(value.purchased * 1000).format('lll');
       let status = value.status;
 
+      console.log(value);
+
       let entry = (
         <tr
           key={index}
@@ -335,13 +370,13 @@ class Raffle extends Component {
         >
           <td>{value.title}</td>
           <td>{value.tickets}</td>
-          <td>{value.amount + ' XMR'}</td>
+          <td>{value.amount + ' USD'}</td>
           <td>{purchaseDate}</td>
           <td>{value.winner}</td>
         </tr>
       );
 
-      if (!value.title.includes('Steam')) {
+      if (value.title.includes('Steam')) {
         if (status == 1) {
           ticketListUpcoming.push(entry);
         } else {
@@ -357,7 +392,7 @@ class Raffle extends Component {
             {this.state.success && this.displaySuccess()}
             <Row>
               <Col>
-                <h3 className={Style.orange}>Monero Giveaways</h3>
+                <h3 className={Style.orange}>Gift Card Giveaways</h3>
               </Col>
             </Row>
             <Container className="mb-4">
@@ -367,13 +402,13 @@ class Raffle extends Component {
               <h4>History</h4>
               <Tabs defaultActiveKey="upcoming">
                 <Tab eventKey="upcoming" title="Upcoming">
-                  {this.state.purchasedTickets.length ? (
+                  {ticketListUpcoming.length ? (
                     <Table striped bordered hover>
                       <thead>
                         <tr>
                           <th>Drawing Title</th>
                           <th>Number of Tickets</th>
-                          <th>Prize Amount (XMR)</th>
+                          <th>Prize Amount (USD)</th>
                           <th>Last Purchased</th>
                           <th>Past Winner</th>
                         </tr>
@@ -391,7 +426,7 @@ class Raffle extends Component {
                         <tr>
                           <th>Drawing Title</th>
                           <th>Number of Tickets</th>
-                          <th>Prize Amount (XMR)</th>
+                          <th>Prize Amount (USD)</th>
                           <th>Last Purchased</th>
                           <th>Past Winner</th>
                         </tr>
@@ -555,4 +590,4 @@ class Raffle extends Component {
   }
 }
 
-export default Raffle;
+export default GiftCards;
