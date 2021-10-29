@@ -142,7 +142,7 @@ class DashboardPage extends Component {
         let count = 0;
 
         newMinerObj.historical_hashrates = response.data.map((entry) => {
-          if (count < 10) {
+          if (count < 30) {
             avg += parseInt(entry.rate);
             count++;
           }

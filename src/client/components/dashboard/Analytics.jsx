@@ -106,7 +106,7 @@ class AnalyticsComponent extends Component {
                   <Card.ImgOverlay className={Style.CardOverlay + ' p-3'}>
                     <div>
                       <h1 className={Style.dynamicSubtitle}>
-                        Average Hashrate (20m){' '}
+                        Average Hashrate (1hr){' '}
                       </h1>
                       <h1 className={Style.dynamicTitle}>
                         {`${miner.average_hashrate} H/sec`}
