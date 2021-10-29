@@ -460,17 +460,9 @@ class GiftCards extends Component {
                       <small className="text-muted">Drawing Amount: </small>
                       {formatMoney(
                         this.state.raffle[this.state.drawOption].public
-                          .prizeAmount * this.state.USD
+                          .prizeAmount
                       )}
-                      USD
-                      <small className="text-muted">
-                        (
-                        {
-                          this.state.raffle[this.state.drawOption].public
-                            .prizeAmount
-                        }
-                        XMR)
-                      </small>
+                      USD <small className="text-muted">Steam Gift Card</small>
                     </h5>
                     <h5>
                       <small className="text-muted">Ticket Price: </small>{' '}
