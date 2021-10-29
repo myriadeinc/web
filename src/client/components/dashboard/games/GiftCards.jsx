@@ -266,23 +266,28 @@ class GiftCards extends Component {
 
         if (type) {
           if (prizeAmount == 5) {
-            png = 'public\\images\\red.png';
+            png =
+              'https://res.cloudinary.com/dtocmcjrg/image/upload/v1635478116/red_k3jxok.png';
           }
 
           if (prizeAmount == 10) {
-            png = 'public\\images\\teal.png';
+            png =
+              'https://res.cloudinary.com/dtocmcjrg/image/upload/v1635478116/teal_mbjzzi.png';
           }
 
           if (prizeAmount == 20) {
-            png = 'public\\images\\orange.png';
+            png =
+              'https://res.cloudinary.com/dtocmcjrg/image/upload/v1635478116/orange_yjk2ox.png';
           }
 
           if (prizeAmount == 50) {
-            png = 'public\\images\\green.png';
+            png =
+              'https://res.cloudinary.com/dtocmcjrg/image/upload/v1635478116/green_xue8kg.png';
           }
 
           if (prizeAmount == 100) {
-            png = 'public\\images\\purple.png';
+            png =
+              'https://res.cloudinary.com/dtocmcjrg/image/upload/v1635478116/purple_kq4ha4.png';
           }
         }
 
