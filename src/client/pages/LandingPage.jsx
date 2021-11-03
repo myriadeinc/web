@@ -35,8 +35,9 @@ class LandingPage extends Component {
             dismissible={this.dismiss}
             open={this.state.poolAlert}
           >
-            Our Mining Pool is in alpha so there may be some issues. Thanks for
+            Our Mining Pool is in alpha so there may be some issues. Currently we are facing downtime and are working on a fix. Withdrawals and Game room are still operational. Check back with us soon. Thanks for
             your patience!
+            
           </Alert>
           <LandingBody />
           <LandingFooter />
