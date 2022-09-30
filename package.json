@@ -74,7 +74,7 @@
     "react-router-dom": "~4.3.1",
     "react-syntax-highlighter": "^12.2.1",
     "react-three-fiber": "^3.0.17",
-    "recharts": "^1.8.5",
+    "recharts": "^2.1.14",
     "shards-react": "^1.0.3",
     "styled-components": "^4.4.1",
     "three": "^0.127.0"
