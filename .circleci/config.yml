@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: myriadeinc/node-ci:latest
     steps:
-      - checkout
+      #- checkout
       - run:
           name: Debug SSH Access
           command: |
