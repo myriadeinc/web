@@ -6,10 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Debug SSH Access
-          command: |
-            ssh -T git@github.com
-      - run:
           name: Installing dependencies
           command: |
             npm install
