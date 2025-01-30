@@ -1,7 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
-const fs = require('fs')
-
 
 module.exports = {
     entry: './src/client/index.js',
@@ -9,9 +8,7 @@ module.exports = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                include: [
-                    path.resolve(__dirname, 'src'),
-                ],
+                include: [path.resolve(__dirname, 'src')],
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -21,11 +18,7 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                use: [
-                    {
-                        loader: 'html-loader',
-                    },
-                ],
+                use: [{ loader: 'html-loader' }],
             },
             {
                 test: /\.svg$/,
@@ -33,22 +26,16 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    "style-loader", // creates style nodes from JS strings
-                    "css-loader", // translates CSS into CommonJS
-                    "sass-loader" // compiles Sass to CSS, using Node Sass by default
-                ]
+                use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.css$/,
-                loader: "style-loader!css-loader"
+                loader: 'style-loader!css-loader',
             },
             {
                 test: /\.less$/,
                 use: [
-                    {
-                        loader: 'style-loader',
-                    },
+                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -56,9 +43,7 @@ module.exports = {
                             localIdentName: '[local]___[hash:base64:5]',
                         },
                     },
-                    {
-                        loader: 'less-loader',
-                    },
+                    'less-loader',
                 ],
             },
         ],
@@ -66,12 +51,20 @@ module.exports = {
     devServer: {
         port: 8030,
         open: true,
-        compress: true
+        compress: true,
     },
     plugins: [
         new HtmlWebPackPlugin({
             template: './public/index.html',
             favicon: './public/icons/favicon.png',
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'quartzHomepage'),
+                    to: path.resolve(__dirname, 'dist/quartzHomepage'),
+                },
+            ],
         }),
     ],
 };
