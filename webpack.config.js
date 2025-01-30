@@ -62,7 +62,7 @@ module.exports = {
             patterns: [
                 {
                     from: path.resolve(__dirname, 'quartzHomepage'),
-                    to: path.resolve(__dirname, 'public/quartzHomepage'),
+                    to: path.resolve(__dirname, 'dist/quartzHomepage'),
                 },
             ],
         }),
