@@ -17,7 +17,7 @@ jobs:
           name: Build using Webpack
           command: |
             make build
-      - deploy:
+      - run:
           name: Deploying to myriade-web
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
