@@ -271,7 +271,7 @@ const Faq = () => (
           eventKey="0"
           className={Style.faqToggle}
         >
-          <Card.Title>What is Myriade?</Card.Title>
+          <Card.Title>TEST What is Myriade?</Card.Title>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="0" className={Style.faqCollapse}>
           <Card.Body>
