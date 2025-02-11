@@ -1,9 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 
 class LandingPage extends Component {
+  constructor(props) {
+    super(props);
+    this.containerRef = createRef();
+  }
+  
+  componentDidMount() {
+    const container = this.containerRef.current;
+    const scripts = container.getElementsByTagName('script');
+    const scriptsArray = Array.from(scripts);
+    scriptsArray.forEach(oldScript => {
+      const newScript = document.createElement('script');
+      Array.from(oldScript.attributes).forEach(attr => {
+        newScript.setAttribute(attr.name, attr.value);
+      });
+      newScript.text = oldScript.innerHTML;
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+  }
+  
   render() {
     return (
       <div
+        ref={this.containerRef}
         dangerouslySetInnerHTML={{
           __html: `
 <!DOCTYPE html>
@@ -14,7 +34,7 @@ class LandingPage extends Component {
   <title>Myriade</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  <meta name="viewport" content= "width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/img/favicon.png" rel="icon">
   <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +90,7 @@ class LandingPage extends Component {
         </button>
       </div>
       <div class="btn-toolbar justify-content-center" data-aos="zoom-in">
-        <button class="btn btn-advanced-mining  justify-content-center mx-auto " type="button" onclick="window.location.href='https://github.com/xmrig/xmrig'">Advanced Mining (XMRIG)</button>
+        <button class="btn btn-advanced-mining justify-content-center mx-auto" type="button" onclick="window.location.href='https://github.com/xmrig/xmrig'">Advanced Mining (XMRIG)</button>
       </div>
       <div style="margin-bottom:500px"></div>
     </div>
@@ -84,7 +104,7 @@ class LandingPage extends Component {
     <section id="why-us" class="why-us">
       <div class="container-fluid" data-aos="fade-up">
         <div class="row">
-          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
             <div class="content">
               <h3>Getting started with Myriade is quick and easy. <strong>Just follow these steps.</strong></h3>
               <p>
@@ -98,9 +118,9 @@ class LandingPage extends Component {
                   <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Download the miner and create a secure account.<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                     <p>
-                      Once your account is created, you’ll be able to log in on multiple devices and start mining to one account. 
-                      The app is a simple program but it can still be confusing to new people. Send us a message or ask our community on 
-                      Discord if you run into trouble. We're all on the same team here and we all want you to succeed. 
+                      Once your account is created, you’ll be able to log in on multiple devices and start mining to one account.
+                      The app is a simple program but it can still be confusing to new people. Send us a message or ask our community on
+                      Discord if you run into trouble. We're all on the same team here and we all want you to succeed.
                     </p>
                   </div>
                 </li>
@@ -110,8 +130,8 @@ class LandingPage extends Component {
                     <p>
                       Before you start mining you have to initialize some key settings. One of which being your preferred mining split. Myriade allows you to be
                       rewarded for your mining in a variety of ways. Before you start, it is important to choose how you wish to be rewarded. This mining allocation
-                      is personal to you and should reflect what  you want to get out of your time with Myriade. We also have some other personalization options that 
-                      are less serious but are available to you for fun. 
+                      is personal to you and should reflect what  you want to get out of your time with Myriade. We also have some other personalization options that
+                      are less serious but are available to you for fun.
                     </p>
                   </div>
                 </li>
@@ -120,10 +140,10 @@ class LandingPage extends Component {
                   <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
                     <p>
                       Once you've chosen your preferred mining split, you are now ready to start mining. The magic of crypto mining is that it
-                      is a completely passive process. You could be at school, work, or even sleeping  and you will be earning on Myriade. 
+                      is a completely passive process. You could be at school, work, or even sleeping  and you will be earning on Myriade.
                       It's a bit like magic. Just make sure you have followed some of the guidelines on the app to make sure the program keeps
-                      running when you want it to. Sometimes Windows will enter sleep mode when it doesn't detect mouse movement so you wouldn't 
-                      want a whole day of mining to go to waste just because you forgot to change your settings around. 
+                      running when you want it to. Sometimes Windows will enter sleep mode when it doesn't detect mouse movement so you wouldn't
+                      want a whole day of mining to go to waste just because you forgot to change your settings around.
                     </p>
                   </div>
                 </li>
@@ -132,7 +152,7 @@ class LandingPage extends Component {
                   <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
                     <p>
                       Now that you've been mining for awhile, you have probably accumulated a fair amount of Mining Credits. You can use your
-                      MC to purchase tickets in the game room for gift cards or crypto rewards. 
+                      MC to purchase tickets in the game room for gift cards or crypto rewards.
                     </p>
                   </div>
                 </li>
@@ -140,8 +160,8 @@ class LandingPage extends Component {
                   <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5" class="collapsed"><span>05</span> Withdraw <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                      Not your keys, not your crypto. Now that you have mined or won your crypto / gift cards, it is time to withdraw them. 
-                      All you need to do is head over to the withdraw page and submit a request. The withdrawal process takes upt to 24 hours but usually less. We make it as easy as possible for you to get your crypto into your own personal wallet. 
+                      Not your keys, not your crypto. Now that you have mined or won your crypto / gift cards, it is time to withdraw them.
+                      All you need to do is head over to the withdraw page and submit a request. The withdrawal process takes upt to 24 hours but usually less. We make it as easy as possible for you to get your crypto into your own personal wallet.
                     </p>
                   </div>
                 </li>
@@ -315,7 +335,7 @@ class LandingPage extends Component {
               <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
                 <p>
                   When you sign in and mine on the Myriade mining pool, your account will be credited in Mining Credits (MC), which are proportionally distributed based off your hashing power (similar to current mining pools). To be clear. MCs are NOT a crypto asset in any way, shape, or form. It does not have a set value, it is not mineable. 
-                  You will be mining on the Monero network, and there will be no scenario where you would be able to pull MC out to an exchange or use it anywhere other than the Myriade ecosystem. Instead, think of MC like tokens at an arcade or credit card rebate points that are exclusively redeemable here.                
+                  You will be mining on the Monero network, and there will be no scenario where you would be able to pull MC out to an exchange or use it anywhere other than the Myriade ecosystem. Instead, think of MC like tokens at an arcade or credit card rebate points that are exclusively redeemable here.
                 </p>
               </div>
             </li>
@@ -324,7 +344,7 @@ class LandingPage extends Component {
               <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
                 <p>
                   The goal of Myriade’s Fortune Mining system is to create value from personal gaming computers that aren’t being used during downtime. Myriade allows gamers and people with spare hashing power laying around to put their old 
-                  and unused devices to use, by creating a potentially profitable means of earning Monero.                
+                  and unused devices to use, by creating a potentially profitable means of earning Monero.
                 </p>
               </div>
             </li>
@@ -332,7 +352,7 @@ class LandingPage extends Component {
               <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Can I convert MC into XMR or XMR into MC <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  No, there is no conversion for XMR and MC at this time.          
+                  No, there is no conversion for XMR and MC at this time.
                 </p>
               </div>
             </li>
@@ -340,9 +360,9 @@ class LandingPage extends Component {
               <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-6" class="collapsed">Will Mining Crypto Damage my PC?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-6" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                No. As long as your PC has proper air flow, then it will be able to mine just fine. If you have ever left your PC accidentally idling on the main menu of a video game for 
-                a day without it melting, then it will more than handle mining.
-              </p>
+                  No. As long as your PC has proper air flow, then it will be able to mine just fine. If you have ever left your PC accidentally idling on the main menu of a video game for 
+                  a day without it melting, then it will more than handle mining.
+                </p>
               </div>
             </li>
           </ul>
@@ -353,7 +373,7 @@ class LandingPage extends Component {
   <div id="popup-overlay" style="display: none;" class="popup-overlay">
     <div class="popup-box">
       <p>Installation in Progress...</p>
-      <div id="spinner"></div> 
+      <div id="spinner"></div>
     </div>
   </div>
   <footer id="footer">
@@ -371,8 +391,7 @@ class LandingPage extends Component {
           </div>
           <div class="col-lg-4 col-md-6 footer-links">
             <h4>Our Socials</h4>
-            <p>Join our online communities and get in touch with other Myriade Miners like you!
-            </p>
+            <p>Join our online communities and get in touch with other Myriade Miners like you!</p>
             <div class="social-links mt-3">
               <a href="https://twitter.com/myriadeinc" class="twitter" target="_blank" rel="noopener noreferrer"><i class="bx bxl-twitter"></i></a>
               <a href="https://linkedin.com/company/myriade-inc" class="linkedin" target="_blank" rel="noopener noreferrer"><i class="bx bxl-linkedin"></i></a>
@@ -434,7 +453,9 @@ class LandingPage extends Component {
     zoom: 1.10
   });
   </script>
-`,
+</body>
+</html>
+          `,
         }}
       />
     );
