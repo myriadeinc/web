@@ -12,8 +12,7 @@ import SignupPage from './pages/SignupPage.jsx';
 import PasswordForget from './pages/PasswordForget.jsx';
 import NavigationBar from './components/common/Navbar.jsx';
 import CookiesToast from './components/common/CookiesToast.jsx';
-import LandingPageNew from './pages/LandingPageNew.html';
-
+  
  
 
 
