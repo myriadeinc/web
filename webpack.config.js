@@ -1,7 +1,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const fs = require('fs')
-
+const fs = require('fs');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
@@ -34,9 +34,9 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    "style-loader", // creates style nodes from JS strings
-                    "css-loader", // translates CSS into CommonJS
-                    "sass-loader" // compiles Sass to CSS, using Node Sass by default
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader"
                 ]
             },
             {
@@ -73,5 +73,9 @@ module.exports = {
             template: './public/index.html',
             favicon: './public/icons/favicon.png',
         }),
+        new CopyWebpackPlugin([
+            { from: 'public/assets', to: 'assets' },
+            { from: 'public/icons', to: 'icons' },
+        ]),
     ],
 };
