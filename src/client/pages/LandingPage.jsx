@@ -15,8 +15,8 @@ class LandingPage extends Component {
   <meta content="" name="description">
   <meta content="" name="keywords">
   <meta name="viewport" content= "width=device-width, initial-scale=1.0">
-  <link href="./assetsLandingPage/img/favicon.png" rel="icon">
-  <link href="./assetsLandingPage/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,25 +24,25 @@ class LandingPage extends Component {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Varela+Round&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="./assetsLandingPage/vendor/aos/aos.css" rel="stylesheet">
-  <link href="./assetsLandingPage/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="./assetsLandingPage/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="./assetsLandingPage/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="./assetsLandingPage/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="./assetsLandingPage/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="./assetsLandingPage/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="./assetsLandingPage/css/style.css" rel="stylesheet">
-  <script src="./assetsLandingPage/js/three.r119.min.js"></script>
-  <script src="./assetsLandingPage/js/vanta.waves.min.js"></script>
+  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/assets/css/style.css" rel="stylesheet">
+  <script src="/assets/js/three.r119.min.js"></script>
+  <script src="/assets/js/vanta.waves.min.js"></script>
 </head>
 <body>
   <header id="header" class="fixed-top">
     <div class="container-fluid d-flex align-items-center">
-      <a href="index.html" class="logo me-auto"><img src="./assetsLandingPage/img/Myriade-logo.svg" alt="" class="pull-left"></a>
+      <a href="index.html" class="logo me-auto"><img src="/assets/img/Myriade-logo.svg" alt="" class="pull-left"></a>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="login scrollto" href="#about">Login</a></li>
-          <li><a class="signup scrollto" href="#about">Get Started</a></li>
+          <li><a class="login scrollto" href="#login">Login</a></li>
+          <li><a class="signup scrollto" href="#signup">Get Started</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
@@ -77,7 +77,7 @@ class LandingPage extends Component {
   </section>
   <div class="row col-9 d-flex justify-content-center mx-auto ">
     <div class="hero-img ">
-      <img src="./assetsLandingPage/img/app.png" class="img-fluid mx-auto justify-content-center d-flex img-responsive">
+      <img src="/assets/img/app.png" class="img-fluid mx-auto justify-content-center d-flex img-responsive">
     </div>
   </div>
   <main id="main">
@@ -148,7 +148,7 @@ class LandingPage extends Component {
               </ul>
             </div>
           </div>
-          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("./assetsLandingPage/img/mining-image.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("/assets/img/mining-image.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
         </div>
       </div>
     </section>
@@ -161,7 +161,7 @@ class LandingPage extends Component {
         <div class="row">
           <div class="col-lg-6">
             <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
-              <div class="pic col-lg-1"><img src="./assetsLandingPage/img/testimonials/Snowman.png" class="img-fluid" alt=""></div>
+              <div class="pic col-lg-1"><img src="/assets/img/testimonials/Snowman.png" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Herosnowman #1658</h4>
                 <span>Miner since Sept. 4 2021</span>
@@ -172,7 +172,7 @@ class LandingPage extends Component {
           </div>
           <div class="col-lg-6 mt-4 mt-lg-0">
             <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="200">
-              <div class="pic col-lg-1"><img src="./assetsLandingPage/img/testimonials/Dog.png" class="img-fluid" alt=""></div>
+              <div class="pic col-lg-1"><img src="/assets/img/testimonials/Dog.png" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Tri #928</h4>
                 <span>Miner since May 6 2021</span>
@@ -183,7 +183,7 @@ class LandingPage extends Component {
           </div>
           <div class="col-lg-6 mt-4">
             <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="300">
-              <div class="pic col-lg-1"><img src="./assetsLandingPage/img/testimonials/Frog.png" class="img-fluid" alt=""></div>
+              <div class="pic col-lg-1"><img src="/assets/img/testimonials/Frog.png" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Pulsd #1730</h4>
                 <span>Miner Since Sept. 22 2021</span>
@@ -194,7 +194,7 @@ class LandingPage extends Component {
           </div>
           <div class="col-lg-6 mt-4">
             <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
-              <div class="pic col-lg-1"><img src="./assetsLandingPage/img/testimonials/Bear.png" class="img-fluid" alt=""></div>
+              <div class="pic col-lg-1"><img src="/assets/img/testimonials/Bear.png" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Dachaz #982</h4>
                 <span>Miner Since May 14 2021</span>
@@ -391,14 +391,14 @@ class LandingPage extends Component {
     </div>
   </footer>
   <div id="preloader"></div>
-  <script src="./assetsLandingPage/vendor/aos/aos.js"></script>
-  <script src="./assetsLandingPage/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="./assetsLandingPage/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="./assetsLandingPage/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="./assetsLandingPage/vendor/php-email-form/validate.js"></script>
-  <script src="./assetsLandingPage/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="./assetsLandingPage/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="./assetsLandingPage/js/main.js"></script>
+  <script src="/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="/assets/js/main.js"></script>
   <script>
   window.ChatraSetup = {
       colors: {
