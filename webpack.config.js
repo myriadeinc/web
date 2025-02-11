@@ -9,9 +9,7 @@ module.exports = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                include: [
-                    path.resolve(__dirname, 'src'),
-                ],
+                include: [path.resolve(__dirname, 'src')],
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -33,15 +31,11 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader"
-                ]
+                use: ["style-loader", "css-loader", "sass-loader"],
             },
             {
                 test: /\.css$/,
-                loader: "style-loader!css-loader"
+                loader: "style-loader!css-loader",
             },
             {
                 test: /\.less$/,
@@ -66,16 +60,18 @@ module.exports = {
     devServer: {
         port: 8030,
         open: true,
-        compress: true
+        compress: true,
     },
     plugins: [
         new HtmlWebPackPlugin({
             template: './public/index.html',
             favicon: './public/icons/favicon.png',
         }),
-        new CopyWebpackPlugin([
-            { from: 'public/assets', to: 'assets' },
-            { from: 'public/icons', to: 'icons' },
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'public/assets', to: 'assets' },
+                { from: 'public/icons', to: 'icons' },
+            ],
+        }),
     ],
 };
