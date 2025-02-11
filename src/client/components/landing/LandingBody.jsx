@@ -293,7 +293,7 @@ const Faq = () => (
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="1" className={Style.faqCollapse}>
           <Card.Body>
-            What sets us apart from traditional mining pools is our novel payout
+            TEST 104 What sets us apart from traditional mining pools is our novel payout
             method. Rather than using classic systems such as PPS and PPLNS,
             we’re using something completely different. Something we call:
             Fortune Mining.
