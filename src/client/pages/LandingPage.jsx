@@ -28,9 +28,7 @@ class LandingPage extends Component {
           __html: `
 <header id="header" class="fixed-top">
   <div class="container-fluid d-flex align-items-center">
-    <a href="index.html" class="logo me-auto">
-      <img src="/assets/img/Myriade-logo.svg" alt="" class="pull-left">
-    </a>
+    <a href="index.html" class="logo me-auto"><img src="/assets/img/Myriade-logo.svg" alt="" class="pull-left"></a>
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="login scrollto" href="#login">Login</a></li>
@@ -399,39 +397,39 @@ class LandingPage extends Component {
 <script src="/assets/vendor/waypoints/noframework.waypoints.js"></script>
 <script src="/assets/js/main.js"></script>
 <script>
-  window.ChatraSetup = {
-      colors: {
-          buttonText: '#f0f0f0',
-          buttonBg: '#f68600'
-      },
-  };
-  (function (d, w, c) {
-      w.ChatraID = 'kzQzfDagyXR78mcF3';
-      var s = d.createElement('script');
-      w[c] = w[c] || function () {
-          (w[c].q = w[c].q || []).push(arguments);
-      };
-      s.async = true;
-      s.src = 'https://call.chatra.io/chatra.js';
-      if (d.head) d.head.appendChild(s);
-  })(document, window, 'Chatra');
+window.ChatraSetup = {
+    colors: {
+        buttonText: '#f0f0f0',
+        buttonBg: '#f68600'
+    }
+};
+(function (d, w, c) {
+    w.ChatraID = 'kzQzfDagyXR78mcF3';
+    var s = d.createElement('script');
+    w[c] = w[c] || function () {
+        (w[c].q = w[c].q || []).push(arguments);
+    };
+    s.async = true;
+    s.src = 'https://call.chatra.io/chatra.js';
+    if (d.head) d.head.appendChild(s);
+})(document, window, 'Chatra');
 </script>
 <script>
-  VANTA.WAVES({
-    el: "#hero",
-    mouseControls: false,
-    touchControls: false,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.00,
-    scaleMobile: 1.00,
-    color: 0x31355,
-    shininess: 15.00,
-    waveHeight: 23.00,
-    waveSpeed: 0.2,
-    zoom: 1.10
-  });
+VANTA.WAVES({
+  el: "#hero",
+  mouseControls: false,
+  touchControls: false,
+  gyroControls: false,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0x31355,
+  shininess: 15.00,
+  waveHeight: 23.00,
+  waveSpeed: 0.2,
+  zoom: 1.10
+});
 </script>
           `,
         }}
