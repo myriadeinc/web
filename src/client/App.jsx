@@ -12,6 +12,10 @@ import SignupPage from './pages/SignupPage.jsx';
 import PasswordForget from './pages/PasswordForget.jsx';
 import NavigationBar from './components/common/Navbar.jsx';
 import CookiesToast from './components/common/CookiesToast.jsx';
+import LandingPageNew from './pages/LandingPageNew.html';
+
+ 
+
 
 import Cookies from './components/landing/CookiesPolicy.jsx';
 import Privacy from './components/landing/PrivacyPolicy.jsx';
@@ -33,9 +37,8 @@ class App extends React.Component {
                 <Route
                   exact
                   path={ROUTES.LANDING}
-                  component={() => (
-                    <LandingPage authenticated={authenticated} />
-                  )}
+                  component={() => window.location.replace('./components/LandingPageNew.html')}
+
                 />
                 <Route
                   path={ROUTES.LOGIN}

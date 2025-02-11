@@ -1,455 +1,444 @@
-(function(){
-  document.write(`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Myriade</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Varela+Round&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <script src="assets/js/three.r119.min.js"></script>
-    <script src="assets/js/vanta.waves.min.js"></script>
-  </head>
-  <body>
-    <header id="header" class="fixed-top">
-      <div class="container-fluid d-flex align-items-center">
-        <a href="index.html" class="logo me-auto"><img src="assets/img/Myriade-logo.svg" alt="" class="pull-left"></a>
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="login scrollto" href="#about">Login</a></li>
-            <li><a class="signup scrollto" href="#about">Get Started</a></li>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-      </div>
-    </header>
-    <section id="hero" class="container-fluid">
-      <div class="container mt-3">
-        <div class="flex absolute top-00 left-0 bottom-0 right-0 "></div>
-        <div class="row">
-          <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
-            <h1>Make your PC work for you...</h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
-            <h2>...while you’re at work, school, or asleep and collect your mined rewards when you get back. Mining crypto on Myriade is safe and easy. Once you download our app, you can start earning crypto and gift cards right away.</h2>
-          </div>
-        </div>
-        <div class="btn-toolbar justify-content-center " data-aos="zoom-in">
-          <button id="download-desktop-app" class="btn btn-download-desktop-app" type="submit" >
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="40" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-            </svg> Download Desktop App
-          </button>
-        </div>
-        <div class="btn-toolbar justify-content-center" data-aos="zoom-in">
-          <button class="btn btn-advanced-mining  justify-content-center mx-auto " type="button" onclick="window.location.href='https://github.com/xmrig/xmrig'">Advanced Mining (XMRIG)</button>
-        </div>
-        <div style="margin-bottom:500px"></div>
-      </div>
-    </section>
-    <div class="row col-9 d-flex justify-content-center mx-auto ">
-      <div class="hero-img ">
-        <img src="assets/img/app.png" class="img-fluid mx-auto justify-content-center d-flex img-responsive">
-      </div>
-    </div>
-    <main id="main">
-      <section id="why-us" class="why-us">
-        <div class="container-fluid" data-aos="fade-up">
-          <div class="row">
-            <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
-              <div class="content">
-                <h3>Getting started with Myriade is quick and easy. <strong>Just follow these steps.</strong></h3>
-                <p>
-                  We have tried our best to make sure that crypto mining through Myriade is as simple as possible. We have taken great
-                  care to minimize clicks and make mining beginner friendly.
-                </p>
-              </div>
-              <div class="accordion-list">
-                <ul>
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Download the miner and create a secure account.<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        Once your account is created, you’ll be able to log in on multiple devices and start mining to one account. 
-                        The app is a simple program but it can still be confusing to new people. Send us a message or ask our community on 
-                        Discord if you run into trouble. We're all on the same team here and we all want you to succeed. 
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Personalize your Myriade account. <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
-                      <p>
-                        Before you start mining you have to initialize some key settings. One of which being your preferred mining split. Myriade allows you to be
-                        rewarded for your mining in a variety of ways. Before you start, it is important to choose how you wish to be rewarded. This mining allocation
-                        is personal to you and should reflect what  you want to get out of your time with Myriade. We also have some other personalization options that 
-                        are less serious but are available to you for fun. 
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Start Mining <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
-                      <p>
-                        Once you've chosen your preferred mining split, you are now ready to start mining. The magic of crypto mining is that it
-                        is a completely passive process. You could be at school, work, or even sleeping  and you will be earning on Myriade. 
-                        It's a bit like magic. Just make sure you have followed some of the guidelines on the app to make sure the program keeps
-                        running when you want it to. Sometimes Windows will enter sleep mode when it doesn't detect mouse movement so you wouldn't 
-                        want a whole day of mining to go to waste just because you forgot to change your settings around. 
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4" class="collapsed"><span>04</span> Use your Mining Credits <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
-                      <p>
-                        Now that you've been mining for awhile, you have probably accumulated a fair amount of Mining Credits. You can use your
-                        MC to purchase tickets in the game room for gift cards or crypto rewards. 
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5" class="collapsed"><span>05</span> Withdraw <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
-                      <p>
-                        Not your keys, not your crypto. Now that you have mined or won your crypto / gift cards, it is time to withdraw them. 
-                        All you need to do is head over to the withdraw page and submit a request. The withdrawal process takes upt to 24 hours but usually less. We make it as easy as possible for you to get your crypto into your own personal wallet. 
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("assets/img/mining-image.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
-          </div>
-        </div>
-      </section>
-      <section id="team" class="team section-bg">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Testimonials</h2>
-            <p>See what long-time Myriade miners are saying about us.</p>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
-                <div class="pic col-lg-1"><img src="assets/img/testimonials/Snowman.png" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Herosnowman #1658</h4>
-                  <span>Miner since Sept. 4 2021</span>
-                  <p>"Myriade has something for everyone.
-                     Small miners have a chance to earn more than they usually would by participating in the raffles and big miners can enjoy the low fees."</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 mt-4 mt-lg-0">
-              <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="200">
-                <div class="pic col-lg-1"><img src="assets/img/testimonials/Dog.png" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Tri #928</h4>
-                  <span>Miner since May 6 2021</span>
-                  <t>"Myriade has been a wonderful gateway mining solution for me. Originally I started with my existing computer and after 
-                        seeing for myself how well it worked for me, someone with far less computer power, I was hooked! Mining isn't just for the big guys now and we can all support the network!"</t>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 mt-4">
-              <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="300">
-                <div class="pic col-lg-1"><img src="assets/img/testimonials/Frog.png" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Pulsd #1730</h4>
-                  <span>Miner Since Sept. 22 2021</span>
-                  <q>As someone who isn't great with computers, the desktop app is perfect, I can also mine for gift cards
-                        which is great for me to get my friends to start mining too. Myriade seems like it's made for beginners.</q>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 mt-4">
-              <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
-                <div class="pic col-lg-1"><img src="assets/img/testimonials/Bear.png" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Dachaz #982</h4>
-                  <span>Miner Since May 14 2021</span>
-                  <p>"Myriade makes it easy to explore what cryptomining is all about for gamers -- 
-                        because even gamers need to sleep! It's got low fees, a fun raffle feature, and much more."</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="services" class="services">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Pool Stats</h2>
-          </div>
-          <div class="row">
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-tachometer"></i></div>
-                <p>5.015 MH/s</p>
-                <h4>Pool Hashrate</h4>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-file"></i></div>
-                <p>5,694</p>
-                <h4>Total Myriade Miners</h4>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-money"></i></div>
-                <p2>10% FRTNE, 0% PPS</p2>
-                <h4>Payout Fees</h4>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-layer"></i></div>
-                <p>0.001 XMR</p>
-                <h4>Minimum Withdrawal</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="cta" class="cta">
-        <div class="container" data-aos="zoom-in">
-          <div class="row">
-            <div class="col-lg-9 text-center text-lg-start">
-              <h3>Try out our Demo Account!</h3>
-              <p> Want to try it out before downloading the app? Try out our demo account and mess around a bit to get a feel for Myriade Mining.</p>
-            </div>
-            <div class="col-lg-3 cta-btn-container text-center">
-              <a class="cta-btn align-middle" href="#">Try Demo</a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>About Us</h2>
-          </div>
-          <div class="row content">
-            <div class="col-lg-6">
-              <p>
-                Myriade is a cryptoasset service company founded in 2019 in Montreal by two university students 
-                who were frustrated by the lack of profitability and payout options available in crypto mining. The Myriade mission is "To ensure the development and adoption of better financial technologies." 
-                Myriade was the first Mining-Pool to offer "Fortune Mining"; where everyday people can potentially earn as much as the big mining farms.
-              </p>
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0">
-              <p>
-                The newest released service is the Open Source desktop app which allows for easy and simple mining. There are plans to 
-                offer many more services in the future that would make earning, holding, and spending your crypto as easy as possible.
-              </p>
-              <ul>
-                <li><i class="ri-check-double-line"></i> A trusted mining pool with a dedicated group of long-time miners</li>
-                <li><i class="ri-check-double-line"></i> Pool operators who actually use the pool every day</li>
-                <li><i class="ri-check-double-line"></i> Live support</li>
-                <li><i class="ri-check-double-line"></i> Open Source Code</li>
-                <a href="https://github.com/myriadeinc" class="btn-learn-more" target="_blank" rel="noopener noreferrer">View our GitHub</a>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="faq" class="faq section-bg">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Frequently Asked Questions</h2>
-            <p>Have your Myriade or Monero Mining questions answered here.</p>
-          </div>
-          <div class="faq-list">
-            <ul>
-              <li data-aos="fade-up" data-aos-delay="100">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">What is Myriade? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
-                  <p>
-                    Myriade is a crypto asset service company that is for the moment focusing on crypto mining, specifically: Monero (XMR). Though look out, we plan on offering other services in the near future.
-                  </p>
-                </div>
-              </li>
-              <li data-aos="fade-up" data-aos-delay="200">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">So... You’re a mining pool... we have plenty of those already.<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
-                  <p>
-                    What sets us apart from traditional mining pools is our novel payout methods. Rather than using classic systems, we’re using something completely different. Something we call: Fortune Mining where 
-                    you can earn gift cards, crypto, or both!
-                  </p>
-                </div>
-              </li>
-              <li data-aos="fade-up" data-aos-delay="300">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">How does Fortune Mining work? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
-                  <p>
-                    When you sign in and mine on the Myriade mining pool, your account will be credited in Mining Credits (MC), which are proportionally distributed based off your hashing power (similar to current mining pools). To be clear. MCs are NOT a crypto asset in any way, shape, or form. It does not have a set value, it is not mineable. 
-                    You will be mining on the Monero network, and there will be no scenario where you would be able to pull MC out to an exchange or use it anywhere other than the Myriade ecosystem. Instead, think of MC like tokens at an arcade or credit card rebate points that are exclusively redeemable here.                
-                  </p>
-                </div>
-              </li>
-              <li data-aos="fade-up" data-aos-delay="400">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Why Fortune Mining? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
-                  <p>
-                    The goal of Myriade’s Fortune Mining system is to create value from personal gaming computers that aren’t being used during downtime. Myriade allows gamers and people with spare hashing power laying around to put their old 
-                    and unused devices to use, by creating a potentially profitable means of earning Monero.                
-                  </p>
-                </div>
-              </li>
-              <li data-aos="fade-up" data-aos-delay="400">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Can I convert MC into XMR or XMR into MC <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
-                  <p>
-                    No, there is no conversion for XMR and MC at this time.          
-                  </p>
-                </div>
-              </li>
-              <li data-aos="fade-up" data-aos-delay="500">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-6" class="collapsed">Will Mining Crypto Damage my PC?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-6" class="collapse" data-bs-parent=".faq-list">
-                  <p>
-                  No. As long as your PC has proper air flow, then it will be able to mine just fine. If you have ever left your PC accidentally idling on the main menu of a video game for 
-                  a day without it melting, then it will more than handle mining.
-                </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </main>
-    <div id="popup-overlay" style="display: none;" class="popup-overlay">
-      <div class="popup-box">
-        <p>Installation in Progress...</p>
-        <div id="spinner"></div> 
-      </div>
-    </div>
-    <footer id="footer">
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 footer-links">
-              <h4>Useful Links</h4>
-              <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="https://myriade.io/#/cookies">Cookies Policy</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="https://myriade.io/#/terms">Terms of service</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="https://myriade.io/#/privacy">Privacy policy</a></li>
-              </ul>
-            </div>
-            <div class="col-lg-4 col-md-6 footer-links">
-              <h4>Our Socials</h4>
-              <p>Join our online communities and get in touch with other Myriade Miners like you!
-              </p>
-              <div class="social-links mt-3">
-                <a href="https://twitter.com/myriadeinc" class="twitter" target="_blank" rel="noopener noreferrer"><i class="bx bxl-twitter"></i></a>
-                <a href="https://linkedin.com/company/myriade-inc" class="linkedin" target="_blank" rel="noopener noreferrer"><i class="bx bxl-linkedin"></i></a>
-                <a href="https://github.com/myriadeinc" class="github" target="_blank" rel="noopener noreferrer"><i class="bx bxl-github"></i></a>
-                <a href="https://discord.gg/J9Pn7Dk" class="discord" target="_blank" rel="noopener noreferrer"><i class="bx bxl-discord"></i></a>
-                <a href="https://reddit.com/r/MyriadeMining/" class="reddit" target="_blank" rel="noopener noreferrer"><i class="bx bxl-reddit"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container footer-bottom clearfix">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Myriade Inc.</span></strong> 2019-2024
-        </div>
-      </div>
-    </footer>
-    <div id="preloader"></div>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-      window.ChatraSetup = {
-        colors: {
-          buttonText: '#f0f0f0',
-          buttonBg: '#f68600'
+import React, { Component } from 'react';
+
+import * as ROUTES from '../../utils/routes.js';
+
+import Style from '../../styles/components/landing/main.less';
+import {
+  Row,
+  Col,
+  Container,
+  Accordion,
+  Card,
+  ResponsiveEmbed,
+  Jumbotron,
+  Button,
+} from 'react-bootstrap';
+
+import RINGS from '../../vendor/vanta.rings.min.js';
+import * as THREE from 'three';
+
+import {
+  LightButton,
+  LightSecondaryButton,
+  DarkGradientButton,
+  PrimaryButton,
+  SecondaryButton,
+  BlueButton,
+} from '../common/Buttons.jsx';
+import { WhiteLink, BlueLink } from '../common/Link.jsx';
+
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+
+import moment from 'moment';
+
+class LandingBody extends Component {
+  constructor(props) {
+    super(props);
+    this.el = null;
+    this.vantaRef = React.createRef();
+    this.state = {
+      minerHashrate: 1000,
+      hashrate: 1465330752.3138,
+      USD: 121.36,
+      reward: 1.57,
+    };
+  }
+  componentDidMount() {
+    if (this.el) {
+      // typeformEmbed.makeWidget(this.el, "https://myriade.typeform.com/to/Y6daMA", {
+      //   hideFooter: true,
+      //   hideHeaders: true,
+      //   opacity: 0
+      // });
+    }
+    this.vantaEffect = RINGS({
+      el: this.vantaRef.current,
+      THREE: THREE,
+      backgroundColor: 0x1122,
+    });
+    this.getHashrate();
+    this.getConversion();
+  }
+  componentWillUnmount() {
+    if (this.vantaEffect) this.vantaEffect.destroy();
+  }
+
+  getHashrate = () => {
+    fetch('https://www.cryptunit.com/api/history/?5')
+      .then((resp) => resp.json())
+      .then(
+        (result) => {
+          this.setState(
+            result[0]['history'][
+              moment().subtract(1, 'day').format('YYYY-MM-DD')
+            ]
+          );
+          this.setState({ hashrate: this.state.hashrate * 1000000 });
+        },
+        (error) => {
+          console.log(error);
         }
-      };
-      (function(d,w,c){
-        w.ChatraID='kzQzfDagyXR78mcF3';
-        var s=d.createElement('script');
-        w[c]=w[c]||function(){(w[c].q=w[c].q||[]).push(arguments);};
-        s.async=true;
-        s.src='https://call.chatra.io/chatra.js';
-        if(d.head)d.head.appendChild(s);
-      })(document,window,'Chatra');
-    </script>
-    <script>
-      VANTA.WAVES({
-        el: "#hero",
-        mouseControls: false,
-        touchControls: false,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0x31355,
-        shininess: 15.00,
-        waveHeight: 23.00,
-        waveSpeed: 0.2,
-        zoom: 1.10
+      );
+  };
+
+  getConversion = () => {
+    fetch('https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD')
+      .then((res) => res.json())
+      .then((result) => {
+        this.setState(result),
+          (error) => {
+            console.log(error);
+          };
       });
-    </script>
-    <script>
-      function getHashrate(){
-        fetch('https://www.cryptunit.com/api/history/?5')
-        .then(resp => resp.json())
-        .then(result => {
-          var d=new Date();
-          d.setDate(d.getDate()-1);
-          var year=d.getFullYear();
-          var month=('0'+(d.getMonth()+1)).slice(-2);
-          var day=('0'+d.getDate()).slice(-2);
-          var key=year+'-'+month+'-'+day;
-          var data=result[0]['history'][key];
-          console.log("Hashrate:", data*1000000);
-        })
-        .catch(error=>console.log(error));
-      }
-      function getConversion(){
-        fetch('https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD')
-        .then(res=>res.json())
-        .then(result=>{
-          console.log("Conversion:", result);
-        })
-        .catch(error=>console.log(error));
-      }
-      getHashrate();
-      getConversion();
-    </script>
-  </body>
-  </html>`);
-  })();
-  
+  };
+
+  hashrateChange = (event) => {
+    this.setState({ minerHashrate: event.target.value });
+  };
+
+  render() {
+    return (
+      <div>
+        <div ref={this.vantaRef} className="vh-100">
+          <div className={Style.TitleDiv}>
+            <h1 className="text-white">
+              <strong>The World’s First Fortune-Mining Pool.</strong>
+            </h1>
+            <h1 className="text-white">
+              <strong>Made for Monero.</strong>{' '}
+              <span style={{ color: '#f07c00' }}>Now with PPS too!</span>
+            </h1>
+            <Row className="ml-5 pl-3">
+              <WhiteLink to={ROUTES.SIGN_UP}>
+                <LightButton pill size="lg" className="mr-2">
+                  Sign Up
+                </LightButton>
+              </WhiteLink>
+              <BlueLink to={ROUTES.DASHBOARD}>
+                <LightSecondaryButton pill size="lg">
+                  Log In
+                </LightSecondaryButton>
+              </BlueLink>
+              <a
+                href="https://paul-myriade.medium.com/a-beginners-guide-to-myriade-mining-9d93e435b74a"
+                target="blank"
+              >
+                <BlueButton pill size="lg" style={{ marginLeft: '150px' }}>
+                  Beginners click here
+                </BlueButton>
+              </a>
+            </Row>
+          </div>
+        </div>
+
+        <Container>
+          <Video />
+        </Container>
+        <Container>
+          <Timeline />
+          <Faq />
+          {/* <Jumbotron className="mt-5">
+            <div ref={(el) => this.el = el} className={Style.mailingForm} />
+          </Jumbotron> */}
+        </Container>
+      </div>
+    );
+  }
+}
+
+const Video = () => (
+  <div style={{ paddingTop: 60, paddingBottom: 100 }}>
+    <h3 className={Style.Title}>
+      What It's All About
+      <small>
+        <small className="text-muted"> (3:07)</small>
+      </small>
+    </h3>
+    <Jumbotron className="p-3">
+      <ResponsiveEmbed aspectRatio="16by9">
+        <iframe
+          src="https://www.youtube.com/embed/U0uYO3xVTDU"
+          frameBorder="0"
+          allowFullScreen
+        ></iframe>
+      </ResponsiveEmbed>
+    </Jumbotron>
+  </div>
+);
+
+const Timeline = () => (
+  <div
+    className={Style.timeline}
+    style={{ paddingBottom: 60, paddingTop: 120 }}
+  >
+    <h3 className={Style.Title + ' mb-4'}>How Myriade Works</h3>
+    <Row className={Style.timeline__row}>
+      <Col sm={6} xl={4} className={Style.timeline__left}>
+        <img
+          className={Style.timeline__image}
+          src="https://i.ibb.co/WgcH6cz/Step-1.png"
+        />
+        <span className={Style.timeline__bullet} />
+      </Col>
+      <Col sm={6} xl={8} className={Style.timeline__right}>
+        <div>
+          <p className={Style.greyText}>Step 1</p>
+          <p className={Style.mediumSemibold}>
+            Create a secure account and download the miner
+          </p>
+
+          <p>
+            Once your account is created, you’ll be able to log in on multiple
+            devices and start mining to one account. The Miner is a rather
+            complicated program to initialize so we have included video and text
+            tutorials for Windows, Linux, and Mac miners.
+          </p>
+        </div>
+      </Col>
+    </Row>
+    <Row className={Style.timeline__row}>
+      <Col sm={6} xl={4} className={Style.timeline__left}>
+        <img
+          className={Style.timeline__image}
+          src="https://i.ibb.co/qJff9PF/Step-2.png"
+        />
+        <span className={Style.timeline__bullet} />
+      </Col>
+      <Col sm={6} xl={8} className={Style.timeline__right}>
+        <p className={Style.greyText}>Step 2</p>
+        <p className={Style.mediumSemibold}>Start mining</p>
+        <p>
+          Users have the option of background or focus mining to earn Mining
+          Credits. Focus mining is the recommended method when mining overnight
+          or while away from the computer. Just set it and forget it.
+        </p>
+      </Col>
+    </Row>
+    <Row className={Style.timeline__row}>
+      <Col sm={6} xl={4} className={Style.timeline__left}>
+        <img
+          className={Style.timeline__image}
+          src="https://i.ibb.co/dgppq2S/Step-3.png"
+        />
+        <span className={Style.timeline__bullet} />
+      </Col>
+      <Col sm={6} xl={8} className={Style.timeline__right}>
+        <p className={Style.greyText}>Step 3</p>
+        <p className={Style.mediumSemibold}>Use your Mining Credits</p>
+        <p>
+          Once a fair amount of Mining Credits have been accumulated, you can
+          use them in our game room where you can win far more XMR than you
+          would have otherwise been able to while mining solo or in a pool.
+        </p>
+      </Col>
+    </Row>
+    <Row className={Style.timeline__row}>
+      <Col sm={6} xl={4} className={Style.timeline__leftLast}>
+        <img
+          className={Style.timeline__image}
+          src="https://i.ibb.co/dbr0x1W/Step-4.png"
+        />
+        <span className={Style.timeline__bullet} />
+      </Col>
+      <Col sm={6} xl={8} className={Style.timeline__rightLast}>
+        <p className={Style.greyText}>Step 4</p>
+        <p className={Style.mediumSemibold}>Withdraw your hard earned Monero</p>
+        <p>
+          Not your keys, not your crypto. We make onboarding easy for beginners,
+          by making your Monero address an optional field on account setup. If
+          you did not provide an address at setup, you can also withdraw at any
+          time to the Monero wallet of your choice using our withdrawals page.
+        </p>
+      </Col>
+    </Row>
+  </div>
+);
+
+const Faq = () => (
+  <div className="pt-5 pb-5">
+    <h3 className={Style.Title}>Frequently Asked Questions</h3>
+    <Accordion>
+      <Card>
+        <Accordion.Toggle
+          as={Card.Header}
+          eventKey="0"
+          className={Style.faqToggle}
+        >
+          <Card.Title>What is Myriade?</Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="0" className={Style.faqCollapse}>
+          <Card.Body>
+            Myriade is a crypto asset service company that is for the moment
+            focusing on mining, specifically: Monero (XMR). Though look out, we
+            plan on offering other services in the near future.
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle
+          as={Card.Header}
+          eventKey="1"
+          className={Style.faqToggle}
+        >
+          <Card.Title>
+            So... You’re a mining pool... we have plenty of those already.
+          </Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="1" className={Style.faqCollapse}>
+          <Card.Body>
+            TEST 104 What sets us apart from traditional mining pools is our novel payout
+            method. Rather than using classic systems such as PPS and PPLNS,
+            we’re using something completely different. Something we call:
+            Fortune Mining.
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle
+          as={Card.Header}
+          eventKey="2"
+          className={Style.faqToggle}
+        >
+          <Card.Title>How does Fortune Mining work?</Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="2" className={Style.faqCollapse}>
+          <Card.Body>
+            When you sign in and mine on the Myriade mining pools, your account
+            will be credited in Mining Credits (MC), which are proportionally
+            distributed based off your hashing power (similar to current mining
+            pools). To be clear. MCs are NOT a crypto asset in any way, shape,
+            or form. It does not have a set value, it is not mineable. You will
+            be mining on the Monero network, and there will be no scenario where
+            you would be able to pull MC out to an exchange or use it anywhere
+            other than the Myriade ecosystem. Instead, think of MC like tokens
+            at an arcade or credit card rebate points that are exclusively
+            redeemable here.{' '}
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle
+          as={Card.Header}
+          eventKey="3"
+          className={Style.faqToggle}
+        >
+          <Card.Title>Why Fortune Mining?</Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="3" className={Style.faqCollapse}>
+          <Card.Body>
+            The goal of Myriade’s Fortune Mining system is to create value from
+            personal gaming computers that aren’t being used during downtime.
+            Myriade allows gamers and people with spare hashing power laying
+            around to put their old and unused devices to use, by creating a
+            potentially profitable means of earning Monero.
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle
+          as={Card.Header}
+          eventKey="4"
+          className={Style.faqToggle}
+        >
+          <Card.Title>What is MC used for?</Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="4" className={Style.faqCollapse}>
+          <Card.Body>
+            We invite you to create an account, if anything, just to see how the
+            service works. You’ll see that MC can be used in the game room,
+            where you can stake them for the chance to win Monero in a “raffle
+            type game”. For example, for one day’s worth of mining on a CPU that
+            would normally earn you $0.13 USD /day of XMR, you could instead
+            walk out with a full block reward, cash out, and never touch Myriade
+            again.
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle
+          as={Card.Header}
+          eventKey="5"
+          className={Style.faqToggle}
+        >
+          <Card.Title>How does Myriade make money?</Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="5" className={Style.faqCollapse}>
+          <Card.Body>
+            For the moment, we only have one game in our game room so we will
+            focus on that. The drawings happen in 4 stages: Creation, Funding,
+            Profit, and Execution. We make our money in the profit stage. The
+            creation stage is where we determine the amount of XMR that will be
+            in play based off the current price of XMR/USD. The price will then
+            be frozen for the remaining life of that drawing, no matter how the
+            market may fluctuate. Then comes the funding stage. This is where
+            people can start purchasing tickets with MC for the drawing. Once
+            the amount of MC in the drawing has reached the point where it is
+            fully funded, then we enter the profit stage. The profit stage lasts
+            20 minutes and the tickets will cost more MC to purchase. Purchasing
+            a ticket during the profit stage is generally for the people who do
+            not want to wait however long it takes the other drawings to become
+            funded. Finally, execution: this is where a winner is chosen and
+            their Myriade account is credited with XMR.
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle
+          as={Card.Header}
+          eventKey="6"
+          className={Style.faqToggle}
+        >
+          <Card.Title>Are there any special events?</Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="6" className={Style.faqCollapse}>
+          <Card.Body>
+            We plan on having many special events where there will be huge
+            jackpots that will be on a timer and will not require the drawing to
+            be fully funded. Theoretically, you can buy 1 ticket, and if no one
+            else plays against you then you will be the only winner. The way
+            that we do this is by giving everyone a little bit less MC so we can
+            store up big pools of XMR which we will be giving out either in big
+            jackpot prizes, or by giving users small amounts of XMR randomly
+            throughout their time mining just to say thank you for using
+            Myriade.
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle
+          as={Card.Header}
+          eventKey="7"
+          className={Style.faqToggle}
+        >
+          <Card.Title>Who is this for?</Card.Title>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="7" className={Style.faqCollapse}>
+          <Card.Body>
+            Myriade is for the people who don’t have a full time mining rig
+            (though those who do are also welcome) it’s for people who truly
+            believe in the project and want to contribute any way they can.
+            Before Myriade, the only way to do that was to either solo mine and
+            have a low chance to win the whole block reward or mine in a pool
+            and earn $4.18 /month of 24/7 mining (Intel I7-7700k, Dec 28 2019).
+            The fact is: we’ve seen so many reddit posts where people ask “can I
+            mine profitably with CPU X,Y,Z?” The responses are usually: no and
+            that if they want Monero, they should just buy it instead. That
+            doesn’t really follow with the Monero ethos of decentralisation.
+            Now, with Myriade, that’s no longer true. So, who is Myriade for?
+            Honestly, we made the service for ourselves since it’s something we
+            would want to use and we think you all would like it too.
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+    </Accordion>
+  </div>
+);
+
+export default LandingBody;
