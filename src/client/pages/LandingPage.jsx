@@ -4,7 +4,7 @@ class LandingPage extends Component {
   render() {
     return (
       <iframe
-        src="../../../public/LandingPage/LandingPageNew.html"
+        src= "/LandingPage/LandingPageNew.html"
         style={{
           width: '100%',
           height: '100vh',
