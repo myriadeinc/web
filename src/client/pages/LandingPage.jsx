@@ -11,24 +11,17 @@ class LandingPage extends Component {
       return new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = src;
-        script.onload = () => {
-          console.log(`${src} loaded`);
-          resolve();
-        };
-        script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+        script.onload = resolve;
+        script.onerror = reject;
         document.body.appendChild(script);
       });
     };
 
-    // Chain the script loads to ensure proper order:
-    loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
-      .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
-      .then(() => {
-        if (!window.THREE) {
-          console.error("THREE is not available on window after loading Three.js");
-        }
-        return loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js');
-      })
+    // Load Three.js and Vanta Waves
+    Promise.all([
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'),
+      loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js')
+    ])
       .then(() => {
         // Dynamically add the CSS links
         const cssLinks = [
@@ -48,10 +41,10 @@ class LandingPage extends Component {
           document.head.appendChild(link);
         });
         
-        // Delay Vanta initialization to ensure that innerHTML is parsed.
+        // Wait a bit for the innerHTML to be parsed and #hero to exist
         setTimeout(() => {
           const heroEl = document.querySelector('#hero');
-          if (heroEl && window.VANTA) {
+          if (window.VANTA && heroEl) {
             window.VANTA.WAVES({
               el: "#hero",
               mouseControls: false,
@@ -61,22 +54,20 @@ class LandingPage extends Component {
               minWidth: 200.00,
               scale: 1.00,
               scaleMobile: 1.00,
-              // Use a valid 6-digit hex color (adjust as needed)
-              color: 0x31355f,
+              color: 0x31355,
               shininess: 15.00,
               waveHeight: 23.00,
               waveSpeed: 0.2,
               zoom: 1.10
             });
           } else {
-            console.error("Either VANTA is not loaded or #hero element not found.");
+            console.error("VANTA or #hero element not found.");
           }
-        }, 1000); // Adjust delay as needed
-        
+        }); 
+
       })
-      .catch(err => console.error("Script loading error:", err));
+      .catch(err => console.error("Failed to load scripts:", err));
   }
-  
   
   
   render() {
