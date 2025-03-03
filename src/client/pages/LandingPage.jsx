@@ -43,7 +43,7 @@ class LandingPage extends Component {
     <div class="flex absolute top-00 left-0 bottom-0 right-0 "></div>
     <div class="row">
       <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
-        <h1>Make your PC work for you...</h1>
+        <h1>Make your PC work for you testing to see...</h1>
       </div>
     </div>
     <div class="row">
