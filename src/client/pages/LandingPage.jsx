@@ -25,7 +25,6 @@ class LandingPage extends Component {
       document.head.appendChild(link);
     });
     
-    // Process scripts
     const container = this.containerRef.current;
     const scriptTags = container.querySelectorAll("script");
     scriptTags.forEach(oldScript => {

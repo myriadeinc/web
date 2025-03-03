@@ -27,40 +27,49 @@ class App extends React.Component {
       <div>
         <AuthConsumer>
           {({ authenticated, login }) => (
-            <>
-              <NavigationBar />
-              <Switch>
-                <Route
-                  exact
-                  path={ROUTES.LANDING}
-                  component={() => (
+            <Switch>
+              <Route
+                exact
+                path={ROUTES.LANDING}
+                component={() => (
+                  <>
                     <LandingPage authenticated={authenticated} />
-                  )}
-                />
-                <Route
-                  path={ROUTES.LOGIN}
-                  component={() => (
-                    <LoginPage login={login} authenticated={authenticated} />
-                  )}
-                />
-                <Route path={ROUTES.SIGN_UP} component={SignupPage} />
-                <Route
-                  path={ROUTES.PASSWORD_FORGET}
-                  component={PasswordForget}
-                />
-                <Route path={ROUTES.COOKIES} component={Cookies} />
-                <Route path={ROUTES.PRIVACY} component={Privacy} />
-                <Route path={ROUTES.TERMS} component={Terms} />
-                <Route path={ROUTES.LINUX} component={LinuxInstructions} />
-                {/* Protected Routes that need authentication */}
-                <ProtectedRoute
-                  path={ROUTES.DASHBOARD}
-                  component={DashboardPage}
-                  authenticated={authenticated}
-                />
-              </Switch>
-              <CookiesToast />
-            </>
+                    <CookiesToast />
+                  </>
+                )}
+              />
+              <Route
+                path="/"
+                render={() => (
+                  <>
+                    <NavigationBar />
+                    <Switch>
+                      <Route
+                        path={ROUTES.LOGIN}
+                        component={() => (
+                          <LoginPage login={login} authenticated={authenticated} />
+                        )}
+                      />
+                      <Route path={ROUTES.SIGN_UP} component={SignupPage} />
+                      <Route
+                        path={ROUTES.PASSWORD_FORGET}
+                        component={PasswordForget}
+                      />
+                      <Route path={ROUTES.COOKIES} component={Cookies} />
+                      <Route path={ROUTES.PRIVACY} component={Privacy} />
+                      <Route path={ROUTES.TERMS} component={Terms} />
+                      <Route path={ROUTES.LINUX} component={LinuxInstructions} />
+                      <ProtectedRoute
+                        path={ROUTES.DASHBOARD}
+                        component={DashboardPage}
+                        authenticated={authenticated}
+                      />
+                    </Switch>
+                    <CookiesToast />
+                  </>
+                )}
+              />
+            </Switch>
           )}
         </AuthConsumer>
       </div>
