@@ -7,36 +7,54 @@ class LandingPage extends Component {
   }
   
   componentDidMount() {
-    // Dynamically add CSS links to document head
-    const cssLinks = [
-      "/assets/vendor/aos/aos.css",
-      "/assets/vendor/bootstrap/css/bootstrap.min.css",
-      "/assets/vendor/bootstrap-icons/bootstrap-icons.css",
-      "/assets/vendor/boxicons/css/boxicons.min.css",
-      "/assets/vendor/glightbox/css/glightbox.min.css",
-      "/assets/vendor/remixicon/remixicon.css",
-      "/assets/vendor/swiper/swiper-bundle.min.css",
-      "/assets/css/style.css"
-    ];
-    cssLinks.forEach(href => {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = href;
-      document.head.appendChild(link);
-    });
-    
-    const container = this.containerRef.current;
-    const scriptTags = container.querySelectorAll("script");
-    scriptTags.forEach(oldScript => {
-      const newScript = document.createElement("script");
-      if (oldScript.src) {
-        newScript.src = oldScript.src;
-        newScript.async = false;
-      } else {
-        newScript.textContent = oldScript.textContent;
-      }
-      document.body.appendChild(newScript);
-    });
+    const loadScript = (src) => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+    };
+
+    // Load Three.js and Vanta Waves
+    Promise.all([
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'),
+      loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js')
+    ])
+      .then(() => {
+        // Dynamically add the CSS links
+        const cssLinks = [
+          "/assets/vendor/aos/aos.css",
+          "/assets/vendor/bootstrap/css/bootstrap.min.css",
+          "/assets/vendor/bootstrap-icons/bootstrap-icons.css",
+          "/assets/vendor/boxicons/css/boxicons.min.css",
+          "/assets/vendor/glightbox/css/glightbox.min.css",
+          "/assets/vendor/remixicon/remixicon.css",
+          "/assets/vendor/swiper/swiper-bundle.min.css",
+          "/assets/css/style.css"
+        ];
+        cssLinks.forEach(href => {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = href;
+          document.head.appendChild(link);
+        });
+        
+        const container = this.containerRef.current;
+        const scriptTags = container.querySelectorAll("script");
+        scriptTags.forEach(oldScript => {
+          const newScript = document.createElement("script");
+          if (oldScript.src) {
+            newScript.src = oldScript.src;
+            newScript.async = false;
+          } else {
+            newScript.textContent = oldScript.textContent;
+          }
+          document.body.appendChild(newScript);
+        });
+      })
+      .catch(err => console.error("Failed to load scripts:", err));
   }
   
   render() {
