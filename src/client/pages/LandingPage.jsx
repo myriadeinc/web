@@ -65,7 +65,7 @@ class LandingPage extends Component {
           }
         }); 
 
-      })
+      }, 10)
       .catch(err => console.error("Failed to load scripts:", err));
   }
   
