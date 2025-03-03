@@ -42,7 +42,7 @@ class LandingPage extends Component {
         });
         
         const container = this.containerRef.current;
-        const scriptTags = container.querySelectorAll("script");
+        const scriptTags = container.querySelectorAll("script:not([data-skip])");
         scriptTags.forEach(oldScript => {
           const newScript = document.createElement("script");
           if (oldScript.src) {
@@ -53,6 +53,24 @@ class LandingPage extends Component {
           }
           document.body.appendChild(newScript);
         });
+
+        if (window.VANTA) {
+          window.VANTA.WAVES({
+            el: "#hero",
+            mouseControls: false,
+            touchControls: false,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x31355,
+            shininess: 15.00,
+            waveHeight: 23.00,
+            waveSpeed: 0.2,
+            zoom: 1.10
+          });
+        }
       })
       .catch(err => console.error("Failed to load scripts:", err));
   }
