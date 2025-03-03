@@ -7,10 +7,29 @@ class LandingPage extends Component {
   }
   
   componentDidMount() {
+    // Dynamically add CSS links to document head
+    const cssLinks = [
+      "/assets/vendor/aos/aos.css",
+      "/assets/vendor/bootstrap/css/bootstrap.min.css",
+      "/assets/vendor/bootstrap-icons/bootstrap-icons.css",
+      "/assets/vendor/boxicons/css/boxicons.min.css",
+      "/assets/vendor/glightbox/css/glightbox.min.css",
+      "/assets/vendor/remixicon/remixicon.css",
+      "/assets/vendor/swiper/swiper-bundle.min.css",
+      "/assets/css/style.css"
+    ];
+    cssLinks.forEach(href => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      document.head.appendChild(link);
+    });
+    
+    // Process scripts
     const container = this.containerRef.current;
-    const scriptTags = container.querySelectorAll('script');
+    const scriptTags = container.querySelectorAll("script");
     scriptTags.forEach(oldScript => {
-      const newScript = document.createElement('script');
+      const newScript = document.createElement("script");
       if (oldScript.src) {
         newScript.src = oldScript.src;
         newScript.async = false;
