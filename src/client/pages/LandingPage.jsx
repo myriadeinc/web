@@ -17,7 +17,6 @@ class LandingPage extends Component {
       });
     };
 
-    // Load Three.js and Vanta Waves
     Promise.all([
       loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'),
       loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js')
@@ -41,9 +40,10 @@ class LandingPage extends Component {
           document.head.appendChild(link);
         });
         
+        // Delay Vanta initialization to ensure the innerHTML is fully parsed
         setTimeout(() => {
           const heroEl = document.querySelector('#hero');
-          if (window.VANTA && heroEl) {
+          if (heroEl && window.VANTA) {
             window.VANTA.WAVES({
               el: "#hero",
               mouseControls: false,
@@ -53,14 +53,14 @@ class LandingPage extends Component {
               minWidth: 200.00,
               scale: 1.00,
               scaleMobile: 1.00,
-              color: 0x31355,
+              color: 0x31355f,
               shininess: 15.00,
               waveHeight: 23.00,
               waveSpeed: 0.2,
               zoom: 1.10
             });
           } else {
-            console.error("VANTA or #hero element not found.");
+            console.error("Either VANTA is not loaded or #hero element not found.");
           }
         }, 1000); 
 
