@@ -41,34 +41,41 @@ class LandingPage extends Component {
           document.head.appendChild(link);
         });
         
-        // Wait a bit for the innerHTML to be parsed and #hero to exist
-        setTimeout(() => {
-          const heroEl = document.querySelector('#hero');
-          if (window.VANTA && heroEl) {
-            window.VANTA.WAVES({
-              el: "#hero",
-              mouseControls: false,
-              touchControls: false,
-              gyroControls: false,
-              minHeight: 200.00,
-              minWidth: 200.00,
-              scale: 1.00,
-              scaleMobile: 1.00,
-              color: 0x31355,
-              shininess: 15.00,
-              waveHeight: 23.00,
-              waveSpeed: 0.2,
-              zoom: 1.10
-            });
+        // Optionally re-run any inline scripts (if needed)
+        const container = this.containerRef.current;
+        const scriptTags = container.querySelectorAll("script:not([data-skip])");
+        scriptTags.forEach(oldScript => {
+          const newScript = document.createElement("script");
+          if (oldScript.src) {
+            newScript.src = oldScript.src;
+            newScript.async = false;
           } else {
-            console.error("VANTA or #hero element not found.");
+            newScript.textContent = oldScript.textContent;
           }
-        }); 
+          document.body.appendChild(newScript);
+        });
 
-      }, 10)
+        // Initialize the Vanta Waves effect after all resources have loaded.
+        if (window.VANTA) {
+          window.VANTA.WAVES({
+            el: "#hero",
+            mouseControls: false,
+            touchControls: false,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x31355,
+            shininess: 15.00,
+            waveHeight: 23.00,
+            waveSpeed: 0.2,
+            zoom: 1.10
+          });
+        }
+      })
       .catch(err => console.error("Failed to load scripts:", err));
   }
-  
   
   render() {
     return (
