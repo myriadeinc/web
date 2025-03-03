@@ -471,23 +471,6 @@ window.ChatraSetup = {
     if (d.head) d.head.appendChild(s);
 })(document, window, 'Chatra');
 </script>
-<script>
-VANTA.WAVES({
-  el: "#hero",
-  mouseControls: false,
-  touchControls: false,
-  gyroControls: false,
-  minHeight: 200.00,
-  minWidth: 200.00,
-  scale: 1.00,
-  scaleMobile: 1.00,
-  color: 0x31355,
-  shininess: 15.00,
-  waveHeight: 23.00,
-  waveSpeed: 0.2,
-  zoom: 1.10
-});
-</script>
           `,
         }}
       />
