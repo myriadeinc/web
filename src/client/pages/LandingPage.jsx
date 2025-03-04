@@ -12,7 +12,6 @@ class LandingPage extends Component {
         const script = document.createElement('script');
         script.src = url;
         script.onload = () => {
-          console.log('Loaded script:', url);
           resolve();
         };
         script.onerror = () => reject(new Error(`Failed to load ${url}`));
@@ -27,7 +26,7 @@ class LandingPage extends Component {
       .then(() => {
         if (window.VANTA && window.THREE) {
           window.VANTA.WAVES({
-            el: '#hero', 
+            el: '#hero',
             mouseControls: false,
             touchControls: false,
             gyroControls: false,
@@ -35,27 +34,32 @@ class LandingPage extends Component {
             minWidth: 200.0,
             scale: 1.0,
             scaleMobile: 1.0,
-            color: 0x31355f, 
+            color: 0x31355f,
             shininess: 15.0,
             waveHeight: 23.0,
             waveSpeed: 0.2,
             zoom: 1.1,
           });
-          console.log('Vanta WAVES initialized!');
-        } else {
-          console.error('VANTA or THREE is not defined.');
         }
       })
-      .catch((error) => console.error('Script load error:', error));
+      .catch(() => {});
   }
 
   render() {
-
     return (
       <div
         ref={this.containerRef}
         dangerouslySetInnerHTML={{
           __html: `
+<link rel="stylesheet" href="/assets/vendor/aos/aos.css">
+<link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
+<link rel="stylesheet" href="/assets/vendor/boxicons/css/boxicons.min.css">
+<link rel="stylesheet" href="/assets/vendor/glightbox/css/glightbox.min.css">
+<link rel="stylesheet" href="/assets/vendor/remixicon/remixicon.css">
+<link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+
 <header id="header" class="fixed-top">
   <div class="container-fluid d-flex align-items-center">
     <a href="index.html" class="logo me-auto"><img src="/assets/img/Myriade-logo.svg" alt="" class="pull-left"></a>
@@ -68,7 +72,8 @@ class LandingPage extends Component {
     </nav>
   </div>
 </header>
-<section id="hero" class="container-fluid">
+
+<section id="hero" class="container-fluid" style="min-height:100vh;">
   <div class="container mt-3">
     <div class="flex absolute top-00 left-0 bottom-0 right-0 "></div>
     <div class="row">
@@ -98,11 +103,13 @@ class LandingPage extends Component {
     <div style="margin-bottom:500px"></div>
   </div>
 </section>
+
 <div class="row col-9 d-flex justify-content-center mx-auto">
   <div class="hero-img">
     <img src="/assets/img/app.png" class="img-fluid mx-auto justify-content-center d-flex img-responsive">
   </div>
 </div>
+
 <main id="main">
   <section id="why-us" class="why-us">
     <div class="container-fluid" data-aos="fade-up">
@@ -183,6 +190,7 @@ class LandingPage extends Component {
       </div>
     </div>
   </section>
+
   <section id="team" class="team section-bg">
     <div class="container" data-aos="fade-up">
       <div class="section-title">
@@ -241,6 +249,7 @@ class LandingPage extends Component {
       </div>
     </div>
   </section>
+
   <section id="services" class="services">
     <div class="container" data-aos="fade-up">
       <div class="section-title">
@@ -278,6 +287,7 @@ class LandingPage extends Component {
       </div>
     </div>
   </section>
+
   <section id="cta" class="cta">
     <div class="container" data-aos="zoom-in">
       <div class="row">
@@ -291,6 +301,7 @@ class LandingPage extends Component {
       </div>
     </div>
   </section>
+
   <section id="about" class="about">
     <div class="container" data-aos="fade-up">
       <div class="section-title">
@@ -317,6 +328,7 @@ class LandingPage extends Component {
       </div>
     </div>
   </section>
+
   <section id="faq" class="faq section-bg">
     <div class="container" data-aos="fade-up">
       <div class="section-title">
@@ -378,12 +390,14 @@ class LandingPage extends Component {
     </div>
   </section>
 </main>
+
 <div id="popup-overlay" style="display: none;" class="popup-overlay">
   <div class="popup-box">
     <p>Installation in Progress...</p>
     <div id="spinner"></div>
   </div>
 </div>
+
 <footer id="footer">
   <div class="footer-top">
     <div class="container">
@@ -417,6 +431,7 @@ class LandingPage extends Component {
     </div>
   </div>
 </footer>
+
 <div id="preloader"></div>
 <script src="/assets/vendor/aos/aos.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -426,24 +441,6 @@ class LandingPage extends Component {
 <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="/assets/vendor/waypoints/noframework.waypoints.js"></script>
 <script src="/assets/js/main.js"></script>
-<script>
-window.ChatraSetup = {
-    colors: {
-        buttonText: '#f0f0f0',
-        buttonBg: '#f68600'
-    }
-};
-(function (d, w, c) {
-    w.ChatraID = 'kzQzfDagyXR78mcF3';
-    var s = d.createElement('script');
-    w[c] = w[c] || function () {
-        (w[c].q = w[c].q || []).push(arguments);
-    };
-    s.async = true;
-    s.src = 'https://call.chatra.io/chatra.js';
-    if (d.head) d.head.appendChild(s);
-})(document, window, 'Chatra');
-</script>
           `,
         }}
       />
