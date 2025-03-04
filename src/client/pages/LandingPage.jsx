@@ -1,11 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Component, createRef } from 'react';
 
-function LandingPage() {
-  const containerRef = useRef(null);
+class LandingPage extends Component {
+  constructor(props) {
+    super(props);
+    this.containerRef = createRef();
+  }
 
-  useEffect(() => {
-    const loadScript = (url) =>
-      new Promise((resolve, reject) => {
+  componentDidMount() {
+    const loadScript = (url) => {
+      return new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = url;
         script.onload = () => {
@@ -15,17 +18,16 @@ function LandingPage() {
         script.onerror = () => reject(new Error(`Failed to load ${url}`));
         document.body.appendChild(script);
       });
-
+    };
 
     loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
       .then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
       .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
       .then(() => loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js'))
       .then(() => {
-        // Now that everything is loaded in order...
         if (window.VANTA && window.THREE) {
           window.VANTA.WAVES({
-            el: '#hero',
+            el: '#hero', 
             mouseControls: false,
             touchControls: false,
             gyroControls: false,
@@ -33,7 +35,7 @@ function LandingPage() {
             minWidth: 200.0,
             scale: 1.0,
             scaleMobile: 1.0,
-            color: 0x31355f,
+            color: 0x31355f, 
             shininess: 15.0,
             waveHeight: 23.0,
             waveSpeed: 0.2,
@@ -44,9 +46,10 @@ function LandingPage() {
           console.error('VANTA or THREE is not defined.');
         }
       })
-      .catch((e) => console.error('Script load error:', e));
-  }, []);
+      .catch((error) => console.error('Script load error:', error));
+  }
 
+  render() {
 
     return (
       <div
