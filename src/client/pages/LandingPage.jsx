@@ -1,83 +1,53 @@
-import React, { Component, createRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-class LandingPage extends Component {
-  constructor(props) {
-    super(props);
-    this.containerRef = createRef();
-  }
-  
-  componentDidMount() {
-    const loadScript = (src) => {
-      return new Promise((resolve, reject) => {
+function LandingPage() {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const loadScript = (url) =>
+      new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = src;
-        script.onload = resolve;
-        script.onerror = reject;
+        script.src = url;
+        script.onload = () => {
+          console.log('Loaded script:', url);
+          resolve();
+        };
+        script.onerror = () => reject(new Error(`Failed to load ${url}`));
         document.body.appendChild(script);
       });
-    };
 
-    // Load Three.js and Vanta Waves
-    Promise.all([
-      loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'),
-      loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js')
-    ])
+
+    loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
+      .then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
+      .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
+      .then(() => loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js'))
       .then(() => {
-        // Dynamically add the CSS links
-        const cssLinks = [
-          "/assets/vendor/aos/aos.css",
-          "/assets/vendor/bootstrap/css/bootstrap.min.css",
-          "/assets/vendor/bootstrap-icons/bootstrap-icons.css",
-          "/assets/vendor/boxicons/css/boxicons.min.css",
-          "/assets/vendor/glightbox/css/glightbox.min.css",
-          "/assets/vendor/remixicon/remixicon.css",
-          "/assets/vendor/swiper/swiper-bundle.min.css",
-          "/assets/css/style.css"
-        ];
-        cssLinks.forEach(href => {
-          const link = document.createElement("link");
-          link.rel = "stylesheet";
-          link.href = href;
-          document.head.appendChild(link);
-        });
-        
-        // Optionally re-run any inline scripts (if needed)
-        const container = this.containerRef.current;
-        const scriptTags = container.querySelectorAll("script:not([data-skip])");
-        scriptTags.forEach(oldScript => {
-          const newScript = document.createElement("script");
-          if (oldScript.src) {
-            newScript.src = oldScript.src;
-            newScript.async = false;
-          } else {
-            newScript.textContent = oldScript.textContent;
-          }
-          document.body.appendChild(newScript);
-        });
-
-        // Initialize the Vanta Waves effect after all resources have loaded.
-        if (window.VANTA) {
+        // Now that everything is loaded in order...
+        if (window.VANTA && window.THREE) {
           window.VANTA.WAVES({
-            el: "#hero",
+            el: '#hero',
             mouseControls: false,
             touchControls: false,
             gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x31355,
-            shininess: 15.00,
-            waveHeight: 23.00,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            color: 0x31355f,
+            shininess: 15.0,
+            waveHeight: 23.0,
             waveSpeed: 0.2,
-            zoom: 1.10
+            zoom: 1.1,
           });
+          console.log('Vanta WAVES initialized!');
+        } else {
+          console.error('VANTA or THREE is not defined.');
         }
       })
-      .catch(err => console.error("Failed to load scripts:", err));
-  }
-  
-  render() {
+      .catch((e) => console.error('Script load error:', e));
+  }, []);
+
+
     return (
       <div
         ref={this.containerRef}
