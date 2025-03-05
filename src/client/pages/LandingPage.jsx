@@ -38,7 +38,7 @@ class LandingPage extends Component {
             shininess: 15.0,
             waveHeight: 23.0,
             waveSpeed: 0.2,
-            zoom: 1.1,
+            zoom: 1.1
           });
         }
         const preloader = document.getElementById('preloader');
@@ -70,15 +70,29 @@ class LandingPage extends Component {
 <link rel="stylesheet" href="/assets/css/style.css">
 
 <style>
+  /* Ensure header is on top */
   #header {
     position: relative !important;
     z-index: 9999 !important;
+  }
+  /* Ensure hero text is above the Vanta background */
+  #hero {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+  /* Ensure cookies popup is above everything */
+  #popup-overlay {
+    position: fixed !important;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999999 !important;
   }
 </style>
 
 <header id="header" class="fixed-top">
   <div class="container-fluid d-flex align-items-center">
-    <a href="index.html" class="logo me-auto"><img src="/assets/img/Myriade-logo.svg" alt="" class="pull-left"></a>
+    <a href="index.html" class="logo me-auto">
+      <img src="/assets/img/Myriade-logo.svg" alt="" class="pull-left">
+    </a>
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="login scrollto" href="#login">Login</a></li>
@@ -457,7 +471,7 @@ class LandingPage extends Component {
 <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="/assets/vendor/waypoints/noframework.waypoints.js"></script>
 <script src="/assets/js/main.js"></script>
-          `,
+          `
         }}
       />
     );
