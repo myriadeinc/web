@@ -7,15 +7,14 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    const loadScript = (url) => {
-      return new Promise((resolve, reject) => {
+    const loadScript = (url) =>
+      new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = url;
         script.onload = () => resolve();
         script.onerror = () => reject(new Error(`Failed to load ${url}`));
         document.body.appendChild(script);
       });
-    };
 
     loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
       .then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
@@ -68,23 +67,35 @@ class LandingPage extends Component {
 <link rel="stylesheet" href="/assets/css/style.css">
 
 <style>
+  /* Ensure header is always on top */
   #header {
-    z-index: 9999 !important;
     position: relative !important;
+    z-index: 9999 !important;
   }
+
+  /* Make the hero section a positioned container */
   #hero {
     position: relative !important;
+    min-height: 100vh;
+    z-index: 1 !important;
   }
+
+  /* The Vanta canvas behind text */
   #hero canvas {
     position: absolute !important;
-    top: 0;
-    left: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     width: 100% !important;
     height: 100% !important;
+    z-index: 0 !important;
   }
-  #main, section, .container {
+
+  /* Ensure hero text and main content are above the canvas */
+  #hero .container, #main, section, .container {
     position: relative !important;
+    z-index: 2 !important;
   }
+
+  /* Highest z-index for the popup overlay */
   #popup-overlay {
     position: fixed !important;
     top: 0 !important;
@@ -110,7 +121,7 @@ class LandingPage extends Component {
   </div>
 </header>
 
-<section id="hero" class="container-fluid" style="min-height:100vh;">
+<section id="hero" class="container-fluid">
   <div class="container mt-3">
     <div class="row">
       <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
