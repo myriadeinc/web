@@ -88,7 +88,7 @@ class LandingPage extends Component {
   }
 </style>
 
-<header id="header" class="fixed-top">
+<header id="header" class="fixed-top" style="z-index: 9999; position: relative;">
   <div class="container-fluid d-flex align-items-center">
     <a href="index.html" class="logo me-auto">
       <img src="/assets/img/Myriade-logo.svg" alt="" class="pull-left">
@@ -102,6 +102,7 @@ class LandingPage extends Component {
     </nav>
   </div>
 </header>
+
 
 <section id="hero" class="container-fluid" style="min-height:100vh;">
   <div class="container mt-3">
