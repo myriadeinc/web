@@ -17,10 +17,10 @@ class LandingPage extends Component {
       });
 
     loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
-      //.then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
-      //.then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
-      //.then(() => loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js'))
-      //.then(() => {
+      .then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
+      .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
+      .then(() => loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js'))
+      .then(() => {
         if (window.VANTA && window.THREE) {
           window.VANTA.WAVES({
             el: '#hero',
@@ -103,6 +103,28 @@ class LandingPage extends Component {
 </head>
 
 <body>
+
+            <style>
+              #hero {
+                position: relative !important;
+                z-index: 1 !important;
+              }
+
+              #hero canvas {
+                position: absolute !important;
+                top: 0; left: 0; right: 0; bottom: 0;
+                width: 100% !important;
+                height: 100% !important;
+                z-index: -1 !important; 
+              }
+
+              #hero .container, #main, section, .container {
+                position: relative !important;
+                z-index: 2 !important;
+              }
+
+            </style>
+
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
