@@ -1,4 +1,3 @@
-x
 import React, { Component, createRef } from 'react';
 
 class LandingPage extends Component {
@@ -26,74 +25,31 @@ class LandingPage extends Component {
       document.head.appendChild(link);
     });
     
-    const container = this.containerRef.current;
-    const scriptTags = container.querySelectorAll("script");
-    scriptTags.forEach(oldScript => {
-      const newScript = document.createElement("script");
-      if (oldScript.src) {
-        newScript.src = oldScript.src;
-        newScript.async = false;
-      } else {
-        newScript.textContent = oldScript.textContent;
+    // Dynamically load the Vanta Waves script
+    const script = document.createElement('script');
+    script.src = "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js";
+    script.async = true;
+    script.onload = () => {
+      if (window.VANTA && window.THREE) {
+        window.VANTA.WAVES({
+          el: "#hero", 
+          mouseControls: false,
+          touchControls: false,
+          gyroControls: false,
+          minHeight: 200,
+          minWidth: 200,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          color: 0x31355f,
+          shininess: 15,
+          waveHeight: 23,
+          waveSpeed: 0.2,
+          zoom: 1.1
+        });
       }
-      document.body.appendChild(newScript);
-    });
-  }
-  
-
-/*import React, { Component, createRef } from 'react';
-
-class LandingPage extends Component {
-  constructor(props) {
-    super(props);
-    this.containerRef = createRef();
-  }
-
-  componentDidMount() {
-    const loadScript = (url) =>
-      new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = url;
-        script.onload = () => resolve();
-        script.onerror = () => reject(new Error(`Failed to load ${url}`));
-        document.body.appendChild(script);
-      });
-
-    loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
-      .then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
-      .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
-      .then(() => loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js'))
-      .then(() => {
-        if (window.VANTA && window.THREE) {
-          window.VANTA.WAVES({
-            el: '#hero',
-            mouseControls: false,
-            touchControls: false,
-            gyroControls: false,
-            minHeight: 200,
-            minWidth: 200,
-            scale: 1.0,
-            scaleMobile: 1.0,
-            color: 0x31355f,
-            shininess: 15,
-            waveHeight: 23,
-            waveSpeed: 0.2,
-            zoom: 1.1,
-          });
-        }
-        const preloader = document.getElementById('preloader');
-        if (preloader) {
-          preloader.style.display = 'none';
-        }
-      })
-      .catch(() => {
-        const preloader = document.getElementById('preloader');
-        if (preloader) {
-          preloader.style.display = 'none';
-        }
-      });
-  }*/
-
+    };
+    document.body.appendChild(script);
+  } 
   render() {
     return (
       <div
