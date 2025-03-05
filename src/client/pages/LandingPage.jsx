@@ -69,6 +69,13 @@ class LandingPage extends Component {
 <link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 
+<style>
+  #header {
+    position: relative !important;
+    z-index: 9999 !important;
+  }
+</style>
+
 <header id="header" class="fixed-top">
   <div class="container-fluid d-flex align-items-center">
     <a href="index.html" class="logo me-auto"><img src="/assets/img/Myriade-logo.svg" alt="" class="pull-left"></a>
