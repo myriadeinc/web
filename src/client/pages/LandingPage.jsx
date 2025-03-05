@@ -1,11 +1,4 @@
 
-
-3
-
-Share
-
-User
-You said:
 import React, { Component, createRef } from 'react';
 
 class LandingPage extends Component {
