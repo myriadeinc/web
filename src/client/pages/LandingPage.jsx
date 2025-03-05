@@ -5,7 +5,7 @@ class LandingPage extends Component {
     super(props);
     this.containerRef = createRef();
   }
-  
+
   componentDidMount() {
     const loadScript = (url) => {
       return new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ class LandingPage extends Component {
         document.body.appendChild(script);
       });
     };
-    
+
     loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
       .then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
       .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
@@ -28,13 +28,13 @@ class LandingPage extends Component {
             mouseControls: false,
             touchControls: false,
             gyroControls: false,
-            minHeight: 200.0,
-            minWidth: 200.0,
+            minHeight: 200,
+            minWidth: 200,
             scale: 1.0,
             scaleMobile: 1.0,
             color: 0x31355f,
-            shininess: 15.0,
-            waveHeight: 23.0,
+            shininess: 15,
+            waveHeight: 23,
             waveSpeed: 0.2,
             zoom: 1.1,
           });
@@ -51,11 +51,13 @@ class LandingPage extends Component {
         }
       });
   }
-  
+
   render() {
     return (
-      <div ref={this.containerRef} dangerouslySetInnerHTML={{
-        __html: `
+      <div
+        ref={this.containerRef}
+        dangerouslySetInnerHTML={{
+          __html: `
 <link rel="stylesheet" href="/assets/vendor/aos/aos.css">
 <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
@@ -66,37 +68,37 @@ class LandingPage extends Component {
 <link rel="stylesheet" href="/assets/css/style.css">
 
 <style>
-  /* Ensure header is above everything */
   #header {
-    position: relative;
+    z-index: 9999 !important;
+    position: relative !important;
   }
-  /* Hero section: content on top, canvas behind */
   #hero {
-    position: relative;
-    z-index: 2;
+    position: relative !important;
+    z-index: 2 !important;
   }
   #hero canvas {
-    position: absolute;
+    position: absolute !important;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: -1 !important;
   }
-  /* Main content and other sections should appear above the background */
   #main, section, .container {
-    position: relative;
-    z-index: 2;
+    position: relative !important;
+    z-index: 2 !important;
   }
-  /* Popup overlay highest */
   #popup-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 999999;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 999999 !important;
   }
 </style>
 
-<header id="header" class="fixed-top" style="z-index: 9999; position: relative;">
+<header id="header" class="fixed-top">
   <div class="container-fluid d-flex align-items-center">
     <a href="index.html" class="logo me-auto">
       <img src="/assets/img/Myriade-logo.svg" alt="" class="pull-left">
@@ -113,7 +115,6 @@ class LandingPage extends Component {
 
 <section id="hero" class="container-fluid" style="min-height:100vh;">
   <div class="container mt-3">
-    <div class="flex absolute top-00 left-0 bottom-0 right-0"></div>
     <div class="row">
       <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
         <h1>Make your PC work for you...</h1>
@@ -479,7 +480,7 @@ class LandingPage extends Component {
 <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="/assets/vendor/waypoints/noframework.waypoints.js"></script>
 <script src="/assets/js/main.js"></script>
-          `
+          `,
         }}
       />
     );
