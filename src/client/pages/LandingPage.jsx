@@ -74,7 +74,6 @@ class LandingPage extends Component {
   }
   #hero {
     position: relative !important;
-    z-index: 2 !important;
   }
   #hero canvas {
     position: absolute !important;
@@ -82,11 +81,9 @@ class LandingPage extends Component {
     left: 0;
     width: 100% !important;
     height: 100% !important;
-    z-index: -1 !important;
   }
   #main, section, .container {
     position: relative !important;
-    z-index: 2 !important;
   }
   #popup-overlay {
     position: fixed !important;
