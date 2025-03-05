@@ -7,6 +7,7 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
+    // Dynamically add CSS links to the document head
     const cssLinks = [
       "/assets/vendor/aos/aos.css",
       "/assets/vendor/bootstrap/css/bootstrap.min.css",
@@ -24,6 +25,7 @@ class LandingPage extends Component {
       document.head.appendChild(link);
     });
 
+    // Dynamically load necessary scripts
     const loadScript = (url) =>
       new Promise((resolve, reject) => {
         const script = document.createElement('script');
@@ -38,9 +40,10 @@ class LandingPage extends Component {
       .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
       .then(() => loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js'))
       .then(() => {
+        // Apply Vanta effect to the new background element
         if (window.VANTA && window.THREE) {
           window.VANTA.WAVES({
-            el: '#hero', 
+            el: '#vanta-background', // New element for Vanta effect
             mouseControls: false,
             touchControls: false,
             gyroControls: false,
@@ -55,6 +58,8 @@ class LandingPage extends Component {
             zoom: 1.1,
           });
         }
+
+        // Hide the preloader once the page is ready
         const preloader = document.getElementById('preloader');
         if (preloader) {
           preloader.style.display = 'none';
@@ -75,128 +80,90 @@ class LandingPage extends Component {
         dangerouslySetInnerHTML={{
           __html: `
           <!DOCTYPE html>
-<html lang="en">
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta content="width=device-width, initial-scale=1.0" name="viewport">
+              <title>Myriade</title>
+              <meta content="" name="description">
+              <meta content="" name="keywords">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+              <!-- Favicons -->
+              <link href="assets/img/favicon.png" rel="icon">
+              <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <title>Myriade</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-  <meta name="viewport" content= "width=device-width, initial-scale=1.0">
+              <!-- Google Fonts -->
+              <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Varela+Round&display=swap" rel="stylesheet"> 
+              <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
+              <!-- Vendor CSS Files -->
+              <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+              <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+              <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+              <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+              <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+              <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+              <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
- 
-  <!-- Google Fonts -->
+              <!-- Template Main CSS File -->
+              <link href="assets/css/style.css" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Varela+Round&display=swap" rel="stylesheet"> 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+              <script src="assets/js/three.r119.min.js"></script>
+              <script src="assets/js/vanta.waves.min.js"></script>
+            </head>
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+            <body>
+              <style>
+                /* Ensure the Vanta canvas has correct position and z-index */
+                #vanta-background {
+                  position: absolute;
+                  top: 0; left: 0; right: 0; bottom: 0;
+                  width: 100%;
+                  height: 100%;
+                  z-index: -1;
+                }
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+                /* Ensure other content stays above the Vanta effect */
+                #main, #hero, section, .container {
+                  position: relative;
+                  z-index: 1;
+                }
+              </style>
 
-  <script src="assets/js/three.r119.min.js"></script>
-  <script src="assets/js/vanta.waves.min.js"></script>
+              <!-- ======= Header ======= -->
+              <header id="header" class="fixed-top">
+                <div class="container-fluid d-flex align-items-center">
+                  <a href="index.html" class="logo me-auto"><img src="assets/img/Myriade-logo.svg" alt="" class="pull-left"></a>
+                  <nav id="navbar" class="navbar">
+                    <ul>
+                      <li><a class="login scrollto" href="#about">Login</a></li>
+                      <li><a class="signup scrollto" href="#about">Get Started</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                  </nav><!-- .navbar -->
+                </div>
+              </header><!-- End Header -->
 
-  
-</head>
+              <!-- New Vanta Background -->
+              <div id="vanta-background"></div> <!-- Vanta effect will be applied to this -->
 
-<body>
+              <!-- ======= Hero Section ======= -->
+              <section id="hero" class="container-fluid">
+                <div class="container mt-3">
+                  <div class="row">
+                    <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
+                      <h1>Make your PC work for you...</h1>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
+                      <h2>...while you’re at work, school, or asleep and collect your mined rewards when you get back. Mining crypto on Myriade is safe and easy. Once you download our app, you can start earning crypto and gift cards right away.</h2>
+                    </div>
+                  </div>
+                </div>
+              </section><!-- End Hero -->
 
-            <style>
-              #hero {
-                position: relative !important;
-                z-index: 1 !important;
-              }
-
-              #hero canvas {
-                position: absolute !important;
-                top: 0; left: 0; right: 0; bottom: 0;
-                width: 100% !important;
-                height: 100% !important;
-                z-index: -1 !important; 
-              }
-
-              #hero .container, #main, section, .container {
-                position: relative !important;
-                z-index: 2 !important;
-              }
-
-            </style>
-
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container-fluid d-flex align-items-center">
-
-      <a href="index.html" class="logo me-auto"><img src="assets/img/Myriade-logo.svg" alt="" class="pull-left"></a>
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="login scrollto" href="#about">Login</a></li>
-          <li><a class="signup scrollto" href="#about">Get Started</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="container-fluid">
-    <div class="container mt-3">
-      <div class="flex absolute top-00 left-0 bottom-0 right-0 "></div>
-      <div class="row">
-        <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
-          <h1>Make your PC work for you...</h1>
-          
-            
-          </div>
-      </div>
-      <div class="row">
-        <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
-          <h2>...while you’re at work, school, or asleep and collect your mined rewards when you get back. Mining crypto on Myriade is safe and easy. Once you download our app, you can start earning crypto and gift cards right away.</h2>
-            
-          </div>
-      </div>
-      
-      <div class="btn-toolbar justify-content-center " data-aos="zoom-in">
-       
-        <button id="download-desktop-app" class="btn btn-download-desktop-app" type="submit" ><svg xmlns="http://www.w3.org/2000/svg" width="50" height="40" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-        </svg> Download Desktop App</button>
-        
-      </div>
-      <div class="btn-toolbar justify-content-center" data-aos="zoom-in">
-        <button class="btn btn-advanced-mining  justify-content-center mx-auto " type="button" onclick="window.location.href='https://github.com/xmrig/xmrig'">Advanced Mining (XMRIG)</button>
-      </div>
-      
-      <div style="margin-bottom:500px"></div>
-
-      
-     
-    </div>
-
-  </section><!-- End Hero -->
 
   <div class="row col-9 d-flex justify-content-center mx-auto ">
     <div class="hero-img ">
