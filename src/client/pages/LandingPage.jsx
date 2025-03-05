@@ -19,7 +19,7 @@ class LandingPage extends Component {
     loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
       .then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
       .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
-      .then(() => loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js'))
+      //.then(() => loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js'))
       .then(() => {
         if (window.VANTA && window.THREE) {
           window.VANTA.WAVES({
