@@ -67,20 +67,24 @@ class LandingPage extends Component {
 <link rel="stylesheet" href="/assets/css/style.css">
 
 <style>
-  /* Ensure header is always on top */
+  /* Header has a high z-index */
   #header {
     position: relative !important;
     z-index: 9999 !important;
   }
+  /* Text inside header even higher */
+  #header * {
+    position: relative !important;
+    z-index: 10000 !important;
+  }
 
-  /* Make the hero section a positioned container */
+  /* Hero section container */
   #hero {
     position: relative !important;
     min-height: 100vh;
     z-index: 1 !important;
   }
-
-  /* The Vanta canvas behind text */
+  /* Vanta canvas behind everything in hero */
   #hero canvas {
     position: absolute !important;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -89,10 +93,15 @@ class LandingPage extends Component {
     z-index: 0 !important;
   }
 
-  /* Ensure hero text and main content are above the canvas */
-  #hero .container, #main, section, .container {
+  /* Main content higher than the hero container */
+  #main {
     position: relative !important;
     z-index: 2 !important;
+  }
+  /* All text inside main even higher than the container */
+  #main * {
+    position: relative !important;
+    z-index: 3 !important;
   }
 
   /* Highest z-index for the popup overlay */
