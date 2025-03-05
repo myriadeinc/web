@@ -7,17 +7,14 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    const loadScript = (url) => {
-      return new Promise((resolve, reject) => {
+    const loadScript = (url) =>
+      new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = url;
-        script.onload = () => {
-          resolve();
-        };
+        script.onload = () => resolve();
         script.onerror = () => reject(new Error(`Failed to load ${url}`));
         document.body.appendChild(script);
       });
-    };
 
     loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
       .then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
@@ -38,19 +35,15 @@ class LandingPage extends Component {
             shininess: 15.0,
             waveHeight: 23.0,
             waveSpeed: 0.2,
-            zoom: 1.1
+            zoom: 1.1,
           });
         }
         const preloader = document.getElementById('preloader');
-        if (preloader) {
-          preloader.style.display = 'none';
-        }
+        if (preloader) preloader.style.display = 'none';
       })
       .catch(() => {
         const preloader = document.getElementById('preloader');
-        if (preloader) {
-          preloader.style.display = 'none';
-        }
+        if (preloader) preloader.style.display = 'none';
       });
   }
 
@@ -70,17 +63,25 @@ class LandingPage extends Component {
 <link rel="stylesheet" href="/assets/css/style.css">
 
 <style>
-  /* Ensure header is on top */
+  /* Header above all */
   #header {
     position: relative !important;
     z-index: 9999 !important;
   }
-  /* Ensure hero text is above the Vanta background */
+  /* Hero section: set position and ensure its canvas is behind content */
   #hero {
     position: relative !important;
     z-index: 2 !important;
   }
-  /* Ensure cookies popup is above everything */
+  #hero > canvas {
+    z-index: -1 !important;
+  }
+  /* Container inside hero: text above canvas */
+  #hero .container {
+    position: relative;
+    z-index: 2;
+  }
+  /* Ensure popup overlay is highest */
   #popup-overlay {
     position: fixed !important;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -103,10 +104,9 @@ class LandingPage extends Component {
   </div>
 </header>
 
-
 <section id="hero" class="container-fluid" style="min-height:100vh;">
   <div class="container mt-3">
-    <div class="flex absolute top-00 left-0 bottom-0 right-0 "></div>
+    <div class="flex absolute top-00 left-0 bottom-0 right-0"></div>
     <div class="row">
       <div class="col-9 d-inline-flex flex-column justify-content-center pt-0 order-1 mx-auto" data-aos="fade-up" data-aos-delay="300">
         <h1>Make your PC work for you...</h1>
@@ -217,7 +217,7 @@ class LandingPage extends Component {
             </ul>
           </div>
         </div>
-        <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("/assets/img/mining-image.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+        <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style="background-image: url('/assets/img/mining-image.png');" data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
       </div>
     </div>
   </section>
