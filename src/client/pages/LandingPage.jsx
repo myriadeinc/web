@@ -1,4 +1,3 @@
-
 import React, { Component, createRef } from 'react';
 
 class LandingPage extends Component {
@@ -6,9 +5,8 @@ class LandingPage extends Component {
     super(props);
     this.containerRef = createRef();
   }
-  
+
   componentDidMount() {
-    // Dynamically add CSS links to document head
     const cssLinks = [
       "/assets/vendor/aos/aos.css",
       "/assets/vendor/bootstrap/css/bootstrap.min.css",
@@ -25,31 +23,7 @@ class LandingPage extends Component {
       link.href = href;
       document.head.appendChild(link);
     });
-    
-    const container = this.containerRef.current;
-    const scriptTags = container.querySelectorAll("script");
-    scriptTags.forEach(oldScript => {
-      const newScript = document.createElement("script");
-      if (oldScript.src) {
-        newScript.src = oldScript.src;
-        newScript.async = false;
-      } else {
-        newScript.textContent = oldScript.textContent;
-      }
-      document.body.appendChild(newScript);
-    });
-  }
-  
 
-/*import React, { Component, createRef } from 'react';
-
-class LandingPage extends Component {
-  constructor(props) {
-    super(props);
-    this.containerRef = createRef();
-  }
-
-  componentDidMount() {
     const loadScript = (url) =>
       new Promise((resolve, reject) => {
         const script = document.createElement('script');
@@ -66,7 +40,7 @@ class LandingPage extends Component {
       .then(() => {
         if (window.VANTA && window.THREE) {
           window.VANTA.WAVES({
-            el: '#hero',
+            el: '#hero', 
             mouseControls: false,
             touchControls: false,
             gyroControls: false,
@@ -92,7 +66,7 @@ class LandingPage extends Component {
           preloader.style.display = 'none';
         }
       });
-  }*/
+  }
 
   render() {
     return (
