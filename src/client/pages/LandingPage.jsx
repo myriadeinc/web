@@ -5,17 +5,18 @@ class LandingPage extends Component {
     super(props);
     this.containerRef = createRef();
   }
-
+  
   componentDidMount() {
-    const loadScript = (url) =>
-      new Promise((resolve, reject) => {
+    const loadScript = (url) => {
+      return new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = url;
         script.onload = () => resolve();
         script.onerror = () => reject(new Error(`Failed to load ${url}`));
         document.body.appendChild(script);
       });
-
+    };
+    
     loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
       .then(() => loadScript('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'))
       .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'))
@@ -39,20 +40,22 @@ class LandingPage extends Component {
           });
         }
         const preloader = document.getElementById('preloader');
-        if (preloader) preloader.style.display = 'none';
+        if (preloader) {
+          preloader.style.display = 'none';
+        }
       })
       .catch(() => {
         const preloader = document.getElementById('preloader');
-        if (preloader) preloader.style.display = 'none';
+        if (preloader) {
+          preloader.style.display = 'none';
+        }
       });
   }
-
+  
   render() {
     return (
-      <div
-        ref={this.containerRef}
-        dangerouslySetInnerHTML={{
-          __html: `
+      <div ref={this.containerRef} dangerouslySetInnerHTML={{
+        __html: `
 <link rel="stylesheet" href="/assets/vendor/aos/aos.css">
 <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
@@ -63,29 +66,34 @@ class LandingPage extends Component {
 <link rel="stylesheet" href="/assets/css/style.css">
 
 <style>
-  /* Header above all */
+  /* Ensure header is above everything */
   #header {
-    position: relative !important;
-    z-index: 9999 !important;
+    position: relative;
+    z-index: 9999;
   }
-  /* Hero section: set position and ensure its canvas is behind content */
+  /* Hero section: content on top, canvas behind */
   #hero {
-    position: relative !important;
-    z-index: 2 !important;
-  }
-  #hero > canvas {
-    z-index: -1 !important;
-  }
-  /* Container inside hero: text above canvas */
-  #hero .container {
     position: relative;
     z-index: 2;
   }
-  /* Ensure popup overlay is highest */
+  #hero canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  /* Main content and other sections should appear above the background */
+  #main, section, .container {
+    position: relative;
+    z-index: 2;
+  }
+  /* Popup overlay highest */
   #popup-overlay {
-    position: fixed !important;
+    position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 999999 !important;
+    z-index: 999999;
   }
 </style>
 
