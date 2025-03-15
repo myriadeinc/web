@@ -3,7 +3,6 @@ import WAVES from "./assets/js/vanta.waves.min";
 import * as THREE from "./assets/js/three.r119.min";
 
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "./assets/js/main.js";
 
 
 import "./assets/vendor/bootstrap/css/bootstrap.min.css";
@@ -19,6 +18,12 @@ import "./assets/vendor/swiper/swiper-bundle.min.css";
 import AOS from "aos";
 
 
+
+import "./assets/vendor/isotope-layout/isotope.pkgd.min.js";
+import "./assets/vendor/php-email-form/validate.js";
+import "./assets/vendor/waypoints/noframework.waypoints.js";
+
+import "./assets/js/main.js";
 
 function LandingPage() {
   const heroRef = useRef(null);
