@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
-import WAVES from "vanta/dist/vanta.waves.min";
-import * as THREE from "three";
+import WAVES from "./assets/js/vanta.waves.min";
+import * as THREE from "./assets/js/three.r119.min";
 
 
 import "./assets/vendor/bootstrap/css/bootstrap.min.css";
