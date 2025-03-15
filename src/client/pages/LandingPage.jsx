@@ -14,6 +14,7 @@ import "./assets/vendor/glightbox/css/glightbox.min.css";
 import "./assets/vendor/remixicon/remixicon.css";
 import "./assets/vendor/swiper/swiper-bundle.min.css";
 
+function LandingPage() {
   const heroRef = useRef(null);
   const [vantaEffect, setVantaEffect] = useState(null);
 
