@@ -18,7 +18,6 @@ import "./assets/css/style.css";
 
 
 import "./assets/vendor/aos/aos.css";
-import "./assets/vendor/glightbox/js/glightbox.min.js";
 import "./assets/vendor/swiper/swiper-bundle.min.js";
 import "./assets/vendor/bootstrap-icons/bootstrap-icons.css";
 import "./assets/vendor/boxicons/css/boxicons.min.css";
