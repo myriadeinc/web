@@ -2,7 +2,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack'); 
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/client/index.js',
@@ -18,8 +18,7 @@ module.exports = {
                     },
                   },
                 ],
-              },
-
+            },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
                 use: [
@@ -30,7 +29,7 @@ module.exports = {
                     },
                   },
                 ],
-              },
+            },
             {
                 test: /\.(js|jsx)$/,
                 include: [path.resolve(__dirname, 'src')],

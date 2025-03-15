@@ -7,7 +7,7 @@ window.GLightbox = GLightbox;
 
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-import WAVES from "./assets/js/vanta.waves.min";
+import { WAVES } from './assets/js/vanta.waves.min.js';
 import * as THREE from "./assets/js/three.r119.min";
 
 import AOS from "aos";
@@ -18,14 +18,16 @@ import "./assets/vendor/bootstrap-icons/bootstrap-icons.css";
 import "./assets/vendor/boxicons/css/boxicons.min.css";
 import "./assets/vendor/glightbox/css/glightbox.min.css";
 import "./assets/vendor/remixicon/remixicon.css";
-import "./assets/vendor/swiper/swiper-bundle.min.css";
+//import "./assets/vendor/swiper/swiper-bundle.min.css";
 
 import "./assets/css/style.css";
 
-import "./assets/vendor/isotope-layout/isotope.pkgd.min.js";
+//import "./assets/vendor/isotope-layout/isotope.pkgd.min.js";
+import Isotope from 'isotope-layout';
+
 import "./assets/vendor/php-email-form/validate.js";
 import "./assets/vendor/waypoints/noframework.waypoints.js";
-import "./assets/vendor/swiper/swiper-bundle.min.js";
+//import "./assets/vendor/swiper/swiper-bundle.min.js";
 
 import "./assets/js/main.js";
 
