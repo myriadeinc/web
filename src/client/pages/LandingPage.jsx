@@ -1,36 +1,33 @@
 import React, { useRef, useEffect, useState } from "react";
-import WAVES from "./assets/js/vanta.waves.min";
-import * as THREE from "./assets/js/three.r119.min";
 
 import $ from "jquery";
 window.$ = $;
 window.jQuery = $;
 
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
+import WAVES from "./assets/js/vanta.waves.min";
+import * as THREE from "./assets/js/three.r119.min";
+
 import GLightbox from "glightbox";
 window.GLightbox = GLightbox;
 
-
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
+import AOS from "aos";
+import "aos/dist/aos.css"; 
 
 import "./assets/vendor/bootstrap/css/bootstrap.min.css";
-import "./assets/css/style.css";
-
-
-import "./assets/vendor/aos/aos.css";
-import "./assets/vendor/swiper/swiper-bundle.min.js";
 import "./assets/vendor/bootstrap-icons/bootstrap-icons.css";
 import "./assets/vendor/boxicons/css/boxicons.min.css";
 import "./assets/vendor/glightbox/css/glightbox.min.css";
 import "./assets/vendor/remixicon/remixicon.css";
 import "./assets/vendor/swiper/swiper-bundle.min.css";
-import AOS from "aos";
 
-
+import "./assets/css/style.css";
 
 import "./assets/vendor/isotope-layout/isotope.pkgd.min.js";
 import "./assets/vendor/php-email-form/validate.js";
 import "./assets/vendor/waypoints/noframework.waypoints.js";
+import "./assets/vendor/swiper/swiper-bundle.min.js";
 
 import "./assets/js/main.js";
 
