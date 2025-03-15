@@ -18,7 +18,7 @@ module.exports = {
                   },
                 ],
               },
-              
+
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
                 use: [
@@ -86,6 +86,12 @@ module.exports = {
         compress: true,
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            GLightbox: 'glightbox'
+          }),
+          
         new HtmlWebPackPlugin({
             template: './public/index.html',
             favicon: './public/icons/favicon.png',

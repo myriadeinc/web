@@ -55,12 +55,13 @@
     "apollo-link-http": "^1.5.17",
     "axios": "^0.21.1",
     "body-parser": "~1.18.3",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^4.6.2",
     "browser-cookies": "^1.2.0",
     "emailjs-com": "^2.6.4",
     "glightbox": "^3.3.1",
     "google-auth-library": "~3.1.0",
     "graphql": "^14.7.0",
+    "isotope-layout": "^3.0.6",
     "jquery": "^3.7.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.21",
@@ -81,6 +82,8 @@
     "recharts": "^1.8.5",
     "shards-react": "^1.0.3",
     "styled-components": "^4.4.1",
-    "three": "^0.127.0"
+    "swiper": "^11.2.5",
+    "three": "^0.127.0",
+    "waypoints": "^4.0.1"
   }
 }
