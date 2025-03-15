@@ -90,7 +90,9 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-            GLightbox: 'glightbox'
+            'window.jQuery': 'jquery', 
+            'window.$': 'jquery',      
+            Bootstrap: 'bootstrap',    
           }),
 
         new HtmlWebPackPlugin({

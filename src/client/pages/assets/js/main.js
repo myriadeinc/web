@@ -1,3 +1,12 @@
+import $ from 'jquery'; 
+import 'bootstrap';     
+import Swiper from 'swiper/bundle'; 
+import 'swiper/swiper-bundle.min.css';  
+import GLightbox from 'glightbox'; 
+import 'glightbox/dist/css/glightbox.min.css';  
+import AOS from 'aos';  
+import 'aos/dist/aos.css'; 
+
 (function() {
   "use strict";
 
