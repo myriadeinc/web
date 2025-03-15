@@ -3,6 +3,7 @@ import WAVES from "./assets/js/vanta.waves.min";
 import * as THREE from "./assets/js/three.r119.min";
 
 
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./assets/vendor/bootstrap/css/bootstrap.min.css";
 import "./assets/css/style.css";
 
