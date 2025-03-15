@@ -8,6 +8,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                type: 'asset/resource',
+              },
+            {
                 test: /\.(js|jsx)$/,
                 include: [path.resolve(__dirname, 'src')],
                 use: {
