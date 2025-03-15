@@ -2,6 +2,14 @@ import React, { useRef, useEffect, useState } from "react";
 import WAVES from "./assets/js/vanta.waves.min";
 import * as THREE from "./assets/js/three.r119.min";
 
+import $ from "jquery";
+window.$ = $;
+window.jQuery = $;
+
+import GLightbox from "glightbox";
+window.GLightbox = GLightbox;
+
+
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 
