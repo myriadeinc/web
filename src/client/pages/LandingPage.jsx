@@ -1,19 +1,17 @@
-import React, { useRef, useEffect, useState } from "react";
-
 import $ from "jquery";
 window.$ = $;
 window.jQuery = $;
+
+import GLightbox from "glightbox";
+window.GLightbox = GLightbox;
 
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import WAVES from "./assets/js/vanta.waves.min";
 import * as THREE from "./assets/js/three.r119.min";
 
-import GLightbox from "glightbox";
-window.GLightbox = GLightbox;
-
 import AOS from "aos";
-import "aos/dist/aos.css"; 
+import "aos/dist/aos.css";
 
 import "./assets/vendor/bootstrap/css/bootstrap.min.css";
 import "./assets/vendor/bootstrap-icons/bootstrap-icons.css";
