@@ -92,8 +92,8 @@ module.exports = {
             jQuery: 'jquery',
             'window.jQuery': 'jquery', 
             'window.$': 'jquery',      
-            Bootstrap: 'bootstrap',    
-          }),
+            Bootstrap: 'bootstrap/dist/js/bootstrap.bundle.min.js',
+        }),
 
         new HtmlWebPackPlugin({
             template: './public/index.html',
