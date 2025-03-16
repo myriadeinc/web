@@ -27,8 +27,8 @@ import "./assets/css/style.css";
 //import "./assets/vendor/isotope-layout/isotope.pkgd.min.js";
 import Isotope from 'isotope-layout';
 
-//import "./assets/vendor/php-email-form/validate.js";
-//import "./assets/vendor/waypoints/noframework.waypoints.js";
+import "./assets/vendor/php-email-form/validate.js";
+import "./assets/vendor/waypoints/noframework.waypoints.js";
 
 //import "./assets/vendor/swiper/swiper-bundle.min.js";
 
