@@ -1,11 +1,11 @@
-import $ from 'jquery'; 
+/*import $ from 'jquery'; 
 import 'bootstrap';     
 import Swiper from 'swiper';
 
 import GLightbox from 'glightbox'; 
 import 'glightbox/dist/css/glightbox.min.css';  
 import AOS from 'aos';  
-import 'aos/dist/aos.css'; 
+import 'aos/dist/aos.css'; */
 
 (function() {
   "use strict";
