@@ -31,7 +31,7 @@ import "./assets/vendor/waypoints/noframework.waypoints.js";
 
 
 
-import "./assets/js/main.js";
+//import "./assets/js/main.js";
 
 function LandingPage() {
   const heroRef = useRef(null);
