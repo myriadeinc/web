@@ -5,17 +5,9 @@
 
 
   <script>
-    window.addEventListener('error', function(event) {
-      const target = event.target;
-      if (target instanceof HTMLScriptElement ||
-          target instanceof HTMLLinkElement ||
-          target instanceof HTMLImageElement) {
-        const srcOrHref = target.src || target.href;
-        console.error('Resource failed to load:', srcOrHref);
-      }
-    }, true);
+    console.log("LandingPageStatic.html loaded");
   </script>
-  
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
