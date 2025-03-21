@@ -67,10 +67,11 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
     }),
+    /*
     new HtmlWebPackPlugin({
       template: './public/index.html',
       favicon: './public/icons/favicon.png'
-    }),
+    }),*/
     new CopyWebpackPlugin({
       patterns: [
         { from: 'public/assets', to: 'assets' },
