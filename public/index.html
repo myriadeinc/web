@@ -25,7 +25,7 @@
         <!-- Note: the if statment below specifically checks if the current rendering page is not an iframe since 
          the landing page is rendered as an iframe-->
         <script>
-        if (window.self === window.top) {
+         if (!window.location.pathname.startsWith('/LandingPage/')) {
             window.ChatraSetup = {
             colors: {
                 buttonText: '#f0f0f0', // chat button text color
