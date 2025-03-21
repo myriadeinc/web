@@ -72,6 +72,11 @@ module.exports = {
       template: './public/index.html',
       favicon: './public/icons/favicon.png'
     }),*/
+    new HtmlWebPackPlugin({
+      template: './public/index.html',
+      favicon: './public/icons/favicon.png',
+      inject: false, 
+    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: 'public/assets', to: 'assets' },
