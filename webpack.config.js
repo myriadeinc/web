@@ -73,7 +73,6 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'public/assets', to: 'assets' },
         { from: 'public/icons', to: 'icons' },
         { from: 'public/LandingPage', to: 'LandingPage' } 
 
