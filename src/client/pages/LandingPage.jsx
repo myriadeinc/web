@@ -3,7 +3,7 @@ import React from 'react';
 const LandingPage = () => {
   return (
     <iframe
-    src="/LandingPage/LandingPageStatic.html"
+    src="./LandingPageStatic.html"
       style={{
         width: '100%',
         height: '100vh',
