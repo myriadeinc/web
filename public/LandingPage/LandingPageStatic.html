@@ -2,6 +2,20 @@
 <html lang="en">
 
 <head>
+
+
+  <script>
+    window.addEventListener('error', function(event) {
+      const target = event.target;
+      if (target instanceof HTMLScriptElement ||
+          target instanceof HTMLLinkElement ||
+          target instanceof HTMLImageElement) {
+        const srcOrHref = target.src || target.href;
+        console.error('Resource failed to load:', srcOrHref);
+      }
+    }, true);
+  </script>
+  
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -428,7 +442,7 @@
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="/assets/js/LandingPagemain.js"></script>
+  <script src="assets/js/LandingPagemain.js"></script>
 
   <!-- Chatra widget code -->
   <script>
