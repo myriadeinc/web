@@ -69,8 +69,7 @@ module.exports = {
     }),
     new HtmlWebPackPlugin({
       template: './public/index.html',
-      favicon: './public/icons/favicon.png',
-      inject: false
+      favicon: './public/icons/favicon.png'
     }),
     new CopyWebpackPlugin({
       patterns: [
