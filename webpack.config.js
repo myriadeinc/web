@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/client/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '.js'
   },
   module: {
     rules: [
@@ -67,15 +67,9 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
     }),
-    /*
     new HtmlWebPackPlugin({
       template: './public/index.html',
       favicon: './public/icons/favicon.png'
-    }),*/
-    new HtmlWebPackPlugin({
-      template: './public/index.html',
-      favicon: './public/icons/favicon.png',
-      inject: false, 
     }),
     new CopyWebpackPlugin({
       patterns: [
