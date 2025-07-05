@@ -253,11 +253,24 @@
     
     const platform = navigator.platform.toLowerCase();
 
+    // Accounting for different platform name formats
+    if (platform.startsWith('linux')) {
+      platform = 'linux';
+    } else if (platform.startsWith('win')) {
+      platform = 'win32';
+    } else if (platform.startsWith('mac')) {
+      platform = 'darwin';
+    } else {
+      platform = 'unknown';
+    }
+    
     // Hosted installer file URLs for different platforms
+    // Keeping linux_rpm for future RPM based distributions
     const hostedInstallers = {
         win32: 'https://myriade-installers.nyc3.digitaloceanspaces.com/Myriade-1.0.0%20Setup.exe',
-       // darwin: '
-       // linux: 
+        darwin: 'https://myriade-installers.nyc3.digitaloceanspaces.com/Myriade-1.0.0-x64.dmg',
+        linux: 'https://myriade-installers.nyc3.digitaloceanspaces.com/myriade_1.0.0_amd64.deb',
+        linux_rpm: 'https://myriade-installers.nyc3.digitaloceanspaces.com/myriade-1.0.0-1.x86_64.rpm'
     };
 
     // Select the appropriate installer for the platform
